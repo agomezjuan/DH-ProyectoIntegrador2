@@ -22,5 +22,6 @@
         "class",
         "className",
         "ngClass"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }

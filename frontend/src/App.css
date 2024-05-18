@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+.btn{
+  background-color: #61dafbaa;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 7px 16px;
+  text-align: center;
+}
