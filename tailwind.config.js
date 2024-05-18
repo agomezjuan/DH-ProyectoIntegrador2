@@ -1,23 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: [ './frontend/.index.html',
+    '././src/**/*.{html,css,js,jsx,ts,tsx,svg}' // Include all HTML, CSS, JS, JSX, TS, and TSX files in the src directory and subdirectories
+  ],
   theme: {
     extend: {
-      colors:{
-        primary:{
-          DEFAULT:"#557824",
-          200:"#557824",
-          300:"#557824",
-          400:"#557824",
-
+      colors: {
+        primary: {
+          DEFAULT: "#557824",
+          200: "#557824",
+          300: "#557824",
+          400: "#557824",
         },
-        secondary:{
-          DEFAULT:{
-            42:"#557824",
-          }
+        secondary: {
+          DEFAULT: "#557824",
+          200: "#557824",
+          300: "#557824",
+          400: "#557824",
+        },
       },
     },
   },
-  plugins: [],
-},
-
+  plugins: [require('daisyui')],
+}
