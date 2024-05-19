@@ -39,11 +39,9 @@ public class RecipeService {
         }
 
     }
-
     //DELETE
-    public void deleteRecipe(String id){
+    public void deleteRecipe(String id) {
         recipeRepository.deleteById(id);
-
     }
 
 }

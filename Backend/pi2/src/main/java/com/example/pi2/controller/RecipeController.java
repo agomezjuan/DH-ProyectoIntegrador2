@@ -1,9 +1,11 @@
 package com.example.pi2.controller;
 
+import com.example.pi2.model.Recipe;
 import com.example.pi2.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
@@ -12,5 +14,29 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    //TODO faltan crear endpoints
+   @PostMapping
+    public Recipe createRecipe(@RequestBody Recipe recipe){
+       return recipeService.createRecipe(recipe);
+   }
+    @GetMapping("/{id}")
+     public Recipe getRecipeById(@PathVariable String id){
+       return recipeService.getRecipeById(id);
+   }
+
+   @GetMapping
+    public List<Recipe>getAllRecipes(){
+       return recipeService.getAllRecipes();
+   }
+
+   @PutMapping("/{id}")
+    public Recipe updateRecipe(@PathVariable String id, @RequestBody Recipe recipe){
+       return recipeService.updateRecipe(id, recipe);
+
+   }
+    @DeleteMapping("/{id}")
+    public void deleteRecipe(@PathVariable String id) {
+        recipeService.deleteRecipe(id);
+    }
+
+
 }
