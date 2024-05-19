@@ -2,22 +2,29 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {
-      colors: {
-        primary: {
-          DEFAULT: '#557824',
-          200: '#557824',
-          300: '#557824',
-          400: '#557824'
+    extend: {},},
+
+    daisyui: {
+      themes: [
+        {
+          mytheme: {
+            "primary": "#1E3A8A",
+            "secondary": "#9333EA",
+            "accent": "#3B82F6",
+            "neutral": "#111827",
+            "base-100": "#FFFFFF",
+            "info": "#60A5FA",
+            "success": "#10B981",
+            "warning": "#F59E0B",
+            "error": "#EF4444",
+          },
         },
-        secondary: {
-          DEFAULT: '#557824',
-          200: '#557824',
-          300: '#557824',
-          400: '#557824'
-        }
-      }
-    }
-  },
+        "dark",
+        "cupcake",
+      ],
+    },
+
+      };
+
   plugins: [require('daisyui')]
-};
+    
