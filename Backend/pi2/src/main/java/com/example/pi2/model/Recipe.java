@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @Entity
 public class Recipe {
+
     private String name;
     private LinkedList<String> preparationSteps;
     // TODO falta completar relacion con la entidad Category

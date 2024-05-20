@@ -14,29 +14,29 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
-   @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe){
-       return recipeService.createRecipe(recipe);
-   }
+    @PostMapping
+    public Recipe createRecipe(@RequestBody Recipe recipe) {
+        return recipeService.createRecipe(recipe);
+    }
+
     @GetMapping("/{id}")
-     public Recipe getRecipeById(@PathVariable String id){
-       return recipeService.getRecipeById(id);
-   }
+    public Recipe getRecipeById(@PathVariable String id) {
+        return recipeService.getRecipeById(id);
+    }
 
-   @GetMapping
-    public List<Recipe>getAllRecipes(){
-       return recipeService.getAllRecipes();
-   }
+    @GetMapping
+    public List<Recipe> getAllRecipes() {
+        return recipeService.getAllRecipes();
+    }
 
-   @PutMapping("/{id}")
-    public Recipe updateRecipe(@PathVariable String id, @RequestBody Recipe recipe){
-       return recipeService.updateRecipe(id, recipe);
+    @PutMapping
+    public Recipe updateRecipe(@RequestBody Recipe recipe) {
+        return recipeService.updateRecipe(recipe);
 
-   }
+    }
+
     @DeleteMapping("/{id}")
     public void deleteRecipe(@PathVariable String id) {
         recipeService.deleteRecipe(id);
     }
-
-
 }
