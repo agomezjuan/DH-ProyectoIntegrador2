@@ -14,7 +14,13 @@ public class RecipeService {
     private RecipeRepository recipeRepository;
 
     public Recipe createRecipe(Recipe recipe) {
-        // agregar validación de receta existente y datos validos
+        if(recipe == null){
+            throw new ResourceNotFoundException("Recipe object cannot be null");
+        }
+
+        if(recipe.getName()== null || recipe.getName().isEmpty()){
+            throw new ResourceNotFoundException("Recipe name required");
+        }
         return recipeRepository.save(recipe);
 
     }
@@ -38,11 +44,11 @@ public class RecipeService {
         if (existingRecipe != null) {
             existingRecipe.setName(recipe.getName());
             existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
-            existingRecipe.setCategories(recipe.getCategories());
+            //existingRecipe.setCategories(recipe.getCategories());
             existingRecipe.setIngredients(recipe.getIngredients());
             return recipeRepository.save(existingRecipe);
         } else {
-            throw new ResourceNotFoundException("");// agregar mensaje
+            throw new ResourceNotFoundException("Recipe with ID " + recipe.getId() + " not found");
         }
 
     }

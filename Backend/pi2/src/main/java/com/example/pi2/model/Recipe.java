@@ -15,6 +15,6 @@ public class Recipe {
     private String name;
     private LinkedList<String> preparationSteps;
     // TODO falta completar relacion con la entidad Category
-    private List<Category> categories;
+    //private List<Category> categories;
     private List<String> ingredients;
 }
