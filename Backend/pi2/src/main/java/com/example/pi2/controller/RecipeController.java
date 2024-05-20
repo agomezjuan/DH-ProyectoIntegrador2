@@ -20,7 +20,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable String id) {
+    public Recipe getRecipeById(@PathVariable Integer id) {
         return recipeService.getRecipeById(id);
     }
 
@@ -36,7 +36,7 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRecipe(@PathVariable String id) {
+    public void deleteRecipe(@PathVariable Integer id) {
         recipeService.deleteRecipe(id);
     }
 }

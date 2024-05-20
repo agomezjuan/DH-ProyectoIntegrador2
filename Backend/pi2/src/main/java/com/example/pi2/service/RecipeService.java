@@ -19,7 +19,7 @@ public class RecipeService {
 
     }
 
-    public Recipe getRecipeById(String id) {
+    public Recipe getRecipeById(Integer id) {
         Recipe recipe = recipeRepository.findById(id).orElse(null);
         if (recipe == null) {
             throw new ResourceNotFoundException("Recipe not found with id: " + id);
@@ -34,7 +34,7 @@ public class RecipeService {
     }
 
     public Recipe updateRecipe(Recipe recipe) {
-        Recipe existingRecipe = recipeRepository.findById().orElse(null);
+        Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElse(null);
         if (existingRecipe != null) {
             existingRecipe.setName(recipe.getName());
             existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
@@ -47,7 +47,7 @@ public class RecipeService {
 
     }
 
-    public void deleteRecipe(String id) {
+    public void deleteRecipe(Integer id) {
         recipeRepository.deleteById(id);
     }
 
