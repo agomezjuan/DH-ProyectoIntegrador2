@@ -37,7 +37,7 @@ spring:
         registration:
           gateway-service:
             client-id: ms-gateway
-            client-secret: EnjEUukYhglAmE41MBCR71Iaa0AeOn26
+            client-secret: ${CLIENT-SECRET}
             scope:
               - openid
             authorization-grant-type: authorization_code
