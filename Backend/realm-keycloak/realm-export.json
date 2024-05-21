@@ -412,7 +412,17 @@
       "ms-gateway": []
     }
   },
-  "groups": [],
+  "groups": [
+    {
+      "id": "bf426b21-8550-48d6-9a81-d38043e4e256",
+      "name": "USERS",
+      "path": "/USERS",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    }
+  ],
   "defaultRole": {
     "id": "a3f3bf26-60ba-434e-af1b-76475d333e75",
     "name": "default-roles-proyecto-integrador",
@@ -699,6 +709,7 @@
         "acr",
         "roles",
         "profile",
+        "Users",
         "email"
       ],
       "optionalClientScopes": [
@@ -1317,6 +1328,35 @@
         "consent.screen.text": "${offlineAccessScopeConsentText}",
         "display.on.consent.screen": "true"
       }
+    },
+    {
+      "id": "1a3cf8f3-ea4e-4a16-8239-9611dc489c54",
+      "name": "Users",
+      "description": "Acceso de recursos de usuario",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "gui.order": "",
+        "consent.screen.text": ""
+      },
+      "protocolMappers": [
+        {
+          "id": "76b8c863-f0a0-4974-a1e1-645fda2953a8",
+          "name": "UsersGroup",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": {
+            "full.path": "false",
+            "userinfo.token.claim": "true",
+            "multivalued": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "users-group"
+          }
+        }
+      ]
     }
   ],
   "defaultDefaultClientScopes": [
@@ -1325,7 +1365,8 @@
     "email",
     "roles",
     "web-origins",
-    "acr"
+    "acr",
+    "Users"
   ],
   "defaultOptionalClientScopes": [
     "offline_access",
