@@ -16,7 +16,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
+    private String urlImg;
 //    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
 //    private LinkedList<Recipe> recipe;
 

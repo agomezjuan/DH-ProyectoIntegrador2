@@ -17,6 +17,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String urlImg;
     private LinkedList<String> preparationSteps;
     // TODO falta completar relacion con la entidad Category
 //    private List<Category> categories;

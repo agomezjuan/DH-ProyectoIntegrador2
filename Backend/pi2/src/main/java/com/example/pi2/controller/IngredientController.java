@@ -3,7 +3,7 @@ package com.example.pi2.controller;
 import com.example.pi2.model.Ingredient;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
-import com.example.pi2.service.impl.IngredientServiceImpl;
+import com.example.pi2.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class IngredientController {
 
 	  @Autowired
-	  IngredientServiceImpl ingredientService;
+	  IngredientService ingredientService;
 
 	@GetMapping
 	  public Optional<Ingredient> getIngredientByIdHandler(@RequestParam Integer id) throws ResourceNotFoundException{
