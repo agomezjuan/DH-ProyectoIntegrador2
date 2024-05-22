@@ -1,6 +1,6 @@
 package com.example.pi2.service.impl;
 
-import com.example.pi2.entity.Ingredient;
+import com.example.pi2.model.Ingredient;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.repository.IngredientRepository;

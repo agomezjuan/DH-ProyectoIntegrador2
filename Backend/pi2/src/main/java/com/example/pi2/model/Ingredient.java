@@ -1,4 +1,4 @@
-package com.example.pi2.entity;
+package com.example.pi2.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table (name= "ingredients")
 public class Ingredient {
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)

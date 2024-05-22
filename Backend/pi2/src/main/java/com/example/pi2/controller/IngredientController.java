@@ -1,6 +1,6 @@
 package com.example.pi2.controller;
 
-import com.example.pi2.entity.Ingredient;
+import com.example.pi2.model.Ingredient;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.service.impl.IngredientServiceImpl;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/ingredient")
 public class IngredientController {
 
 	  @Autowired
@@ -21,12 +22,12 @@ public class IngredientController {
 		  return ingredientService.findById(id);
 	}
 
-	@GetMapping
+	@GetMapping("/all")
 	  public List<Optional<Ingredient>> getAllIngredientHandler(){
 		  return ingredientService.findAll();
 	}
 
-	@GetMapping
+	@GetMapping("/byName")
 	  public Optional<Ingredient> getIngredientByNameHandler(@RequestParam String name) throws ResourceNotFoundException{
 		  return ingredientService.findByName(name);
 	}

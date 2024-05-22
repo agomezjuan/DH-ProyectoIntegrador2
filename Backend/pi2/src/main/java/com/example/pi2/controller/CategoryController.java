@@ -37,7 +37,7 @@ public class CategoryController {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory != null) {
             existingCategory.setName(category.getName());
-            existingCategory.setRecipe(category.getRecipe());
+//            existingCategory.setRecipe(category.getRecipe());
             return categoryService.save(existingCategory);
         }
         return null;
