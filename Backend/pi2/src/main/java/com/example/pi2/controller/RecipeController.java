@@ -1,5 +1,7 @@
 package com.example.pi2.controller;
 
+import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
+import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,12 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
+    public Recipe createRecipe(@RequestBody Recipe recipe) throws ResourceAlreadyExistExeption, ResourceNotFoundException {
         return recipeService.createRecipe(recipe);
     }
 
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable Integer id) {
+    public Recipe getRecipeById(@PathVariable Integer id) throws ResourceNotFoundException {
         return recipeService.getRecipeById(id);
     }
 
@@ -30,7 +32,7 @@ public class RecipeController {
     }
 
     @PutMapping
-    public Recipe updateRecipe(@RequestBody Recipe recipe) {
+    public Recipe updateRecipe(@RequestBody Recipe recipe) throws ResourceNotFoundException {
         return recipeService.updateRecipe(recipe);
 
     }
