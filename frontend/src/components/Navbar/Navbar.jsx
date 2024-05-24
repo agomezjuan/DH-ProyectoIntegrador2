@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <div className='navbar bg-base-100'>
       <div className='flex-none'>
@@ -24,7 +26,14 @@ export default function Navbar() {
       </div>
       <div className='flex items-center'>
         <button className='btn btn-ghost text-primary'>
-          <FaRegCircleUser className='text-primary text-xl' /> Registro / Login
+          <Link to="/register" >
+          <FaRegCircleUser className='text-primary text-xl' /> Registro 
+          </Link>
+        </button>
+        <button className='btn btn-ghost text-primary'>
+          <Link to='/login' >
+          <FaRegCircleUser className='text-primary text-xl' /> Login
+          </Link>
         </button>
       </div>
     </div>
