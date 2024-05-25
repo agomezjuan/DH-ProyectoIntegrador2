@@ -25,9 +25,16 @@ spring:
             - Path=/api/v1/recipes/**
           filters:
             - StripPrefix=2
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+              - Path=/api/v1/users/register/**
+          filters:
+              - StripPrefix=2
 
 
-# Configuraciones de seguridad
+
+  # Configuraciones de seguridad
   security:
     oauth2:
       client:
