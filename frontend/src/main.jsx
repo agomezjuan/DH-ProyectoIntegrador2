@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Home } from '@/pages/Home';
-import { Register } from '@/components/Register';
-import { Login } from '@/components/Login';
+import { Auth } from '@/pages/Auth';
+import { Login } from '@/components/LoginForm';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/register',
-    element: <Register />
+    element: <Auth />
   },
   {
     path: '/login',

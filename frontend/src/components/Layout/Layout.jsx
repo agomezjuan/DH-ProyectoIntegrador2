@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     <div className='min-h-screen flex flex-col bg-base-300'>
       {/* Contenido Principal */}
       <div className='flex-grow bg-base-300'>
-        <main className='max-w-7xl mx-auto px-4 py-8'>
+        <main className='max-w-7xl mx-auto px-4 py-8 bg-white'>
           <Navbar />
           {children}
         </main>

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom";
 
 
-function Login() {
+function LoginForm() {
   // const setToken = useAuthStore((state) => state.setToken);
   // const setProfile = useAuthStore((state) => state.setProfile);
   const navigate = useNavigate();
@@ -47,12 +47,13 @@ function Login() {
   });
 
   return (
-    <div className='flex flex-column justify-center w-1/2 bg-zinc-100 p-28' > 
+    <div className='flex flex-column justify-center bg-zinc-100 p-28' > 
     <form onSubmit={onSubmit}>
-      <div>
+      <div className="text-center">
     <h2 className='text-lg font-bold text-primary max-w-lg'>Iniciar Sesión</h2>
       <div>
         <input
+         className="w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary"
           placeholder="Correo electrónico"
           type="email"
           name="correo"
@@ -72,6 +73,7 @@ function Login() {
 
       <div>
         <input
+          className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
           placeholder="Contraseña"
           type="password"
           name="password"
@@ -91,7 +93,7 @@ function Login() {
       
       <button 
       type="submit"
-      className="bg-primary text-white p-2"
+      className="bg-primary px-3 font-semibold text-white p-2 mt-5 rounded-sm border border-solid border-primary"
       >
         Iniciar Sesión
       </button>
@@ -104,4 +106,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;
