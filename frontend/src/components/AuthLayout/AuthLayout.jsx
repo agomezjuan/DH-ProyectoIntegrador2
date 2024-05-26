@@ -1,10 +1,9 @@
 import React from 'react';
-import { RegisterForm } from '@/components/RegisterForm';
 import { Layout } from '@/components/Layout';
 import hero from '@/assets/hero.png';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
-export default function Auth() {
+export default function AuthLayout({children}) {
     return (
       <Layout>
         <div className='relative w-full h-96'>
@@ -26,7 +25,7 @@ export default function Auth() {
         </div>
         <div className='bg-white flex flex-col justify-items-center'>
           <div className='w-1/2 mx-auto -mt-20 z-10'>
-            <RegisterForm />
+            {children}
           </div>
         </div>
       </Layout>

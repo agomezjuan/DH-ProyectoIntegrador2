@@ -28,7 +28,6 @@ function RegisterForm() {
       correo: "",
       password: "",
       confirmarPassword: "",
-      aceptaTerminos: false,
     },
   });
 
@@ -42,7 +41,6 @@ function RegisterForm() {
     //   correo: '',
     //   password: '',
     //   confirmarPassword: '',
-    //   aceptaTerminos: false
  
     // })
     reset();
@@ -143,21 +141,6 @@ function RegisterForm() {
             <span>{errors.confirmarPassword.message}</span>
           )}
         </div>
-        {/* <div>
-        <input
-          type="checkbox"
-          name="aceptaTerminos"
-          {...register("aceptaTerminos", {
-            required: {
-              value: true,
-              message: "Acepta los términos y condiciones",
-            },
-          })}
-        />
-        <label>Acepto los términos y condiciones</label>
-        {errors.aceptaTerminos && <span>{errors.aceptaTerminos.message}</span>}
-      </div>
-        */}
         <div className="flex justify-center">
           <button 
             type="submit"

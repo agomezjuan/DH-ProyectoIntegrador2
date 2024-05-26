@@ -47,9 +47,9 @@ function LoginForm() {
   });
 
   return (
-    <div className='flex flex-column justify-center bg-zinc-100 p-28' > 
+    <div className='flex flex-column text-center bg-zinc-100 py-20' > 
+    <div  className="text-center mx-auto">
     <form onSubmit={onSubmit}>
-      <div className="text-center">
     <h2 className='text-lg font-bold text-primary max-w-lg'>Iniciar Sesión</h2>
       <div>
         <input
@@ -100,8 +100,15 @@ function LoginForm() {
 
       {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre>
       <h3>Hello {watch("nombre")}</h3> */}
-      </div>
     </form>
+    <div className="">
+    <button className='btn btn-ghost text-primary'>
+          <Link to='/register' >
+          Registrarse
+          </Link>
+        </button>
+    </div>
+    </div>
     </div>
   );
 }
