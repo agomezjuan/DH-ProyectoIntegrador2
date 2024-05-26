@@ -1,34 +1,77 @@
-import App from "../../App"
-import "./footer.css"
+import React from 'react';
+import './footer.css';
+
+
+const transformFirstLetter = (text) => {
+  return text.split('').map((char, index) => {
+      if (index === text.search(/\w/)) {
+          return char.toUpperCase();
+      } else if (char.toLowerCase() === text.charAt(index)) {
+          return char.toLowerCase();
+      }
+      return char.toUpperCase();
+  }).join('');
+};
 
 const Footer = () => {
   return (
+    <footer className="footer w-full p-10 bg-primary text-primary-content">
+      <div className="flex flex-wrap justify-around">
+        <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+          <h2 className="footer-title text-primary-content">Registrate</h2>
+          <a href="#" aria-label="X" className="text-neutral-300 hover:text-primary-content">
+          <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd"/>
+</svg>
+</a>
+          </nav>
+          </div>
+<div id="verticle-line">
 
-<footer className="footer p-10 bg-base-300 text-base-content">
-<nav>
-  <h6 className="footer-title">Services</h6>
-  <a className="link link-hover">Branding</a>
-  <a className="link link-hover">Design</a>
-  <a className="link link-hover">Marketing</a>
-  <a className="link link-hover">Advertisement</a>
-</nav>
-<nav>
-  <h6 className="footer-title">Company</h6>
-  <a className="link link-hover">About us</a>
-  <a className="link link-hover">Contact</a>
-  <a className="link link-hover">Jobs</a>
-  <a className="link link-hover">Press kit</a>
-</nav>
-<nav>
-  <h6 className="footer-title">Social</h6>
-  <div className="grid grid-flow-col gap-4">
-    <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
-    <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
-    <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
-  </div>
-</nav>
-</footer>
-)
-}
+</div>
+
+          <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+          <p className="footer-title text-primary-content">MealMap</p>
+
+          <div className="flex gap-4">
+          <a href="#" aria-label="Facebook" className="text-neutral-300 hover:text-primary-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+              </svg>
+            </a>
+            <a href="#" aria-label="X" className="text-neutral-300 hover:text-primary-content">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
+</svg>
+</a>
+            <a href="#" aria-label="Instagram" className="text-neutral-300 hover:text-primary-content">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
+</svg>
+</a>
+
+            <a href="#" aria-label="YouTube" className="text-neutral-300 hover:text-primary-content">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+              </svg>
+            </a>
+            </div>
+        </nav>
+        <div id="verticle-line">
+
+</div>
+        <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+          <h2 className="footer-title text-primary-content">Company</h2>
+          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Blog</a>
+          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Recetas</a>
+          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Tips</a>
+        </nav>
+
+    </footer>
+  );
+};
+
 export default Footer;
+
+
 

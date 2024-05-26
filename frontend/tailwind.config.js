@@ -1,30 +1,38 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {},},
+  theme: {},
+  plugins: [require('daisyui')],
+  daisyui: {
+    styled: true,
+    themes: [
+      {
+        mealmap: {
+          primary: '#82AA33',
+          'primary-focus': '#82AA33',
+          'primary-content': '#ffffff',
+          secondary: '#82AA33',
+          'secondary-focus': '#82AA33',
+          'secondary-content': '#ffffff',
+          accent: '#82AA33',
+          'accent-focus': '#82AA33',
+          'accent-content': '#ffffff',
+          neutral: '#82AA33',
+          'neutral-focus': '#82AA33',
+          'neutral-content': '#ffffff',
+          'base-100': '#ffffff',
+          'base-200': '#f9fafb',
+          'base-300': '#d1d5db',
+          'base-content': '#1f2937',
+          info: '#2094f3',
+          success: '#009485',
+          warning: '#ff9900',
+          error: '#ff5724'
+        }
+      }
+    ],
+    rtl: false,
+    logs: false
+  }
+};
 
-    daisyui: {
-      themes: [
-        {
-          mytheme: {
-            "primary": "#1E3A8A",
-            "secondary": "#9333EA",
-            "accent": "#3B82F6",
-            "neutral": "#111827",
-            "base-100": "#FFFFFF",
-            "info": "#60A5FA",
-            "success": "#10B981",
-            "warning": "#F59E0B",
-            "error": "#EF4444",
-          },
-        },
-        "dark",
-        "cupcake",
-      ],
-    },
-
-      };
-
-  plugins: [require('daisyui')]
-    
