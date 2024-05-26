@@ -28,6 +28,7 @@ function RegisterForm() {
       correo: "",
       password: "",
       confirmarPassword: "",
+      aceptaTerminos: false,
     },
   });
 
@@ -41,6 +42,7 @@ function RegisterForm() {
     //   correo: '',
     //   password: '',
     //   confirmarPassword: '',
+    //   aceptaTerminos: false
  
     // })
     reset();
@@ -49,7 +51,7 @@ function RegisterForm() {
   });
 
   return (
-    <div className='flex flex-column justify-center bg-zinc-100 p-28' > 
+    <div className='flex flex-column justify-center bg-zinc-100 p-20' > 
       <form onSubmit={onSubmit} >
           <div className="text-center">
             <h2 className="text-lg font-bold text-primary max-w-lg">Regístrate</h2>
@@ -141,6 +143,21 @@ function RegisterForm() {
             <span>{errors.confirmarPassword.message}</span>
           )}
         </div>
+        {/* <div>
+        <input
+          type="checkbox"
+          name="aceptaTerminos"
+          {...register("aceptaTerminos", {
+            required: {
+              value: true,
+              message: "Acepta los términos y condiciones",
+            },
+          })}
+        />
+        <label>Acepto los términos y condiciones</label>
+        {errors.aceptaTerminos && <span>{errors.aceptaTerminos.message}</span>}
+      </div>
+        */}
         <div className="flex justify-center">
           <button 
             type="submit"
@@ -149,9 +166,6 @@ function RegisterForm() {
               Regístrate
           </button>
         </div>
-
-        {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre>
-        <h3>Hello {watch("nombre")}</h3> */}
       </form>
     </div>
   );
