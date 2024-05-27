@@ -49,7 +49,7 @@ function RegisterForm() {
   });
 
   return (
-    <div className='flex flex-column justify-center bg-zinc-100 p-20' > 
+    <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-70 py-20' > 
       <form onSubmit={onSubmit} >
           <div className="text-center">
             <h2 className="text-lg font-bold text-primary max-w-lg">Regístrate</h2>

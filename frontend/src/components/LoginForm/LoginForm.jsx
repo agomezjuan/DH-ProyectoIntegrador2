@@ -47,7 +47,7 @@ function LoginForm() {
   });
 
   return (
-    <div className='flex flex-column text-center bg-zinc-100 py-20' > 
+    <div className='flex flex-column text-center bg-zinc-200 bg-opacity-70 py-20' > 
     <div  className="text-center mx-auto">
     <form onSubmit={onSubmit}>
     <h2 className='text-lg font-bold text-primary max-w-lg'>Iniciar Sesión</h2>
