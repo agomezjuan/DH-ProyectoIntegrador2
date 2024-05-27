@@ -15,7 +15,7 @@ spring:
                         issuer-uri: http://localhost:8089/realms/proyecto-integrador
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/recipe?createDatabaseIfNotExist=true
+        url: jdbc:mysql://localhost:3306/MealMap?createDatabaseIfNotExist=true
         password: root
         username: root
     jpa:
