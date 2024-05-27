@@ -19,10 +19,10 @@ const Footer = () => {
 </div>
 
 <div className="flex items-center justify-center">
-    <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 flex flex-col items-start gap-4">
+    <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
       <span className="text-4xl text-neutral-100">MealMap</span>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-start gap-3 justify-between">
         <a href="#" aria-label="Facebook" className="text-neutral-100 hover:text-primary-content">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
             <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
@@ -44,18 +44,21 @@ const Footer = () => {
           </svg>
         </a>
       </div>
+      <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
       <span className="text-l text-neutral-100">DgProyect2® 2024</span>
+      </nav>
     </nav>
   </div>
         <div id="verticle-line">
 
 </div>
 
-        <ul className="list-disc list-inside text-neutral-100">
-          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Blog</li></a>
-          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Recetas</li></a>
-          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Tips</li></a>
-        </ul>
+<ul className="list-disc list-inside text-neutral-100">
+  <li><a className="link link-hover text-neutral-100 hover:text-primary-content" href="#">Blog</a></li>
+  <li><a className="link link-hover text-neutral-100 hover:text-primary-content" href="#">Recetas</a></li>
+  <li><a className="link link-hover text-neutral-100 hover:text-primary-content" href="#">Tips</a></li>
+</ul>
+
 
     </footer>
   );
