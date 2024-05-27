@@ -18,42 +18,44 @@ const Footer = () => {
 
 </div>
 
-          <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
-          <p className="footer-title text-primary-content">MealMap</p>
+<div className="flex items-center justify-center">
+    <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 flex flex-col items-start gap-4">
+      <span className="text-4xl text-neutral-100">MealMap</span>
 
-          <div className="flex gap-4">
-          <a href="#" aria-label="Facebook" className="text-neutral-300 hover:text-primary-content">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-              </svg>
-            </a>
-            <a href="#" aria-label="X" className="text-neutral-300 hover:text-primary-content">
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-  <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
-</svg>
-</a>
-            <a href="#" aria-label="Instagram" className="text-neutral-300 hover:text-primary-content">
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-  <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
-</svg>
-</a>
-
-            <a href="#" aria-label="YouTube" className="text-neutral-300 hover:text-primary-content">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
-                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-              </svg>
-            </a>
-            </div>
-        </nav>
+      <div className="flex items-center gap-4">
+        <a href="#" aria-label="Facebook" className="text-neutral-100 hover:text-primary-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
+            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="X" className="text-neutral-100 hover:text-primary-content">
+          <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram" className="text-neutral-100 hover:text-primary-content">
+          <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path fill="currentColor" fillRule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clipRule="evenodd"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" className="text-neutral-100 hover:text-primary-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
+            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+          </svg>
+        </a>
+      </div>
+      <span className="text-l text-neutral-100">DgProyect2® 2024</span>
+    </nav>
+  </div>
         <div id="verticle-line">
 
 </div>
-        <nav className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
-          <h2 className="footer-title text-primary-content">Company</h2>
-          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Blog</a>
-          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Recetas</a>
-          <a className="link link-hover text-neutral-300 hover:text-primary-content" href="#">Tips</a>
-        </nav>
+
+        <ul className="list-disc list-inside text-neutral-100">
+          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Blog</li></a>
+          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Recetas</li></a>
+          <a className="link link-hover text-neutral-100 hover:text-primary-content" href="#"><li>Tips</li></a>
+        </ul>
 
     </footer>
   );
