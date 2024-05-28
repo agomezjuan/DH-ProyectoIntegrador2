@@ -3,7 +3,7 @@ spring:
     name: servicio-eureka-server
 
 server:
-  port: 8083
+  port: 8761
 
 eureka:
   client:
