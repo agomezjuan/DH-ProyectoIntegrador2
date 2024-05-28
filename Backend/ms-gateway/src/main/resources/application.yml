@@ -22,7 +22,7 @@ spring:
         - id: mealmap
           uri: lb://pi2
           predicates:
-            - Path=/api/v1/recipes/**
+            - Path=/api/v1/**
           filters:
             - StripPrefix=2
         - id: ms-users
@@ -31,6 +31,10 @@ spring:
               - Path=/api/v1/users/register/**
           filters:
               - StripPrefix=2
+#        - id: categoriesMealMap
+#          uri: lb://pi2
+#          predicates:
+#            - Path=/api/v1/categories/**
 
 
 
