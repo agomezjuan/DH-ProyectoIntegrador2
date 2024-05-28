@@ -1,9 +1,6 @@
 import { useForm } from "react-hook-form"
-// import { loginRequest, profileRequest } from "../api/auth";
-// import { useAuthStore } from "../store/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/auth";
-
+import { useAuthStore } from "../../store/authStore";
 
 function LoginForm() {
 
@@ -28,9 +25,10 @@ function LoginForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log('DATA', data)
     try {
       const resLogin = await login(data);
-      setToken(resLogin.data.token);  
+      console.log('RESPONSE', resLogin) 
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useAuthStore } from "../store/auth";
+import { useAuthStore } from "@/store/authStore";
 import { Link, useNavigate } from "react-router-dom";
 // import { Errors } from "../errors";
 
@@ -21,19 +21,17 @@ function RegisterForm() {
     reset,
   } = useForm({
     defaultValues: {
-      nombre: "",
-      correo: "",
+      fistName: "",
+      lastName: "",
       password: "",
-      confirmarPassword: "",
+      email: "",
     },
   });
-
-  const password = useRef(null);
-  password.current = watch("password", "");
 
   const onSubmit =  handleSubmit(async (data) => {
     try {
       const resRegister = await registerUser(data);
+      console.log('REGISTER RESPONSE', resRegister)
       navigate("/");
     } catch (error) {
       console.error("Registration failed:", error);
@@ -54,8 +52,8 @@ function RegisterForm() {
             className="w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary"
             placeholder="Nombre"
             type="text"
-            name="nombre"
-            {...register("nombre", {
+            name="fistName"
+            {...register("firstName", {
               required: {
                 value: true,
                 message: "Nombre es requerido",
@@ -64,22 +62,47 @@ function RegisterForm() {
               minLength: 2,
             })}
           />
-          {errors.nombre?.type === "required" && <span>Nombre requerido</span>}
-          {errors.nombre?.type === "maxLength" && (
+          {errors.firstName?.type === "required" && <span>Nombre requerido</span>}
+          {errors.firstName?.type === "maxLength" && (
             <span>Nombre no debe ser mayor a 20 caracteres</span>
           )}
-          {errors.nombre?.type === "minLength" && (
+          {errors.firstName?.type === "minLength" && (
             <span>Nombre debe ser mayor a 2 caracteres</span>
           )}
         </div>
+        
+        <div>
+          <input
+            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
+            placeholder="Apellido"
+            type="text"
+            name="lastName"
+            {...register("lastName", {
+              required: {
+                value: true,
+                message: "El apellido es requerido",
+              },
+              maxLength: 20,
+              minLength: 2,
+            })}
+          />
+          {errors.lastName?.type === "required" && <span>Apellido requerido</span>}
+          {errors.lastName?.type === "maxLength" && (
+            <span>Apellido no debe ser mayor a 20 caracteres</span>
+          )}
+          {errors.lastName?.type === "minLength" && (
+            <span>Apellido debe ser mayor a 2 caracteres</span>
+          )}
+        </div>
+
 
         <div>
           <input
             className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
             placeholder="Correo electrónico"
             type="email"
-            name="correo"
-            {...register("correo", {
+            name="email"
+            {...register("email", {
               required: {
                 value: true,
                 message: "Correo es requerido",
@@ -90,7 +113,7 @@ function RegisterForm() {
               },
             })}
           />
-          {errors.correo && <span>{errors.correo.message}</span>}
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
 
         <div>
@@ -112,7 +135,7 @@ function RegisterForm() {
           />
           {errors.password && <span>{errors.password.message}</span>}
         </div>
-
+{/* 
         <div>
           <input
             className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
@@ -135,7 +158,7 @@ function RegisterForm() {
           {errors.confirmarPassword && (
             <span>{errors.confirmarPassword.message}</span>
           )}
-        </div>
+        </div> */}
         <div className="flex justify-center">
           <button 
             type="submit"
