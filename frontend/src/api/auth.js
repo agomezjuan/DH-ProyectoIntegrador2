@@ -1,12 +1,33 @@
 import axios from "../libs/axios";
 
-export const loginRequest = async (email, password) =>
-  axios.post("http://localhost:8089/realms/proyecto-integrador/protocol/openid-connect/token", {
-    email,
-    password,
-  });
+const config = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  }
+};
 
-export const registerRequest = async (data) =>
-  axios.post("http://localhost:8090/api/v1/users/register", data);
+export const loginRequest = async (data) =>
+  axios
+    .post(
+      'http://localhost:8089/realms/proyecto-integrador/protocol/openid-connect/token',
+      data,
+      config
+    )
+    .then((response) => {
+      console.log('Response:', response.data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
-export const profileRequest = async () => axios.get("/api/auth/profile");
+    export const registerRequest = async (data) => {
+      try {
+        const response = await axios.post('http://localhost:8090/api/v1/users/register', data);
+        console.log('Response:', response.data);
+        return response;
+      } catch (error) {
+        console.error('Error:', error);
+        throw error;
+      }
+    };
+

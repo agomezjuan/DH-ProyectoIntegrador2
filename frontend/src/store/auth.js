@@ -1,6 +1,6 @@
-import create from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { profileRequest, registerRequest } from "../api/auth";
+import { loginRequest, registerRequest } from "../api/auth";
 
 
 export const useAuthStore = create(
@@ -15,23 +15,32 @@ export const useAuthStore = create(
           token,
           isAuth: !!token,
         })),
-      register: async (user) => {
+      login: async (user) => {
+        try {
+          const resLogin = await loginRequest(user);
+          set(() => ({
+            token: resLogin.data.token,
+            isAuth: true,
+          }));
+          return resLogin;
+        } catch (error) {
+          set(() => ({ errors: error.response.data }));
+          throw error;
+        }
+      },
+      registerUser: async (user) => {
         try {
           const resRegister = await registerRequest(user);
           set(() => ({
-            token: resRegister.data.token,
             isAuth: true,
           }));
+          return resRegister;
         } catch (error) {
           set(() => ({ errors: error.response.data }));
+          throw error;
         }
       },
-      getProfile: async () => {
-        const resProfile = await profileRequest();
-        set(() => ({
-          profile: resProfile.data,
-        }));
-      },
+     
       logout: () => set(() => ({ token: null, profile: null, isAuth: false })),
       cleanErrors: () => set(() => ({ errors: null })),
     }),

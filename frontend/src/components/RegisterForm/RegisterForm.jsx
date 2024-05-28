@@ -1,16 +1,13 @@
 import { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import { profileRequest, registerRequest } from "../api/auth";
-// import { useAuthStore } from "../store/auth";
+import { useAuthStore } from "../store/auth";
 import { Link, useNavigate } from "react-router-dom";
 // import { Errors } from "../errors";
 
 
 function RegisterForm() {
-  // const regis = useAuthStore((state) => state.register);
-  // const err = useAuthStore((state) => state.errors);
-  // const isAuth = useAuthStore((state) => state.isAuth);
-  // const getProfile = useAuthStore((state) => state.getProfile);
+  const {registerUser} = useAuthStore();
+ 
 
   const navigate = useNavigate();
 
@@ -35,17 +32,15 @@ function RegisterForm() {
   password.current = watch("password", "");
 
   const onSubmit =  handleSubmit(async (data) => {
-    console.log(data);
-    // reset({
-    //   nombre: '',
-    //   correo: '',
-    //   password: '',
-    //   confirmarPassword: '',
- 
-    // })
-    reset();
-    // await regis(data);
-    // await getProfile();
+    try {
+      const resRegister = await registerUser(data);
+      navigate("/");
+    } catch (error) {
+      console.error("Registration failed:", error);
+    } finally {
+      reset();
+    }
+
   });
 
   return (

@@ -1,13 +1,14 @@
-import { useRef } from "react"
 import { useForm } from "react-hook-form"
 // import { loginRequest, profileRequest } from "../api/auth";
 // import { useAuthStore } from "../store/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/auth";
 
 
 function LoginForm() {
-  // const setToken = useAuthStore((state) => state.setToken);
-  // const setProfile = useAuthStore((state) => state.setProfile);
+
+  const { login, setToken } = useAuthStore();
+ 
   const navigate = useNavigate();
 
   const {
@@ -19,31 +20,23 @@ function LoginForm() {
     reset,
   } = useForm({
     defaultValues: {
-      correo: "",
+      grant_type: "password",
+      client_id: "frontend",
+      username: "",
       password: "",
     },
   });
 
-  const password = useRef(null);
-  password.current = watch("password", "");
-
   const onSubmit = handleSubmit(async (data) => {
-    // reset({
-    //   nombre: '',
-    //   correo: '',
-    //   password: '',
-    //   confirmarPassword: '',
- 
-    // })
-
-    // const resLogin = await loginRequest(data);
-    // setToken(resLogin.data.token);
-
-    // const resProfile = await profileRequest();
-    // setProfile(resProfile.data);
-
-    // navigate("/dashboard");
-    reset();
+    try {
+      const resLogin = await login(data);
+      setToken(resLogin.data.token);  
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      reset();
+    }
   });
 
   return (
@@ -56,8 +49,8 @@ function LoginForm() {
          className="w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary"
           placeholder="Correo electrónico"
           type="email"
-          name="correo"
-          {...register("correo", {
+          name="username"
+          {...register("username", {
             required: {
               value: true,
               message: "Correo es requerido",
@@ -68,7 +61,7 @@ function LoginForm() {
             },
           })}
         />
-        {errors.correo && <span>{errors.correo.message}</span>}
+        {errors.correo && <span>{errors.username.message}</span>}
       </div>
 
       <div>
@@ -98,8 +91,6 @@ function LoginForm() {
         Iniciar Sesión
       </button>
 
-      {/* <pre style={{ width: "400px" }}>{JSON.stringify(watch(), null, 2)}</pre>
-      <h3>Hello {watch("nombre")}</h3> */}
     </form>
     <div className="">
     <button className='btn btn-ghost text-primary'>
