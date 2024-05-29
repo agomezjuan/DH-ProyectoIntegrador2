@@ -41,4 +41,9 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable Integer id) {
         recipeService.deleteRecipe(id);
     }
+
+    @GetMapping("/{name}")
+    public Recipe getRecipeByName(@PathVariable String name) throws ResourceNotFoundException {
+        return recipeService.getRecipeByName(name);
+    }
 }
