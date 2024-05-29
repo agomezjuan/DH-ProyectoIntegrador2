@@ -37,54 +37,54 @@ function RegisterForm() {
   });
 
   return (
-    <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-70 py-20' > 
+    <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-80 py-16 rounded-md' > 
       <form onSubmit={onSubmit} >
           <div className="text-center">
             <h2 className="text-lg font-bold text-primary max-w-lg">Regístrate</h2>
           </div>
-        <div>
+        <div className="flex flex-col text-left">
           <input
-            className="w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary"
+            className="w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             placeholder="Nombre"
             type="text"
             {...register("firstName")}
           />
-          {errors.firstName && <span>{errors.firstName.message}</span>}
+          {errors.firstName && <span className="text-xs text-primary font-bold">{errors.firstName.message}</span>}
         </div>
         
-        <div>
+        <div className="mt-1 flex flex-col text-left">
           <input
-            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
+            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             placeholder="Apellido"
             type="text"
             {...register("lastName")}
           />
-          {errors.lastName && <span>{errors.lastName.message}</span>}
+          {errors.lastName && <span className="text-xs text-primary font-bold">{errors.lastName.message}</span>}
         </div>
 
-        <div>
+        <div className="mt-1 flex flex-col text-left">
           <input
-            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
+            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             placeholder="Correo electrónico"
             type="email"
             {...register("email")}
           />
-          {errors.email && <span>{errors.email.message}</span>}
+          {errors.email && <span className="text-xs text-primary font-bold">{errors.email.message}</span>}
         </div>
 
-        <div>
+        <div className="mt-1 flex flex-col text-left">
           <input
-            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary"
+            className="w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             placeholder="Contraseña"
             type="password"
             {...register("password")}
           />
-          {errors.password && <span>{errors.password.message}</span>}
+          {errors.password && <span className="text-xs text-primary font-bold">{errors.password.message}</span>}
         </div>
         <div className="flex justify-center">
           <button 
             type="submit"
-            className="bg-primary px-3 font-semibold text-white p-2 mt-5 rounded-sm border border-solid border-primary"
+            className="bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900"
             >
               Regístrate
           </button>

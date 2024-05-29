@@ -26,7 +26,8 @@ export default function Navbar() {
       <div className='flex items-center'>
         <button className='btn btn-ghost text-primary'>
           <Link to='/login' >
-          <FaRegCircleUser className='text-primary text-xl' /> Login
+          <FaRegCircleUser className='text-primary text-xl' /> 
+          <span>Login</span>
           </Link>
         </button>
       </div>
