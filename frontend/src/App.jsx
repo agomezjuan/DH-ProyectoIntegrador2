@@ -1,7 +1,7 @@
 import './App.css';
 import { Navbar } from '@/components/Navbar';
 import { Layout } from '@/components/Layout';
-import Header from '@/components/Header/Header';
+import Header from '@/components/Header';
 
 function App() {
   return (
