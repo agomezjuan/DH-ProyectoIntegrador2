@@ -1,20 +1,24 @@
 package com.example.pi2.service;
 
+import com.example.pi2.dto.RecipeDTO;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.repository.RecipeRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
-    public Recipe createRecipe(Recipe recipe) throws ResourceNotFoundException, ResourceAlreadyExistExeption {
+    public Recipe createRecipe(RecipeDTO recipe) throws ResourceNotFoundException, ResourceAlreadyExistExeption {
+        ObjectMapper objectMapper = new ObjectMapper();
         if(recipe == null){
             throw new ResourceNotFoundException("Recipe object cannot be null");
         }
@@ -25,8 +29,9 @@ public class RecipeService {
         if(nameAlreadyInUse(recipe.getName())){
             throw new ResourceAlreadyExistExeption("A Recipe with that name already exists in the database");
         }
+        Recipe recipe1 = objectMapper.convertValue(recipe, Recipe.class);
 
-        return recipeRepository.save(recipe);
+        return recipeRepository.save(recipe1);
 
     }
 

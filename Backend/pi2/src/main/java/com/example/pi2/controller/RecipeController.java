@@ -1,5 +1,6 @@
 package com.example.pi2.controller;
 
+import com.example.pi2.dto.RecipeDTO;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.Recipe;
@@ -17,7 +18,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) throws ResourceAlreadyExistExeption, ResourceNotFoundException {
+    public Recipe createRecipe(@RequestBody RecipeDTO recipe) throws ResourceAlreadyExistExeption, ResourceNotFoundException {
         return recipeService.createRecipe(recipe);
     }
 
@@ -41,4 +42,7 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable Integer id) {
         recipeService.deleteRecipe(id);
     }
-}
+    }
+
+
+
