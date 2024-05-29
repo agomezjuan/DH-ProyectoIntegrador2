@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
 
 export default function Navbar() {
@@ -24,7 +25,10 @@ export default function Navbar() {
       </div>
       <div className='flex items-center'>
         <button className='btn btn-ghost text-primary'>
-          <FaRegCircleUser className='text-primary text-xl' /> Registro / Login
+          <Link to='/login' >
+          <FaRegCircleUser className='text-primary text-xl' /> 
+          <span>Login</span>
+          </Link>
         </button>
       </div>
     </div>
