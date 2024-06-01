@@ -3,10 +3,14 @@ package com.example.pi2.service;
 import com.example.pi2.dto.RecipeDTO;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
+import com.example.pi2.model.Pagination;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.repository.RecipeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,6 +79,14 @@ public class RecipeService {
     }
 
 
+    public Page<Recipe> getAllPaginated(Integer page, Integer elements, String sortBy){
+        PageRequest paging = PageRequest.of(page,elements, Sort.by(sortBy));
+		  //        Long totalElements = pagedResult.getTotalElements();
+//        int totalPages=pagedResult.getTotalPages();
+//        Pagination pagination = new Pagination(pagedResult,totalElements,totalPages);
+        return recipeRepository.findAll(paging);
+
+    }
 
 
 
