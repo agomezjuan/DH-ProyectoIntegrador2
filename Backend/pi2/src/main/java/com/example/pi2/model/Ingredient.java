@@ -1,23 +1,17 @@
 package com.example.pi2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table (name= "ingredients")
 @JsonIdentityInfo(
@@ -31,6 +25,7 @@ public class Ingredient {
 	  private String name;
 	  private Integer caloriesUnit;
 	  private String imgUrl;
-	  @OneToMany(mappedBy = "ingredient")
-	  private Set<RecipesIngredient> recipes  = new HashSet<>();
+	  @OneToMany(mappedBy = "ingredient", cascade = CascadeType.MERGE)
+	  @JsonIgnore
+	  private Set<RecipeIngredient> recipes  = new HashSet<>();
 }
