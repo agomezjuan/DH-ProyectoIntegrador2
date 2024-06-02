@@ -1,1 +1,36 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.carousel__contenedor {
+  position: relative;
+}
+
+.carousel__anterior, .carousel__siguiente {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para los botones */
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  width: 25%;
+  padding: 10px;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto; /* Ajustamos la altura automáticamente para mantener la relación de aspecto */
+  object-fit: cover;
+  border-radius: 50%; /* Hace que las imágenes sean circulares */
+}
 
