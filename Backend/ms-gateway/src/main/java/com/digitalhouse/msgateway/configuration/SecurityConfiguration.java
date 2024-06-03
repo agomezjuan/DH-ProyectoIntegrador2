@@ -23,7 +23,8 @@ public class SecurityConfiguration {
                                 .pathMatchers("/api/v1/users/register/**").permitAll()
                                 .anyExchange()
                                 .authenticated()
-                ).oauth2Login(Customizer.withDefaults());
+                ).oauth2Login(Customizer.withDefaults())
+                .oauth2ResourceServer(jwt -> jwt.jwt());
         return httpSecurity.build();
     }
 
