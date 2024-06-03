@@ -61,3 +61,6 @@ spring:
               - openid
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8090/login/oauth2/code/keycloak
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8089/realms/proyecto-integrador
