@@ -25,6 +25,7 @@ function RegisterForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    const { confirmPassword, ...registerData } = data;
     try {
       const resRegister = await registerUser(data);
       console.log('REGISTER RESPONSE', resRegister);
