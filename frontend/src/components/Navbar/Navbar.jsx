@@ -7,6 +7,7 @@ export default function Navbar() {
     <div className='navbar bg-base-100'>
       <div className='flex-none'>
         <button className='btn btn-square btn-ghost text-primary'>
+         
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -21,7 +22,9 @@ export default function Navbar() {
         </button>
       </div>
       <div className='flex-1'>
-        <a className='btn btn-ghost text-xl text-primary'>MealMap</a>
+      <Link to='/'>
+        <h3 className='btn btn-ghost text-xl text-primary'>MealMap</h3>
+      </Link>
       </div>
       <div className='flex items-center'>
         <button className='btn btn-ghost text-primary'>
