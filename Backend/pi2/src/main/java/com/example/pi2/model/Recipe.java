@@ -25,11 +25,14 @@ public class Recipe {
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Integer id;
+	  @Column(unique = true)
 	  private String name;
 	  private String urlImg;
 	  private LinkedList<String> preparationSteps;
 	  @OneToMany(mappedBy = "recipe")
 	  private Set<RecipeIngredient> ingredients = new HashSet<>();
+	  @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
+      private List<CategoryXRecipe> categoryXRecipes;
 
 	  private Integer caloriesTotal;
 
@@ -42,5 +45,4 @@ public class Recipe {
 			}
 			caloriesTotal = acc;
 	  }
-	  // TODO falta completar relacion con la entidad Category
 }

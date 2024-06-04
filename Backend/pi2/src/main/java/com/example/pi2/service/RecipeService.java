@@ -7,6 +7,9 @@ import com.example.pi2.model.Recipe;
 import com.example.pi2.model.RecipeIngredient;
 import com.example.pi2.repository.IngredientRepository;
 import com.example.pi2.repository.RecipeIngredientRepository;
+import com.example.pi2.model.Category;
+import com.example.pi2.model.CategoryXRecipe;
+import com.example.pi2.repository.CategoryXRecipeRepository;
 import com.example.pi2.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,18 +17,33 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class RecipeService {
+    public static final String NO_MATCHING_CATEGORY_NAMES = "None of the provided category names are in our database, please create the categories and try again";
+    private static final String RECIPE_NOT_FOUND_FMT = "Recipe not found with %s: %s";
+    @Autowired
+    private RecipeRepository recipeRepository;
+    @Autowired
+    private CategoryXRecipeRepository categoryXRecipeRepository;
+    @Autowired
+    private CategoryService categoryService;
+	@Autowired
+	private IngredientRepository ingredientRepository;
+	@Autowired
+	private RecipeIngredientRepository recipeIngredientRepository;
 
-	  @Autowired
-	  private RecipeRepository recipeRepository;
-	  @Autowired
-	  private IngredientRepository ingredientRepository;
-	  @Autowired
-	  private RecipeIngredientRepository recipeIngredientRepository;
+    public Recipe getRecipeByNameWithCategory(String name) throws ResourceNotFoundException {
+        return recipeRepository.findByNameWithCategory(name)
+                .orElseThrow(() -> new ResourceNotFoundException(RECIPE_NOT_FOUND_FMT.formatted("name", name)));
+    }
+
+    public List<Recipe> getAllRecipes() {
+        return  recipeRepository.findAll();
+    }
 
 	  public Recipe createRecipe(Recipe recipe) throws ResourceNotFoundException, ResourceAlreadyExistExeption {
 
@@ -73,11 +91,6 @@ public class RecipeService {
 			return recipe;
 	  }
 
-	  public List<Recipe> getAllRecipes() {
-
-			return recipeRepository.findAll();
-	  }
-
 	  public Recipe updateRecipe(Recipe recipe) throws ResourceNotFoundException {
 
 			Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElse(null);
@@ -104,10 +117,41 @@ public class RecipeService {
 			return recipeRepository.findAll(paging);
 	  }
 
-// UTILS
+    public void associateCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
+        Recipe recipe = getRecipeById(id);
+        List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
+        for (String name : categoryNames) {
+            Category category = categoryService.findByName(name);
+            if (category != null) {
+                CategoryXRecipe cxr = new CategoryXRecipe();
+                cxr.setCategory(category);
+                cxr.setRecipe(recipe);
+                categoryXRecipes.add(cxr);
+            }
+        }
+        if (categoryXRecipes.isEmpty()) {
+            throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
+        }
+        categoryXRecipeRepository.saveAll(categoryXRecipes);
+    }
 
-	  private boolean nameAlreadyInUse(String name) {
+    public void removeCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
+        Recipe recipe = getRecipeById(id);
+        List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
+        for (String name : categoryNames) {
+            Category category = categoryService.findByName(name);
+            if (category != null) {
+                categoryXRecipeRepository.findByRecipeAndCategory(recipe, category).ifPresent(categoryXRecipes::add);
+            }
+        }
+        if (categoryXRecipes.isEmpty()) {
+            throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
+        }
+        categoryXRecipeRepository.deleteAll(categoryXRecipes);
+    }
 
-			return recipeRepository.findByName(name).isPresent();
-	  }
+    // UTILS
+    private boolean nameAlreadyInUse(String name){
+        return recipeRepository.findByName(name).isPresent();
+    }
 }
