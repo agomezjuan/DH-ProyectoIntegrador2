@@ -88,6 +88,8 @@ fabric.properties
 
 !.idea/codeStyles
 !.idea/runConfigurations
+Backend/.idea
+Backend/*.iml
 
 ### macOS ###
 # General

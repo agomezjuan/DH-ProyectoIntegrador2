@@ -55,6 +55,7 @@ public class RecipeController {
     public ResponseEntity<Page<Recipe>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer elements, @RequestParam(defaultValue = "id") String sortBy) {
         Page<Recipe> recipePage = recipeService.getAllPaginated(page, elements, sortBy);
         return new ResponseEntity<>(recipePage, new HttpHeaders(), HttpStatus.OK);
+    }
 
     // EXTRA
     @GetMapping("/name/{name}")
