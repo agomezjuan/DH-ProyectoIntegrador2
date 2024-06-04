@@ -44,8 +44,7 @@ class RecipeServiceTest {
     @Test
     void testGetRecipeByIdNotFound() {
         when(recipeRepository.findById(anyInt())).thenReturn(Optional.empty());
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.getRecipeById(ID));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.getRecipeById(ID));
     }
 
     @Test
@@ -58,8 +57,7 @@ class RecipeServiceTest {
     @Test
     void testGetRecipeByNameNotFound() {
         when(recipeRepository.findByName(anyString())).thenReturn(Optional.empty());
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.getRecipeByName(TEST));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.getRecipeByName(TEST));
     }
 
     @Test
@@ -72,8 +70,7 @@ class RecipeServiceTest {
     @Test
     void testGetRecipeByNameWithCategoryNotFound() {
         when(recipeRepository.findByNameWithCategory(anyString())).thenReturn(Optional.empty());
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.getRecipeByNameWithCategory(TEST));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.getRecipeByNameWithCategory(TEST));
     }
 
     @Test
@@ -91,8 +88,7 @@ class RecipeServiceTest {
         when(recipeRepository.findById(anyInt())).thenReturn(Optional.of(arrangeRecipe()));
         when(categoryService.findByName(anyString())).thenReturn(null);
 
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.associateCategories(ID, List.of("Soup")));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.associateCategories(ID, List.of("Soup")));
     }
 
     @Test
@@ -111,8 +107,7 @@ class RecipeServiceTest {
         when(recipeRepository.findById(anyInt())).thenReturn(Optional.of(arrangeRecipe()));
         when(categoryService.findByName(anyString())).thenReturn(null);
 
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.removeCategories(ID, List.of("Soup")));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.removeCategories(ID, List.of("Soup")));
     }
 
     @Test
@@ -121,8 +116,7 @@ class RecipeServiceTest {
         when(categoryService.findByName(anyString())).thenReturn(arrangeCategory());
         when(categoryXRecipeRepository.findByRecipeAndCategory(any(), any())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(ResourceNotFoundException.class,
-                () -> service.removeCategories(ID, List.of("Soup")));
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.removeCategories(ID, List.of("Soup")));
     }
 
     private Recipe arrangeRecipe() {

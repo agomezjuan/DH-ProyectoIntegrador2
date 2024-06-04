@@ -63,8 +63,7 @@ public class RecipeController {
         Recipe recipe = recipeService.getRecipeByNameWithCategory(name);
         RecipeWithCategories withCategories = new RecipeWithCategories();
         withCategories.setRecipe(mapper.toRecipeDto(recipe));
-        withCategories.setCategories(recipe.getCategoryXRecipes()
-                .stream().map(CategoryXRecipe::getCategory).map(mapper::toCategoryDto).toList());
+        withCategories.setCategories(recipe.getCategoryXRecipes().stream().map(CategoryXRecipe::getCategory).map(mapper::toCategoryDto).toList());
         return withCategories;
     }
 
