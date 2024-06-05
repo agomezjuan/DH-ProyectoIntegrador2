@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
+import { useAuthStore } from "../../store/authStore";
 
 export default function Navbar() {
+  const { isAuth, profile } = useAuthStore();
+
   return (
     <div className='navbar bg-base-100'>
       <div className='flex-none'>
@@ -28,10 +31,17 @@ export default function Navbar() {
       </div>
       <div className='flex items-center'>
         <button className='btn btn-ghost text-primary'>
-          <Link to='/login' >
+         
           <FaRegCircleUser className='text-primary text-xl' /> 
-          <span>Login</span>
+          {!isAuth ?  
+          <Link to='/login' >
+          'Login' 
           </Link>
+          : 
+          <Link to='/profile' >
+           { profile.name}
+          </Link>
+          } 
         </button>
       </div>
     </div>

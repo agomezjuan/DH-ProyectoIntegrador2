@@ -34,7 +34,7 @@ const configRegister = {
 
     export const registerRequest = async (data) => {
       try {
-        const response = await axios.post('http://localhost:57668/users/register', data, configRegister);
+        const response = await axios.post('http://localhost:56499/users/register', data, configRegister);
         console.log('Response:', response.data);
         return response;
       } catch (error) {

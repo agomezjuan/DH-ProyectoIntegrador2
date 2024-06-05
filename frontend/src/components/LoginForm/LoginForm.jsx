@@ -25,15 +25,13 @@ function LoginForm() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-  
     try {
-      const resLogin = await login(data);
-      console.log('RESPONSE', resLogin) 
-      navigate("/");
+      await login(data);
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
       reset();
+      navigate("/");
     }
   });
 
