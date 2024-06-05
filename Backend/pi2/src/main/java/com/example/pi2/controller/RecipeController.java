@@ -5,6 +5,10 @@ import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,5 +49,11 @@ public class RecipeController {
     @GetMapping("/{name}")
     public Recipe getRecipeByName(@PathVariable String name) throws ResourceNotFoundException {
         return recipeService.getRecipeByName(name);
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<Recipe>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer elements, @RequestParam(defaultValue = "id") String sortBy) {
+        Page<Recipe> recipePage = recipeService.getAllPaginated(page, elements, sortBy);
+        return new ResponseEntity<>(recipePage, new HttpHeaders(), HttpStatus.OK);
     }
 }
