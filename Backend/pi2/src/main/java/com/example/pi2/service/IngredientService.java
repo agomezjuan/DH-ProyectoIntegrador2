@@ -18,13 +18,8 @@ public class IngredientService {
 	  IngredientRepository ingredientRepository;
 
 	  public Optional<Ingredient> findById(Integer id) throws ResourceNotFoundException{
-			Ingredient ingredient;
-			Optional<Ingredient> optionalIngredient = ingredientRepository.findById(id);
-			if (optionalIngredient.isPresent()){
-				ingredient = optionalIngredient.get();
-			}else {
-				  throw new ResourceNotFoundException("There's no ingredient with that id in the database");
-			}
+			Ingredient ingredient = ingredientRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("There's no ingredient with that id in the database"));
 			return Optional.of(ingredient);
 	  }
 
