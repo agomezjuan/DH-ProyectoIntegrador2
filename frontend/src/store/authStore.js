@@ -30,12 +30,11 @@ export const useAuthStore = create(
           const resLogin = await loginRequest(data);
           if (resLogin && resLogin.access_token) {
             const token = resLogin.access_token;
-            const session = parseJWT(token);
-            const profile = session.name
+            const profile = parseJWT(token);
             set((state) => ({
               token,
               profile,
-              isAuth: true,
+              isAuth: true
             }));
           } else {
             throw new Error("Invalid response format from login API");
@@ -56,7 +55,6 @@ export const useAuthStore = create(
         }
       },
       logout: () => set(() => ({ token: null, profile: null, isAuth: false })),
-      cleanErrors: () => set(() => ({ errors: null })),
     }),
     {
       name: "auth",
