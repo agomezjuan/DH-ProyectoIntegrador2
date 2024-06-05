@@ -51,10 +51,10 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
     }
 
-    @GetMapping("/{name}")
-    public Recipe getRecipeByName(@PathVariable String name) throws ResourceNotFoundException {
-        return recipeService.getRecipeByName(name);
-    }
+//    @GetMapping("/{name}")
+//    public Recipe getRecipeByName(@PathVariable String name) throws ResourceNotFoundException {
+//        return recipeService.getRecipeByName(name);
+//    }
 
     @GetMapping("/pagination")
     public ResponseEntity<Page<Recipe>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer elements, @RequestParam(defaultValue = "id") String sortBy) {

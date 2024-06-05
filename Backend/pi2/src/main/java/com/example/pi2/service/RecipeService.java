@@ -93,8 +93,6 @@ public class RecipeService {
         if (existingRecipe != null) {
             existingRecipe.setName(recipe.getName());
             existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
-            //existingRecipe.setCategories(recipe.getCategories());
-//            existingRecipe.setIngredients(recipe.getIngredients());
             return recipeRepository.save(existingRecipe);
         } else {
             throw new ResourceNotFoundException("Recipe with ID " + recipe.getId() + " not found");

@@ -1,15 +1,9 @@
 package com.example.pi2.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
+import lombok.*;
 @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "categoryxrecipes")
 public class CategoryXRecipe {

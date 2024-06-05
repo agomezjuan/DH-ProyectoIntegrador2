@@ -5,11 +5,8 @@ import lombok.*;
 
 import java.util.LinkedList;
 import java.util.List;
-
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Entity
 @Table(name = "categories")
 public class Category {
