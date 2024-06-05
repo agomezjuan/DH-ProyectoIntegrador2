@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +16,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String name;
     private String urlImg;
-//    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-//    private LinkedList<Recipe> recipe;
-
-
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private List<CategoryXRecipe> categoryXRecipes;
 }
