@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,30 +17,32 @@ import java.util.Set;
 @Entity
 @Table(name = "recipes")
 @JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id"
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
 )
 public class Recipe {
 
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Integer id;
-	  private String name;
-	  private String urlImg;
-	  private LinkedList<String> preparationSteps;
-	  @OneToMany(mappedBy = "recipe")
-	  private Set<RecipeIngredient> ingredients = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(unique = true)
+    private String name;
+    private String urlImg;
+    private LinkedList<String> preparationSteps;
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
+    private List<CategoryXRecipe> categoryXRecipes;
 
-	  private Integer caloriesTotal;
+    private Integer caloriesTotal;
 
-	  public void calculateTotalCalories() {
+    public void calculateTotalCalories() {
 
-			Integer acc = 0;
-			for (RecipeIngredient ingredient :
-					ingredients) {
-				  acc += ingredient.getCaloriesPartial();
-			}
-			caloriesTotal = acc;
-	  }
-	  // TODO falta completar relacion con la entidad Category
+        Integer acc = 0;
+        for (RecipeIngredient ingredient :
+                ingredients) {
+            acc += ingredient.getCaloriesPartial();
+        }
+        caloriesTotal = acc;
+    }
 }
