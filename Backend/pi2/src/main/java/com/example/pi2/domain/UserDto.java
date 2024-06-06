@@ -1,4 +1,4 @@
-package com.example.pi2.dto;
+package com.example.pi2.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,4 @@ public class UserDto {
     private String id;
     private String nombre;
     private String email;
-
-
-
 }

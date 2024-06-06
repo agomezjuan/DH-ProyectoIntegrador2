@@ -20,5 +20,4 @@ public class Favorite {
     @ManyToOne
     private Recipe recipe;
 
-
 }

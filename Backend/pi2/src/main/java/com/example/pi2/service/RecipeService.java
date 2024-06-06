@@ -9,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.example.pi2.model.Favorite;
-import java.util.stream.Collectors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
@@ -148,33 +148,4 @@ public class RecipeService {
     private boolean nameAlreadyInUse(String name) {
         return recipeRepository.findByName(name).isPresent();
     }
-
-    public List<Recipe>getRecipesFavoriteByUser(String userid){
-        List<Favorite> favorites= favoriteRepository.findByUser(userid);
-        return favorites.stream()
-                .map(Favorite::getRecipe)
-                .collect(Collectors.toList());
-    }
-
-    public void saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
-
-            try {
-                Recipe recipe = recipeRepository.findById(recipeid)
-                        .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
-                Favorite favorite = new Favorite();
-                favorite.setUser(userid);
-                favorite.setRecipe(recipe);
-                favoriteRepository.save(favorite);
-            } catch (ResourceNotFoundException e) {
-                throw e;
-            }
-        }
-
-
-
-public void deleteRecipeFavorite(String userId, Integer recipeId) {
-        favoriteRepository.deleteByUserAndRecipeId(userId, recipeId);
-    }
-
-
 }

@@ -8,11 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "ms-users", url = "http://localhost:8090/api/v1", configuration = FeignAuthInterceptor.class)
 public interface UserClient {
 
-    @GetMapping("/users/{id}")
-    User getUserById(@PathVariable ("id")String id);
-
-
-
-
+    @GetMapping("/users/search")
+    User findByUsername(@RequestParam String username);
 }
 
