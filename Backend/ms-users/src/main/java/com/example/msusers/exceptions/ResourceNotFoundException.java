@@ -1,4 +1,4 @@
-package com.example.pi2.exceptions;
+package com.example.msusers.exceptions;
 
 public class ResourceNotFoundException extends Exception {
 	  public ResourceNotFoundException(String msg) {

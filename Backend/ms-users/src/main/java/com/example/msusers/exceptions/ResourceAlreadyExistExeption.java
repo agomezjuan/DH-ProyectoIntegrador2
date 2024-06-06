@@ -1,4 +1,4 @@
-package com.example.pi2.exceptions;
+package com.example.msusers.exceptions;
 
 public class ResourceAlreadyExistExeption extends Exception {
 	  public ResourceAlreadyExistExeption(String msg) {

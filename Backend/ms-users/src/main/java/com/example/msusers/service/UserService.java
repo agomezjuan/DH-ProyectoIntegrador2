@@ -2,6 +2,7 @@ package com.example.msusers.service;
 
 import com.example.msusers.configuration.ClientConfig;
 import com.example.msusers.dto.UserDTO;
+import com.example.msusers.exceptions.ResourceNotFoundException;
 import com.example.msusers.repository.UserRepository;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.Keycloak;
@@ -11,15 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-
     private final Keycloak keycloak;
-
     private final ClientConfig clientConfig;
-
+    private UserRepository userRepository;
     @Value("${keycloakProperties.realm}")
     private String realm;
 
@@ -30,7 +29,7 @@ public class UserService {
         this.clientConfig = clientConfig;
     }
 
-    public Integer createUser(UserDTO user){
+    public Integer createUser(UserDTO user) {
 
         UserRepresentation userRepresentation = new UserRepresentation();
 
@@ -46,7 +45,7 @@ public class UserService {
 
         userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation));
 
-        Keycloak keycloakBuilder= clientConfig.buildClientWithToken();
+        Keycloak keycloakBuilder = clientConfig.buildClientWithToken();
 
         Response response = keycloakBuilder.realm(realm).users().create(userRepresentation);
 
@@ -55,7 +54,23 @@ public class UserService {
 
     }
 
+    public UserDTO findByUsername(String username) throws ResourceNotFoundException {
+        UserRepresentation userById = keycloak.realm(realm)
+                .users()
+                .searchByUsername(username, true)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Username: %s not found", username)));
+        return this.mapToDto(userById);
+    }
 
-
-
+    private UserDTO mapToDto(UserRepresentation user) {
+        UserDTO dto = new UserDTO();
+        dto.setEmail(user.getEmail());
+        dto.setEnabled(user.isEnabled());
+        dto.setId(user.getId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        return dto;
+    }
 }

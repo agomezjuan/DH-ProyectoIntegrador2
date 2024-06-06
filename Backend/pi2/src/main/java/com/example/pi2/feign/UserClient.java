@@ -1,7 +1,7 @@
 package com.example.pi2.feign;
 
+import com.example.pi2.domain.UserDto;
 import com.example.pi2.security.config.FeignAuthInterceptor;
-import com.example.msusers.domain.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.*;
 public interface UserClient {
 
     @GetMapping("/users/search")
-    User findByUsername(@RequestParam String username);
+    UserDto findByUsername(@RequestParam String username);
 }
 

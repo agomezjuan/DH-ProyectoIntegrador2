@@ -1,7 +1,5 @@
 package com.example.pi2.controller;
 
-import com.example.msusers.domain.User;
-import com.example.pi2.feign.UserClient;
 import com.example.pi2.domain.RecipeWithCategories;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
@@ -52,11 +50,6 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable Integer id) {
         recipeService.deleteRecipe(id);
     }
-
-//    @GetMapping("/{name}")
-//    public Recipe getRecipeByName(@PathVariable String name) throws ResourceNotFoundException {
-//        return recipeService.getRecipeByName(name);
-//    }
 
     @GetMapping("/pagination")
     public ResponseEntity<Page<Recipe>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer elements, @RequestParam(defaultValue = "id") String sortBy) {
