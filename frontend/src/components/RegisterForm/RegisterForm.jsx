@@ -28,8 +28,10 @@ function RegisterForm() {
     const { confirmPassword, ...registerData } = data;
     try {
       const resRegister = await registerUser(data);
-      console.log('REGISTER RESPONSE', resRegister);
-      navigate('/');
+      if (resRegister.status === 201) {
+        console.log('Registro exitoso:', resRegister.statusText);
+        navigate('/login');
+      }
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {

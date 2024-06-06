@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { loginRequest, registerRequest } from "../api/auth";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { loginRequest, registerRequest } from '../api/auth';
 
 // Función para decodificar el JWT y obtener el perfil del usuario
 function parseJWT(token) {
@@ -22,7 +22,7 @@ export const useAuthStore = create(
         set((state) => ({
           token,
           profile,
-          isAuth: !!token,
+          isAuth: !!token
         }));
       },
       login: async (data) => {
@@ -37,7 +37,7 @@ export const useAuthStore = create(
               isAuth: true
             }));
           } else {
-            throw new Error("Invalid response format from login API");
+            throw new Error('Invalid response format from login API');
           }
         } catch (error) {
           throw error;
@@ -46,18 +46,16 @@ export const useAuthStore = create(
       registerUser: async (data) => {
         try {
           const resRegister = await registerRequest(data);
-          set(() => ({
-            isAuth: true,
-          }));
+
           return resRegister;
         } catch (error) {
           throw error;
         }
       },
-      logout: () => set(() => ({ token: null, profile: null, isAuth: false })),
+      logout: () => set(() => ({ token: null, profile: null, isAuth: false }))
     }),
     {
-      name: "auth",
+      name: 'auth'
     }
   )
 );
