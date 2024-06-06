@@ -5,11 +5,12 @@ import { RecipeContainer } from '@/components/RecipeContainer';
 import { recipeMock } from '@/mocks/recipeMock';
 import { Carousel } from '../../components/carousel/Carousel';
 
-
 const popularRecipes = [recipeMock, recipeMock, recipeMock];
 const newRecipes = [recipeMock, recipeMock, recipeMock];
 
 export const Home = () => {
+ 
+
   return (
     <Layout>
       <div className='container bg-base-200 p-6'>

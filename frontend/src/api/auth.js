@@ -1,45 +1,31 @@
-import axios from "axios";
+import http from './httpService';
+import { loginService } from './httpService';
 
-const configLogin = {
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+export const loginRequest = async (data) => {
+  const formBody = Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+
+  try {
+    const response = await loginService.post(
+      '/realms/proyecto-integrador/protocol/openid-connect/token',
+      formBody
+    );
+
+    console.log('Response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
   }
 };
 
-
-
-export const loginRequest = async (data) => {
-  const formBody = Object.keys(data).map(key => 
-    encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-  ).join('&');
+export const registerRequest = async (data) => {
   try {
-    const response = await axios.post(
-      'http://localhost:8089/realms/proyecto-integrador/protocol/openid-connect/token',
-      formBody,
-      configLogin
-    );
+    const response = await http.post('/api/v1/users/register', data);
     console.log('Response:', response.data);
-    return response.data; 
+    return response;
   } catch (error) {
     console.error('Error:', error);
     throw error;
   }
 };
-
-const configRegister = {
-  headers: {
-    'Content-Type': 'application/json',
-  }
-};
-
-    export const registerRequest = async (data) => {
-      try {
-        const response = await axios.post('http://localhost:57668/users/register', data, configRegister);
-        console.log('Response:', response.data);
-        return response;
-      } catch (error) {
-        console.error('Error:', error);
-        throw error;
-      }
-    };
-
