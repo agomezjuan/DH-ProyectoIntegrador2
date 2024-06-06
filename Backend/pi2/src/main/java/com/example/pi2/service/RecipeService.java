@@ -150,14 +150,14 @@ public class RecipeService {
     }
 
     public List<Recipe>getRecipesFavoriteByUser(String userid){
-        List<Favorite> favorites= favoriteRepository.findByUserId(userid);
+        List<Favorite> favorites= favoriteRepository.findByUser(userid);
         return favorites.stream()
                 .map(Favorite::getRecipe)
                 .collect(Collectors.toList());
     }
 
     public void saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
-        if (!favoriteRepository.existsByUserIdAndRecipeId(userid, recipeid)) {
+
             try {
                 Recipe recipe = recipeRepository.findById(recipeid)
                         .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
@@ -169,11 +169,11 @@ public class RecipeService {
                 throw e;
             }
         }
-    }
+
 
 
 public void deleteRecipeFavorite(String userId, Integer recipeId) {
-        favoriteRepository.deleteByUserIdAndRecipeId(userId, recipeId);
+        favoriteRepository.deleteByUserAndRecipeId(userId, recipeId);
     }
 
 

@@ -9,10 +9,9 @@ import java.util.List;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long>{
 
-    List<Favorite> findByUserId(String userId);
+    List<Favorite> findByUser(String userId);
 
-    boolean existsByUserIdAndRecipeId(String userId, Integer recipeId);
-    void deleteByUserIdAndRecipeId(String userId, Integer recipeId);
+    void deleteByUserAndRecipeId(String userId, Integer recipeId);
 
 
 }

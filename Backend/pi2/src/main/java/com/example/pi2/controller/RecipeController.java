@@ -1,7 +1,7 @@
 package com.example.pi2.controller;
 
 import com.example.msusers.domain.User;
-import com.example.msusers.feign.UserClient;
+import com.example.pi2.feign.UserClient;
 import com.example.pi2.domain.RecipeWithCategories;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
