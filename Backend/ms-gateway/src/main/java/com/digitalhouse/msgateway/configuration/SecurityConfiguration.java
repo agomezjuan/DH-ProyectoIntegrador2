@@ -21,6 +21,8 @@ public class SecurityConfiguration {
                 .authorizeExchange(auth ->
                         auth
                                 .pathMatchers("/api/v1/users/register/**").permitAll()
+                                .pathMatchers("/api/v1/categories/**").permitAll()
+                                .pathMatchers("/api/v1/recipes/**").permitAll()
                                 .anyExchange()
                                 .authenticated()
                 ).oauth2Login(Customizer.withDefaults())

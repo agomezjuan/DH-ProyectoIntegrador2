@@ -21,6 +21,8 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeRequests( auth -> auth
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Permitir acceso a Swagger
+                        .requestMatchers("/categories/**").permitAll()
+                        .requestMatchers("/recipes/**").permitAll()
                         .anyRequest()
                         .authenticated())
                 .oauth2ResourceServer(oauth -> oauth
