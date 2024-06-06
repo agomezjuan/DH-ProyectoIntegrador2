@@ -3,16 +3,14 @@ package com.example.pi2.service;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.*;
-import com.example.pi2.repository.CategoryXRecipeRepository;
-import com.example.pi2.repository.IngredientRepository;
-import com.example.pi2.repository.RecipeIngredientRepository;
-import com.example.pi2.repository.RecipeRepository;
+import com.example.pi2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import com.example.pi2.model.Favorite;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +29,8 @@ public class RecipeService {
     private IngredientRepository ingredientRepository;
     @Autowired
     private RecipeIngredientRepository recipeIngredientRepository;
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
     public Recipe getRecipeByNameWithCategory(String name) throws ResourceNotFoundException {
         return recipeRepository.findByNameWithCategory(name)
@@ -148,4 +148,33 @@ public class RecipeService {
     private boolean nameAlreadyInUse(String name) {
         return recipeRepository.findByName(name).isPresent();
     }
+
+    public List<Recipe>getRecipesFavoriteByUser(String userid){
+        List<Favorite> favorites= favoriteRepository.findByUserId(userid);
+        return favorites.stream()
+                .map(Favorite::getRecipe)
+                .collect(Collectors.toList());
+    }
+
+    public void saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
+        if (!favoriteRepository.existsByUserIdAndRecipeId(userid, recipeid)) {
+            try {
+                Recipe recipe = recipeRepository.findById(recipeid)
+                        .orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+                Favorite favorite = new Favorite();
+                favorite.setUser(userid);
+                favorite.setRecipe(recipe);
+                favoriteRepository.save(favorite);
+            } catch (ResourceNotFoundException e) {
+                throw e;
+            }
+        }
+    }
+
+
+public void deleteRecipeFavorite(String userId, Integer recipeId) {
+        favoriteRepository.deleteByUserIdAndRecipeId(userId, recipeId);
+    }
+
+
 }

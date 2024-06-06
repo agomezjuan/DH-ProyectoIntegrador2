@@ -3,6 +3,7 @@ package com.example.pi2.model;
 import jakarta.persistence.*;
 import lombok.*;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "categoryxrecipes")

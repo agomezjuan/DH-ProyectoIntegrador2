@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table (name= "ingredients")

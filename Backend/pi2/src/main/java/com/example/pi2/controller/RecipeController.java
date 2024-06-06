@@ -1,5 +1,7 @@
 package com.example.pi2.controller;
 
+import com.example.msusers.domain.User;
+import com.example.msusers.feign.UserClient;
 import com.example.pi2.domain.RecipeWithCategories;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
@@ -24,6 +26,9 @@ public class RecipeController {
     private RecipeService recipeService;
     @Autowired
     private DtoMapper mapper;
+
+    @Autowired
+    private UserClient userClient;
 
     // CRUD
     @PostMapping
@@ -81,4 +86,34 @@ public class RecipeController {
     public void removeCategories(@PathVariable Integer id, @RequestBody List<String> categoryNames) throws ResourceNotFoundException {
         recipeService.removeCategories(id, categoryNames);
     }
+
+    @GetMapping("/favorites/{userId}")
+    public List<Recipe> getRecipesFavorites(@PathVariable String userId) throws ResourceNotFoundException {
+        User user = userClient.getUserById(userId);
+        if (user != null) {
+            return recipeService.getRecipesFavoriteByUser(userId);
+        } else {
+            throw new ResourceNotFoundException ("User not found");
+        }
+    }
+
+    @PostMapping("/favorites/{userId}/{recipeId}")
+    public void saveRecipeFavorite(@PathVariable String userId, @PathVariable Integer recipeId) throws ResourceNotFoundException {
+        User user = userClient.getUserById(userId);
+        if (user != null) {
+            recipeService.saveRecipeFavorite(userId, recipeId);
+        } else {
+            throw new ResourceNotFoundException("User not found");
+        }
+    }
+    @DeleteMapping("/favorites/{userId}/{recipeId}")
+    public void deleteRecipeFavorite(@PathVariable String userId, @PathVariable Integer recipeId) throws ResourceNotFoundException {
+        User user = userClient.getUserById(userId);
+        if (user != null) {
+            recipeService.deleteRecipeFavorite(userId, recipeId);
+        } else {
+            throw new  ResourceNotFoundException ("User not found");
+        }
+    }
+
 }

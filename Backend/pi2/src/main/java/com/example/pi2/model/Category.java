@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.LinkedList;
 import java.util.List;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "categories")
