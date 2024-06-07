@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './footer.css';
 
 const Footer = () => {
@@ -6,8 +7,8 @@ const Footer = () => {
     <footer className='footer w-full p-10 bg-primary text-primary-content'>
       <div className='flex items-center justify-center'>
         <nav className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 flex justify-center'>
-          <a
-            href='#'
+          <Link
+            to='/register' // Usar Link con el atributo to
             aria-label='Registration'
             className='relative h-32 w-32 text-neutral-100 hover:text-primary-content flex items-center'>
             <svg
@@ -25,22 +26,23 @@ const Footer = () => {
               />
             </svg>
             <span className='text-l text-neutral-100'>Registrate</span>
-          </a>
+          </Link>
         </nav>
       </div>
-      <div id='verticle-line'>
-
-</div>
+      <div id='verticle-line'></div>
       <div className='flex items-center justify-start flex-none w-96'>
         <nav className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2'>
-          <span className='block text center text-4xl text-neutral-100 mb-4'>
-            MealMap
-          </span>
-
+          <Link to='/'>
+            <span className='block text center text-4xl text-neutral-100 mb-4'>
+              MealMap
+            </span>
+          </Link>
           <div className='flex items-start gap-3 justify-between'>
             <a
-              href='#'
+              href='https://www.facebook.com'
               aria-label='Facebook'
+               target='_blank'
+              rel='noopener noreferrer'
               className='text-neutral-100 hover:text-primary-content'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -52,8 +54,10 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='#'
+              href='https://www.x.com/home'
               aria-label='X'
+               target='_blank'
+              rel='noopener noreferrer'
               className='text-neutral-100 hover:text-primary-content'>
               <svg
                 className='w-6 h-6'
@@ -67,8 +71,10 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='#'
+              href='https://www.instagram.com/'
               aria-label='Instagram'
+               target='_blank'
+              rel='noopener noreferrer'
               className='text-neutral-100 hover:text-primary-content'>
               <svg
                 className='w-6 h-6'
@@ -87,8 +93,10 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='#'
+              href='https://www.youtube.com/'
               aria-label='YouTube'
+               target='_blank'
+              rel='noopener noreferrer'
               className='text-neutral-100 hover:text-primary-content'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -101,10 +109,9 @@ const Footer = () => {
             </a>
           </div>
 
-            <nav className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2'>
-              <span className='text-l text-neutral-100'>DgProyect2® 2024</span>
-            </nav>
-
+          <nav className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2'>
+            <span className='text-l text-neutral-100'>DgProyect2® 2024</span>
+          </nav>
         </nav>
       </div>
       <div id='verticle-line'></div>
@@ -132,7 +139,6 @@ const Footer = () => {
           </a>
         </li>
       </ul>
-
     </footer>
   );
 };
