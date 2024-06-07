@@ -3,10 +3,7 @@ package com.example.pi2.service;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.*;
-import com.example.pi2.repository.CategoryXRecipeRepository;
-import com.example.pi2.repository.IngredientRepository;
-import com.example.pi2.repository.RecipeIngredientRepository;
-import com.example.pi2.repository.RecipeRepository;
+import com.example.pi2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
@@ -31,6 +29,8 @@ public class RecipeService {
     private IngredientRepository ingredientRepository;
     @Autowired
     private RecipeIngredientRepository recipeIngredientRepository;
+    @Autowired
+    private FavoriteRepository favoriteRepository;
 
     public Recipe getRecipeByNameWithCategory(String name) throws ResourceNotFoundException {
         return recipeRepository.findByNameWithCategory(name)
@@ -93,8 +93,6 @@ public class RecipeService {
         if (existingRecipe != null) {
             existingRecipe.setName(recipe.getName());
             existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
-            //existingRecipe.setCategories(recipe.getCategories());
-//            existingRecipe.setIngredients(recipe.getIngredients());
             return recipeRepository.save(existingRecipe);
         } else {
             throw new ResourceNotFoundException("Recipe with ID " + recipe.getId() + " not found");
