@@ -12,140 +12,136 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
-    public static final String NO_MATCHING_CATEGORY_NAMES = "None of the provided category names are in our database, please create the categories and try again";
-    private static final String RECIPE_NOT_FOUND_FMT = "Recipe not found with %s: %s";
-    @Autowired
-    private RecipeRepository recipeRepository;
-    @Autowired
-    private CategoryXRecipeRepository categoryXRecipeRepository;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private IngredientRepository ingredientRepository;
-    @Autowired
-    private RecipeIngredientRepository recipeIngredientRepository;
-    @Autowired
-    private FavoriteRepository favoriteRepository;
 
-    public Recipe getRecipeByNameWithCategory(String name) throws ResourceNotFoundException {
-        return recipeRepository.findByNameWithCategory(name)
-                .orElseThrow(() -> new ResourceNotFoundException(RECIPE_NOT_FOUND_FMT.formatted("name", name)));
-    }
+	  public static final String NO_MATCHING_CATEGORY_NAMES = "None of the provided category names are in our database, please create the categories and try again";
+	  private static final String RECIPE_NOT_FOUND_FMT = "Recipe not found with %s: %s";
+	  @Autowired
+	  private RecipeRepository recipeRepository;
+	  @Autowired
+	  private CategoryXRecipeRepository categoryXRecipeRepository;
+	  @Autowired
+	  private CategoryService categoryService;
+	  @Autowired
+	  private IngredientRepository ingredientRepository;
+	  @Autowired
+	  private RecipeIngredientRepository recipeIngredientRepository;
+	  @Autowired
+	  private FavoriteRepository favoriteRepository;
 
-    public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
-    }
+	  public Recipe getRecipeByNameWithCategory(String name) throws ResourceNotFoundException {
 
-    public Recipe createRecipe(Recipe recipe) throws ResourceNotFoundException, ResourceAlreadyExistExeption {
+			return recipeRepository.findByNameWithCategory(name)
+					.orElseThrow(() -> new ResourceNotFoundException(RECIPE_NOT_FOUND_FMT.formatted("name", name)));
+	  }
 
-        if (recipe == null) {
-            throw new ResourceNotFoundException("Recipe object cannot be null");
-        }
-        if (recipe.getName() == null || recipe.getName().isEmpty()) {
-            throw new ResourceNotFoundException("Recipe name required");
-        }
-        if (nameAlreadyInUse(recipe.getName())) {
-            throw new ResourceAlreadyExistExeption("A Recipe with that name already exists in the database");
-        }
-        Recipe recipe1 = recipeRepository.save(recipe);
-        Set<RecipeIngredient> recipeIngredientSet = recipe1.getIngredients();
-        for (RecipeIngredient recipeIngredient :
-                recipeIngredientSet) {
-            recipeIngredient.setRecipe(recipe1);
-            Ingredient ingredient = ingredientRepository.findById(recipeIngredient.getIngredient().getId()).orElse(null);
-            recipeIngredient.calculateCalories(recipeIngredient.getQuantity(), ingredient.getCaloriesUnit());
-        }
-        recipeIngredientRepository.saveAll(recipeIngredientSet);
-        Recipe recipeFullData = recipeRepository.getReferenceById(recipe1.getId());
-        recipeFullData.calculateTotalCalories();
+	  public List<Recipe> getAllRecipes() {
 
-        return recipeRepository.save(recipeFullData);
+			return recipeRepository.findAll();
+	  }
 
-    }
+	  public Recipe createRecipe(Recipe recipe) throws ResourceNotFoundException, ResourceAlreadyExistExeption {
 
-    public Recipe getRecipeById(Integer id) throws ResourceNotFoundException {
+			if (recipe == null) {
+				  throw new ResourceNotFoundException("Recipe object cannot be null");
+			}
+			if (recipe.getName() == null || recipe.getName().isEmpty()) {
+				  throw new ResourceNotFoundException("Recipe name required");
+			}
+			if (nameAlreadyInUse(recipe.getName())) {
+				  throw new ResourceAlreadyExistExeption("A Recipe with that name already exists in the database");
+			}
 
-        Recipe recipe = recipeRepository.findById(id).orElse(null);
-        if (recipe == null) {
-            throw new ResourceNotFoundException("Recipe not found with id: " + id);
-        }
-        return recipe;
+			return recipeRepository.save(recipe);
 
-    }
+	  }
 
-    public Recipe getRecipeByName(String name) throws ResourceNotFoundException {
+	  public Recipe getRecipeById(Integer id) throws ResourceNotFoundException {
 
-        Recipe recipe = recipeRepository.findByName(name).orElse(null);
-        if (recipe == null) {
-            throw new ResourceNotFoundException("Recipe not found with id: " + name);
-        }
-        return recipe;
-    }
+			Recipe recipe = recipeRepository.findById(id).orElse(null);
+			if (recipe == null) {
+				  throw new ResourceNotFoundException("Recipe not found with id: " + id);
+			}
+			return recipe;
 
-    public Recipe updateRecipe(Recipe recipe) throws ResourceNotFoundException {
+	  }
 
-        Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElse(null);
-        if (existingRecipe != null) {
-            existingRecipe.setName(recipe.getName());
-            existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
-            return recipeRepository.save(existingRecipe);
-        } else {
-            throw new ResourceNotFoundException("Recipe with ID " + recipe.getId() + " not found");
-        }
+	  public Recipe getRecipeByName(String name) throws ResourceNotFoundException {
 
-    }
+			Recipe recipe = recipeRepository.findByName(name).orElse(null);
+			if (recipe == null) {
+				  throw new ResourceNotFoundException("Recipe not found with id: " + name);
+			}
+			return recipe;
+	  }
 
-    public void deleteRecipe(Integer id) {
+	  public Recipe updateRecipe(Recipe recipe) throws ResourceNotFoundException {
 
-        recipeRepository.deleteById(id);
-    }
+			Recipe existingRecipe = recipeRepository.findById(recipe.getId()).orElse(null);
+			if (existingRecipe != null) {
+				  existingRecipe.setName(recipe.getName());
+				  existingRecipe.setPreparationSteps(recipe.getPreparationSteps());
+				  return recipeRepository.save(existingRecipe);
+			} else {
+				  throw new ResourceNotFoundException("Recipe with ID " + recipe.getId() + " not found");
+			}
 
-    public Page<Recipe> getAllPaginated(Integer page, Integer elements, String sortBy) {
+	  }
 
-        PageRequest paging = PageRequest.of(page, elements, Sort.by(sortBy));
-        return recipeRepository.findAll(paging);
-    }
+	  public void deleteRecipe(Integer id) {
 
-    public void associateCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
-        Recipe recipe = getRecipeById(id);
-        List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
-        for (String name : categoryNames) {
-            Category category = categoryService.findByName(name);
-            if (category != null) {
-                CategoryXRecipe cxr = new CategoryXRecipe();
-                cxr.setCategory(category);
-                cxr.setRecipe(recipe);
-                categoryXRecipes.add(cxr);
-            }
-        }
-        if (categoryXRecipes.isEmpty()) {
-            throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
-        }
-        categoryXRecipeRepository.saveAll(categoryXRecipes);
-    }
+			recipeRepository.deleteById(id);
+	  }
 
-    public void removeCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
-        Recipe recipe = getRecipeById(id);
-        List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
-        for (String name : categoryNames) {
-            Category category = categoryService.findByName(name);
-            if (category != null) {
-                categoryXRecipeRepository.findByRecipeAndCategory(recipe, category).ifPresent(categoryXRecipes::add);
-            }
-        }
-        if (categoryXRecipes.isEmpty()) {
-            throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
-        }
-        categoryXRecipeRepository.deleteAll(categoryXRecipes);
-    }
+	  public Page<Recipe> getAllPaginated(Integer page, Integer elements, String sortBy) {
 
-    // UTILS
-    private boolean nameAlreadyInUse(String name) {
-        return recipeRepository.findByName(name).isPresent();
-    }
+			PageRequest paging = PageRequest.of(page, elements, Sort.by(sortBy));
+			return recipeRepository.findAll(paging);
+	  }
+
+	  public void associateCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
+
+			Recipe recipe = getRecipeById(id);
+			List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
+			for (String name : categoryNames) {
+				  Category category = categoryService.findByName(name);
+				  if (category != null) {
+						CategoryXRecipe cxr = new CategoryXRecipe();
+						cxr.setCategory(category);
+						cxr.setRecipe(recipe);
+						categoryXRecipes.add(cxr);
+				  }
+			}
+			if (categoryXRecipes.isEmpty()) {
+				  throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
+			}
+			categoryXRecipeRepository.saveAll(categoryXRecipes);
+	  }
+
+	  public void removeCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
+
+			Recipe recipe = getRecipeById(id);
+			List<CategoryXRecipe> categoryXRecipes = new ArrayList<>();
+			for (String name : categoryNames) {
+				  Category category = categoryService.findByName(name);
+				  if (category != null) {
+						categoryXRecipeRepository.findByRecipeAndCategory(recipe, category).ifPresent(categoryXRecipes::add);
+				  }
+			}
+			if (categoryXRecipes.isEmpty()) {
+				  throw new ResourceNotFoundException(NO_MATCHING_CATEGORY_NAMES);
+			}
+			categoryXRecipeRepository.deleteAll(categoryXRecipes);
+	  }
+
+	  public void postMultiple(List<Recipe> recipes) {
+			recipeRepository.saveAll(recipes);
+	  }
+	  // UTILS
+	  private boolean nameAlreadyInUse(String name) {
+
+			return recipeRepository.findByName(name).isPresent();
+	  }
 }

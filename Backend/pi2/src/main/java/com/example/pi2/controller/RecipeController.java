@@ -76,4 +76,9 @@ public class RecipeController {
     public void removeCategories(@PathVariable Integer id, @RequestBody List<String> categoryNames) throws ResourceNotFoundException {
         recipeService.removeCategories(id, categoryNames);
     }
+
+    @PostMapping("/addMany")
+    public void addMany(@RequestBody List<Recipe> recipes){
+        recipeService.postMultiple(recipes);
+    }
 }
