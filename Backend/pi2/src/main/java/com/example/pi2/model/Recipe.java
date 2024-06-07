@@ -31,7 +31,7 @@ public class Recipe {
 	  @Column(length = 2500)
 	  private LinkedList<String> preparationSteps;
 	  @Column(length = 2500)
-	  private LinkedList<String> ingredients;
+	  private List<String> ingredients;
 	  @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
 	  private List<CategoryXRecipe> categoryXRecipes;
 }
