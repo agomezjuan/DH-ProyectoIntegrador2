@@ -13,19 +13,8 @@ import java.util.Optional;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-//     NO son necesarios vienen por defecto con el JpaRepository
-
-//    @Query("SELECT s FROM Schedule s")
-//    List<Schedule> findAll();
-//
-//    @Query("SELECT s FROM Schedule s WHERE s.id = :id")
-//    Optional<Schedule> findById(@Param("id") Long id);
-//
-//    @Query("INSERT INTO Schedule (idUsuario, recipe, diaDeLaSemana) VALUES (:idUsuario, :recipe, :diaDeLaSemana)")
-//    Schedule save(@Param("idUsuario") String idUsuario, @Param("recipe") Recipe recipe, @Param("diaDeLaSemana") String diaDeLaSemana);
-//    @Query("DELETE FROM Schedule s WHERE s.id = :id")
-//    void deleteById(@Param("id") Long id);
-
-    @Query("UPDATE Schedule s SET s.idUsuario = :idUsuario, s.recipe = :recipe, s.diaDeLaSemana = :diaDeLaSemana WHERE s.id = :id")
-    Schedule update(@Param("id") Long id, @Param("idUsuario") String idUsuario, @Param("recipe") Recipe recipe, @Param("diaDeLaSemana") String diaDeLaSemana);
+    @Query("SELECT s FROM Schedule s WHERE s.idUser = :idUser")
+    List<Schedule> findByUserId(@Param("idUser") String idUser);
+    @Query("UPDATE Schedule s SET s.idUser = :idUser, s.recipe = :recipe, s.weekDay = :weekDay WHERE s.id = :id")
+    Schedule update(@Param("id") Long id, @Param("idUser") String idUser, @Param("recipe") Recipe recipe, @Param("weekDay") String weekDay);
 }

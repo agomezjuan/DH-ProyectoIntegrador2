@@ -24,9 +24,19 @@ public class ScheduleController {
         return scheduleService.findById(id);
     }
 
+    @GetMapping("/user/{idUser}")
+    public List<Schedule> getByUserId(@PathVariable String idUser) {
+        return scheduleService.findByUserId(idUser);
+    }
+
     @PostMapping
     public Schedule save(@RequestBody Schedule schedule) {
         return scheduleService.save(schedule);
+    }
+
+    @PostMapping("/user/{idUser}")
+    public Schedule createScheduleForUser(@PathVariable String idUser, @RequestBody Schedule schedule) {
+        return scheduleService.saveForUser(idUser, schedule);
     }
 
     @PutMapping("/{id}")

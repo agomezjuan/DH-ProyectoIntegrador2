@@ -26,16 +26,23 @@ public class ScheduleService {
         return scheduleRepository.findById(id).orElseThrow(() -> new RuntimeException("Schedule not found"));
     }
 
+    public List<Schedule> findByUserId(String idUser) {
+        return scheduleRepository.findByUserId(idUser);
+    }
     public Schedule save(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }
 
+    public Schedule saveForUser(String idUser, Schedule schedule) {
+        schedule.setIdUser(idUser);
+        return scheduleRepository.save(schedule);
+    }
     public Schedule update(Long id, Schedule scheduleDetails) {
         Schedule schedule = findById(id);
-        schedule.setIdUsuario(scheduleDetails.getIdUsuario());
+        schedule.setIdUser(scheduleDetails.getIdUser());
         Recipe recipe = recipeRepository.findById(scheduleDetails.getRecipe().getId()).orElseThrow(() -> new RuntimeException("Recipe not found"));
         schedule.setRecipe(recipe);
-        schedule.setDiaDeLaSemana(scheduleDetails.getDiaDeLaSemana());
+        schedule.setWeekDay(scheduleDetails.getWeekDay());
         return scheduleRepository.save(schedule);
     }
 

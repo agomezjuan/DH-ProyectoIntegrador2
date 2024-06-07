@@ -14,15 +14,15 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_usuario", nullable = false)
-    private String idUsuario;
+    @Column(name = "id_user", nullable = false)
+    private String idUser;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
-    @Column(name = "dia_de_la_semana", nullable = false)
-    private String diaDeLaSemana;
+    @Column(name = "week_day", nullable = false)
+    private String weekDay;
 
 
 }
