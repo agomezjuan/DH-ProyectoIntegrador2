@@ -30,22 +30,17 @@ public class FavoritesController {
         }
     }
 
-    @PostMapping("/save")
-    public void saveRecipeFavorite(@RequestBody FavoriteRequestDto favoriteRequestDto) throws ResourceNotFoundException {
+    @PostMapping
+    public Favorite saveRecipeFavorite(@RequestBody FavoriteRequestDto favoriteRequestDto) throws ResourceNotFoundException {
         UserDto user = userClient.findByUsername(favoriteRequestDto.getUsername());
         if (user != null) {
-            favoritesService.saveRecipeFavorite(favoriteRequestDto.getUsername(), favoriteRequestDto.getRecipeId());
+            return favoritesService.saveRecipeFavorite(favoriteRequestDto.getUsername(), favoriteRequestDto.getRecipeId());
         } else {
             throw new ResourceNotFoundException("User not found");
         }
     }
-    @PostMapping("/delete")
-    public void deleteRecipeFavorite(@RequestBody FavoriteRequestDto favoriteRequestDto) throws ResourceNotFoundException {
-        UserDto user = userClient.findByUsername(favoriteRequestDto.getUsername());
-        if (user != null) {
-            favoritesService.deleteRecipeFavorite(favoriteRequestDto.getUsername(), favoriteRequestDto.getRecipeId());
-        } else {
-            throw new  ResourceNotFoundException ("User not found");
-        }
+    @DeleteMapping("/{id}")
+    public void deleteRecipeFavorite(@PathVariable(name = "id") Long id) {
+        favoritesService.deleteRecipeFavorite(id);
     }
 }

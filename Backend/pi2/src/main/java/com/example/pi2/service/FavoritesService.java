@@ -21,16 +21,16 @@ public class FavoritesService {
         return favoriteRepository.findByUser(userid);
     }
 
-    public void saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
+    public Favorite saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
         Recipe recipe = recipeService.getRecipeById(recipeid);
         Favorite favorite = new Favorite();
         favorite.setUser(userid);
         favorite.setRecipe(recipe);
-        favoriteRepository.save(favorite);
+        return favoriteRepository.save(favorite);
     }
 
 
-    public void deleteRecipeFavorite(String userId, Integer recipeId) {
-        favoriteRepository.deleteByUserAndRecipeId(userId, recipeId);
+    public void deleteRecipeFavorite(Long favoriteId) {
+        favoriteRepository.deleteById(favoriteId);
     }
 }

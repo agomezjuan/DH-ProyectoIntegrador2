@@ -36,7 +36,9 @@ public class UserService {
         userRepresentation.setFirstName(user.getFirstName());
         userRepresentation.setLastName(user.getLastName());
         userRepresentation.setEmail(user.getEmail());
+        userRepresentation.setUsername(user.getEmail());
         userRepresentation.setEnabled(true);
+        userRepresentation.setEmailVerified(true);
 
         CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
         credentialRepresentation.setTemporary(false);
@@ -71,6 +73,7 @@ public class UserService {
         dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
+        dto.setUserName(user.getEmail());
         return dto;
     }
 }
