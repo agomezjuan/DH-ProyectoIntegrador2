@@ -1,0 +1,206 @@
+[
+  {
+    "name": "Salmón a la Parrilla",
+    "description": "Salmón jugoso a la parrilla con un toque de limón y eneldo.",
+    "time": "20 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "2 cucharadas de aceite de oliva",
+      "1 limón, en rodajas",
+      "2 cucharadas de eneldo fresco, picado",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta la parrilla a fuego medio-alto.",
+      "Unta los filetes de salmón con aceite de oliva y sazona con sal y pimienta.",
+      "Coloca los filetes en la parrilla y cocina durante 4-5 minutos por cada lado.",
+      "Durante los últimos minutos de cocción, añade las rodajas de limón a la parrilla.",
+      "Sirve el salmón caliente, adornado con eneldo fresco y rodajas de limón."
+    ]
+  },
+  {
+    "name": "Salmón al Horno con Miel y Mostaza",
+    "description": "Salmón al horno cubierto con una deliciosa mezcla de miel y mostaza.",
+    "time": "25 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "2 cucharadas de miel",
+      "2 cucharadas de mostaza Dijon",
+      "1 cucharada de aceite de oliva",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 200°C (400°F).",
+      "En un bol, mezcla la miel, la mostaza y el aceite de oliva.",
+      "Coloca los filetes de salmón en una bandeja para hornear y unta con la mezcla de miel y mostaza.",
+      "Hornea durante 15-20 minutos o hasta que el salmón esté completamente cocido.",
+      "Sirve caliente con tus guarniciones favoritas."
+    ]
+  },
+  {
+    "name": "Salmón al Limón y Eneldo",
+    "description": "Salmón al horno con una fragante salsa de limón y eneldo.",
+    "time": "30 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1/4 taza de jugo de limón",
+      "2 cucharadas de eneldo fresco, picado",
+      "2 cucharadas de aceite de oliva",
+      "2 dientes de ajo, picados",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 200°C (400°F).",
+      "En un bol, mezcla el jugo de limón, el eneldo, el aceite de oliva, el ajo, la sal y la pimienta.",
+      "Coloca los filetes de salmón en una bandeja para hornear y vierte la mezcla de limón y eneldo sobre ellos.",
+      "Hornea durante 20-25 minutos o hasta que el salmón esté completamente cocido.",
+      "Sirve caliente."
+    ]
+  },
+  {
+    "name": "Salmón Teriyaki",
+    "description": "Salmón glaseado con una sabrosa salsa teriyaki.",
+    "time": "25 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1/4 taza de salsa de soja",
+      "2 cucharadas de miel",
+      "2 cucharadas de aceite de sésamo",
+      "1 cucharada de jengibre fresco, picado",
+      "2 dientes de ajo, picados",
+      "Semillas de sésamo para adornar",
+      "Cebolla verde picada para adornar"
+    ],
+    "preparation_steps": [
+      "En un bol, mezcla la salsa de soja, la miel, el aceite de sésamo, el jengibre y el ajo.",
+      "Marina los filetes de salmón en la mezcla durante 15 minutos.",
+      "Precalienta una sartén grande a fuego medio-alto.",
+      "Cocina los filetes de salmón durante 4-5 minutos por cada lado o hasta que estén completamente cocidos.",
+      "Adorna con semillas de sésamo y cebolla verde picada antes de servir."
+    ]
+  },
+  {
+    "name": "Salmón en Papillote",
+    "description": "Salmón cocido al horno en papel de aluminio con vegetales frescos.",
+    "time": "30 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1 pimiento rojo, en rodajas",
+      "1 calabacín, en rodajas",
+      "1 limón, en rodajas",
+      "2 cucharadas de aceite de oliva",
+      "2 cucharadas de eneldo fresco, picado",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 200°C (400°F).",
+      "Coloca cada filete de salmón en una hoja de papel de aluminio.",
+      "Distribuye las rodajas de pimiento rojo, calabacín y limón sobre los filetes.",
+      "Rocía con aceite de oliva y sazona con eneldo, sal y pimienta.",
+      "Cierra el papel de aluminio formando paquetes herméticos.",
+      "Hornea durante 20-25 minutos o hasta que el salmón esté completamente cocido.",
+      "Sirve caliente en el mismo papel de aluminio."
+    ]
+  },
+  {
+    "name": "Salmón al Curry",
+    "description": "Salmón cocido en una rica y cremosa salsa de curry.",
+    "time": "30 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1 lata de leche de coco",
+      "2 cucharadas de pasta de curry rojo",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "2 cucharadas de aceite de oliva",
+      "Cilantro fresco para adornar",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Calienta el aceite de oliva en una sartén grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora la pasta de curry y cocina durante 2-3 minutos.",
+      "Añade la leche de coco y lleva a ebullición.",
+      "Reduce el fuego y añade los filetes de salmón.",
+      "Cocina a fuego lento durante 10-15 minutos o hasta que el salmón esté completamente cocido.",
+      "Adorna con cilantro fresco antes de servir."
+    ]
+  },
+  {
+    "name": "Salmón con Costra de Almendra",
+    "description": "Salmón al horno con una costra crujiente de almendra y hierbas.",
+    "time": "30 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1/2 taza de almendras molidas",
+      "2 cucharadas de perejil fresco, picado",
+      "2 cucharadas de aceite de oliva",
+      "1 limón, ralladura y jugo",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 200°C (400°F).",
+      "En un bol, mezcla las almendras molidas, el perejil, el aceite de oliva, la ralladura y el jugo de limón, la sal y la pimienta.",
+      "Cubre los filetes de salmón con la mezcla de almendras.",
+      "Coloca los filetes en una bandeja para hornear y hornea durante 20-25 minutos o hasta que el salmón esté completamente cocido.",
+      "Sirve caliente con tus guarniciones favoritas."
+    ]
+  },
+  {
+    "name": "Salmón a la Plancha",
+    "description": "Salmón jugoso y dorado a la plancha con hierbas frescas.",
+    "time": "15 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "2 cucharadas de aceite de oliva",
+      "1 cucharada de eneldo fresco, picado",
+      "1 limón, en rodajas",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Calienta el aceite de oliva en una plancha a fuego medio-alto.",
+      "Sazona los filetes de salmón con sal y pimienta.",
+      "Cocina los filetes de salmón durante 3-4 minutos por cada lado o hasta que estén completamente cocidos.",
+      "Adorna con eneldo fresco y rodajas de limón antes de servir."
+    ]
+  },
+  {
+    "name": "Salmón al Pesto",
+    "description": "Salmón al horno cubierto con una sabrosa salsa de pesto.",
+    "time": "25 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1/2 taza de salsa pesto",
+      "2 cucharadas de aceite de oliva",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 200°C (400°F).",
+      "Coloca los filetes de salmón en una bandeja para hornear.",
+      "Cubre cada filete con una cucharada de salsa pesto.",
+      "Rocía con aceite de oliva y sazona con sal y pimienta.",
+      "Hornea durante 15-20 minutos o hasta que el salmón esté completamente cocido.",
+      "Sirve caliente con tus guarniciones favoritas."
+    ]
+  },
+  {
+    "name": "Salmón en Salsa de Soja y Jengibre",
+    "description": "Salmón marinado en una sabrosa mezcla de salsa de soja y jengibre.",
+    "time": "20 minutos",
+    "ingredients": [
+      "4 filetes de salmón",
+      "1/4 taza de salsa de soja",
+      "2 cucharadas de jengibre fresco, rallado",
+      "2 cucharadas de aceite de sésamo",
+      "1 diente de ajo, picado",
+      "Cebolla verde picada para adornar"
+    ],
+    "preparation_steps": [
+      "En un bol, mezcla la salsa de soja, el jengibre, el aceite de sésamo y el ajo.",
+      "Marina los filetes de salmón en la mezcla durante 15 minutos.",
+      "Calienta una sartén grande a fuego medio-alto.",
+      "Cocina los filetes de salmón durante 4-5 minutos por cada lado o hasta que estén completamente cocidos.",
+      "Adorna con cebolla verde picada antes de servir."
+    ]
+  }
+]

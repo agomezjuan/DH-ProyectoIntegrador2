@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetchRecipes as fetchMockRecipes } from '@/mocks/recipeMock';
 
 const httpService = axios.create({
   baseURL: import.meta.env.VITE_GATEWAY_URL,
@@ -20,6 +21,14 @@ export default httpService;
 httpService.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    if (config.url === '/api/mock/recipes') {
+      return fetchMockRecipes().then((data) => {
+        return {
+          ...config,
+          adapter: () => Promise.resolve({ data: data, status: 200 })
+        };
+      });
+    }
 
     // Request authorization
     const session = localStorage.getItem('auth');
@@ -42,6 +51,9 @@ httpService.interceptors.request.use(
 httpService.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
+    if (response.data && Array.isArray(response.data)) {
+      return Promise.resolve({ ...response, data: response.data });
+    }
 
     // Response data
     console.log('Interceptor Response (Incoming) ', response);
@@ -55,3 +67,7 @@ httpService.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const getRecipes = () => {
+  return httpService.get('/api/mock/recipes');
+};
