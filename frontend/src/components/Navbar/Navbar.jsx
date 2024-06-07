@@ -46,7 +46,11 @@ export default function Navbar() {
       <Link to='/'>
         <h3 className='btn btn-ghost text-xl text-primary'>MealMap</h3>
       </Link>
+      <img src='/imagenes PI/logo MealPlanner.jpeg' alt='Logo' className='h-14 w-auto' />
+
       </div>
+      
+
       <div className='flex items-center'>
         < details className="dropdown dropdown-end dropdown-hover">
           <summary className="m-1 btn">
