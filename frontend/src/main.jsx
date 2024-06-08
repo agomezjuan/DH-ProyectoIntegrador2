@@ -5,6 +5,7 @@ import { RegisterPage } from '@/pages/RegisterPage';
 import { LoginPage } from '@/pages/LoginPage';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ViewRecipe } from '@/pages/ViewRecipe/ViewRecipe';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />
+  },
+  {
+    path: '/recipe',
+    element: <ViewRecipe />
   },
   {
     path: '*',
