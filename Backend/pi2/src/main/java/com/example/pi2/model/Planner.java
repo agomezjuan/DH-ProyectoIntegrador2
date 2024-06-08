@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "schedule")
-public class Schedule {
+public class Planner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Schedule {
     @Column(name = "id_user", nullable = false)
     private String idUser;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
