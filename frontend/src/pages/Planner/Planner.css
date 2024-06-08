@@ -1,15 +1,18 @@
+
 .planner-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  justify-content: center;
 
 }
 
 .planner {
   border: 2px solid #ccc;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
+  text-align: left;
 }
 
 table {
@@ -26,19 +29,16 @@ th, td {
   border: 2px solid #557824;
   padding: 10px;
   text-align: left;
-
-
 }
 
 th {
   background-color: #f4f4f4;
 }
-td{
 
+td {
   padding: 10px;
   text-align: left;
   color: #2c430d;
-
 }
 
 input[type="text"] {
@@ -48,42 +48,47 @@ input[type="text"] {
 }
 
 button {
-  padding: 8px 16px;
+  padding: 12px 16px;
   margin: 5px 0;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: white;
   color: white;
   border: none;
   border-radius: 5px;
+  width: 200px;
+  height: 40px; /* Altura deseada */
+  display: flex; /* Activa el modelo de caja flexible */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
 }
 
 button:hover {
   background-color: #0056b3;
 }
-
 .planner-buttons {
-  display: flex;
+  display:flex;
   flex-direction: column;
   gap: 10px;
+  color: white;
+  font-weight: bold;
 }
-
 /* Estilos para las celdas de los días de la semana */
 .green {
   background-color: #82AA33;
-
-
 }
 
 .light-green {
   background-color: #c7cfaa;
 }
-.planner-container h1{
-  font-size:x-large;
+
+.planner-container h1 {
+  font-size: x-large;
   font-style: initial;
   color: #557824;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
+
 .header-titles {
   display: flex;
   justify-content: space-around;
@@ -91,29 +96,35 @@ button:hover {
   margin-bottom: 20px;
 }
 
-/* Estilo para el encabezado de "Editar Fechas" con el SVG */
-.header-edit-dates {
-  display: flex;
-  align-items: center;
-
-  gap: 0.1px;
-  margin-left: auto; /* Alinea a la derecha */
-}
 .header-titles h2 {
-  margin: 0 30px; /* Añade espacio horizontal entre Día y Recetas */
-  font-size:medium;
+  margin: 0;
+  font-size: medium;
   font-style: initial;
   color: #557824;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-}
-.header-recipes {
   display: flex;
   align-items: center;
-  gap: 20px;
 }
-.header-recipes image{
+
+.header-recipes, .header-edit-dates {
   display: flex;
   align-items: center;
-  gap: 5px;
+}
+
+.header-recipes img {
+  margin-right: 5px; /* Ajusta este valor según sea necesario */
+  vertical-align: middle; /* Alinea la imagen verticalmente en el medio */
+}
+
+.header-edit-dates svg {
+  width: 22px;  /* Ajustar el tamaño según sea necesario */
+  height: 22px;
+  margin-right: 5px; /* Ajusta este valor según sea necesario para una distancia pequeña */
+  vertical-align: middle; /* Alinea el ícono verticalmente en el medio */
+}
+.header-recipes img {
+  margin-right: 5px; /* Ajusta este valor según sea necesario */
+  vertical-align: middle; /* Alinea la imagen verticalmente en el medio */
+  filter: invert(24%) sepia(96%) saturate(3428%) hue-rotate(60deg) brightness(89%) contrast(109%);
 }
