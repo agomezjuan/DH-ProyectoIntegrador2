@@ -120,21 +120,28 @@ const Footer = () => {
         <li>
           <a
             className='link link-hover text-neutral-100 hover:text-primary-content'
-            href='#'>
+              target='_blank'
+              rel='noopener noreferrer'
+            href='https://somosgusman.com/meal-prep-y-batch-cooking/'>
             Blog
           </a>
         </li>
         <li>
           <a
             className='link link-hover text-neutral-100 hover:text-primary-content'
-            href='#'>
+           target='_blank'
+              rel='noopener noreferrer'
+           href='#'>
             Recetas
           </a>
         </li>
         <li>
           <a
             className='link link-hover text-neutral-100 hover:text-primary-content'
-            href='#'>
+            target='_blank'
+            rel='noopener noreferrer'
+         href='https://www.youtube.com/watch?v=3EO2tWJi2Y8'>
+
             Tips
           </a>
         </li>

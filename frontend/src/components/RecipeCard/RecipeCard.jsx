@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default function RecipeCard({ recipe }) {
   return (
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative'>
@@ -14,12 +15,12 @@ export default function RecipeCard({ recipe }) {
           <div className='flex items-center '>
             {[...Array(recipe.rating)].map((_, index) => (
               <span key={index} className='text-primary'>
-                ★
+
               </span>
             ))}
             {[...Array(5 - recipe.rating)].map((_, index) => (
               <span key={index} className='text-gray-300'>
-                ★
+
               </span>
             ))}
           </div>
