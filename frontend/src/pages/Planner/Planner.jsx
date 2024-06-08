@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import './Planner.css';
 
 const Planner = () => {
-    const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    const daysOfWeek = [
+        { name: 'Lunes', colorClass: 'green' },
+        { name: 'Martes', colorClass: 'light-green' },
+        { name: 'Miércoles', colorClass: 'green' },
+        { name: 'Jueves', colorClass: 'light-green' },
+        { name: 'Viernes', colorClass: 'green' },
+        { name: 'Sábado', colorClass: 'light-green' },
+        { name: 'Domingo', colorClass: 'green' },
+    ];
     const [items, setItems] = useState(Array(7).fill(''));
 
     const handleItemChange = (index, event) => {
@@ -23,7 +31,7 @@ const Planner = () => {
 
     return (
         <div className="planner-container">
-            <h1>Planner Semanal</h1>
+            <h1>AGENDA SEMANAL</h1>
             <div className="planner">
                 <table>
                     <thead>
@@ -36,7 +44,7 @@ const Planner = () => {
                     <tbody>
                         {daysOfWeek.map((day, index) => (
                             <tr key={index}>
-                                <td>{day}</td>
+                                <td className={day.colorClass}>{day.name}</td>
                                 <td>
                                     <input
                                         type="text"
@@ -46,7 +54,7 @@ const Planner = () => {
                                     />
                                 </td>
                                 <td>
-                                    <button onClick={() => alert('Editar fechas para ' + day)}>Editar</button>
+                                    <button onClick={() => alert('Editar fechas para ' + day.name)}>Editar</button>
                                 </td>
                             </tr>
                         ))}
@@ -62,5 +70,6 @@ const Planner = () => {
 };
 
 export default Planner;
+
 
 
