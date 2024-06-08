@@ -1,27 +1,14 @@
-import image from '@/assets/recipe.png';
-import ensalada from '@/assets/image9.png';
-export const recipeMock = {
-  id: 1,
-  title: 'Spaghetti Carbonara',
-  rating: 4,
-  prepTime: '30 min',
-  image
-};
+import { recipeMocks } from '@/assets/recetas';
 
-export const recipeMocks = [
-  recipeMock,
-  {
-    id: 2,
-    title: 'Ensalada Caesar',
-    rating: 4,
-    prepTime: '30 min',
-    image: ensalada
-  },
-  {
-    id: 3,
-    title: 'Hamburguesa Pullet Pork',
-    rating: 4,
-    prepTime: '25 min',
-    image: ensalada
-  }
-];
+/**
+ * Simula una solicitud GET a un endpoint de API para obtener recetas.
+ * @returns {Promise} Una promesa que resuelve con los datos de las recetas.
+ */
+export const fetchRecipes = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Resolver la promesa con los datos simulados
+      resolve(recipeMocks);
+    }, 1000); // Simula un retraso de 1 segundo
+  });
+};

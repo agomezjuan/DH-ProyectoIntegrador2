@@ -19,30 +19,18 @@ spring:
     gateway:
       default-filters: TokenRelay
       routes:
-        - id: mealmap-categories
+        - id: mealmap-core
           uri: lb://pi2
           predicates:
-            - Path=/api/v1/categories/**
-          filters:
-            - StripPrefix=2
-        - id: mealmap-ingredient
-          uri: lb://pi2
-          predicates:
-          - Path=/api/v1/ingredient/**
-          filters:
-            - StripPrefix=2
-        - id: mealmap-recipes
-          uri: lb://pi2
-          predicates:
-            - Path=/api/v1/recipes/**
+            - Path=/api/v1/categories/**, /api/v1/ingredient/**, /api/v1/recipes/**, /api/v1/favorites/**
           filters:
             - StripPrefix=2
         - id: ms-users
           uri: lb://ms-users
           predicates:
-              - Path=/api/v1/users/**
+            - Path=/api/v1/users/**
           filters:
-              - StripPrefix=2
+            - StripPrefix=2
 
 
 
