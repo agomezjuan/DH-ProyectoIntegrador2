@@ -53,22 +53,16 @@ public class PlannerController {
 	  @GetMapping("/getcsv")
 	  public void sendCSV(HttpServletResponse response, @RequestParam String idUser) throws IOException {
 
-			List<Planner> plannerList = plannerService.findByUserId(idUser);
-			List<PlannerDTO> plannerDTOList = new ArrayList<>();
-			PlannerDTO plannerDTO = new PlannerDTO();
-			for (Planner planner :
-					plannerList) {
-				  plannerDTO.setId(planner.getId());
-				  plannerDTO.setWeekday(planner.getWeekDay());
-				  plannerDTO.setIdUser(planner.getIdUser());
-				  plannerDTO.setRecipeName(planner.getRecipe().getName());
-				  plannerDTOList.add(plannerDTO);
-			}
-			String csvFileName = "planner.csv";
+			String csvFileName = "Planner.csv";
 			response.setContentType("text/csv");
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					csvFileName);
+			response.setHeader(headerKey, headerValue);
 			ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 			String[] header = {"Id", "idUser", "recipeName", "weekDay"};
 			csvBeanWriter.writeHeader(header);
+			List<PlannerDTO> plannerDTOList = plannerService.dtoForCsv(idUser);
 			for (PlannerDTO plannerDTO1 :
 					plannerDTOList) {
 				  csvBeanWriter.write(plannerDTO1, header);
