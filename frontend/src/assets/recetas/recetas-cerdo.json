@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Albóndigas de Cerdo",
+    "description": "Albóndigas de cerdo jugosas cocidas en una rica salsa de tomate.",
+    "time": "40 minutos",
+    "ingredients": [
+      "500 g de carne de cerdo molida",
+      "1 huevo",
+      "1/4 taza de pan rallado",
+      "2 dientes de ajo, picados",
+      "1/4 taza de perejil picado",
+      "Sal y pimienta al gusto",
+      "2 tazas de salsa de tomate"
+    ],
+    "preparation_steps": [
+      "En un bol grande, mezcla la carne de cerdo, el huevo, el pan rallado, el ajo, el perejil, la sal y la pimienta.",
+      "Forma albóndigas con la mezcla.",
+      "Calienta una sartén grande a fuego medio y cocina las albóndigas hasta que estén doradas por todos lados.",
+      "Añade la salsa de tomate y cocina a fuego lento durante 20-25 minutos.",
+      "Sirve caliente con pasta o arroz."
+    ],
+    "url_img": "/recipes/Albondigas-de-cerdo.jpeg"
+  },
+  {
+    "name": "Cerdo al Horno con Manzanas",
+    "description": "Lomo de cerdo asado al horno con manzanas y cebolla.",
+    "time": "1 hora y 30 minutos",
+    "ingredients": [
+      "1 kg de lomo de cerdo",
+      "2 manzanas, en rodajas",
+      "1 cebolla, en rodajas",
+      "2 cucharadas de aceite de oliva",
+      "1 taza de caldo de pollo",
+      "1 cucharadita de tomillo seco",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Precalienta el horno a 180°C (350°F).",
+      "En una bandeja para hornear, coloca las rodajas de manzana y cebolla.",
+      "Sazona el lomo de cerdo con sal, pimienta y tomillo.",
+      "Coloca el lomo sobre las manzanas y cebollas y rocía con aceite de oliva.",
+      "Vierte el caldo de pollo en la bandeja.",
+      "Hornea durante 1-1.5 horas o hasta que el cerdo esté completamente cocido.",
+      "Deja reposar durante 10 minutos antes de cortar y servir."
+    ],
+    "url_img": "/recipes/eb998c64-78e6-401f-b6c3-317737df3dc6.jpg"
+  },
+  {
+    "name": "Chuletas de Cerdo a la Miel y Mostaza",
+    "description": "Chuletas de cerdo cocinadas en una sabrosa salsa de miel y mostaza.",
+    "time": "30 minutos",
+    "ingredients": [
+      "4 chuletas de cerdo",
+      "2 cucharadas de miel",
+      "2 cucharadas de mostaza Dijon",
+      "1 cucharada de aceite de oliva",
+      "2 dientes de ajo, picados",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "En un bol, mezcla la miel, la mostaza, el aceite de oliva, el ajo, la sal y la pimienta.",
+      "Unta las chuletas de cerdo con la mezcla de miel y mostaza.",
+      "Calienta una sartén grande a fuego medio y cocina las chuletas durante 6-8 minutos por cada lado o hasta que estén completamente cocidas.",
+      "Sirve caliente con tus guarniciones favoritas."
+    ],
+    "url_img": "/recipes/1078ff661fa9f32468e90557cf856a87aba-500x500.jpg"
+  },
+  {
+    "name": "Cerdo a la Cerveza",
+    "description": "Cerdo cocido a fuego lento en una rica salsa de cerveza y especias.",
+    "time": "3 horas",
+    "ingredients": [
+      "1 kg de carne de cerdo en cubos",
+      "1 lata de cerveza",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "2 cucharadas de aceite de oliva",
+      "1 cucharadita de comino",
+      "1 cucharadita de pimentón",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Calienta el aceite de oliva en una olla grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora el cerdo y cocina hasta que esté dorado.",
+      "Añade el comino, el pimentón, la sal y la pimienta y mezcla bien.",
+      "Vierte la cerveza y lleva a ebullición.",
+      "Reduce el fuego y cocina a fuego lento durante 2.5-3 horas o hasta que el cerdo esté tierno.",
+      "Sirve caliente con puré de patatas o arroz."
+    ],
+    "url_img": "/recipes/receta-de-lomo-de-cerdo-a-la-cerveza.webp"
+  },
+  {
+    "name": "Cerdo con Salsa de Ciruelas",
+    "description": "Cerdo tierno cocido en una salsa dulce de ciruelas.",
+    "time": "1 hora",
+    "ingredients": [
+      "500 g de cerdo en tiras",
+      "1 taza de ciruelas secas, picadas",
+      "1/2 taza de vino tinto",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "2 cucharadas de aceite de oliva",
+      "1 cucharadita de canela",
+      "Sal y pimienta al gusto"
+    ],
+    "preparation_steps": [
+      "Calienta el aceite de oliva en una sartén grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora el cerdo y cocina hasta que esté dorado.",
+      "Añade las ciruelas, el vino tinto, la canela, la sal y la pimienta.",
+      "Lleva a ebullición, reduce el fuego y cocina a fuego lento durante 45-60 minutos o hasta que el cerdo esté tierno.",
+      "Sirve caliente con arroz o puré de patatas."
+    ],
+    "url_img": "/recipes/465df598dea729a75f99cba6dfd53dac.webp"
+  }
+]

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from '@/components/Navbar';
+import {Footer} from '@/components/Footer';
 
 export default function Layout({ children }) {
   return (
@@ -9,6 +10,7 @@ export default function Layout({ children }) {
         <main className='max-w-7xl mx-auto px-4 py-8'>
           <Navbar />
           {children}
+          <Footer/>
         </main>
       </div>
 
