@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 export default function RecipeCard({ recipe }) {
   return (
@@ -10,7 +11,7 @@ export default function RecipeCard({ recipe }) {
       />
       <div className='flex flex-col flex-grow'>
         <div className='flex flex-grow h-full flex-col'>
-          <h3 className='text-lg font-semibold p-4'>{recipe.name}</h3>
+        <Link to='./recipe'>  <h3 className='text-lg font-semibold p-4'>{recipe.name}</h3></Link>
           <p className='text-gray-600 p-4'>{recipe.description}</p>
         </div>
         <div className='flex items-center justify-between p-4 bg-secondary'>
