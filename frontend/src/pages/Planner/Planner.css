@@ -84,4 +84,36 @@ button:hover {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
+.header-titles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
+/* Estilo para el encabezado de "Editar Fechas" con el SVG */
+.header-edit-dates {
+  display: flex;
+  align-items: center;
+
+  gap: 0.1px;
+  margin-left: auto; /* Alinea a la derecha */
+}
+.header-titles h2 {
+  margin: 0 30px; /* Añade espacio horizontal entre Día y Recetas */
+  font-size:medium;
+  font-style: initial;
+  color: #557824;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+.header-recipes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header-recipes image{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
