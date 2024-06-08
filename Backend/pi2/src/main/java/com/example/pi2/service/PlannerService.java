@@ -39,6 +39,12 @@ public class PlannerService {
         planner.setIdUser(idUser);
         return plannerRepository.save(planner);
     }
+
+    public List<Planner> postWeek(List<Planner> plannerList){
+        return plannerRepository.saveAll(plannerList);
+    }
+
+
     public Planner update(Long id, Planner plannerDetails) {
         Planner planner = findById(id);
         planner.setIdUser(plannerDetails.getIdUser());

@@ -45,6 +45,11 @@ public class PlannerController {
 			return plannerService.save(planner);
 	  }
 
+	  @PostMapping("/postWeek")
+	  public List<Planner> saveMany(@RequestBody List<Planner> plannerList){
+			return plannerService.postWeek(plannerList);
+	  }
+
 	  @PostMapping("/user/{idUser}")
 	  public Planner createScheduleForUser(@PathVariable String idUser, @RequestBody Planner planner) {
 
