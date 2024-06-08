@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RecipeWithCategories {
+public class RecipeWithCategoriesDto {
     private RecipeDto recipe;
     private List<CategoryDto> categories;
 }
