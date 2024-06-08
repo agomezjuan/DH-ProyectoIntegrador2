@@ -49,7 +49,9 @@ public class RecipeController {
     }
 
     @GetMapping("/pagination")
-    public ResponseEntity<Page<RecipeWithCategoriesDto>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer elements, @RequestParam(defaultValue = "id") String sortBy) {
+    public ResponseEntity<Page<RecipeWithCategoriesDto>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page,
+                                                        @RequestParam(defaultValue = "10") Integer elements,
+                                                        @RequestParam(defaultValue = "id") String sortBy) {
         Page<RecipeWithCategoriesDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy)
                 .map(mapper::toFullRecipeDto);
         return ResponseEntity.ok(recipePage);
@@ -64,5 +66,10 @@ public class RecipeController {
     @PostMapping("/categories/remove/{id}")
     public void removeCategories(@PathVariable Integer id, @RequestBody List<String> categoryNames) throws ResourceNotFoundException {
         recipeService.removeCategories(id, categoryNames);
+    }
+
+    @PostMapping("/addMany")
+    public void addMany(@RequestBody List<Recipe> recipes){
+        recipeService.postMultiple(recipes);
     }
 }
