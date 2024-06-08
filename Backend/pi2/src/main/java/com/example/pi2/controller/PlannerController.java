@@ -15,61 +15,78 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schedule")
+@RequestMapping("/planner")
 public class PlannerController {
 
-    @Autowired
-    private PlannerService plannerService;
+	  @Autowired
+	  private PlannerService plannerService;
 
-    @GetMapping
-    public List<Planner> getAll() {
-        return plannerService.findAll();
-    }
+	  @GetMapping
+	  public List<Planner> getAll() {
 
-    @GetMapping("/{id}")
-    public Planner getById(@PathVariable Long id) {
-        return plannerService.findById(id);
-    }
+			return plannerService.findAll();
+	  }
 
-    @GetMapping("/user/{idUser}")
-    public List<Planner> getByUserId(@PathVariable String idUser) {
-        return plannerService.findByUserId(idUser);
-    }
+	  @GetMapping("/{id}")
+	  public Planner getById(@PathVariable Long id) {
 
-    @PostMapping
-    public Planner save(@RequestBody Planner planner) {
-        return plannerService.save(planner);
-    }
+			return plannerService.findById(id);
+	  }
 
-    @PostMapping("/user/{idUser}")
-    public Planner createScheduleForUser(@PathVariable String idUser, @RequestBody Planner planner) {
-        return plannerService.saveForUser(idUser, planner);
-    }
-    @GetMapping("/getcsv")
-    public void sendCSV(HttpServletResponse response, @RequestParam String idUser) throws IOException{
-        List<Planner> plannerList = plannerService.findByUserId(idUser);
-        List<PlannerDTO> plannerDTOList = new ArrayList<>();
-        String csvFileName="planner.csv";
-        response.setContentType("text/csv");
-        ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] header = {"Id","idUser","Recipe","weekDay"};
-        for (Planner planner :
-                plannerList) {
-            csvBeanWriter.write(planner,header);
-        }
+	  @GetMapping("/user/{idUser}")
+	  public List<Planner> getByUserId(@PathVariable String idUser) {
 
-        csvBeanWriter.writeHeader(header);
-        csvBeanWriter.close();
-    }
+			return plannerService.findByUserId(idUser);
+	  }
 
-    @PutMapping("/{id}")
-    public Planner update(@PathVariable Long id, @RequestBody Planner plannerDetails) {
-        return plannerService.update(id, plannerDetails);
-    }
+	  @PostMapping
+	  public Planner save(@RequestBody Planner planner) {
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        plannerService.deleteById(id);
-    }
+			return plannerService.save(planner);
+	  }
+
+	  @PostMapping("/user/{idUser}")
+	  public Planner createScheduleForUser(@PathVariable String idUser, @RequestBody Planner planner) {
+
+			return plannerService.saveForUser(idUser, planner);
+	  }
+	  @GetMapping("/getcsv")
+	  public void sendCSV(HttpServletResponse response, @RequestParam String idUser) throws IOException {
+
+			List<Planner> plannerList = plannerService.findByUserId(idUser);
+			List<PlannerDTO> plannerDTOList = new ArrayList<>();
+			PlannerDTO plannerDTO = new PlannerDTO();
+			for (Planner planner :
+					plannerList) {
+				  plannerDTO.setId(planner.getId());
+				  plannerDTO.setWeekday(planner.getWeekDay());
+				  plannerDTO.setIdUser(planner.getIdUser());
+				  plannerDTO.setRecipeName(planner.getRecipe().getName());
+				  plannerDTOList.add(plannerDTO);
+			}
+			String csvFileName = "planner.csv";
+			response.setContentType("text/csv");
+			ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+			String[] header = {"Id", "idUser", "recipeName", "weekDay"};
+			csvBeanWriter.writeHeader(header);
+			for (PlannerDTO plannerDTO1 :
+					plannerDTOList) {
+				  csvBeanWriter.write(plannerDTO1, header);
+			}
+
+			csvBeanWriter.close();
+	  }
+
+	  @PutMapping("/{id}")
+	  public Planner update(@PathVariable Long id, @RequestBody Planner plannerDetails) {
+
+			return plannerService.update(id, plannerDetails);
+	  }
+
+	  @DeleteMapping("/{id}")
+	  public void delete(@PathVariable Long id) {
+
+			plannerService.deleteById(id);
+	  }
 
 }

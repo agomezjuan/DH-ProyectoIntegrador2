@@ -1,8 +1,11 @@
 package com.example.pi2.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class PlannerDTO {
 
 	  private Long id;
