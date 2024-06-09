@@ -14,6 +14,8 @@ export const ViewRecipe = () => {
       fetchRecipeById(id);
     }
   }, [id, fetchRecipeById]);
+
+  console.log('DETAIL', detail)
   
   return (
     <Layout>

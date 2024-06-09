@@ -20,6 +20,7 @@ export const useRecipesStore = create((set) => ({
     set({ loading: true, error: null });
     try {
       const detail = await getRecipeById(id);
+      console.log('detail', detail)
       set({ detail, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
