@@ -1,5 +1,4 @@
 import React from 'react';
-import hero from '@/assets/hero.png';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 
