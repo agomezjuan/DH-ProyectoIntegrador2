@@ -3,7 +3,6 @@ import { getRecipes, getRecipeById } from '../api/recipes';
 
 export const useRecipesStore = create((set) => ({
   recipes: [],
-  recipeId: "",
   detail: {},
   error: null,
   loading: false,
@@ -17,10 +16,10 @@ export const useRecipesStore = create((set) => ({
       set({ error: error.message, loading: false });
     }
   },
-  fetchRecipeById: async (recipeId) => {
+  fetchRecipeById: async (id) => {
     set({ loading: true, error: null });
     try {
-      const detail = await getRecipeById(recipeId);
+      const detail = await getRecipeById(id);
       set({ detail, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
