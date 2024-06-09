@@ -13,7 +13,6 @@ export const getRecipes = async () => {
 export const getRecipeById = async (id) => {
   try {
     const response = await httpService.get(`/api/v1/recipes/${id}`);
-    console.log('Detail', response.data)
     return response.data; 
   } catch (error) {
     console.error('Error fetching recipes:', error);
