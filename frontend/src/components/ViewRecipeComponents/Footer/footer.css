@@ -1,0 +1,20 @@
+
+#verticle-line
+{
+width: 2px;
+height: 150px;/* Altura de la línea */
+background-color: white;
+display: block;
+border-left: 1px solid #ffffff; /* Estilo de la línea */
+margin: 0 20px;
+}
+@media (max-width: 640px) {
+  #verticle-line {
+      display: inline-block; /* Cambia la línea a horizontal en pantallas más pequeñas */
+      width: 100%; /* Ancho completo en pantallas pequeñas */
+      height: 1px; /* Altura de la línea horizontal */
+      margin: 10px 0; /* Espacio superior e inferior de la línea */
+      border: none; /* Elimina el borde izquierdo en pantallas más pequeñas */
+  }
+
+}
