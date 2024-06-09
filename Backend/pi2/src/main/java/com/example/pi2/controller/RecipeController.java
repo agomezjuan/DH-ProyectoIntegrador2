@@ -50,9 +50,10 @@ public class RecipeController {
 
     @GetMapping("/pagination")
     public ResponseEntity<Page<RecipeWithCategoriesDto>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page,
-                                                        @RequestParam(defaultValue = "9") Integer elements,
-                                                        @RequestParam(defaultValue = "id") String sortBy) {
-        Page<RecipeWithCategoriesDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy)
+                                                        @RequestParam(defaultValue = "10") Integer elements,
+                                                        @RequestParam(defaultValue = "id") String sortBy,
+                                                        @RequestParam(required = false) String name) {
+        Page<RecipeWithCategoriesDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy, name)
                 .map(mapper::toFullRecipeDto);
         return ResponseEntity.ok(recipePage);
     }

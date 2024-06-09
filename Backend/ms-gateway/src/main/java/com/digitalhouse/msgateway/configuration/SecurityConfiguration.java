@@ -9,7 +9,6 @@ import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfiguration;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -39,10 +38,9 @@ public class SecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-//        configuration.addAllowedOrigin("http://localhost:5173/");
+//        configuration.addAllowedOrigin("http://localhost:5173");
 //        configuration.addAllowedHeader("*");
 //        configuration.addAllowedMethod("*");
-
         configuration.setAllowedOrigins(List.of("http://127.0.0.1:5173/"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));

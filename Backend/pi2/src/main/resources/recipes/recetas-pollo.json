@@ -1,0 +1,224 @@
+[
+	{
+		"name": "Pollo a la Parrilla con Limón",
+		"description": "Jugosas pechugas de pollo a la parrilla marinadas en jugo de limón y hierbas.",
+		"preparationTime": "30 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ93zHIeCPialAXlH29iXrsqvJC8tJtKDqzlA&s",
+		"ingredients": [
+			"4 pechugas de pollo",
+			"1/4 taza de jugo de limón",
+			"2 cucharadas de aceite de oliva",
+			"1 cucharadita de ajo en polvo",
+			"1 cucharadita de orégano seco",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"En un bol, mezcla el jugo de limón, el aceite de oliva, el ajo en polvo, el orégano, la sal y la pimienta.",
+			"Marina las pechugas de pollo en la mezcla durante al menos 15 minutos.",
+			"Precalienta la parrilla a fuego medio-alto.",
+			"Asa el pollo durante 6-8 minutos por cada lado o hasta que esté completamente cocido.",
+			"Sirve caliente con tus guarniciones favoritas."
+		]
+		 
+	},
+	{
+		"name": "Pollo Alfredo",
+		"description": "Salsa Alfredo cremosa servida sobre tiernos trozos de pollo y pasta.",
+		"preparationTime": "25 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8JEH1OZy87PvP_CoopREOMvrRUmSLDJ8Zg&s",
+		"ingredients": [
+			"2 pechugas de pollo, en cubos",
+			"8 oz de pasta fettuccine",
+			"1 taza de crema espesa",
+			"1/2 taza de queso parmesano rallado",
+			"2 cucharadas de mantequilla",
+			"2 dientes de ajo, picados",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Cocina la pasta fettuccine según las instrucciones del paquete.",
+			"En una sartén, derrite la mantequilla y saltea el ajo hasta que esté fragante.",
+			"Añade los cubos de pollo y cocina hasta que ya no estén rosados.",
+			"Vierte la crema espesa y lleva a ebullición a fuego lento.",
+			"Agrega el queso parmesano y mezcla hasta que la salsa espese.",
+			"Incorpora la pasta cocida y sazona con sal y pimienta.",
+			"Sirve inmediatamente."
+		]
+		
+	},
+	{
+		"name": "Pollo al Horno con Mostaza y Miel",
+		"description": "Tiernas pechugas de pollo horneadas en una salsa de mostaza y miel.",
+		"preparationTime": "40 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0l0z62C0DF-PTvTIZa-CMyjZ71-ZMCxtiNQ&s",
+		"ingredients": [
+			"4 pechugas de pollo",
+			"1/4 taza de miel",
+			"1/4 taza de mostaza de Dijon",
+			"1 cucharadita de pimentón",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Precalienta el horno a 190°C (375°F).",
+			"En un bol, mezcla la miel, la mostaza de Dijon, el pimentón, la sal y la pimienta.",
+			"Coloca las pechugas de pollo en una fuente para horno y vierte la salsa sobre ellas.",
+			"Hornea durante 30-35 minutos o hasta que el pollo esté completamente cocido.",
+			"Sirve con tus verduras o arroz favoritos."
+		]
+		
+	},
+	{
+		"name": "Salteado de Pollo",
+		"description": "Salteado de pollo rápido y fácil con verduras y salsa de soja.",
+		"preparationTime": "20 minutos",
+		"urlImg":"https://cdn0.recetasgratis.net/es/posts/9/2/7/salteado_de_pollo_con_verduras_32729_orig.jpg",
+		"ingredients": [
+			"2 pechugas de pollo, en rodajas finas",
+			"2 tazas de verduras mixtas (pimientos, brócoli, zanahorias)",
+			"2 cucharadas de salsa de soja",
+			"1 cucharada de aceite de oliva",
+			"1 cucharadita de ajo en polvo",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Calienta el aceite de oliva en una sartén grande a fuego medio-alto.",
+			"Añade las rodajas de pollo y cocina hasta que estén doradas y ya no estén rosadas.",
+			"Añade las verduras mixtas y cocina hasta que estén tiernas pero crujientes.",
+			"Incorpora la salsa de soja, el ajo en polvo, la sal y la pimienta.",
+			"Cocina durante 2-3 minutos adicionales, luego sirve sobre arroz o fideos."
+		]
+		
+	},
+	{
+		"name": "Ensalada César con Pollo",
+		"description": "Clásica ensalada César con pechugas de pollo a la parrilla y aderezo casero.",
+		"preparationTime": "20 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7t54tSIuM_tRuEmM9umtO4NfNeNRrYuT5Ew&s",
+		"ingredients": [
+			"2 pechugas de pollo, a la parrilla y en rodajas",
+			"4 tazas de lechuga romana, picada",
+			"1/2 taza de picatostes",
+			"1/4 taza de queso parmesano rallado",
+			"1/4 taza de aderezo César"
+		],
+		"preparationSteps": [
+			"Asa las pechugas de pollo hasta que estén completamente cocidas y córtalas en rodajas finas.",
+			"En un bol grande, combina la lechuga romana picada, los picatostes y el queso parmesano.",
+			"Añade las rodajas de pollo a la ensalada.",
+			"Rocía con aderezo César y mezcla para cubrir.",
+			"Sirve inmediatamente."
+		]
+		
+	},
+	{
+		"name": "Tacos de Pollo",
+		"description": "Deliciosos tacos de pollo con una variedad de toppings.",
+		"preparationTime": "25 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvlypptWeg95qa3k5_FhY7tTj9TG7HvO4kKw&s",
+		"ingredients": [
+			"2 pechugas de pollo, cocidas y desmenuzadas",
+			"8 tortillas pequeñas",
+			"1/2 taza de salsa",
+			"1/2 taza de lechuga rallada",
+			"1/2 taza de queso rallado",
+			"1/4 taza de crema agria"
+		],
+		"preparationSteps": [
+			"Calienta las tortillas en una sartén o en el microondas.",
+			"Distribuye el pollo desmenuzado sobre las tortillas.",
+			"Añade salsa, lechuga rallada, queso y crema agria.",
+			"Sirve con tus toppings favoritos."
+		]
+		
+	},
+	{
+		"name": "Pollo al Curry",
+		"description": "Pollo al curry con una rica salsa de coco y especias.",
+		"preparationTime": "35 minutos",
+		"urlImg":"https://www.comedera.com/wp-content/uploads/2016/07/receta-de-pollo-al-curry.jpg",
+		"ingredients": [
+			"2 pechugas de pollo, en cubos",
+			"1 lata de leche de coco",
+			"2 cucharadas de pasta de curry",
+			"1 cebolla, picada",
+			"2 dientes de ajo, picados",
+			"1 cucharada de aceite vegetal",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Calienta el aceite en una sartén grande y saltea la cebolla y el ajo hasta que estén tiernos.",
+			"Añade los cubos de pollo y cocina hasta que estén dorados.",
+			"Incorpora la pasta de curry y cocina durante 2 minutos.",
+			"Añade la leche de coco y lleva a ebullición.",
+			"Reduce el fuego y cocina a fuego lento durante 20 minutos.",
+			"Sazona con sal y pimienta y sirve sobre arroz."
+		]
+		
+	},
+	{
+		"name": "Pollo a la Naranja",
+		"description": "Pechugas de pollo cocidas en una salsa agridulce de naranja.",
+		"preparationTime": "30 minutos",
+		"urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3Tn6mxGVkn_8oPjxp0MKcJ69F2u7vVVRDUw&s",
+		"ingredients": [
+			"4 pechugas de pollo",
+			"1 taza de jugo de naranja",
+			"2 cucharadas de salsa de soja",
+			"2 cucharadas de miel",
+			"1 cucharadita de jengibre rallado",
+			"2 dientes de ajo, picados",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"En un bol, mezcla el jugo de naranja, la salsa de soja, la miel, el jengibre y el ajo.",
+			"Sazona las pechugas de pollo con sal y pimienta.",
+			"Calienta una sartén grande y cocina las pechugas de pollo hasta que estén doradas por ambos lados.",
+			"Añade la mezcla de jugo de naranja y lleva a ebullición.",
+			"Reduce el fuego y cocina a fuego lento durante 20 minutos o hasta que el pollo esté cocido y la salsa se haya reducido.",
+			"Sirve con arroz o verduras."
+		]
+		
+	},
+	{
+		"name": "Pollo al Ajo y Limón",
+		"description": "Pollo asado con una deliciosa salsa de ajo y limón.",
+		"preparationTime": "45 minutos",
+		"urlImg":"https://www.demoslavueltaaldia.com/sites/default/files/pollo_al_ajillo_limon_g.png",
+		"ingredients": [
+			"4 pechugas de pollo",
+			"4 dientes de ajo, picados",
+			"1/4 taza de jugo de limón",
+			"2 cucharadas de aceite de oliva",
+			"1 cucharadita de tomillo seco",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Precalienta el horno a 200°C (400°F).",
+			"En un bol, mezcla el ajo, el jugo de limón, el aceite de oliva, el tomillo, la sal y la pimienta.",
+			"Coloca las pechugas de pollo en una fuente para horno y vierte la mezcla de ajo y limón sobre ellas.",
+			"Hornea durante 35-40 minutos o hasta que el pollo esté completamente cocido.",
+			"Sirve con tus guarniciones favoritas."
+		]
+		
+	},
+	{
+		"name": "Pollo al Pesto",
+		"description": "Pollo asado cubierto con una rica salsa de pesto.",
+		"preparationTime": "30 minutos",
+		"urlImg":"https://i.ytimg.com/vi/Pps5s_p1xC8/maxresdefault.jpg",
+		"ingredients": [
+			"4 pechugas de pollo",
+			"1/2 taza de salsa pesto",
+			"2 cucharadas de aceite de oliva",
+			"Sal y pimienta al gusto"
+		],
+		"preparationSteps": [
+			"Precalienta el horno a 200°C (400°F).",
+			"Sazona las pechugas de pollo con sal y pimienta.",
+			"En una sartén, calienta el aceite de oliva y dora las pechugas de pollo por ambos lados.",
+			"Transfiere el pollo a una fuente para horno y cubre con la salsa pesto.",
+			"Hornea durante 20-25 minutos o hasta que el pollo esté completamente cocido.",
+			"Sirve con pasta o ensalada."
+		]
+	}
+]

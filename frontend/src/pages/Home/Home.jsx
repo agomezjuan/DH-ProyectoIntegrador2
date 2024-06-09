@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { Header } from '@/components/Header';
 import { RecipeContainer } from '@/components/RecipeContainer';
