@@ -22,4 +22,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
             WHERE r.name = ?1""")
     Optional<Recipe> findByNameWithCategory(String name);
 
+    Page<Recipe> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
+
 }

@@ -81,9 +81,13 @@ public class RecipeService {
         recipeRepository.deleteById(id);
     }
 
-    public Page<Recipe> getAllPaginated(Integer page, Integer elements, String sortBy) {
+    public Page<Recipe> getAllPaginated(Integer page, Integer elements, String sortBy, String name) {
         PageRequest paging = PageRequest.of(page, elements, Sort.by(sortBy));
-        return recipeRepository.findAll(paging);
+        if(name != null && !name.isEmpty()) {
+            return recipeRepository.findAllByNameContainingIgnoreCase(name, paging);
+        } else {
+            return recipeRepository.findAll(paging);
+        }
     }
 
     public void associateCategories(Integer id, List<String> categoryNames) throws ResourceNotFoundException {
