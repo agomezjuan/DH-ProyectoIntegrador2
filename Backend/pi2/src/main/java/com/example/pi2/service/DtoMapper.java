@@ -34,6 +34,7 @@ public class DtoMapper {
         dto.setName(recipe.getName());
         dto.setUrlImg(recipe.getUrlImg());
         dto.setPreparationSteps(recipe.getPreparationSteps());
+        dto.setIngredients(recipe.getIngredients());
         return dto;
     }
 
