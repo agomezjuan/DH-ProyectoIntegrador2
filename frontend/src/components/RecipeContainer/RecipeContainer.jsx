@@ -13,7 +13,7 @@ const RecipeContainer = ({ title, recipes, loading }) => {
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
           {recipes && recipes.length > 0 ? (
             recipes.map((recipe, index) => (
-              <RecipeCard key={index} recipe={recipe} />
+              <RecipeCard key={index} recipe={recipe.recipe} />
             ))
           ) : (
             <div className='col-span-full text-center text-primary'>

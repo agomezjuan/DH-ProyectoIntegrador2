@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <LoginPage />
   },
   {
-    path: '/recipe',
+    path: '/:id',
     element: <ViewRecipe />
   },
   {
