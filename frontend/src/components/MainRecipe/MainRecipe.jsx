@@ -1,6 +1,6 @@
 
 
-const MainRecipe = () => {
+const MainRecipe = ({title}) => {
   return (
   <div 
   // style={{ display: 'flex', justifyContent: 'space-between', margin: '0 80px' }}
@@ -14,7 +14,7 @@ const MainRecipe = () => {
         </div>
       </div>
       <div style={{ width: '45%', maxWidth: '900px' }}>
-      <h2 style={{ fontWeight: 'bold', fontSize: '30px' }}>Ensalada César</h2>
+      <h2 style={{ fontWeight: 'bold', fontSize: '30px' }}>{title}</h2>
         <div className="grid gap-4">
           <div>
           </div>

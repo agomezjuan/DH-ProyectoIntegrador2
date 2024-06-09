@@ -32,15 +32,12 @@ export const ViewRecipe = () => {
             style={{ margin: '0 50px' }}
           />
         </div>
-        <MainRecipe />
+        <MainRecipe title={detail.name} />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
           {!loading && !error && (
-            <div>
-              <h1 className='font-bold text-xl' style={{ marginTop: '20px', marginBottom: '20px' }}>
-                {detail?.name}
-              </h1>
+            <div>    
               <div
                 style={{
                   width: '100%',
@@ -49,21 +46,21 @@ export const ViewRecipe = () => {
                   marginLeft: '80px'
                 }}>
                 <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
-                {/* <ul>
-                  {detail.ingredients && detail.ingredients.map((ingredient, index) => (
+                <ul>
+                  {detail?.ingredients && detail.ingredients.map((ingredient, index) => (
                     <li key={index}>{ingredient}</li>
                   ))}
-                </ul> */}
+                </ul>
               </div>
               <main className='p-4'>
                 <h1 className='font-bold text-xl' style={{ marginTop: '20px', marginBottom: '20px' }}>
                   Preparación
                 </h1>
-                {/* <ul className='list-disc pl-5'>
-                  {detail?.steps && detail?.steps.map((step, index) => (
+                <ul className='list-disc pl-5'>
+                  {detail?.preparationSteps && detail?.preparationSteps.map((step, index) => (
                     <li key={index}>{step}</li>
                   ))}
-                </ul> */}
+                </ul>
               </main>
             </div>
           )}
