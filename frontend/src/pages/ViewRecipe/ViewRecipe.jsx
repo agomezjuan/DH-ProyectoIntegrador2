@@ -39,7 +39,7 @@ export const ViewRecipe = () => {
           {!loading && !error && (
             <div>
               <h1 className='font-bold text-xl' style={{ marginTop: '20px', marginBottom: '20px' }}>
-                {detail.title}
+                {detail?.name}
               </h1>
               <div
                 style={{
@@ -59,11 +59,11 @@ export const ViewRecipe = () => {
                 <h1 className='font-bold text-xl' style={{ marginTop: '20px', marginBottom: '20px' }}>
                   Preparación
                 </h1>
-                <ul className='list-disc pl-5'>
-                  {detail.steps && detail.steps.map((step, index) => (
+                {/* <ul className='list-disc pl-5'>
+                  {detail?.steps && detail?.steps.map((step, index) => (
                     <li key={index}>{step}</li>
                   ))}
-                </ul>
+                </ul> */}
               </main>
             </div>
           )}
