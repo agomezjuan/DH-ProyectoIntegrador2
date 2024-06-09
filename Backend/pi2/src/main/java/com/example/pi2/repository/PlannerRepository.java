@@ -16,7 +16,7 @@ public interface PlannerRepository extends JpaRepository<Planner, Long> {
 	  @Query("SELECT p FROM Planner p WHERE p.idUser = :idUser")
 	  List<Planner> findByUserId(@Param("idUser") String idUser);
 
-	  @Modifying
-	  @Query("UPDATE Planner p SET p.idUser = :idUser, p.recipe = :recipe, p.weekDay = :weekDay WHERE p.id = :id")
-	  Planner update(@Param("id") Long id, @Param("idUser") String idUser, @Param("recipe") Recipe recipe, @Param("weekDay") String weekDay);
+//	  @Modifying
+//	  @Query("UPDATE Planner p SET p.idUser = :idUser, p.recipe = :recipe, p.weekDay = :weekDay WHERE p.id = :id")
+//	  Planner update(@Param("id") Long id, @Param("idUser") String idUser, @Param("recipe") Recipe recipe, @Param("weekDay") String weekDay);
 }

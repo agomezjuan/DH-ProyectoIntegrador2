@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '@/components/ViewRecipeComponents/Layout';
 import { Header } from '@/components/ViewRecipeComponents/Header';
 import { RecipeContainer } from '@/components/ViewRecipeComponents/RecipeContainer';
-import { recipeMock } from '@/mocks/recipeMock';
+import { fetchRecipes } from '@/mocks/recipeMock';
 import { Carousel } from '../../components/carousel/Carousel';
 import SearchBar from '../../components/ViewRecipeComponents/SearchBar/SearchBar';
 import MainRecipe from '../../components/ViewRecipeComponents/MainRecipe/MainRecipe';
@@ -11,7 +11,7 @@ import Preparation from '../../components/ViewRecipeComponents/Preparation/Prepa
 import RatingComment from '../../components/ViewRecipeComponents/RatingComment/RatingComment';
 
 
-const popularRecipes = [recipeMock, recipeMock, recipeMock];
+const popularRecipes = [fetchRecipes, fetchRecipes, fetchRecipes];
 
 export const ViewRecipe = () => {
   return (

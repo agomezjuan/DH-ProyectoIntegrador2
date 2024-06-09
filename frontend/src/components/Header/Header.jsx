@@ -1,4 +1,4 @@
-import hero from '@/assets/hero.webp';
+import hero from '../../assets/hero.webp';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 const Header = () => {
