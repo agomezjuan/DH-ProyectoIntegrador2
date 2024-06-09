@@ -48,7 +48,7 @@ export const ViewRecipe = () => {
                 }}>
                 <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
                 <ul>
-                  {detail?.recipe?.ingredients && detail?.recipe?.ingredients.map((ingredient, index) => (
+                  {detail.recipe?.ingredients && detail.recipe?.ingredients.map((ingredient, index) => (
                     <li key={index}>{ingredient}</li>
                   ))}
                 </ul>
@@ -58,7 +58,7 @@ export const ViewRecipe = () => {
                   Preparación
                 </h1>
                 <ul className='list-disc pl-5'>
-                  {detail?.recipe?.preparationSteps && detail?.recipe?.preparationSteps.map((step, index) => (
+                  {detail.recipe?.preparationSteps && detail.recipe?.preparationSteps.map((step, index) => (
                     <li key={index}>{step}</li>
                   ))}
                 </ul>
