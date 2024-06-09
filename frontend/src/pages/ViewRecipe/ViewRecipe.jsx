@@ -16,7 +16,7 @@ export const ViewRecipe = () => {
   }, [id, fetchRecipeById]);
 
   console.log('DETAIL', detail)
-  
+
   return (
     <Layout>
       <div className='container bg-base-200 p-6'>
@@ -34,12 +34,12 @@ export const ViewRecipe = () => {
             style={{ margin: '0 50px' }}
           />
         </div>
-        <MainRecipe title={detail.name} />
+        <MainRecipe title={detail.recipe?.name} />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
           {!loading && !error && (
-            <div>    
+            <div>
               <div
                 style={{
                   width: '100%',
