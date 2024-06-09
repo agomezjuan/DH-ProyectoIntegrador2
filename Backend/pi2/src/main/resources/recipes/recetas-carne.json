@@ -1,0 +1,234 @@
+[
+  {
+    "urlImg": "https://espanol.kingsford.com/wp-content/uploads/2014/11/kfd-hoetosteak-Steak_4_0323-1024x621.jpg",
+    "name": "Filete a la Parrilla",
+    "description": "Filete jugoso a la parrilla sazonado con sal y pimienta.",
+    "preparationTime": "15 minutos",
+    "ingredients": [
+      "2 filetes de res",
+      "1 cucharada de aceite de oliva",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Precalienta la parrilla a fuego alto.",
+      "Sazona los filetes con sal y pimienta por ambos lados.",
+      "Rocía con aceite de oliva.",
+      "Asa los filetes durante 4-5 minutos por cada lado o hasta el punto de cocción deseado.",
+      "Deja reposar los filetes durante 5 minutos antes de servir."
+    ]
+  },
+  {
+    "urlImg": "https://i.ytimg.com/vi/Fw3epK88vYo/maxresdefault.jpg",
+    "name": "Carne de Res al Estilo Mongol",
+    "description": "Tierna carne de res cocinada en una salsa dulce y salada al estilo mongol.",
+    "preparationTime": "20 minutos",
+    "ingredients": [
+      "500 g de carne de res en tiras",
+      "1/2 taza de salsa de soja",
+      "1/4 taza de azúcar moreno",
+      "2 dientes de ajo, picados",
+      "1 cucharada de jengibre rallado",
+      "1 cucharada de aceite de sésamo",
+      "2 cebollas verdes, en rodajas"
+    ],
+    "preparationSteps": [
+      "Calienta el aceite de sésamo en una sartén grande.",
+      "Añade el ajo y el jengibre y cocina hasta que estén fragantes.",
+      "Incorpora la carne de res y cocina hasta que esté dorada.",
+      "Añade la salsa de soja y el azúcar moreno y cocina a fuego lento hasta que la salsa se espese.",
+      "Agrega las cebollas verdes y mezcla bien.",
+      "Sirve caliente con arroz."
+    ]
+  },
+  {
+    "urlImg": "https://www.elmejornido.com/sites/g/files/jgfbjl316/files/styles/facebook_share/public/recipe-thumbnail/112808-66c9b575a38a40a208d75a6830f4f8aa_Maggi_-_Beef_Stew.jpg?itok=nUFNOuAU",
+    "name": "Estofado de Carne",
+    "description": "Estofado de carne de res tierno con zanahorias y patatas en una rica salsa.",
+    "preparationTime": "2 horas",
+    "ingredients": [
+      "500 g de carne de res en cubos",
+      "2 zanahorias, en rodajas",
+      "2 patatas, en cubos",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "4 tazas de caldo de carne",
+      "2 cucharadas de pasta de tomate",
+      "1 cucharadita de tomillo seco",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "En una olla grande, dora la carne de res en aceite a fuego medio-alto.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Agrega las zanahorias, las patatas, el caldo de carne, la pasta de tomate, el tomillo, la sal y la pimienta.",
+      "Lleva a ebullición, reduce el fuego y cocina a fuego lento durante 1.5-2 horas o hasta que la carne esté tierna.",
+      "Sirve caliente."
+    ]
+  },
+  {
+    "urlImg": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2021/04/Carne-Asada-main.jpg",
+    "name": "Carne Asada",
+    "description": "Carne de res asada al horno con hierbas y especias.",
+    "preparationTime": "1 hora y 30 minutos",
+    "ingredients": [
+      "1 kg de carne de res para asar",
+      "2 cucharadas de aceite de oliva",
+      "2 dientes de ajo, picados",
+      "1 cucharadita de romero seco",
+      "1 cucharadita de tomillo seco",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Precalienta el horno a 180°C (350°F).",
+      "En un bol, mezcla el aceite de oliva, el ajo, el romero, el tomillo, la sal y la pimienta.",
+      "Unta la mezcla sobre la carne de res.",
+      "Coloca la carne en una bandeja para hornear y asa durante 1-1.5 horas o hasta que alcance el punto de cocción deseado.",
+      "Deja reposar durante 10 minutos antes de cortar y servir."
+    ]
+  },
+  {
+    "urlImg": "https://www.finedininglovers.com/sites/g/files/xknfdk626/files/styles/recipes_1200_800_fallback/public/2021-09/carne-asada-tacos-recipe%C2%A9iStock.jpg?itok=1UaGpAYD",
+    "name": "Tacos de Carne Asada",
+    "description": "Tacos de carne asada con cebolla, cilantro y salsa.",
+    "preparationTime": "30 minutos",
+    "ingredients": [
+      "500 g de carne de res en tiras",
+      "1 cebolla, picada",
+      "1/4 taza de cilantro picado",
+      "8 tortillas de maíz",
+      "1/4 taza de salsa",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Calienta una sartén grande a fuego medio-alto.",
+      "Sazona la carne de res con sal y pimienta.",
+      "Cocina la carne en la sartén hasta que esté dorada y cocida.",
+      "Calienta las tortillas en una sartén o en el microondas.",
+      "Distribuye la carne de res sobre las tortillas.",
+      "Añade cebolla, cilantro y salsa al gusto.",
+      "Sirve inmediatamente."
+    ]
+  },
+  {
+    "urlImg": "https://www.recetasnestlecam.com/sites/default/files/srh_recipes/9ecd390d639f183317b16368da327c2c.jpg",
+    "name": "Carne de Res con Brócoli",
+    "description": "Carne de res tierna con brócoli en una sabrosa salsa.",
+    "preparationTime": "25 minutos",
+    "ingredients": [
+      "500 g de carne de res en tiras",
+      "2 tazas de brócoli, cortado en floretes",
+      "1/4 taza de salsa de soja",
+      "2 cucharadas de aceite de sésamo",
+      "2 dientes de ajo, picados",
+      "1 cucharadita de jengibre rallado",
+      "1 cucharadita de maicena",
+      "1/4 taza de agua"
+    ],
+    "preparationSteps": [
+      "Calienta 1 cucharada de aceite de sésamo en una sartén grande.",
+      "Añade el ajo y el jengibre y cocina hasta que estén fragantes.",
+      "Agrega la carne de res y cocina hasta que esté dorada.",
+      "Retira la carne de la sartén y reserva.",
+      "En la misma sartén, añade el brócoli y cocina hasta que esté tierno.",
+      "Mezcla la salsa de soja, la maicena y el agua, y vierte en la sartén.",
+      "Añade la carne de res de vuelta a la sartén y cocina hasta que la salsa se espese.",
+      "Sirve caliente con arroz."
+    ]
+  },
+  {
+    "urlImg": "https://s1.abcstatics.com/media/gurmesevilla/2016/03/como-hacer-hamburguesas.jpg",
+    "name": "Hamburguesas Caseras",
+    "description": "Jugosas hamburguesas de res caseras con tus toppings favoritos.",
+    "preparationTime": "20 minutos",
+    "ingredients": [
+      "500 g de carne molida de res",
+      "1 huevo",
+      "1/4 taza de pan rallado",
+      "1/2 cebolla, picada",
+      "1 cucharadita de sal",
+      "1/2 cucharadita de pimienta",
+      "Pan de hamburguesa",
+      "Toppings al gusto (lechuga, tomate, queso, etc.)"
+    ],
+    "preparationSteps": [
+      "En un bol grande, mezcla la carne molida, el huevo, el pan rallado, la cebolla, la sal y la pimienta.",
+      "Forma hamburguesas con la mezcla.",
+      "Calienta una sartén grande a fuego medio-alto y cocina las hamburguesas hasta que estén doradas y cocidas por dentro.",
+      "Coloca las hamburguesas en los panes y añade tus toppings favoritos.",
+      "Sirve inmediatamente."
+    ]
+  },
+  {
+    "urlImg": "https://www.paulinacocina.net/wp-content/uploads/2023/06/bistec-de-res-a-la-mexicana.jpg",
+    "name": "Carne de Res a la Mexicana",
+    "description": "Carne de res cocinada con tomate, cebolla y chiles.",
+    "preparationTime": "30 minutos",
+    "ingredients": [
+      "500 g de carne de res en tiras",
+      "2 tomates, picados",
+      "1 cebolla, picada",
+      "2 chiles jalapeños, picados",
+      "2 dientes de ajo, picados",
+      "2 cucharadas de aceite vegetal",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Calienta el aceite en una sartén grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora la carne de res y cocina hasta que esté dorada.",
+      "Añade los tomates y los chiles y cocina durante 10-15 minutos.",
+      "Sazona con sal y pimienta al gusto.",
+      "Sirve caliente con arroz o tortillas."
+    ]
+  },
+  {
+    "urlImg": "https://i.ytimg.com/vi/TRs88Bmfwmo/maxresdefault.jpg",
+    "name": "Carne de Res con Champiñones",
+    "description": "Carne de res tierna con champiñones en una sabrosa salsa de vino.",
+    "preparationTime": "40 minutos",
+    "ingredients": [
+      "500 g de carne de res en tiras",
+      "2 tazas de champiñones, en rodajas",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "1/2 taza de vino tinto",
+      "1 taza de caldo de carne",
+      "2 cucharadas de aceite de oliva",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Calienta el aceite de oliva en una sartén grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora la carne de res y cocina hasta que esté dorada.",
+      "Añade los champiñones y cocina hasta que estén tiernos.",
+      "Vierte el vino tinto y cocina a fuego lento hasta que se reduzca a la mitad.",
+      "Añade el caldo de carne y cocina a fuego lento durante 20 minutos.",
+      "Sazona con sal y pimienta al gusto.",
+      "Sirve caliente con puré de patatas o arroz."
+    ]
+  },
+  {
+    "urlImg": "https://i.ytimg.com/vi/7TgUuGs4oXI/maxresdefault.jpg",
+    "name": "Carne de Res en Salsa de Tomate",
+    "description": "Carne de res tierna cocida en una rica salsa de tomate.",
+    "preparationTime": "1 hora",
+    "ingredients": [
+      "500 g de carne de res en cubos",
+      "1 lata de tomates triturados",
+      "1 cebolla, picada",
+      "2 dientes de ajo, picados",
+      "1 cucharadita de orégano seco",
+      "1 cucharadita de albahaca seca",
+      "2 cucharadas de aceite de oliva",
+      "Sal y pimienta al gusto"
+    ],
+    "preparationSteps": [
+      "Calienta el aceite de oliva en una sartén grande.",
+      "Añade la cebolla y el ajo y cocina hasta que estén tiernos.",
+      "Incorpora la carne de res y cocina hasta que esté dorada.",
+      "Añade los tomates triturados, el orégano y la albahaca.",
+      "Lleva a ebullición, reduce el fuego y cocina a fuego lento durante 45 minutos a 1 hora.",
+      "Sazona con sal y pimienta al gusto.",
+      "Sirve caliente con pasta o arroz."
+    ]
+  }
+]
