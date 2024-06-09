@@ -43,7 +43,7 @@ public class SecurityConfiguration {
 //        configuration.addAllowedHeader("*");
 //        configuration.addAllowedMethod("*");
 
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5173/"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173/", "http://127.0.0.1:5173/"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
 
