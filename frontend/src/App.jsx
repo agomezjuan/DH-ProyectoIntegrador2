@@ -1,9 +1,10 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Home } from '@/pages/Home';
 import { RegisterPage } from '@/pages/RegisterPage';
 import { LoginPage } from '@/pages/LoginPage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Planner } from './pages/Planner';
-
+import { Planner } from '@/pages/Planner';
+import { ViewRecipe } from '@/pages/ViewRecipe';
+import { SearchPage } from '@/pages/SearchPage/SearchPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -16,6 +17,14 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />
+  },
+  {
+    path: '/search/:searchText',
+    element: <SearchPage />
+  },
+  {
+    path: '/recipe/:recipeId',
+    element: <ViewRecipe />
   },
   {
     path: '/planner',

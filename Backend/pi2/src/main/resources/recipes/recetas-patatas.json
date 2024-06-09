@@ -1,0 +1,217 @@
+[
+    {
+      "name": "Patatas Fritas Caseras",
+      "description": "Crujientes patatas fritas caseras perfectas para acompañar cualquier comida.",
+      "preparationTime": "30 minutos",
+      "urlImg":"https://canalcocina.es/medias/_cache/zoom-ccb61e64099c05711a1147f7cf34ca23-920-518.jpg",
+      "ingredients": [
+        "4 patatas grandes",
+        "Aceite vegetal para freír",
+        "Sal al gusto"
+      ],
+      "preparationSteps": [
+        "Pela y corta las patatas en tiras delgadas.",
+        "Calienta el aceite en una sartén grande a fuego medio-alto.",
+        "Fríe las patatas en tandas hasta que estén doradas y crujientes.",
+        "Escurre en papel absorbente y sazona con sal al gusto.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Pur&eacute; de Patatas Cremoso",
+      "description": "Pur&eacute; de patatas suave y cremoso, perfecto como guarnici&oacute;n.",
+      "preparationTime": "30 minutos",
+      "urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zJIrbZF_D_fDApwuY9zo2FoWg2t313j-lg&s",
+      "ingredients": [
+        "1 kg de patatas",
+        "1/2 taza de leche",
+        "50 g de mantequilla",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Pela y corta las patatas en trozos.",
+        "Hierve las patatas en agua con sal hasta que estén tiernas.",
+        "Escurre y machaca las patatas.",
+        "Añade la leche y la mantequilla, y mezcla hasta obtener una consistencia cremosa.",
+        "Sazona con sal y pimienta al gusto.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Patatas Asadas con Romero",
+      "description": "Patatas asadas al horno con romero y ajo.",
+      "preparationTime": "45 minutos",
+       "urlImg":"https://okdiario.com/img/2018/08/20/receta-de-patatas-al-romero.jpg",
+      "ingredients": [
+        "1 kg de patatas",
+        "2 cucharadas de aceite de oliva",
+        "2 dientes de ajo, picados",
+        "2 cucharadas de romero fresco, picado",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Precalienta el horno a 200°C (400°F).",
+        "Corta las patatas en trozos y colócalas en una bandeja para hornear.",
+        "Rocía con aceite de oliva y añade el ajo y el romero.",
+        "Sazona con sal y pimienta, y mezcla bien.",
+        "Hornea durante 35-40 minutos o hasta que estén doradas y crujientes.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Patatas Gratinadas",
+      "description": "Patatas en rodajas horneadas con queso y nata.",
+      "preparationTime": "1 hora",
+      "urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SnJbF3WzdWlDwc7gfNb4BFYORAenCZvPpg&s",
+      "ingredients": [
+        "1 kg de patatas",
+        "1 taza de nata",
+        "1 taza de queso rallado",
+        "2 dientes de ajo, picados",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Precalienta el horno a 180°C (350°F).",
+        "Pela y corta las patatas en rodajas finas.",
+        "En una fuente para horno, coloca capas de patatas, ajo y queso.",
+        "Vierte la nata sobre las patatas y sazona con sal y pimienta.",
+        "Hornea durante 45-50 minutos o hasta que las patatas estén tiernas y doradas.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Patatas al Horno con Queso y Bacon",
+      "description": "Patatas al horno cubiertas con queso fundido y bacon crujiente.",
+      "preparationTime": "1 hora",
+      "urlImg":"https://www.annarecetasfaciles.com/files/patatas-beicon-queso-estilo-fosters-1024x576.jpg",
+      "ingredients": [
+        "4 patatas grandes",
+        "1 taza de queso cheddar rallado",
+        "4 lonchas de bacon, picadas",
+        "2 cucharadas de cebollino picado",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Precalienta el horno a 200°C (400°F).",
+        "Lava y seca las patatas, luego hazles unos agujeros con un tenedor.",
+        "Hornea las patatas durante 50-60 minutos o hasta que estén tiernas.",
+        "Mientras tanto, cocina el bacon en una sartén hasta que esté crujiente.",
+        "Corta las patatas al horno por la mitad y añade queso rallado y bacon.",
+        "Vuelve a hornear hasta que el queso se derrita.",
+        "Adorna con cebollino y sirve caliente."
+      ]
+    },
+    {
+      "name": "Ensalada de Patatas",
+      "description": "Ensalada de patatas con mayonesa, huevo y cebolla.",
+      "preparationTime": "40 minutos",
+      "urlImg":"https://imag.bonviveur.com/ensalada-de-patata-alemana-o-kartoffelsalat.jpg",
+      "ingredients": [
+        "1 kg de patatas",
+        "4 huevos duros, picados",
+        "1/2 taza de mayonesa",
+        "1 cebolla, picada",
+        "2 cucharadas de mostaza",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Hierve las patatas en agua con sal hasta que estén tiernas.",
+        "Escurre, pela y corta las patatas en cubos.",
+        "En un bol grande, mezcla las patatas, los huevos, la mayonesa, la cebolla y la mostaza.",
+        "Sazona con sal y pimienta al gusto.",
+        "Refrigera durante al menos 1 hora antes de servir."
+      ]
+    },
+    {
+      "name": "Patatas Rellenas",
+      "description": "Patatas al horno rellenas de carne picada, queso y crema agria.",
+      "preparationTime": "1 hora",
+      "urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzpgbLzjbiR19WikjWaZaQZKpv8-q7VaB84g&s",
+      "ingredients": [
+        "4 patatas grandes",
+        "250 g de carne picada",
+        "1 taza de queso rallado",
+        "1/2 taza de crema agria",
+        "1 cebolla, picada",
+        "2 dientes de ajo, picados",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Precalienta el horno a 200°C (400°F).",
+        "Lava y seca las patatas, luego hazles unos agujeros con un tenedor.",
+        "Hornea las patatas durante 50-60 minutos o hasta que estén tiernas.",
+        "Mientras tanto, cocina la carne picada con la cebolla y el ajo hasta que esté dorada.",
+        "Corta las patatas al horno por la mitad y saca la pulpa, dejando una capa delgada.",
+        "Mezcla la pulpa de patata con la carne picada, la mitad del queso y la crema agria.",
+        "Rellena las patatas con la mezcla y cubre con el queso restante.",
+        "Hornea durante 10-15 minutos o hasta que el queso se derrita.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Patatas con Perejil y Ajo",
+      "description": "Patatas hervidas con ajo y perejil fresco.",
+      "preparationTime": "30 minutos",
+      "urlImg":"https://okdiario.com/img/2019/08/18/receta-de-patatas-deluxe-con-ajo-y-perejil.jpg",
+      "ingredients": [
+        "1 kg de patatas pequeñas",
+        "2 dientes de ajo, picados",
+        "2 cucharadas de perejil fresco, picado",
+        "2 cucharadas de aceite de oliva",
+        "Sal al gusto"
+      ],
+      "preparationSteps": [
+        "Hierve las patatas en agua con sal hasta que estén tiernas.",
+        "Escurre las patatas y colócalas en un bol grande.",
+        "Añade el ajo, el perejil y el aceite de oliva, y mezcla bien.",
+        "Sazona con sal al gusto.",
+        "Sirve caliente."
+      ]
+    },
+    {
+      "name": "Tortilla de Patatas",
+      "description": "Clásica tortilla española hecha con patatas, cebolla y huevos.",
+      "preparationTime": "40 minutos",
+      "urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ-32fx1zuXSG77uhifFPyUtIJT6pe-Ef5Og&s",
+      "ingredients": [
+        "4 patatas medianas",
+        "1 cebolla grande",
+        "6 huevos",
+        "1/2 taza de aceite de oliva",
+        "Sal al gusto"
+      ],
+      "preparationSteps": [
+        "Pela y corta las patatas en rodajas finas.",
+        "Pela y pica la cebolla.",
+        "Calienta el aceite en una sartén grande y fríe las patatas y la cebolla a fuego medio hasta que estén tiernas.",
+        "Bate los huevos en un bol grande y añade las patatas y la cebolla.",
+        "Vierte la mezcla en la sartén y cocina a fuego medio-bajo hasta que la tortilla esté dorada por debajo.",
+        "Voltea la tortilla con la ayuda de un plato y cocina el otro lado hasta que esté completamente cocida.",
+        "Sirve caliente o a temperatura ambiente."
+      ]
+    },
+    {
+      "name": "Patatas a la Provenzal",
+      "description": "Patatas salteadas con ajo, tomate y hierbas provenzales.",
+      "preparationTime": "30 minutos",
+      "urlImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZK-5H5IANLxdg8qR4MCGZHJYaaRyAOdrXkw&s",
+      "ingredients": [
+        "1 kg de patatas",
+        "2 tomates, picados",
+        "2 dientes de ajo, picados",
+        "2 cucharadas de hierbas provenzales",
+        "2 cucharadas de aceite de oliva",
+        "Sal y pimienta al gusto"
+      ],
+      "preparationSteps": [
+        "Pela y corta las patatas en cubos.",
+        "Hierve las patatas en agua con sal hasta que estén tiernas.",
+        "Escurre las patatas y resérvalas.",
+        "Calienta el aceite de oliva en una sartén grande y añade el ajo y los tomates.",
+        "Cocina durante 5 minutos, luego añade las patatas y las hierbas provenzales.",
+        "Sazona con sal y pimienta al gusto y cocina hasta que las patatas estén doradas.",
+        "Sirve caliente."
+      ]
+    }
+  ]
+  
