@@ -15,9 +15,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("SELECT r FROM Recipe r WHERE r.name = ?1")
     Optional<Recipe> findByName(String name);
 
-    @Query("SELECT r FROM Recipe r")
-    Page<Recipe> findRecipesPaginated(Pageable pageable);
-
     @Query("""
             SELECT r
             FROM Recipe r
