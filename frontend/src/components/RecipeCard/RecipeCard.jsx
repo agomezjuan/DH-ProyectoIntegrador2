@@ -5,14 +5,14 @@ export default function RecipeCard({ recipe }) {
   return (
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative'>
       <img
-        src={recipe?.url_img}
+        src={recipe?.urlImg}
         alt={recipe.name}
         className='w-full h-52 object-cover'
       />
       <div className='flex flex-col flex-grow'>
         <div className='flex flex-grow h-full flex-col'>
         <Link to='./recipe'>  <h3 className='text-lg font-semibold p-4'>{recipe.name}</h3></Link>
-          <p className='text-gray-600 p-4'>{recipe.description}</p>
+          <p className='text-gray-600 p-4'>{recipe.preparationSteps}</p>
         </div>
         <div className='flex items-center justify-between p-4 bg-secondary'>
           <div className='flex items-center '>
@@ -27,7 +27,7 @@ export default function RecipeCard({ recipe }) {
               </span>
             ))} */}
           </div>
-          <span className='text-gray-600'>{recipe.time}</span>
+          {/* <span className='text-gray-600'>{recipe.time}</span> */}
         </div>
       </div>
     </div>
