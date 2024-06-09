@@ -5,6 +5,8 @@ import com.example.pi2.model.Planner;
 import com.example.pi2.service.PlannerService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -40,14 +42,10 @@ public class PlannerController {
 	  }
 
 	  @PostMapping
-	  public Planner save(@RequestBody Planner planner) {
+	  public Planner save(@RequestBody Planner planner, @AuthenticationPrincipal Jwt jwt) {
 
+			planner.setIdUser(jwt.getSubject());
 			return plannerService.save(planner);
-	  }
-
-	  @PostMapping("/postWeek")
-	  public List<Planner> saveMany(@RequestBody List<Planner> plannerList){
-			return plannerService.postWeek(plannerList);
 	  }
 
 	  @PostMapping("/user/{idUser}")
@@ -55,6 +53,7 @@ public class PlannerController {
 
 			return plannerService.saveForUser(idUser, planner);
 	  }
+
 	  @GetMapping("/getcsv")
 	  public void sendCSV(HttpServletResponse response, @RequestParam String idUser) throws IOException {
 
@@ -65,7 +64,7 @@ public class PlannerController {
 					csvFileName);
 			response.setHeader(headerKey, headerValue);
 			ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-			String[] header = {"Id", "idUser", "recipeName", "weekDay"};
+			String[] header = {"Id", "idUser", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
 			csvBeanWriter.writeHeader(header);
 			List<PlannerDTO> plannerDTOList = plannerService.dtoForCsv(idUser);
 			for (PlannerDTO plannerDTO1 :
@@ -74,12 +73,6 @@ public class PlannerController {
 			}
 
 			csvBeanWriter.close();
-	  }
-
-	  @PutMapping("/{id}")
-	  public Planner update(@PathVariable Long id, @RequestBody Planner plannerDetails) {
-
-			return plannerService.update(id, plannerDetails);
 	  }
 
 	  @DeleteMapping("/{id}")

@@ -14,64 +14,70 @@ import java.util.List;
 @Service
 public class PlannerService {
 
-    @Autowired
-    private PlannerRepository plannerRepository;
+	  @Autowired
+	  private PlannerRepository plannerRepository;
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+	  @Autowired
+	  private RecipeRepository recipeRepository;
 
-    public List<Planner> findAll() {
-        return plannerRepository.findAll();
-    }
+	  public List<Planner> findAll() {
 
-    public Planner findById(Long id) {
-        return plannerRepository.findById(id).orElseThrow(() -> new RuntimeException("Schedule not found"));
-    }
+			return plannerRepository.findAll();
+	  }
 
-    public List<Planner> findByUserId(String idUser) {
-        return plannerRepository.findByUserId(idUser);
-    }
-    public Planner save(Planner planner) {
-        return plannerRepository.save(planner);
-    }
+	  public Planner findById(Long id) {
 
-    public Planner saveForUser(String idUser, Planner planner) {
-        planner.setIdUser(idUser);
-        return plannerRepository.save(planner);
-    }
+			return plannerRepository.findById(id).orElseThrow(() -> new RuntimeException("Schedule not found"));
+	  }
 
-    public List<Planner> postWeek(List<Planner> plannerList){
-        return plannerRepository.saveAll(plannerList);
-    }
+	  public List<Planner> findByUserId(String idUser) {
 
+			return plannerRepository.findByUserId(idUser);
+	  }
 
-    public Planner update(Long id, Planner plannerDetails) {
-        Planner planner = findById(id);
-        planner.setIdUser(plannerDetails.getIdUser());
-        Recipe recipe = recipeRepository.findById(plannerDetails.getRecipe().getId()).orElseThrow(() -> new RuntimeException("Recipe not found"));
-        planner.setRecipe(recipe);
-        planner.setWeekDay(plannerDetails.getWeekDay());
-        return plannerRepository.save(planner);
-    }
+	  public Planner save(Planner planner) {
 
-    public List<PlannerDTO> dtoForCsv(String IdUser){
-        List<Planner> plannerList = plannerRepository.findByUserId(IdUser);
-        List<PlannerDTO> plannerDTOList = new ArrayList<>();
-        System.out.println(plannerList.toString());
-        for (Planner planner :
-                plannerList) {
-            PlannerDTO plannerDTO = new PlannerDTO();
-            plannerDTO.setId(planner.getId());
-            plannerDTO.setWeekday(planner.getWeekDay());
-            plannerDTO.setIdUser(planner.getIdUser());
-            plannerDTO.setRecipeName(planner.getRecipe().getName());
-            plannerDTOList.add(plannerDTO);
-        }
-        return plannerDTOList;
-    }
+			return plannerRepository.save(planner);
+	  }
 
-    public void deleteById(Long id) {
-        Planner planner = findById(id);
-        plannerRepository.delete(planner);
-    }
+	  public Planner saveForUser(String idUser, Planner planner) {
+
+			planner.setIdUser(idUser);
+			return plannerRepository.save(planner);
+	  }
+
+	  public List<PlannerDTO> dtoForCsv(String IdUser) {
+
+			List<Planner> plannerList = plannerRepository.findByUserId(IdUser);
+			List<PlannerDTO> plannerDTOList = new ArrayList<>();
+			System.out.println(plannerList.toString());
+			for (Planner planner :
+					plannerList) {
+				  PlannerDTO plannerDTO = new PlannerDTO();
+				  plannerDTO.setId(planner.getId());
+				  plannerDTO.setIdUser(planner.getIdUser());
+				  if (planner.getSunday() != null)
+						plannerDTO.setSunday(planner.getSunday().getName());
+				  if (planner.getMonday() != null)
+						plannerDTO.setMonday(planner.getMonday().getName());
+				  if (planner.getTuesday() != null)
+						plannerDTO.setTuesday(planner.getTuesday().getName());
+				  if (planner.getWednesday() != null)
+						plannerDTO.setWednesday(planner.getWednesday().getName());
+				  if (planner.getThursday() != null)
+						plannerDTO.setThursday(planner.getThursday().getName());
+				  if (planner.getFriday() != null)
+						plannerDTO.setFriday(planner.getFriday().getName());
+				  if (planner.getSaturday() != null)
+						plannerDTO.setSaturday(planner.getSaturday().getName());
+				  plannerDTOList.add(plannerDTO);
+			}
+			return plannerDTOList;
+	  }
+
+	  public void deleteById(Long id) {
+
+			Planner planner = findById(id);
+			plannerRepository.delete(planner);
+	  }
 }
