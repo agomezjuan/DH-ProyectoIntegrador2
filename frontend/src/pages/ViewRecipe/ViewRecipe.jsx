@@ -33,19 +33,13 @@ export const ViewRecipe = () => {
             style={{ margin: '0 50px' }}
           />
         </div>
-        <MainRecipe title={detail.recipe?.name} />
+        <MainRecipe title={detail.recipe?.name} time={detail.recipe?.preparationTime} />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
           {!loading && !error && (
             <div>
-              <div
-                style={{
-                  width: '100%',
-                  float: 'left',
-                  padding: '20px',
-                  marginLeft: '80px'
-                }}>
+              <div className='my-5'>
                 <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
                 <ul>
                   {detail.recipe?.ingredients && detail.recipe?.ingredients.map((ingredient, index) => (

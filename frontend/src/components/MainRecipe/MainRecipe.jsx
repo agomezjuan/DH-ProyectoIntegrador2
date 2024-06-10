@@ -1,6 +1,6 @@
 
 
-const MainRecipe = ({title}) => {
+const MainRecipe = ({title, time}) => {
   return (
   <div 
   // style={{ display: 'flex', justifyContent: 'space-between', margin: '0 80px' }}
@@ -21,7 +21,7 @@ const MainRecipe = ({title}) => {
             <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
             <div style={{ margin: '0 5px', textAlign: 'center' }}> {}
               <i className="fas fa-clock"></i>
-              <p>Tiempo</p>
+              <p>Tiempo de preparación: <span>{time}</span></p>
             </div>
             <div style={{ margin: '0 5px', textAlign: 'center' }}>
               <i className="fas fa-calendar-alt"></i>
