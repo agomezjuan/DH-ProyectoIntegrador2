@@ -1,6 +1,6 @@
 package com.example.pi2.controller;
 
-import com.example.pi2.domain.RecipeWithCategoriesDto;
+import com.example.pi2.domain.RecipeDto;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.model.Recipe;
@@ -22,25 +22,29 @@ public class RecipeController {
     @Autowired
     private DtoMapper mapper;
 
+    private RecipeDto mapResponseToDto(Recipe recipe) {
+        return mapper.toRecipeDto(recipe, true);
+    }
+
     // CRUD
     @PostMapping
-    public RecipeWithCategoriesDto createRecipe(@RequestBody Recipe recipe) throws ResourceAlreadyExistExeption, ResourceNotFoundException {
-        return mapper.toFullRecipeDto(recipeService.createRecipe(recipe));
+    public RecipeDto createRecipe(@RequestBody Recipe recipe) throws ResourceAlreadyExistExeption, ResourceNotFoundException {
+        return mapResponseToDto(recipeService.createRecipe(recipe));
     }
 
     @GetMapping("/{id}")
-    public RecipeWithCategoriesDto getRecipeById(@PathVariable Integer id) throws ResourceNotFoundException {
-        return mapper.toFullRecipeDto(recipeService.getRecipeById(id));
+    public RecipeDto getRecipeById(@PathVariable Integer id) throws ResourceNotFoundException {
+        return mapResponseToDto(recipeService.getRecipeById(id));
     }
 
     @GetMapping
-    public List<RecipeWithCategoriesDto> getAllRecipes() {
-        return recipeService.getAllRecipes().stream().map(mapper::toFullRecipeDto).toList();
+    public List<RecipeDto> getAllRecipes() {
+        return recipeService.getAllRecipes().stream().map(this::mapResponseToDto).toList();
     }
 
     @PutMapping
-    public RecipeWithCategoriesDto updateRecipe(@RequestBody Recipe recipe) throws ResourceNotFoundException {
-        return mapper.toFullRecipeDto(recipeService.updateRecipe(recipe));
+    public RecipeDto updateRecipe(@RequestBody Recipe recipe) throws ResourceNotFoundException {
+        return mapResponseToDto(recipeService.updateRecipe(recipe));
     }
 
     @DeleteMapping("/{id}")
@@ -49,12 +53,12 @@ public class RecipeController {
     }
 
     @GetMapping("/pagination")
-    public ResponseEntity<Page<RecipeWithCategoriesDto>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page,
+    public ResponseEntity<Page<RecipeDto>> getAllPaginated(@RequestParam(defaultValue = "0") Integer page,
                                                         @RequestParam(defaultValue = "10") Integer elements,
                                                         @RequestParam(defaultValue = "id") String sortBy,
                                                         @RequestParam(required = false) String name) {
-        Page<RecipeWithCategoriesDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy, name)
-                .map(mapper::toFullRecipeDto);
+        Page<RecipeDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy, name)
+                .map(this::mapResponseToDto);
         return ResponseEntity.ok(recipePage);
     }
 

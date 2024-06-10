@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { fetchRecipes as fetchMockRecipes } from '@/mocks/recipeMock';
+import { fetchCategories as fetchMockCategories } from '@/mocks/categoryMock';
 
 const httpService = axios.create({
   baseURL: import.meta.env.VITE_GATEWAY_URL,
@@ -15,26 +16,38 @@ export const loginService = axios.create({
   }
 });
 
-export default httpService;
+export default httpService; 
 
 // Request interceptor (Outgoing)
 httpService.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    if (config.url === '/api/mock/recipes') {
-      return fetchMockRecipes().then((data) => {
-        return {
-          ...config,
-          adapter: () => Promise.resolve({ data: data, status: 200 })
-        };
-      });
+    const useApiMock = import.meta.env.VITE_USE_MOCKS;
+    if (useApiMock === 'true') {
+      if (config.url === '/recipes') {
+        console.log(`We are using recipe mocks for ${config.url}`)
+        return fetchMockRecipes().then((data) => {
+          return {
+            ...config,
+            adapter: () => Promise.resolve({ data: data, status: 200 })
+          };
+        });
+      } else if (config.url === '/categories') {
+        console.log(`We are using categories mocks for ${config.url}`)
+        return fetchMockCategories().then((data) => {
+          return {
+            ...config,
+            adapter: () => Promise.resolve({ data: data, status: 200 })
+          };
+        });
+      }
     }
 
     // Request authorization
     const session = localStorage.getItem('auth');
     const token = session && JSON.parse(session).state.token;
 
-    console.log('Token:', token);
+    console.log(`Token ${token}`);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -69,5 +82,9 @@ httpService.interceptors.response.use(
 );
 
 export const getRecipes = () => {
-  return httpService.get('/api/mock/recipes');
+  return httpService.get('/recipes');
+};
+
+export const getCategories = () => {
+  return httpService.get('/categories');
 };

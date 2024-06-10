@@ -1,36 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { getCategories } from '@/api/httpService';
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state, usaremos react query para esto
 
-  const images = [
-    { src: '/categories/Broccoli-Meal-Prep-Recipe.jpg', title: '30 minutos' },
-    {
-      src: '/categories/Creamy-Parmesan-Green-Beans-Casserole-with-Bacon.jpg',
-      title: 'Aperitivos'
-    },
-    { src: '/categories/postres.jpg', title: 'Postres' },
-    {
-      src: '/categories/Grilled-Lemon-Garlic-Chicken-Skewers-recipe.jpg',
-      title: 'Plato Fuerte'
-    }
-  ];
+
+  useEffect(() => {
+    getCategories().then((res) => {
+      if (res.status === 200) {
+        setCategories(res.data);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   const handlePrevious = () => {
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    const newIndex = currentIndex === 0 ? categories.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const handleNext = () => {
-    const newIndex = (currentIndex + 1) % images.length;
+    const newIndex = (currentIndex + 1) % categories.length;
     setCurrentIndex(newIndex);
   };
 
   const displayImages = [];
   for (let i = 0; i < 4; i++) {
-    displayImages.push(images[(currentIndex + i) % images.length]);
+    displayImages.push(categories[(currentIndex + i) % categories.length]);
+  }
+
+  if (loading) {
+    return (
+      <div className='flex flex-col justify-center items-center h-36'>
+        <span className='loading loading-ring loading-md'></span>
+        <span className='text-primary mt-4'>Cargando...</span>
+      </div>
+    );
   }
 
   return (
@@ -43,19 +52,19 @@ export const Carousel = () => {
       </button>
 
       <div className='carousel flex overflow-hidden justify-center'>
-        {displayImages.map((image, index) => (
+        {displayImages.map((category, index) => (
           <div
             key={index}
             className='carousel-item flex flex-col items-center p-2 text-center'>
             <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
               <img
-                src={image.src}
+                src={category.url_img}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
-              {image.title}
+              {category.name}
             </div>
           </div>
         ))}

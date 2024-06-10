@@ -1,6 +1,6 @@
 package com.example.pi2.controller;
 
-import com.example.pi2.domain.CategoryWithRecipeDto;
+import com.example.pi2.domain.CategoryDto;
 import com.example.pi2.model.Category;
 import com.example.pi2.service.CategoryService;
 import com.example.pi2.service.DtoMapper;
@@ -17,32 +17,36 @@ public class CategoryController {
     @Autowired
     private DtoMapper mapper;
 
+    private CategoryDto mapResponseToDto(Category category) {
+        return mapper.toCategoryDto(category, true);
+    }
+
     @GetMapping
-    public List<CategoryWithRecipeDto> getAllCategories() {
-        return categoryService.findAll().stream().map(mapper::toFullCategoryDto).toList();
+    public List<CategoryDto> getAllCategories() {
+        return categoryService.findAll().stream().map(this::mapResponseToDto).toList();
     }
 
     @GetMapping("/{id}")
-    public CategoryWithRecipeDto getCategoryById(@PathVariable Integer id) {
-        return mapper.toFullCategoryDto(categoryService.findById(id));
+    public CategoryDto getCategoryById(@PathVariable Integer id) {
+        return mapResponseToDto(categoryService.findById(id));
     }
 
     @GetMapping("/name/{name}")
-    public CategoryWithRecipeDto getCategoryByName(@PathVariable String name) {
-        return mapper.toFullCategoryDto(categoryService.findByName(name));
+    public CategoryDto getCategoryByName(@PathVariable String name) {
+        return mapResponseToDto(categoryService.findByName(name));
     }
     @PostMapping
-    public CategoryWithRecipeDto createCategory(@RequestBody Category category) {
-        return mapper.toFullCategoryDto(categoryService.save(category));
+    public CategoryDto createCategory(@RequestBody Category category) {
+        return mapResponseToDto(categoryService.save(category));
     }
 
     @PutMapping("/{id}")
-    public CategoryWithRecipeDto updateCategory(@PathVariable Integer id, @RequestBody Category category) {
+    public CategoryDto updateCategory(@PathVariable Integer id, @RequestBody Category category) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory != null) {
             existingCategory.setName(category.getName());
 //            existingCategory.setRecipe(category.getRecipe());
-            return mapper.toFullCategoryDto(categoryService.save(existingCategory));
+            return mapResponseToDto(categoryService.save(existingCategory));
         }
         return null;
     }
