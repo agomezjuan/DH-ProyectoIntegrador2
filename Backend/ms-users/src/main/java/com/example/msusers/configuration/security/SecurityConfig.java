@@ -18,6 +18,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests( auth -> auth
+                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/users/register").permitAll()
                         .anyRequest()
                         .authenticated())
