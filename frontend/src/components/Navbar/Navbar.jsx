@@ -32,7 +32,7 @@ export default function Navbar() {
           navigate("/");
         }
         setToastMessage(null);
-      }, 5000); 
+      }, 5000);
     }
     return () => clearTimeout(timer);
   }, [toastMessage, navigate]);
@@ -41,26 +41,16 @@ export default function Navbar() {
   return (
     <div className='navbar bg-base-100'>
       <div className='flex-none'>
-        <button className='btn btn-square btn-ghost text-primary'>
-         
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            className='inline-block w-5 h-5 stroke-current'>
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth='2'
-              d='M4 6h16M4 12h16M4 18h16'></path>
-          </svg>
-        </button>
       </div>
       <div className='flex-1'>
       <Link to='/'>
         <h3 className='btn btn-ghost text-xl text-primary'>MealMap</h3>
       </Link>
+      <img src='/imagenes PI/logo MealPlanner.jpeg' alt='Logo' className='h-14 w-auto' />
+
       </div>
+      
+
       <div className='flex items-center'>
         < details className="dropdown dropdown-end dropdown-hover">
           <summary className="m-1 btn">
@@ -69,7 +59,7 @@ export default function Navbar() {
             </summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
           {
-            !isAuth ?  
+            !isAuth ?
             <>
             <li><Link to='/login' >Login</Link></li>
             <li><Link to='/register' >Registro</Link></li>

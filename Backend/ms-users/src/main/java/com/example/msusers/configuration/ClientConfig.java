@@ -17,6 +17,9 @@ public class ClientConfig {
     private String realm;
     @Value("${keycloakProperties.clientId}")
     private String clientId;
+
+    @Value("${keycloakProperties.clientIdFront}")
+    private String clientIdFront;
     @Value("${keycloakProperties.clientSecret}")
     private String clientSecret;
 
@@ -42,5 +45,16 @@ public class ClientConfig {
     private String getClientCredentialsToken(){
         AccessTokenResponse token = buildClient().tokenManager().getAccessToken();
         return token.getToken();
+    }
+
+    public AccessTokenResponse getUserAccessToken(String username, String password) {
+        return KeycloakBuilder.builder().
+                serverUrl(serverUrl)
+                .realm(realm)
+                .clientId(clientIdFront)
+                .grantType(OAuth2Constants.PASSWORD)
+                .username(username)
+                .password(password)
+                .build().tokenManager().getAccessToken();
     }
 }

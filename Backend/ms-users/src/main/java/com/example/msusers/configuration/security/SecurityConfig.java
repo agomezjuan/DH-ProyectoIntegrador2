@@ -20,6 +20,7 @@ public class SecurityConfig {
                 .authorizeRequests( auth -> auth
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/users/register").permitAll()
+                        .requestMatchers("/users/login").permitAll()
                         .anyRequest()
                         .authenticated())
                 .oauth2ResourceServer( oauth -> oauth
