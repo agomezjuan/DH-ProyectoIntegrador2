@@ -1,10 +1,10 @@
 package com.example.msusers.controller;
 
-import com.example.msusers.domain.User;
 import com.example.msusers.dto.UserDTO;
 import com.example.msusers.exceptions.ResourceNotFoundException;
 import com.example.msusers.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.keycloak.representations.AccessTokenResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,5 +27,11 @@ public class UserController {
     @GetMapping("/search")
     public UserDTO findByUsername(@RequestParam String username) throws ResourceNotFoundException {
         return userService.findByUsername(username);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AccessTokenResponse> loginUser(@RequestBody UserDTO userDTO){
+        AccessTokenResponse response = userService.loginUser(userDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
