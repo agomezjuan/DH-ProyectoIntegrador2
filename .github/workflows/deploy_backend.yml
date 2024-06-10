@@ -35,7 +35,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
 # keycloak
-- name: Create ECR repository for Keycloak if not exists
+      - name: Create ECR repository for Keycloak if not exists
         env:
           ECR_REPOSITORY: keycloak
           AWS_REGION: us-east-1
