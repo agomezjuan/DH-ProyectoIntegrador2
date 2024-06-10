@@ -8,7 +8,7 @@ export default function RecipeCard({ recipe }) {
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative'>
       <Link to={`/recipe/${recipe.id}`}>
         <img
-          src={recipe?.url_img}
+          src={recipe.urlImg}
           alt={recipe.name}
           className='w-full h-52 object-cover'
         />
@@ -20,12 +20,13 @@ export default function RecipeCard({ recipe }) {
               {recipe.name}
             </h3>
           </Link>
+          <div className='mb-5'>
           <p className='text-gray-600 p-4'>{recipe.description}</p>
+          </div>
         </div>
-        <div className='absolute bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-secondary'>
+        <div className='absolute bottom-0 left-0 right-0 mb-5 flex items-center justify-between p-4 bg-secondary'>
           <div className='flex items-center '></div>
           <span className='text-gray-600'>{recipe.preparationTime}</span>
-
         </div>
       </div>
     </div>

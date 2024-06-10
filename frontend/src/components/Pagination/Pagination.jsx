@@ -3,7 +3,7 @@ import { useRecipesStore } from '@/store/recipesStore';
 
 const Pagination = () => {
   const { currentPage, fetchRecipes } = useRecipesStore();
-  const totalPages = 5; // Replace with actual total pages if available
+  const totalPages = 6; // Replace with actual total pages if available
 
   const handlePageChange = (page) => {
     fetchRecipes(page);
