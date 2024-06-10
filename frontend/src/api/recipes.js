@@ -1,8 +1,8 @@
 import httpService from './httpService';
 
-export const getRecipes = async () => {
+export const getRecipes = async (page = 0) => {
   try {
-    const response = await httpService.get('/api/v1/recipes/pagination');
+    const response = await httpService.get(`/api/v1/recipes/pagination?page=${page}`);
     return response.data.content;
   } catch (error) {
     console.error('Error fetching recipes:', error);
