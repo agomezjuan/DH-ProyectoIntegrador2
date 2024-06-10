@@ -74,11 +74,11 @@ public class UserService {
         dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
-        dto.setUserName(user.getEmail());
+        dto.setUsername(user.getEmail());
         return dto;
     }
 
     public AccessTokenResponse loginUser(UserDTO userDTO) {
-        return clientConfig.getUserAccessToken(userDTO.getUserName(), userDTO.getPassword());
+        return clientConfig.getUserAccessToken(userDTO.getUsername(), userDTO.getPassword());
     }
 }

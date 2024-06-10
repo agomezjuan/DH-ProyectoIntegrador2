@@ -21,7 +21,7 @@ function LoginForm() {
     defaultValues: {
       grant_type: 'password',
       client_id: 'frontend',
-      userName: '',
+      username: '',
       password: ''
     }
   });
@@ -67,7 +67,7 @@ function LoginForm() {
               className='w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
               placeholder='Correo electrónico'
               type='text'
-              {...register('userName')}
+              {...register('username')}
             />
             {errors.username && (
               <span className='text-xs text-primary font-bold'>
