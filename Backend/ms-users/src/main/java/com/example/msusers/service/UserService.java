@@ -6,6 +6,7 @@ import com.example.msusers.exceptions.ResourceNotFoundException;
 import com.example.msusers.repository.UserRepository;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,7 +74,11 @@ public class UserService {
         dto.setId(user.getId());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
-        dto.setUserName(user.getEmail());
+        dto.setUsername(user.getEmail());
         return dto;
+    }
+
+    public AccessTokenResponse loginUser(UserDTO userDTO) {
+        return clientConfig.getUserAccessToken(userDTO.getUsername(), userDTO.getPassword());
     }
 }

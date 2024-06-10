@@ -13,7 +13,7 @@ import lombok.Setter;
 public class UserDTO {
 
     private String id;
-    private String userName;
+    private String username;
     private String email;
     private String firstName;
     private String lastName;
@@ -21,7 +21,7 @@ public class UserDTO {
     private String password;
 
     public UserDTO(String userName, String email, String firstName, String lastName, boolean enabled, String password) {
-        this.userName = userName;
+        this.username = userName;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
