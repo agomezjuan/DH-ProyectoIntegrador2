@@ -2,11 +2,11 @@ import React from 'react';
 import { useRecipesStore } from '@/store/recipesStore';
 
 const Pagination = () => {
-  const { currentPage, fetchRecipesPaginated } = useRecipesStore();
+  const { currentPage, fetchRecipes } = useRecipesStore();
   const totalPages = 5; // Replace with actual total pages if available
 
   const handlePageChange = (page) => {
-    fetchRecipesPaginated(page);
+    fetchRecipes(page);
   };
 
   return (
