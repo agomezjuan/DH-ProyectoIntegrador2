@@ -8,8 +8,8 @@ export const loginRequest = async (data) => {
 
   try {
     const response = await loginService.post(
-      '/realms/proyecto-integrador/protocol/openid-connect/token',
-      formBody
+      '/api/v1/users/login',
+      data
     );
 
     console.log('Response:', response.data);
