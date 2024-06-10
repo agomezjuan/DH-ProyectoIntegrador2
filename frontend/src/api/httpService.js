@@ -9,9 +9,9 @@ const httpService = axios.create({
 });
 
 export const loginService = axios.create({
-  baseURL: import.meta.env.VITE_KEYCLOAK_URL,
+  baseURL: import.meta.env.VITE_GATEWAY_URL,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    'Content-Type': 'application/json'
   }
 });
 
