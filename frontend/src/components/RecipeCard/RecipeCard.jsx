@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+
 export default function RecipeCard({ recipe }) {
   return (
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative'>
@@ -23,6 +24,7 @@ export default function RecipeCard({ recipe }) {
         <div className='flex items-center justify-between p-4 bg-secondary'>
           <div className='flex items-center '></div>
           <span className='text-gray-600'>{recipe.time}</span>
+
         </div>
       </div>
     </div>
