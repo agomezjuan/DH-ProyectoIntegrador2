@@ -4,6 +4,7 @@ import { Header } from '@/components/Header';
 import { RecipeContainer } from '@/components/RecipeContainer';
 import { Carousel } from '../../components/carousel/Carousel';
 import { useRecipesStore } from '@/store/recipesStore';
+import { Pagination } from '@/components/Pagination'
 
 
 export const Home = () => {
@@ -15,7 +16,6 @@ export const Home = () => {
     fetchRecipes();
   }, [fetchRecipes]);
 
-  console.log('RECIPES', recipes);
 
   return (
     <Layout>
@@ -31,6 +31,7 @@ export const Home = () => {
             loading={loading}
           />}
         </div>
+        <Pagination/>
       </div>
     </Layout>
   );
