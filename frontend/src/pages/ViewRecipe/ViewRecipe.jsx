@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import MainRecipe from '../../components/MainRecipe/MainRecipe';
+import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useRecipesStore } from '@/store/recipesStore'
 import { useParams } from 'react-router-dom';
 
@@ -26,14 +27,13 @@ export const ViewRecipe = () => {
             margin: '0 80px'
           }}
           className='flex items-center justify-center p-8 text-center'>
-          <input
-            type='text'
-            placeholder='Busca una receta, un ingrediente, palabra clave'
-            className='w-full p-4 rounded'
-            style={{ margin: '0 50px' }}
-          />
+          <SearchBar />
         </div>
-        <MainRecipe title={detail.recipe?.name} time={detail.recipe?.preparationTime} img={detail.recipe?.urlImg} />
+        <MainRecipe
+          title={detail.recipe?.name}
+          time={detail.recipe?.preparationTime}
+          img={detail.recipe?.urlImg}
+        />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
@@ -42,19 +42,23 @@ export const ViewRecipe = () => {
               <div className='my-5'>
                 <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
                 <ul>
-                  {detail.recipe?.ingredients && detail.recipe?.ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
-                  ))}
+                  {detail.recipe?.ingredients &&
+                    detail.recipe?.ingredients.map((ingredient, index) => (
+                      <li key={index}>{ingredient}</li>
+                    ))}
                 </ul>
               </div>
               <main className='p-4'>
-                <h1 className='font-bold text-xl' style={{ marginTop: '20px', marginBottom: '20px' }}>
+                <h1
+                  className='font-bold text-xl'
+                  style={{ marginTop: '20px', marginBottom: '20px' }}>
                   Preparación
                 </h1>
                 <ul className='list-disc pl-5'>
-                  {detail.recipe?.preparationSteps && detail.recipe?.preparationSteps.map((step, index) => (
-                    <li key={index}>{step}</li>
-                  ))}
+                  {detail.recipe?.preparationSteps &&
+                    detail.recipe?.preparationSteps.map((step, index) => (
+                      <li key={index}>{step}</li>
+                    ))}
                 </ul>
               </main>
             </div>
