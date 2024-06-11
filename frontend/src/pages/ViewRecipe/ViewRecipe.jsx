@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import MainRecipe from '../../components/MainRecipe/MainRecipe';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { useRecipesStore } from '@/store/recipesStore'
 import { useParams } from 'react-router-dom';
+
 
 export const ViewRecipe = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ export const ViewRecipe = () => {
       fetchRecipeById(id);
     }
   }, [id, fetchRecipeById]);
+
 
   return (
     <Layout>
@@ -33,7 +35,6 @@ export const ViewRecipe = () => {
           img={detail.recipe?.urlImg}
         />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
-        <div className='container mx-auto'>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
           {!loading && !error && (
@@ -41,9 +42,6 @@ export const ViewRecipe = () => {
               <div className='my-5'>
                 <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
                 <ul>
-              <div className='my-5 p-4 mx-20'>
-                <h2 className='text-xl font-bold mb-3'>Ingredientes</h2>
-                <ul className='list-disc px-5'>
                   {detail.recipe?.ingredients &&
                     detail.recipe?.ingredients.map((ingredient, index) => (
                       <li key={index}>{ingredient}</li>
@@ -57,15 +55,11 @@ export const ViewRecipe = () => {
                   Preparación
                 </h1>
                 <ul className='list-disc pl-5'>
-              <main className='p-4 mx-20'>
-                <h1 className='font-bold text-xl mb-3'>Preparación</h1>
-                <ol className='pl-5 list-decimal'>
                   {detail.recipe?.preparationSteps &&
                     detail.recipe?.preparationSteps.map((step, index) => (
                       <li key={index}>{step}</li>
                     ))}
                 </ul>
-                </ol>
               </main>
             </div>
           )}
@@ -74,5 +68,6 @@ export const ViewRecipe = () => {
     </Layout>
   );
 };
+
 
 export default ViewRecipe;
