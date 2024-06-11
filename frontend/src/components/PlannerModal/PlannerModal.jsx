@@ -1,10 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import SelectDay from './SelectDay';
+import { usePlanner } from '../../hooks/usePlanner';
+import { useRecipesStore } from '../../store/recipesStore';
+import useUserProfileStore from '../../store/userProfileStore';
 
 export const PlannerModal = () => {
   const navigate = useNavigate();
+  const { day } = usePlanner();
+  const detail = useRecipesStore((state) => state.detail);
+  const addRecipeToPlanner = useUserProfileStore(
+    (state) => state.addRecipeToPlanner
+  );
 
   const handleClick = () => {
+    addRecipeToPlanner(day, detail.recipe);
     navigate('/planner');
   };
 

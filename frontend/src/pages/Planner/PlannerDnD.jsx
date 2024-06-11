@@ -9,27 +9,29 @@ import {
   verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 // import { AddRecipe } from './AddRecipe';
-import { useRecipesStore } from '../../store/recipesStore';
 import PlannedRecipe from './PlannedRecipe';
-// import { AddRecipe } from './AddRecipe';
+import useUserProfileStore from '../../store/userProfileStore';
+import { mapPlannerData } from '../../utils/plannerMapper';
 
 const PlannerDnD = () => {
   const daysOfWeek = [
+    { name: 'Domingo', colorClass: 'light-green' },
     { name: 'Lunes', colorClass: 'green' },
     { name: 'Martes', colorClass: 'light-green' },
     { name: 'Miércoles', colorClass: 'green' },
     { name: 'Jueves', colorClass: 'light-green' },
     { name: 'Viernes', colorClass: 'green' },
-    { name: 'Sábado', colorClass: 'light-green' },
-    { name: 'Domingo', colorClass: 'green' }
+    { name: 'Sábado', colorClass: 'light-green' }
   ];
-  const [items, setItems] = useState(Array(7).fill(''));
-  const recipes = useRecipesStore((state) => state.recipes);
-  console.log('RECIPES', recipes);
+  const [items, setItems] = useState([]);
+  const planner = useUserProfileStore((state) => state.planner);
+
+  console.log('Planner', planner);
+  console.log('Items', mapPlannerData(items));
 
   useEffect(() => {
-    setItems(recipes.slice(0, 7));
-  }, [recipes]);
+    setItems(mapPlannerData(planner));
+  }, [planner]);
 
   console.log('RECIPES', items);
   const handleDownload = () => {
@@ -49,8 +51,8 @@ const PlannerDnD = () => {
           <div className='w-[800px] mx-auto container mt-24 planner-container'>
             <h1>AGENDA SEMANAL</h1>
             <div className='planner p-4'>
-              <div className='flex w-full'>
-                <div className='flex flex-col'>
+              <div className='flex w-full gap-4'>
+                <div className='flex flex-col gap-4'>
                   <div className='flex justify-center'>
                     <span className='text-primary text-xl font-bold text-center m-2'>
                       Día
@@ -58,13 +60,13 @@ const PlannerDnD = () => {
                   </div>
                   {daysOfWeek.map((day, index) => (
                     <div
-                      className={`${day.colorClass} text-center text-3xl w-56 h-40 flex items-center justify-center border border-primary`}
+                      className={`${day.colorClass} text-center text-3xl w-56 h-40 flex items-center justify-center border border-primary rounded-lg`}
                       key={index}>
                       {day.name}
                     </div>
                   ))}
                 </div>
-                <div className='flex flex-col w-full'>
+                <div className='flex flex-col w-full gap-4'>
                   <div className='font-bold text-primary flex items-center justify-center gap-2 m-2'>
                     {/* <img
                       src={knifeplateImage}
@@ -80,11 +82,7 @@ const PlannerDnD = () => {
                     items={items}
                     strategy={verticalListSortingStrategy}>
                     {items?.map((recipe, index) => (
-                      <div
-                        key={index}
-                        className='flex items-center justify-center h-40 border border-primary'>
-                        <PlannedRecipe key={index} item={recipe} />
-                      </div>
+                      <PlannedRecipe key={index} item={recipe} />
                     ))}
                   </SortableContext>
                   {/* <AddRecipe key={index} tooltip='Añadir receta' /> */}

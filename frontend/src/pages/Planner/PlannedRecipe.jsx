@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function PlannedRecipe({ item }) {
   const { attributes, listeners, setNodeRef, transition, transform } =
     useSortable({
-      id: item?.recipe?.id
+      id: item?.id
     });
 
   const style = {
@@ -18,17 +18,17 @@ function PlannedRecipe({ item }) {
       {...listeners}
       ref={setNodeRef}
       style={style}
-      className='bg-gray-200 rounded-md h-36 w-96 grid grid-cols-3'>
+      className='bg-gray-200 rounded-md h-40 w-full grid grid-cols-3'>
       <div className='rounded-bl-md rounded-tl-md overflow-hidden'>
         <img
-          src={item?.recipe?.urlImg}
-          alt={item?.recipe?.name}
-          className='h-36 object-cover aspect-square'
+          src={item?.urlImg}
+          alt={item?.name}
+          className='h-40 object-cover aspect-square scale-110 transition-transform duration-500 hover:scale-105'
         />
       </div>
       <div className='flex flex-col p-2 col-start-2 col-end-4'>
-        <h3 className='text-lg font-semibold'>{item?.recipe?.name}</h3>
-        <p className='text-gray-600'>{item?.recipe?.description}</p>
+        <h3 className='text-lg font-semibold'>{item?.name}</h3>
+        <p className='text-gray-600'>{item?.description}</p>
       </div>
     </div>
   );

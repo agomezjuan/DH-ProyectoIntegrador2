@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import MainRecipe from '../../components/MainRecipe/MainRecipe';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
-import { useRecipesStore } from '@/store/recipesStore'
+import { useRecipesStore } from '@/store/recipesStore';
 import { useParams } from 'react-router-dom';
-
+import { PlannerProvider } from '../../context/PlannerContext';
+import useUserProfileStore from '../../store/userProfileStore';
 
 export const ViewRecipe = () => {
   const { id } = useParams();
   const { detail, loading, error, fetchRecipeById } = useRecipesStore();
+  const planner = useUserProfileStore((state) => state.planner);
+
+  console.log('RECIPES', planner);
 
   useEffect(() => {
     if (id) {
       fetchRecipeById(id);
     }
   }, [id, fetchRecipeById]);
-
 
   return (
     <Layout>
@@ -29,45 +32,42 @@ export const ViewRecipe = () => {
           className='flex items-center justify-center p-8 text-center'>
           <SearchBar />
         </div>
-        <MainRecipe
-          title={detail.recipe?.name}
-          time={detail.recipe?.preparationTime}
-          img={detail.recipe?.urlImg}
-        />
-        <div style={{ marginLeft: '80px', marginRight: '80px' }}>
-          {loading && <p>Cargando...</p>}
-          {error && <p>Error: {error}</p>}
-          {!loading && !error && (
-            <div>
-              <div className='my-5'>
-                <h2 style={{ fontWeight: 'bold' }}>Ingredientes</h2>
-                <ul>
-                  {detail.recipe?.ingredients &&
-                    detail.recipe?.ingredients.map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
-                    ))}
-                </ul>
-              </div>
-              <main className='p-4'>
-                <h1
-                  className='font-bold text-xl'
-                  style={{ marginTop: '20px', marginBottom: '20px' }}>
-                  Preparación
-                </h1>
-                <ul className='list-disc pl-5'>
+        <PlannerProvider>
+          <MainRecipe
+            title={detail.recipe?.name}
+            time={detail.recipe?.preparationTime}
+            img={detail.recipe?.urlImg}
+          />
+        </PlannerProvider>
+        <div className='container mx-20'>
+          <main className='p-4'>
+            {loading && <p>Cargando...</p>}
+            {error && <p>Error: {error}</p>}
+            {!loading && !error && (
+              <div>
+                <div className='my-5'>
+                  <h2 className='font-bold text-xl'>Ingredientes</h2>
+                  <ul className='list-disc p-5'>
+                    {detail.recipe?.ingredients &&
+                      detail.recipe?.ingredients.map((ingredient, index) => (
+                        <li key={index}>{ingredient}</li>
+                      ))}
+                  </ul>
+                </div>
+                <h2 className='font-bold text-xl'>Preparación</h2>
+                <ul className='list-decimal p-5'>
                   {detail.recipe?.preparationSteps &&
                     detail.recipe?.preparationSteps.map((step, index) => (
                       <li key={index}>{step}</li>
                     ))}
                 </ul>
-              </main>
-            </div>
-          )}
+              </div>
+            )}
+          </main>
         </div>
       </div>
     </Layout>
   );
 };
-
 
 export default ViewRecipe;
