@@ -61,14 +61,14 @@ export default function Navbar() {
           {
             !isAuth ?
             <>
-            <li><Link to='/login' >Login</Link></li>
-            <li><Link to='/register' >Registro</Link></li>
+            <li><Link to='/login' >Iniciar Sesión</Link></li>
+            <li><Link to='/register' >Registrarse</Link></li>
             </>
             :
             <>
             <li><Link to='/profile' >Perfil</Link></li>
             <li>
-              <a onClick={handleClick} >Logout</a>
+              <a onClick={handleClick} >Cerrar Sesión</a>
             </li>
             </>
             }

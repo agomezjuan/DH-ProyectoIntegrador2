@@ -35,6 +35,8 @@ public class DtoMapper {
         dto.setUrlImg(recipe.getUrlImg());
         dto.setPreparationSteps(recipe.getPreparationSteps());
         dto.setIngredients(recipe.getIngredients());
+        dto.setDescription(recipe.getDescription());
+        dto.setPreparationTime(recipe.getPreparationTime());
         return dto;
     }
 

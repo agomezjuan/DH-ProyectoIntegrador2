@@ -12,4 +12,6 @@ public class RecipeDto {
     private String urlImg;
     private LinkedList<String> preparationSteps;
     private List<String> ingredients;
+    private String description;
+    private String preparationTime;
 }
