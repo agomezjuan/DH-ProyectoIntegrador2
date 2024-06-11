@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useCategoriesStore } from '@/store/categoryStore'
+import { useCategoriesStore } from '@/store/categoryStore';
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,21 +12,9 @@ export const Carousel = () => {
     fetchCategories();
   }, [fetchCategories]);
 
-  const images = [
-    { src: '/categories/Broccoli-Meal-Prep-Recipe.jpg', title: '30 minutos' },
-    {
-      src: '/categories/Creamy-Parmesan-Green-Beans-Casserole-with-Bacon.jpg',
-      title: 'Aperitivos'
-    },
-    { src: '/categories/postres.jpg', title: 'Postres' },
-    {
-      src: '/categories/Grilled-Lemon-Garlic-Chicken-Skewers-recipe.jpg',
-      title: 'Plato Fuerte'
-    }
-  ];
-
   const handlePrevious = () => {
-    const newIndex = currentIndex === 0 ? categories.length - 1 : currentIndex - 1;
+    const newIndex =
+      currentIndex === 0 ? categories.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
@@ -35,10 +23,11 @@ export const Carousel = () => {
     setCurrentIndex(newIndex);
   };
 
-
   const displayImages = [];
   for (let i = 0; i < 4; i++) {
-    !load && categories.length > 0 && displayImages.push(categories[(currentIndex + i) % categories.length]);
+    !load &&
+      categories.length > 0 &&
+      displayImages.push(categories[(currentIndex + i) % categories.length]);
   }
 
   return (
@@ -57,13 +46,13 @@ export const Carousel = () => {
             className='carousel-item flex flex-col items-center p-2 text-center'>
             <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
               <img
-                src={allCategories.category.urlImg?allCategories.category.urlImg:null}
+                src={allCategories?.category?.urlImg}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
-              {allCategories.category.name?allCategories.category.name:null}
+              {allCategories?.category?.name}
             </div>
           </div>
         ))}
