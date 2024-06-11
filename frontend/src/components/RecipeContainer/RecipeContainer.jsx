@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { RecipeCard } from '../RecipeCard';
 
 const RecipeContainer = ({ title, recipes, loading }) => {
@@ -12,9 +11,15 @@ const RecipeContainer = ({ title, recipes, loading }) => {
         </div>
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} />
-          ))}
+          {recipes && recipes.length > 0 ? (
+            recipes.map((recipe, index) => (
+              <RecipeCard key={index} recipe={recipe.recipe} />
+            ))
+          ) : (
+            <div className='col-span-full text-center text-primary'>
+              No hay recetas disponibles.
+            </div>
+          )}
         </div>
       )}
     </div>

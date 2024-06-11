@@ -19,38 +19,29 @@ export const useAuthStore = create(
       errors: null,
       setToken: (token) => {
         const profile = parseJWT(token);
-        set((state) => ({
+        set(() => ({
           token,
           profile,
           isAuth: !!token
         }));
       },
       login: async (data) => {
-        try {
-          const resLogin = await loginRequest(data);
-          if (resLogin && resLogin.access_token) {
-            const token = resLogin.access_token;
-            const profile = parseJWT(token);
-            set((state) => ({
-              token,
-              profile,
-              isAuth: true
-            }));
-          } else {
-            throw new Error('Invalid response format from login API');
-          }
-        } catch (error) {
-          throw error;
+        const resLogin = await loginRequest(data);
+        if (resLogin && resLogin.access_token) {
+          const token = resLogin.access_token;
+          const profile = parseJWT(token);
+          set(() => ({
+            token,
+            profile,
+            isAuth: true
+          }));
+        } else {
+          throw new Error('Invalid response format from login API');
         }
       },
       registerUser: async (data) => {
-        try {
-          const resRegister = await registerRequest(data);
-
-          return resRegister;
-        } catch (error) {
-          throw error;
-        }
+        const resRegister = await registerRequest(data);
+        return resRegister;
       },
       logout: () => set(() => ({ token: null, profile: null, isAuth: false }))
     }),
