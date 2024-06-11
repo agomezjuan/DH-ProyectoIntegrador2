@@ -69,5 +69,5 @@ httpService.interceptors.response.use(
 );
 
 export const getRecipes = () => {
-  return httpService.get('/api/mock/recipes');
+  return httpService.get('/api/v1/recipes');
 };
