@@ -1,0 +1,134 @@
+name: Build and Deploy to ECR
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'Backend/**'
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'Backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Assume role using OIDC
+        id: oidc
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::211125505514:role/BackendRol
+          aws-region: us-east-1
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+# keycloak
+      - name: Create ECR repository for Keycloak if not exists
+        env:
+          ECR_REPOSITORY: keycloak
+          AWS_REGION: us-east-1
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          aws ecr create-repository --repository-name $ECR_REPOSITORY
+
+      - name: Pull, tag, and push Docker image for Keycloak
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: keycloak
+          IMAGE_TAG: latest
+        run: |
+          docker pull quay.io/keycloak/keycloak:22.0.3
+          docker tag quay.io/keycloak/keycloak:22.0.3 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+# ms-discovery
+      - name: Create ECR repository for ms-discovery if not exists
+        env:
+          ECR_REPOSITORY: ms-discovery
+          AWS_REGION: us-east-1
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          aws ecr create-repository --repository-name $ECR_REPOSITORY
+
+      - name: Build and push Docker image for ms-discovery
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ms-discovery
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd ms-discovery
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+# ms-gateway
+      - name: Create ECR repository for ms-gateway if not exists
+        env:
+          ECR_REPOSITORY: ms-gateway
+          AWS_REGION: us-east-1
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          aws ecr create-repository --repository-name $ECR_REPOSITORY
+
+      - name: Build and push Docker image for ms-gateway
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ms-gateway
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd ms-gateway
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+# ms-users
+      - name: Create ECR repository for ms-users if not exists
+        env:
+          ECR_REPOSITORY: ms-users
+          AWS_REGION: us-east-1
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          aws ecr create-repository --repository-name $ECR_REPOSITORY
+
+      - name: Build and push Docker image for ms-users
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ms-users
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd ms-users
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+# pi2
+      - name: Create ECR repository for pi2 if not exists
+        env:
+          ECR_REPOSITORY: pi2
+          AWS_REGION: us-east-1
+        run: |
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          aws ecr create-repository --repository-name $ECR_REPOSITORY
+
+      - name: Build and push Docker image for pi2
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: pi2
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd pi2
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest

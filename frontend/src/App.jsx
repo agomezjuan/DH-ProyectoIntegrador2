@@ -4,6 +4,7 @@ import { LoginPage } from '@/pages/LoginPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ViewRecipe } from '@/pages/ViewRecipe';
 import { SearchPage } from './pages/SearchPage/SearchPage';
+import { PlannerDnD } from './pages/Planner';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/recipe/:id',
     element: <ViewRecipe />
+  },
+  {
+    path: '/planner',
+    element: <PlannerDnD />
   },
   {
     path: '*',
