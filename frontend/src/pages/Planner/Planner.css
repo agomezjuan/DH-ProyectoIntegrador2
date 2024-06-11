@@ -1,0 +1,110 @@
+.planner-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra verticalmente */
+  bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+  width: 100%;
+}
+
+.planner-container {
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.planner {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  color: #557824;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+th,
+td {
+  border: 2px solid #557824;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  color: #2c430d;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.planner-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  font-weight: bold;
+}
+/* Estilos para las celdas de los días de la semana */
+.green {
+  background-color: #82aa33;
+}
+
+.light-green {
+  background-color: #c7cfaa;
+}
+
+.planner-container h1 {
+  font-size: x-large;
+  font-style: initial;
+  color: #557824;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.header-titles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-recipes,
+.header-edit-dates {
+  display: flex;
+  align-items: center;
+}
+
+.header-recipes img {
+  margin-right: 5px; /* Ajusta este valor según sea necesario */
+  vertical-align: middle; /* Alinea la imagen verticalmente en el medio */
+}
+
+.header-edit-dates svg {
+  width: 22px; /* Ajustar el tamaño según sea necesario */
+  height: 22px;
+  margin-right: 5px; /* Ajusta este valor según sea necesario para una distancia pequeña */
+  vertical-align: middle; /* Alinea el ícono verticalmente en el medio */
+}
+.header-recipes img {
+  margin-right: 5px; /* Ajusta este valor según sea necesario */
+  vertical-align: middle; /* Alinea la imagen verticalmente en el medio */
+  filter: invert(24%) sepia(96%) saturate(3428%) hue-rotate(60deg)
+    brightness(89%) contrast(109%);
+}
