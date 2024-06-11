@@ -1,15 +1,15 @@
 
 
-const MainRecipe = ({title, time}) => {
+const MainRecipe = ({title, time, img}) => {
   return (
-  <div 
+  <div
   // style={{ display: 'flex', justifyContent: 'space-between', margin: '0 80px' }}
   className="flex justify-between mx-20 mt-8"
   >
       <div style={{ width: '45%', maxWidth: '900px' }}>
         <div className="grid gap-4">
           <div>
-              <img className="h-auto max-w-full rounded-lg" src="https://www.pequeocio.com/wp-content/uploads/elementor/thumbs/ensalada-cesar-qfujo8fmrbj2dyx2dweu9v6j1f16i9ccpolfwpnhw8.jpg" alt="" />
+              <img className="h-auto max-w-full rounded-lg" src={img} alt="" />
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@ const MainRecipe = ({title, time}) => {
         </div>
       </div>
     </div>
-    
+
   );
 }
 

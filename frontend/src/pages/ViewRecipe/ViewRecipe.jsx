@@ -33,7 +33,7 @@ export const ViewRecipe = () => {
             style={{ margin: '0 50px' }}
           />
         </div>
-        <MainRecipe title={detail.recipe?.name} time={detail.recipe?.preparationTime} />
+        <MainRecipe title={detail.recipe?.name} time={detail.recipe?.preparationTime} img={detail.recipe?.urlImg} />
         <div style={{ marginLeft: '80px', marginRight: '80px' }}>
           {loading && <p>Cargando...</p>}
           {error && <p>Error: {error}</p>}
