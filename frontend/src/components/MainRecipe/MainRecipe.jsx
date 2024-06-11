@@ -1,10 +1,8 @@
 import { FaCalendarAlt, FaClock, FaHeart } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { PlannerModal } from './PlannerModal';
-import { useRef } from 'react';
+import { PlannerModal } from '../PlannerModal/PlannerModal';
 
 const MainRecipe = ({ title, time, img }) => {
-  const ref = useRef(null);
   return (
     <div
       // style={{ display: 'flex', justifyContent: 'space-between', margin: '0 80px' }}
@@ -49,7 +47,7 @@ const MainRecipe = ({ title, time, img }) => {
           </div>
         </div>
       </div>
-      <PlannerModal ref={ref} />
+      <PlannerModal />
     </div>
   );
 };
