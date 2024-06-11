@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useCategoriesStore } from '@/store/categoryStore'
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { categories, load, fetchCategories } = useCategoriesStore();
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const images = [
     { src: '/categories/Broccoli-Meal-Prep-Recipe.jpg', title: '30 minutos' },
@@ -19,18 +26,19 @@ export const Carousel = () => {
   ];
 
   const handlePrevious = () => {
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    const newIndex = currentIndex === 0 ? categories.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const handleNext = () => {
-    const newIndex = (currentIndex + 1) % images.length;
+    const newIndex = (currentIndex + 1) % categories.length;
     setCurrentIndex(newIndex);
   };
 
+
   const displayImages = [];
   for (let i = 0; i < 4; i++) {
-    displayImages.push(images[(currentIndex + i) % images.length]);
+    !load && categories.length > 0 && displayImages.push(categories[(currentIndex + i) % categories.length]);
   }
 
   return (
@@ -43,19 +51,19 @@ export const Carousel = () => {
       </button>
 
       <div className='carousel flex overflow-hidden justify-center'>
-        {displayImages.map((image, index) => (
+        {displayImages.map((allCategories, index) => (
           <div
             key={index}
             className='carousel-item flex flex-col items-center p-2 text-center'>
             <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
               <img
-                src={image.src}
+                src={allCategories.category.urlImg?allCategories.category.urlImg:null}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
-              {image.title}
+              {allCategories.category.name?allCategories.category.name:null}
             </div>
           </div>
         ))}
