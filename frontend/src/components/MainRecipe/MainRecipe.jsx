@@ -9,9 +9,9 @@ const MainRecipe = ({ title, time, img }) => {
         style={{ width: '45%', maxWidth: '900px' }}
         className='sticky top-0 z-10'>
         <div className='grid gap-4'>
-          <div className='overflow-hidden rounded-lg shadow-md bg-white'>
+          <div className='overflow-hidden rounded-lg shadow-md bg-white h-[300px]'>
             <img
-              className='h-auto max-w-full  scale-110 transition-transform duration-500 hover:scale-105'
+              className='h-[300px] max-w-full scale-110 transition-transform duration-500 hover:scale-105 object-cover w-full'
               src={img}
               alt='recipe'
             />
