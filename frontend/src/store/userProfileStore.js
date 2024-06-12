@@ -8,6 +8,15 @@ export const useUserProfileStore = create((set) => ({
     email: ''
   },
   favoriteRecipes: [],
+  planner: {
+    sunday: { id: 993 },
+    monday: { id: 994 },
+    tuesday: { id: 995 },
+    wednesday: { id: 996 },
+    thursday: { id: 997 },
+    friday: { id: 998 },
+    saturday: { id: 999 }
+  },
 
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
@@ -39,7 +48,6 @@ export const useUserProfileStore = create((set) => ({
   // Acción asíncrona para eliminar una receta de favoritos
   removeFavoriteRecipe: async (recipeId) => {
     try {
-      // Asumiendo que tienes una API que acepta DELETE en /api/favorites/{id}
       const response = await http.delete(`/api/favorites/${recipeId}`);
       if (response.status === 200) {
         set((state) => ({
@@ -53,6 +61,30 @@ export const useUserProfileStore = create((set) => ({
     } catch (error) {
       console.error('Error removing recipe:', error);
     }
+  },
+
+  // Acción asíncrona para obtener el planner
+  fetchPlanner: async () => {
+    try {
+      const response = await http.get('/api/planner');
+      if (response.status === 200) {
+        set({ planner: response.data });
+      } else {
+        throw new Error('Failed to fetch planner');
+      }
+    } catch (error) {
+      console.error('Error fetching planner:', error);
+    }
+  },
+
+  // Accion para actualizar el planner
+  addRecipeToPlanner: (day, recipe) => {
+    set((state) => ({
+      planner: {
+        ...state.planner,
+        [day]: recipe
+      }
+    }));
   }
 }));
 

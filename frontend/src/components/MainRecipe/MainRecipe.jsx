@@ -4,10 +4,10 @@ import { PlannerModal } from '../PlannerModal/PlannerModal';
 
 const MainRecipe = ({ title, time, img }) => {
   return (
-    <div
-      // style={{ display: 'flex', justifyContent: 'space-between', margin: '0 80px' }}
-      className='flex justify-between mx-20 mt-8'>
-      <div style={{ width: '45%', maxWidth: '900px' }}>
+    <div className='flex justify-between mx-20 mt-12 relative'>
+      <div
+        style={{ width: '45%', maxWidth: '900px' }}
+        className='sticky top-0 z-10'>
         <div className='grid gap-4'>
           <div className='overflow-hidden rounded-lg shadow-md bg-white'>
             <img
