@@ -18,6 +18,7 @@ export const SearchPage = () => {
       searchRecipes(searchText);
     }
   }, [searchRecipes, searchText]);
+  console.log('results', results);
 
   return (
     <Layout>
@@ -35,8 +36,8 @@ export const SearchPage = () => {
                     No se encontraron resultadosn para &quot;{searchText}&quot;
                   </p>
                 )}
-                {results.map((recipe) => (
-                  <RecipeCard key={recipe.id} recipe={recipe} />
+                {results.map((recipe, index) => (
+                  <RecipeCard key={index} recipe={recipe.recipe} />
                 ))}
               </>
             )}

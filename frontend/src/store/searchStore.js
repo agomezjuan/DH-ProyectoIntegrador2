@@ -15,7 +15,7 @@ export const useSearchStore = create((set) => ({
       console.log('response', response);
       if (response.status === 200) {
         const recipes = response.data.filter((recipe) =>
-          recipe.name.toLowerCase().includes(query.trim().toLowerCase())
+          recipe.recipe.name.toLowerCase().includes(query.trim().toLowerCase())
         );
         console.log('recipes', recipes);
         set({
