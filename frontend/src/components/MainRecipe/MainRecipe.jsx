@@ -11,7 +11,7 @@ const MainRecipe = ({ title, time, img }) => {
         <div className='grid gap-4'>
           <div className='overflow-hidden rounded-lg shadow-md bg-white h-[300px]'>
             <img
-              className='h-auto max-w-full scale-110 transition-transform duration-500 hover:scale-105 object-cover w-full'
+              className='h-[300px] max-w-full scale-110 transition-transform duration-500 hover:scale-105 object-cover w-full'
               src={img}
               alt='recipe'
             />
