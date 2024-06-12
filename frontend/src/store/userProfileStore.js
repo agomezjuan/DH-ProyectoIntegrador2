@@ -9,13 +9,13 @@ export const useUserProfileStore = create((set) => ({
   },
   favoriteRecipes: [],
   planner: {
-    sunday: { id: 993 },
-    monday: { id: 994 },
-    tuesday: { id: 995 },
-    wednesday: { id: 996 },
-    thursday: { id: 997 },
-    friday: { id: 998 },
-    saturday: { id: 999 }
+    sunday: { id: 'sunday' },
+    monday: { id: 'monday' },
+    tuesday: { id: 'tuesday' },
+    wednesday: { id: 'wednesday' },
+    thursday: { id: 'thursday' },
+    friday: { id: 'friday' },
+    saturday: { id: 'saturday' }
   },
 
   // Acción para actualizar los datos del usuario
@@ -82,7 +82,7 @@ export const useUserProfileStore = create((set) => ({
     set((state) => ({
       planner: {
         ...state.planner,
-        [day]: recipe
+        [day]: { ...recipe, id: day, recipeId: recipe.id }
       }
     }));
   }

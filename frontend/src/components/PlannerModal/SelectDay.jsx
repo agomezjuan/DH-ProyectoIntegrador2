@@ -16,6 +16,9 @@ function SelectDay() {
         <option disabled selected>
           Selecciona el día
         </option>
+        <option value={'sunday'}>
+          <FaCalendarAlt /> Domingo
+        </option>
         <option value={'monday'}>
           <FaCalendarAlt /> Lunes
         </option>
@@ -33,9 +36,6 @@ function SelectDay() {
         </option>
         <option value={'saturday'}>
           <FaCalendarAlt /> Sábado
-        </option>
-        <option value={'sunday'}>
-          <FaCalendarAlt /> Domingo
         </option>
       </select>
     </>

@@ -4,6 +4,7 @@ import { useSearchStore } from '@/store/searchStore';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loader } from '../../components/Loader/Loader';
 
 export const SearchPage = () => {
   const results = useSearchStore((state) => state.results);
@@ -26,10 +27,10 @@ export const SearchPage = () => {
         <Header />
         <div className='mt-11'></div>
         <div className='container bg-base-200 p-6 my-20'>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-            {loading ? (
-              <p>Cargando...</p>
-            ) : (
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
               <>
                 {results.length === 0 && (
                   <p>
@@ -40,8 +41,8 @@ export const SearchPage = () => {
                   <RecipeCard key={index} recipe={recipe.recipe} />
                 ))}
               </>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

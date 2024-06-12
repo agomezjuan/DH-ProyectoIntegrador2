@@ -6,9 +6,9 @@ import './Planner.css';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
   SortableContext,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
+  arrayMove
 } from '@dnd-kit/sortable';
-// import { AddRecipe } from './AddRecipe';
 import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
 import { mapPlannerData } from '../../utils/plannerMapper';
@@ -39,7 +39,14 @@ const PlannerDnD = () => {
     alert('Descargar Planner no está implementado aún.');
   };
 
-  const handleDragEnd = () => {};
+  const handleDragEnd = (e) => {
+    const { active, over } = e;
+    setItems((items) => {
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
+      return arrayMove(items, oldIndex, newIndex);
+    });
+  };
 
   return (
     <Layout>
@@ -81,11 +88,10 @@ const PlannerDnD = () => {
                   <SortableContext
                     items={items}
                     strategy={verticalListSortingStrategy}>
-                    {items?.map((recipe, index) => (
-                      <PlannedRecipe key={index} item={recipe} />
+                    {items?.map((recipe) => (
+                      <PlannedRecipe key={recipe.id} item={recipe} />
                     ))}
                   </SortableContext>
-                  {/* <AddRecipe key={index} tooltip='Añadir receta' /> */}
                 </div>
               </div>
               <div className='planner-buttons-container mt-4'>
