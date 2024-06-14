@@ -10,7 +10,7 @@ spring:
       registration:
         users-service:
           client-id: ms-users
-          client-secret: ${CLIENT_SECRET}
+          client-secret: ${USERS_CLIENT_SECRET}
           scope:
             - openid
           authorization-grant-type: client_credentials
