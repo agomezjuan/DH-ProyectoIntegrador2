@@ -111,6 +111,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<repositories>
 		<repository>
 			<id>maven-central</id>
