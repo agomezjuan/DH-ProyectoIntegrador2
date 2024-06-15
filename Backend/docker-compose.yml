@@ -37,7 +37,7 @@ services:
     environment:
       PORT: 8090
       LOCAL_HOST: ms-discovery
-      KEYCLOAK_HOST: localhost
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
       GATEWAY_CLIENT_SECRET: ${GATEWAY_CLIENT_SECRET}
     networks:
       - dh-network
@@ -50,7 +50,7 @@ services:
     environment:
       PORT: 8081
       LOCAL_HOST: ms-discovery
-      KEYCLOAK_HOST: localhost
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
       USERS_CLIENT_SECRET: ${USERS_CLIENT_SECRET}
     depends_on:
       dh-mysql:
