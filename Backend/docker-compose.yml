@@ -25,7 +25,7 @@ services:
       - "8761:8761"
     environment:
       PORT: 8761
-      LOCAL_HOST: localhost
+      LOCAL_HOST: ${AWS_INSTANCE_HOST}
     networks:
       - dh-network
   ms-gateway:
