@@ -83,6 +83,7 @@
     </dependencies>
 
 	<build>
+		<finalName>ms-pi2</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -112,9 +113,8 @@
 	</dependencyManagement>
 	<repositories>
 		<repository>
-			<id>maven_central</id>
-			<name>Maven Central</name>
-			<url>https://repo.maven.apache.org/maven2/</url>
+			<id>maven-central</id>
+			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
 	</repositories>
 
