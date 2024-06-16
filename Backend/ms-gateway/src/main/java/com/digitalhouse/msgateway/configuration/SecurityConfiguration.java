@@ -5,20 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.cors.CorsConfiguration;
-
-import java.util.List;
 
 @Configuration
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityWebFilterChain filterChain(ServerHttpSecurity httpSecurity){
+    public SecurityWebFilterChain filterChain(ServerHttpSecurity httpSecurity) {
         httpSecurity
-                .csrf().disable()
-                .cors().disable()
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .cors(ServerHttpSecurity.CorsSpec::disable)
                 .authorizeExchange(auth ->
                         auth
                                 .pathMatchers("/actuator/**").permitAll()
@@ -30,7 +25,7 @@ public class SecurityConfiguration {
                                 .anyExchange()
                                 .authenticated()
                 ).oauth2Login(Customizer.withDefaults())
-                .oauth2ResourceServer(jwt -> jwt.jwt());
+                .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
         return httpSecurity.build();
     }
 }
