@@ -14,6 +14,9 @@ spring:
             scope:
               - openid
             authorization-grant-type: client_credentials
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador/protocol/openid-connect/certs
 
 eureka:
   instance:
