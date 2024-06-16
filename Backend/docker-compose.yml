@@ -1,0 +1,82 @@
+version: '3.6'
+
+services:
+  ## DATABASE
+  dh-mysql:
+    container_name: mealmap-database
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - dh-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  ## MICROSERVICES
+  ms-discovery:
+    container_name: mealmap-ms-discovery
+    build:
+      context: ms-discovery
+    ports:
+      - "8761:8761"
+    environment:
+      PORT: 8761
+      LOCAL_HOST: ${AWS_INSTANCE_HOST}
+    networks:
+      - dh-network
+  ms-gateway:
+    container_name: mealmap-ms-gateway
+    build:
+      context: ms-gateway
+    ports:
+      - "8090:8090"
+    environment:
+      PORT: 8090
+      LOCAL_HOST: ${AWS_INSTANCE_HOST}
+      EUREKA_ID: ms-discovery
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
+      GATEWAY_CLIENT_SECRET: ${GATEWAY_CLIENT_SECRET}
+    networks:
+      - dh-network
+  ms-users:
+    container_name: mealmap-ms-users
+    build:
+      context: ms-users
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+      EUREKA_ID: ms-discovery
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
+      USERS_CLIENT_SECRET: ${USERS_CLIENT_SECRET}
+    depends_on:
+      - ms-discovery
+      - ms-gateway
+    networks:
+      - dh-network
+  ms-pi2:
+    container_name: mealmap-ms-pi2
+    build:
+      context: pi2
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      EUREKA_ID: ms-discovery
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST}
+      MYSQL_ID: dh-mysql
+      MYSQL_PASSWORD: root
+    depends_on:
+      - dh-mysql
+      - ms-discovery
+      - ms-gateway
+      - ms-users
+    networks:
+      - dh-network
+networks:
+  dh-network:
+    driver: bridge

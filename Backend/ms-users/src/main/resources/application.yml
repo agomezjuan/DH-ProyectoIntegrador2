@@ -2,32 +2,35 @@ spring:
   application:
     name: ms-users
   security:
-  oauth2:
-    client:
-      provider:
-        users-service:
-          token-uri: http://localhost:8089/realms/proyecto-integrador/protocol/openid-connect/token
-      registration:
-        users-service:
-          client-id: ms-users
-          client-secret: ${CLIENT_SECRET}
-          scope:
-            - openid
-          authorization-grant-type: client_credentials
+    oauth2:
+      client:
+        provider:
+          users-service:
+            token-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador/protocol/openid-connect/token
+        registration:
+          users-service:
+            client-id: ms-users
+            client-secret: ${CLIENT_SECRET}
+            scope:
+              - openid
+            authorization-grant-type: client_credentials
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador/protocol/openid-connect/certs
 
 eureka:
   instance:
-    hostname: localhost
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${EUREKA_ID:localhost}:8761/eureka
 
 server:
-  port: ${PORT:0}
+  port: ${PORT:8081}
 
 keycloakProperties:
-  serverUrl: http://localhost:8089/
+  serverUrl: http://${KEYCLOAK_HOST:localhost}:8089/
   realm: proyecto-integrador
   clientId: ms-users
   clientIdFront: frontend

@@ -1,4 +1,4 @@
-package com.example.pi2.security.config;
+package com.example.pi2.config.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

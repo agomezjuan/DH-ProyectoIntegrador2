@@ -1,4 +1,4 @@
-package com.example.msusers.configuration.security;
+package com.example.pi2.config.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -7,8 +7,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
@@ -25,25 +24,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new AuthenticationConverter());
+
         httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests( auth -> auth
-                        .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/users/register").permitAll()
-                        .requestMatchers("/users/login").permitAll()
+                        .requestMatchers("/actuator/**").permitAll() // Permitir acceso a /actuator
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/**").permitAll() // Permitir acceso a Swagger
                         .anyRequest()
                         .authenticated())
-                .oauth2ResourceServer( oauth -> oauth
+                .oauth2ResourceServer(oauth -> oauth
                         .jwt(jwt -> jwt
-                                .decoder(jwtDecoder())));
+                                .jwtAuthenticationConverter(jwtAuthenticationConverter)
+                                .jwkSetUri(jwkSetUri)));
 
         return httpSecurity.build();
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 
     @Bean
