@@ -36,9 +36,4 @@ public class SecurityConfig {
 
         return httpSecurity.build();
     }
-
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8089/realms/proyecto-integrador/protocol/openid-connect/certs").build();
-    }
 }
