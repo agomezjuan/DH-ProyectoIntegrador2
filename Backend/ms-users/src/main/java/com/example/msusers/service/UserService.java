@@ -10,9 +10,11 @@ import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -81,4 +83,66 @@ public class UserService {
     public AccessTokenResponse loginUser(UserDTO userDTO) {
         return clientConfig.getUserAccessToken(userDTO.getUsername(), userDTO.getPassword());
     }
+
+    public UserDTO modifyUser(UserDTO user) {
+
+        Keycloak keycloakBuilder = clientConfig.buildClient();
+
+        UserRepresentation userRepresentation = new UserRepresentation();
+
+        if(isNotBlankOrNull(user.getFirstName())){
+            userRepresentation.setFirstName(user.getFirstName());
+        }
+        if(isNotBlankOrNull(user.getLastName())){
+            userRepresentation.setLastName(user.getLastName());}
+
+        if(isNotBlankOrNull(user.getPassword())){
+            CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+            credentialRepresentation.setTemporary(false);
+            credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+            credentialRepresentation.setValue(user.getPassword());
+
+            userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation));
+        }
+
+        keycloakBuilder.realm(realm).users().get(user.getId()).update(userRepresentation);
+
+        UserDTO userAfterUpdate = mapToDto(keycloakBuilder.realm(realm).users().get(user.getId()).toRepresentation());
+
+        return userAfterUpdate;
+
+    }
+
+    public HttpStatus resetPassword(UserDTO user){
+
+        HttpStatus status = null;
+
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+        credentialRepresentation.setValue(user.getPassword());
+
+        Keycloak keycloakBuilder= clientConfig.buildClientWithToken();
+
+        List<UserRepresentation> userRepresentations = keycloakBuilder.realm(realm).users().searchByEmail(user.getEmail(), true);
+        if(!userRepresentations.isEmpty() && userRepresentations.size() == 1){
+            for (UserRepresentation u: userRepresentations
+            ) {
+                keycloakBuilder.realm(realm).users().get(u.getId()).resetPassword(credentialRepresentation);
+                status = HttpStatus.OK;
+            }
+        }else {
+            status = HttpStatus.CONFLICT;
+        }
+        return status;
+    }
+
+    private Boolean isNotBlankOrNull(String attr){
+        Boolean flag = false;
+        if(attr != null && !attr.isBlank()){
+            flag = true;
+        }
+        return flag;
+    }
+
 }

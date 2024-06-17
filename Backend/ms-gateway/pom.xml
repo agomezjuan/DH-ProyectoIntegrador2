@@ -63,6 +63,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>ms-gateway</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -71,4 +72,10 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 </project>
