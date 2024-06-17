@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/users/register").permitAll()
                         .requestMatchers("/users/login").permitAll()
+                        .requestMatchers("/users/reset").permitAll()
                         .anyRequest()
                         .authenticated())
                 .oauth2ResourceServer( oauth -> oauth

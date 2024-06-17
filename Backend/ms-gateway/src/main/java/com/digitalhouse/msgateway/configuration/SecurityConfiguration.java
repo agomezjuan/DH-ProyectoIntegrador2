@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                                 .pathMatchers("/api/v1/actuator/**").permitAll()
                                 .pathMatchers("/api/v1/users/register/**").permitAll()
                                 .pathMatchers("/api/v1/users/login/**").permitAll()
+                                .pathMatchers("/api/v1/users/reset/**").permitAll()
                                 .pathMatchers("/api/v1/categories/**").permitAll()
                                 .pathMatchers("/api/v1/recipes/**").permitAll()
                                 .anyExchange()
