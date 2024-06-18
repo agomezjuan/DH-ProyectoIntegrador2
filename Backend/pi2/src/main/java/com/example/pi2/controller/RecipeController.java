@@ -43,8 +43,10 @@ public class RecipeController {
     }
 
     @GetMapping
-    public List<RecipeWithCategoriesDto> getAllRecipes() {
-        return recipeService.getAllRecipes().stream().map(mapper::toFullRecipeDto).toList();
+    public List<RecipeWithCategoriesDto> getAllRecipes(@RequestParam(required = false, name = "username") String username) {
+        var recipes = recipeService.getAllRecipes().stream().map(mapper::toFullRecipeDto).toList();
+        this.setFavoriteFlagToRecipes(recipes, username);
+        return recipes;
     }
 
     @PutMapping
@@ -63,20 +65,9 @@ public class RecipeController {
                                                         @RequestParam(defaultValue = "id") String sortBy,
                                                         @RequestParam(required = false) String name,
                                                         @RequestParam(required = false) String username) {
-        List<Favorite> favorites = new ArrayList<>();
-        if(StringUtils.isNotBlank(username)){
-            favorites = favoritesService.getRecipesFavoriteByUser(username);
-        }
-
         Page<RecipeWithCategoriesDto> recipePage = recipeService.getAllPaginated(page, elements, sortBy, name)
                 .map(mapper::toFullRecipeDto);
-
-        for (RecipeWithCategoriesDto recipe : recipePage) {
-            recipe.getRecipe().setFavorite(favorites
-                    .stream()
-                    .anyMatch(favorite -> Objects.equals(favorite.getRecipe().getId(), recipe.getRecipe().getId())));
-        }
-
+        setFavoriteFlagToRecipes(recipePage.getContent(), username);
         return ResponseEntity.ok(recipePage);
     }
 
@@ -94,5 +85,18 @@ public class RecipeController {
     @PostMapping("/addMany")
     public void addMany(@RequestBody List<Recipe> recipes){
         recipeService.postMultiple(recipes);
+    }
+
+    private void setFavoriteFlagToRecipes(List<RecipeWithCategoriesDto> recipes, String username) {
+        if(StringUtils.isBlank(username)) {
+            return;
+        }
+
+        List<Favorite> favorites = favoritesService.getRecipesFavoriteByUser(username);
+        for (RecipeWithCategoriesDto recipe : recipes) {
+            recipe.getRecipe().setFavorite(favorites
+                    .stream()
+                    .anyMatch(favorite -> Objects.equals(favorite.getRecipe().getId(), recipe.getRecipe().getId())));
+        }
     }
 }
