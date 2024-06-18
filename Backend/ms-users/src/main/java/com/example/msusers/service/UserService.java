@@ -3,13 +3,13 @@ package com.example.msusers.service;
 import com.example.msusers.configuration.ClientConfig;
 import com.example.msusers.dto.UserDTO;
 import com.example.msusers.exceptions.ResourceNotFoundException;
-import com.example.msusers.repository.UserRepository;
 import jakarta.ws.rs.core.Response;
 import org.apache.commons.lang.StringUtils;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,12 @@ public class UserService {
 
     private final Keycloak keycloak;
     private final ClientConfig clientConfig;
-    private UserRepository userRepository;
     @Value("${keycloakProperties.realm}")
     private String realm;
 
 
-    public UserService(UserRepository userRepository, Keycloak keycloak, ClientConfig clientConfig) {
-        this.userRepository = userRepository;
+    @Autowired
+    public UserService(Keycloak keycloak, ClientConfig clientConfig) {
         this.keycloak = keycloak;
         this.clientConfig = clientConfig;
     }
