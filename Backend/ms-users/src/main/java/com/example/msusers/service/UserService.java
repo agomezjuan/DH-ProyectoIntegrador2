@@ -50,9 +50,7 @@ public class UserService {
 
         userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation));
 
-        Keycloak keycloakBuilder = clientConfig.buildClientWithToken();
-
-        Response response = keycloakBuilder.realm(realm).users().create(userRepresentation);
+        Response response = keycloak.realm(realm).users().create(userRepresentation);
 
         response.close();
         return response.getStatus();
