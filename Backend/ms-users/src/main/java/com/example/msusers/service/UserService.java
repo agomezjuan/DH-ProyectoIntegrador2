@@ -5,6 +5,7 @@ import com.example.msusers.dto.UserDTO;
 import com.example.msusers.exceptions.ResourceNotFoundException;
 import com.example.msusers.repository.UserRepository;
 import jakarta.ws.rs.core.Response;
+import org.apache.commons.lang.StringUtils;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -120,13 +121,11 @@ public class UserService {
         credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
         credentialRepresentation.setValue(user.getPassword());
 
-        Keycloak keycloakBuilder= clientConfig.buildClientWithToken();
-
-        List<UserRepresentation> userRepresentations = keycloakBuilder.realm(realm).users().searchByEmail(user.getEmail(), true);
+        List<UserRepresentation> userRepresentations = keycloak.realm(realm).users().searchByEmail(user.getEmail(), true);
         if(!userRepresentations.isEmpty() && userRepresentations.size() == 1){
             for (UserRepresentation u: userRepresentations
             ) {
-                keycloakBuilder.realm(realm).users().get(u.getId()).resetPassword(credentialRepresentation);
+                keycloak.realm(realm).users().get(u.getId()).resetPassword(credentialRepresentation);
                 status = HttpStatus.OK;
             }
         }else {
@@ -136,11 +135,7 @@ public class UserService {
     }
 
     private Boolean isNotBlankOrNull(String attr){
-        Boolean flag = false;
-        if(attr != null && !attr.isBlank()){
-            flag = true;
-        }
-        return flag;
+        return StringUtils.isNotBlank(attr);
     }
 
 }

@@ -60,16 +60,16 @@ public class ClientConfig {
 //        return "";
 //    }
 //
-//    public AccessTokenResponse getUserAccessToken(String username, String password) {
-//        return KeycloakBuilder.builder().
-//                serverUrl(serverUrl)
-//                .realm(realm)
-//                .clientId(clientIdFront)
-//                .grantType(OAuth2Constants.PASSWORD)
-//                .username(username)
-//                .password(password)
-//                .build()
-//                .tokenManager()
-//                .getAccessToken();
-//    }
+    public AccessTokenResponse getUserAccessToken(String username, String password) {
+        return KeycloakBuilder.builder().
+                serverUrl(serverUrl)
+                .realm(realm)
+                .clientId(clientIdFront)
+                .grantType(OAuth2Constants.PASSWORD)
+                .username(username)
+                .password(password)
+                .build()
+                .tokenManager()
+                .getAccessToken();
+    }
 }
