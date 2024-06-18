@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { getRecipes } from '@/api/httpService';
 
+const normalizeText = (text) => {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+};
+
+
 export const useSearchStore = create((set) => ({
   searchText: '',
   results: [],
@@ -14,8 +19,9 @@ export const useSearchStore = create((set) => ({
       const response = await getRecipes();
       console.log('response', response);
       if (response.status === 200) {
+        const normalizedQuery = normalizeText(query.trim());
         const recipes = response.data.filter((recipe) =>
-          recipe.recipe.name.toLowerCase().includes(query.trim().toLowerCase())
+          normalizeText(recipe.recipe.name).includes(normalizedQuery)
         );
         console.log('recipes', recipes);
         set({
