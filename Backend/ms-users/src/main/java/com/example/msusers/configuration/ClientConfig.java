@@ -1,13 +1,16 @@
 package com.example.msusers.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.token.TokenManager;
 import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class ClientConfig {
 
@@ -46,18 +49,22 @@ public class ClientConfig {
     }
 
     private String getClientCredentialsToken(){
-        AccessTokenResponse token = buildClient()
-                .tokenManager()
-                .getAccessToken();
-        return token.getToken();
+        Keycloak keycloak = buildClient();
+        log.info("keycloak client: {}", keycloak);
+        TokenManager tokenManager = keycloak.tokenManager();
+        if(tokenManager != null){
+            return tokenManager.getAccessToken().getToken();
+        } else {
+            log.error("No token found");
+        }
+        return "";
     }
 
     public AccessTokenResponse getUserAccessToken(String username, String password) {
         return KeycloakBuilder.builder().
                 serverUrl(serverUrl)
                 .realm(realm)
-                .clientId(clientId)
-                .clientSecret(clientSecret)
+                .clientId(clientIdFront)
                 .grantType(OAuth2Constants.PASSWORD)
                 .username(username)
                 .password(password)
