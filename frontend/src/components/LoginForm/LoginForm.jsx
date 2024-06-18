@@ -4,11 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { loginSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FormModal } from '@/FormModal';
+import { RestorePassword } from '@/RestorePassword';
 
 function LoginForm() {
   const { login, profile } = useAuthStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [ openModal, setOpenModal] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
   const {
@@ -106,6 +109,11 @@ function LoginForm() {
             <Link to='/register'>Registrarse</Link>
           </button>
         </div>
+        <div className='mt-2'>
+          <button className='btn btn-ghost text-primary'>
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
       </div>
       {toastMessage && (
         <div className='toast toast-center toast-middle'>
@@ -114,6 +122,12 @@ function LoginForm() {
           </div>
         </div>
       )}
+      {openModal && (
+        <FormModal isOpen={openModal}>
+          <RestorePassword/>
+        </FormModal>
+      )
+      }
     </div>
   );
 }
