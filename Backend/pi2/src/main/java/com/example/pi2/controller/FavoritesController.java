@@ -27,7 +27,7 @@ public class FavoritesController {
         if (user != null) {
             return favoritesService.getRecipesFavoriteByUser(username);
         } else {
-            throw new ResourceNotFoundException ("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
     }
 
@@ -40,8 +40,15 @@ public class FavoritesController {
             throw new ResourceNotFoundException("User not found");
         }
     }
+
     @DeleteMapping("/{id}")
     public void deleteRecipeFavorite(@PathVariable(name = "id") Long id) {
         favoritesService.deleteRecipeFavorite(id);
+    }
+
+    @DeleteMapping("/user")
+    public void deleteRecipeFavoriteByUser(@RequestParam(name = "username") String username
+            , @RequestParam(name = "id") Long id) {
+        favoritesService.deleteRecipeFavoriteByUser(username, id);
     }
 }
