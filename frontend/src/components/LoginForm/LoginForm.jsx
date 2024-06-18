@@ -4,14 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { loginSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FormModal } from '@/FormModal';
-import { RestorePassword } from '@/RestorePassword';
+import { FormModal } from '../FormModal';
+import { RestorePassword } from '../RestorePassword';
 
 function LoginForm() {
   const { login, profile } = useAuthStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [ openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
   const {
@@ -28,6 +28,11 @@ function LoginForm() {
       password: ''
     }
   });
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen)
+    console.log(isModalOpen, 'Toggle modal')
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
@@ -110,7 +115,7 @@ function LoginForm() {
           </button>
         </div>
         <div className='mt-2'>
-          <button className='btn btn-ghost text-primary'>
+          <button className='btn btn-ghost text-primary'onClick={toggleModal}>
             ¿Olvidaste tu contraseña?
           </button>
         </div>
@@ -122,10 +127,12 @@ function LoginForm() {
           </div>
         </div>
       )}
-      {openModal && (
-        <FormModal isOpen={openModal}>
+       {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <FormModal isOpen={isModalOpen}>
           <RestorePassword/>
         </FormModal>
+        </div>
       )
       }
     </div>
