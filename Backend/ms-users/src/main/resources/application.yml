@@ -33,5 +33,4 @@ keycloakProperties:
   serverUrl: http://${KEYCLOAK_HOST:localhost}:8089/
   realm: proyecto-integrador
   clientId: ms-users
-  clientIdFront: frontend
   clientSecret: ${CLIENT_SECRET}
