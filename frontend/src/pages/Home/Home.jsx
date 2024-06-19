@@ -5,12 +5,18 @@ import { RecipeContainer } from '@/components/RecipeContainer';
 import { Carousel } from '../../components/carousel/Carousel';
 import { useRecipesStore } from '@/store/recipesStore';
 import { Pagination } from '@/components/Pagination';
+import {useAuthStore} from "../../store/authStore.js";
 
 export const Home = () => {
   const { recipes, loading, fetchRecipes } = useRecipesStore();
+  const { profile } = useAuthStore();
 
   useEffect(() => {
-    fetchRecipes();
+    if(profile){
+      fetchRecipes(0, profile.email)
+    } else {
+      fetchRecipes();
+    }
   }, [fetchRecipes]);
 
   return (

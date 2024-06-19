@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FavoriteIcon } from "../FavoriteIcon/index.js";
+import {useEffect} from "react";
 
 export default function RecipeCard({ recipe }) {
+  useEffect(() => {
+
+  }, [recipe]);
+
   return (
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative pb-8'>
       <Link to={`/recipe/${recipe.id}`}>
@@ -25,6 +31,7 @@ export default function RecipeCard({ recipe }) {
         <div className='absolute bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-secondary'>
           <div className='flex items-center '></div>
           <span className='text-gray-600'>{recipe.preparationTime}</span>
+          <FavoriteIcon isEnabled={recipe.favorite} recipeId={recipe.id}/>
         </div>
       </div>
     </div>

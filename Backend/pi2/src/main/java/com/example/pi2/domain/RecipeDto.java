@@ -14,4 +14,5 @@ public class RecipeDto {
     private List<String> ingredients;
     private String description;
     private String preparationTime;
+    private boolean favorite;
 }

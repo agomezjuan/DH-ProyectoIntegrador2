@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FavoritesService {
@@ -32,5 +33,13 @@ public class FavoritesService {
 
     public void deleteRecipeFavorite(Long favoriteId) {
         favoriteRepository.deleteById(favoriteId);
+    }
+
+    public void deleteRecipeFavoriteByUser(String username, Long recipeId) {
+        List<Favorite> favorites = favoriteRepository.findByUser(username);
+        Optional<Favorite> favoriteOptional = favorites.stream()
+                .filter(favorite -> favorite.getRecipe().getId() == recipeId.intValue())
+                .findFirst();
+        favoriteOptional.ifPresent(favorite -> favoriteRepository.deleteById(favorite.getId()));
     }
 }
