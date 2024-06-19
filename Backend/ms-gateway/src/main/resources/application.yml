@@ -48,3 +48,9 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
