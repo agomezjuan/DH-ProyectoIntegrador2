@@ -21,26 +21,34 @@ public class FavoritesController {
     private FavoritesService favoritesService;
 
     @GetMapping
-    public List<Favorite> getRecipesFavoritesByUsername(@RequestParam String username) throws ResourceNotFoundException {
-        UserDto user = userClient.findByUsername(username);
+    public List<Favorite> getRecipesFavoritesByUsername(@RequestHeader("Authorization") String token,
+                                                        @RequestParam String username) throws ResourceNotFoundException {
+        UserDto user = userClient.findByUsername(token, username);
         if (user != null) {
             return favoritesService.getRecipesFavoriteByUser(username);
         } else {
-            throw new ResourceNotFoundException ("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
     }
 
     @PostMapping
-    public Favorite saveRecipeFavorite(@RequestBody FavoriteRequestDto favoriteRequestDto) throws ResourceNotFoundException {
-        UserDto user = userClient.findByUsername(favoriteRequestDto.getUsername());
+    public Favorite saveRecipeFavorite(@RequestHeader("Authorization") String token, @RequestBody FavoriteRequestDto favoriteRequestDto) throws ResourceNotFoundException {
+        UserDto user = userClient.findByUsername(token, favoriteRequestDto.getUsername());
         if (user != null) {
             return favoritesService.saveRecipeFavorite(favoriteRequestDto.getUsername(), favoriteRequestDto.getRecipeId());
         } else {
             throw new ResourceNotFoundException("User not found");
         }
     }
+
     @DeleteMapping("/{id}")
     public void deleteRecipeFavorite(@PathVariable(name = "id") Long id) {
         favoritesService.deleteRecipeFavorite(id);
+    }
+
+    @DeleteMapping("/user")
+    public void deleteRecipeFavoriteByUser(@RequestParam(name = "username") String username
+            , @RequestParam(name = "id") Long id) {
+        favoritesService.deleteRecipeFavoriteByUser(username, id);
     }
 }
