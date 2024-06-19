@@ -60,14 +60,14 @@ export const Carousel = () => {
             className='carousel-item flex flex-col items-center p-2 text-center'>
             <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
               <img
-                src={category?.url_img}
+                src={allCategories?.category?.urlImg}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
-                onClick={() => handleCategoryClick(category)}
+                onClick={() => handleCategoryClick(allCategories)}
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
-              {category?.name}
+              {allCategories?.category?.name}
             </div>
           </div>
         ))}
@@ -82,11 +82,10 @@ export const Carousel = () => {
 
       {selectedCategory && (
         <div className='recipes__contenedor'>
-          <h2>Recetas de {selectedCategory ? selectedCategory.name : 'No hay categoría seleccionada'}</h2>
           <button
             className='btn-reset'
             onClick={handleResetCategory}>
-            Resetear categoría
+            Limpiar categoría seleccionada
           </button>
         </div>
       )}

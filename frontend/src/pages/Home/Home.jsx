@@ -4,20 +4,26 @@ import { Header } from '@/components/Header';
 import { RecipeContainer } from '@/components/RecipeContainer';
 import { Carousel } from '../../components/carousel/Carousel';
 import { useAuthStore } from '@/store/authStore';
+import { Pagination } from '@/components/Pagination';
 import { useRecipesStore } from '@/store/recipesStore';
 import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Home = () => {
   const { recipes, loading, fetchRecipes, setRecipesByCategory } = useRecipesStore();
-  const { load, selectedCategory, fetchCategoryByName, categoryByName } = useCategoriesStore();
+  const { selectedCategory } = useCategoriesStore();
   const { profile } = useAuthStore();
+
+  const mapCategoryRecipe = (category) => {
+    const categoryRecipes = category?.recipes || [];
+    return categoryRecipes.map(element => ({
+      recipe: element
+    }));
+  }
 
   useEffect(() => {
     const loadRecipes = async () => {
       if (selectedCategory) {
-        fetchCategoryByName(selectedCategory.name);
-        console.log(`resultado ${JSON.stringify(categoryByName.recipes)}`)
-        setRecipesByCategory(categoryByName?.recipes ?? []);
+        setRecipesByCategory(mapCategoryRecipe(selectedCategory));
       } else {
         if(profile && profile.email) {
           fetchRecipes(0, profile.email)
@@ -39,7 +45,7 @@ export const Home = () => {
           <Carousel />
           {recipes && (
             <RecipeContainer
-              title='Popular Recipes'
+              title={selectedCategory? `Recetas de ${selectedCategory?.category?.name}` : 'Recetas populares'}
               recipes={recipes}
               loading={loading}
             />
