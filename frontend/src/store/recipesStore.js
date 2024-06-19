@@ -30,4 +30,9 @@ export const useRecipesStore = create((set) => ({
       set({ error: error.message, loading: false });
     }
   },
+  setRecipesByCategory: (newRecipes) => {
+    set({ loading: true });
+    set({ recipes: newRecipes});
+    set({ loading: false });
+  },
 }));
