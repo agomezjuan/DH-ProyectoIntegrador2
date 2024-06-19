@@ -1,6 +1,7 @@
 package com.example.pi2.service;
 
 import com.example.pi2.exceptions.ResourceNotFoundException;
+import com.example.pi2.domain.FavoriteDto;
 import com.example.pi2.model.Favorite;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.repository.FavoriteRepository;
@@ -18,16 +19,17 @@ public class FavoritesService {
     @Autowired
     private RecipeService recipeService;
 
-    public List<Favorite> getRecipesFavoriteByUser(String userid) {
-        return favoriteRepository.findByUser(userid);
+    public List<FavoriteDto> getRecipesFavoriteByUser(String userid) {
+        return favoriteRepository.findByUser(userid).stream().map(this::mapToDto).toList();
     }
 
-    public Favorite saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
+    public FavoriteDto saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
         Recipe recipe = recipeService.getRecipeById(recipeid);
         Favorite favorite = new Favorite();
         favorite.setUser(userid);
         favorite.setRecipe(recipe);
-        return favoriteRepository.save(favorite);
+        favorite = favoriteRepository.save(favorite);
+        return this.mapToDto(favorite);
     }
 
 
@@ -41,5 +43,14 @@ public class FavoritesService {
                 .filter(favorite -> favorite.getRecipe().getId() == recipeId.intValue())
                 .findFirst();
         favoriteOptional.ifPresent(favorite -> favoriteRepository.deleteById(favorite.getId()));
+    }
+
+
+    private FavoriteDto mapToDto(Favorite favorite) {
+        FavoriteDto favoriteDto = new FavoriteDto();
+        favoriteDto.setFavoriteId(favorite.getId());
+        favoriteDto.setRecipeId(favorite.getRecipe().getId());
+        favoriteDto.setRecipeName(favorite.getRecipe().getName());
+        return favoriteDto;
     }
 }
