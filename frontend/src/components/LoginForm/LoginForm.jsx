@@ -32,12 +32,13 @@ function LoginForm() {
     try {
       await login(data);
       setToastMessage({ type: 'success', message: 'Bienvenida!' });
+      reset();
+      navigate("/");
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
       console.error("Login failed:", error);
     } finally {
       setLoading(false);
-      reset();
     }
   });
 
@@ -49,7 +50,7 @@ function LoginForm() {
           navigate("/");
         }
         setToastMessage(null);
-      }, 5000); 
+      }, 5000);
     }
 
     return () => clearTimeout(timer);
