@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useCategoriesStore } from '@/store/categoryStore';
+import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const { categories, load, fetchCategories } = useCategoriesStore();
+  const { categories, selectedCategory, load, fetchCategories, setSelectedCategory } = useCategoriesStore();
 
   useEffect(() => {
     fetchCategories();
@@ -25,9 +24,24 @@ export const Carousel = () => {
 
   const displayImages = [];
   for (let i = 0; i < 4; i++) {
-    !load &&
-      categories.length > 0 &&
-      displayImages.push(categories[(currentIndex + i) % categories.length]);
+    displayImages.push(categories[(currentIndex + i) % categories.length]);
+  }
+
+  const handleCategoryClick = async (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleResetCategory = () => {
+    setSelectedCategory(null);
+  };
+
+  if (load) {
+    return (
+      <div className='flex flex-col justify-center items-center h-36'>
+        <span className='loading loading-ring loading-md'></span>
+        <span className='text-primary mt-4'>Cargando...</span>
+      </div>
+    );
   }
 
   return (
@@ -46,13 +60,14 @@ export const Carousel = () => {
             className='carousel-item flex flex-col items-center p-2 text-center'>
             <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
               <img
-                src={allCategories?.category?.urlImg}
+                src={category?.url_img}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
+                onClick={() => handleCategoryClick(category)}
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
-              {allCategories?.category?.name}
+              {category?.name}
             </div>
           </div>
         ))}
@@ -64,6 +79,17 @@ export const Carousel = () => {
         onClick={handleNext}>
         <FaChevronRight size={60} />
       </button>
+
+      {selectedCategory && (
+        <div className='recipes__contenedor'>
+          <h2>Recetas de {selectedCategory ? selectedCategory.name : 'No hay categoría seleccionada'}</h2>
+          <button
+            className='btn-reset'
+            onClick={handleResetCategory}>
+            Resetear categoría
+          </button>
+        </div>
+      )}
     </div>
   );
 };

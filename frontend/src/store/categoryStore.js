@@ -3,6 +3,7 @@ import { getCategories, getCategoryByName } from '../api/category';
 
 export const useCategoriesStore = create((set) => ({
   categories: [],
+  selectedCategory: null,
   error: null,
   load: false,
 
@@ -26,5 +27,8 @@ export const useCategoriesStore = create((set) => ({
     } catch (error) {
       set({ error: error.message, load: false });
     }
+  },
+  setSelectedCategory: (category) => {
+    set({ selectedCategory: category });
   },
 }));

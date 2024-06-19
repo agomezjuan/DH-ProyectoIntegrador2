@@ -3,21 +3,32 @@ import { Layout } from '@/components/Layout';
 import { Header } from '@/components/Header';
 import { RecipeContainer } from '@/components/RecipeContainer';
 import { Carousel } from '../../components/carousel/Carousel';
+import { useAuthStore } from '@/store/authStore';
 import { useRecipesStore } from '@/store/recipesStore';
-import { Pagination } from '@/components/Pagination';
-import {useAuthStore} from "../../store/authStore.js";
+import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Home = () => {
-  const { recipes, loading, fetchRecipes } = useRecipesStore();
+  const { recipes, loading, fetchRecipes, setRecipesByCategory } = useRecipesStore();
+  const { load, selectedCategory, fetchCategoryByName, categoryByName } = useCategoriesStore();
   const { profile } = useAuthStore();
 
   useEffect(() => {
-    if(profile){
-      fetchRecipes(0, profile.email)
-    } else {
-      fetchRecipes();
-    }
-  }, [fetchRecipes]);
+    const loadRecipes = async () => {
+      if (selectedCategory) {
+        fetchCategoryByName(selectedCategory.name);
+        console.log(`resultado ${JSON.stringify(categoryByName.recipes)}`)
+        setRecipesByCategory(categoryByName?.recipes ?? []);
+      } else {
+        if(profile && profile.email) {
+          fetchRecipes(0, profile.email)
+        } else {
+          fetchRecipes();
+        }
+      }
+    };
+
+    loadRecipes();
+  }, [fetchRecipes, selectedCategory]);
 
   return (
     <Layout>
