@@ -34,3 +34,9 @@ keycloakProperties:
   realm: proyecto-integrador
   clientId: ms-users
   clientSecret: ${CLIENT_SECRET}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

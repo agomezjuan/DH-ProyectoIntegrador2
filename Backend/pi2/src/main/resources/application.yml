@@ -30,3 +30,9 @@ spring:
 
 server:
   port: ${PORT:8080}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
