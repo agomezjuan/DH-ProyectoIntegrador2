@@ -11,12 +11,11 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 public class SecurityConfig {
     @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
@@ -28,11 +27,12 @@ public class SecurityConfig {
         httpSecurity
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests( auth -> auth
-                        .requestMatchers("/actuator/**").permitAll()
-                        .requestMatchers("/users/register").permitAll()
-                        .requestMatchers("/users/login").permitAll()
-                        .requestMatchers("/users/reset").permitAll()
+                .authorizeHttpRequests( auth -> auth
+                        .requestMatchers("/actuator/**",
+                                "/users/register",
+                                "/users/login",
+                                "/users/reset")
+                        .permitAll()
                         .anyRequest()
                         .authenticated())
                 .oauth2ResourceServer( oauth -> oauth
@@ -48,16 +48,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CorsWebFilter corsWebFilter() {
+    public CorsConfigurationSource configCors() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOriginPatterns(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("*"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-
-        return new CorsWebFilter(corsConfigurationSource);
+        return corsConfigurationSource;
     }
 }
