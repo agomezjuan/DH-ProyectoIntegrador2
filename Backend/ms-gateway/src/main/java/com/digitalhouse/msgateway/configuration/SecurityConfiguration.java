@@ -2,6 +2,7 @@ package com.digitalhouse.msgateway.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -17,17 +18,19 @@ public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity httpSecurity) {
         httpSecurity
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .cors(Customizer.withDefaults())
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(auth ->
                         auth
-                                .pathMatchers("/actuator/**").permitAll()
-                                .pathMatchers("/api/v1/actuator/**").permitAll()
-                                .pathMatchers("/api/v1/users/register").permitAll()
-                                .pathMatchers("/api/v1/users/login").permitAll()
-                                .pathMatchers("/api/v1/users/reset").permitAll()
-                                .pathMatchers("/api/v1/categories/**").permitAll()
-                                .pathMatchers("/api/v1/recipes/**").permitAll()
+                                .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .pathMatchers(HttpMethod.GET, "/**").permitAll()
+                                .pathMatchers("/actuator/**",
+                                        "/api/v1/actuator/**",
+                                        "/api/v1/users/register",
+                                        "/api/v1/users/login",
+                                        "/api/v1/users/reset",
+                                        "/api/v1/categories/**",
+                                        "/api/v1/recipes/**").permitAll()
                                 .anyExchange()
                                 .authenticated()
                 ).oauth2Login(Customizer.withDefaults())
@@ -39,7 +42,7 @@ public class SecurityConfiguration {
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOriginPatterns(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH", "TRACE"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true);
 
