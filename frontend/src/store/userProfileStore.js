@@ -1,5 +1,8 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
+import {saveFavorite } from '@/api/favorites';
+
+const FAVORITES_BASE_URL = 'api/v1/favorites'
 
 export const useUserProfileStore = create((set) => ({
   userData: {
@@ -17,7 +20,6 @@ export const useUserProfileStore = create((set) => ({
     friday: { id: 'friday' },
     saturday: { id: 'saturday' }
   },
-
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
     set((state) => ({
@@ -31,7 +33,7 @@ export const useUserProfileStore = create((set) => ({
   addFavoriteRecipe: async (recipe) => {
     try {
       // Asumiendo que tienes una API que acepta POST a /api/favorites
-      const response = await http.post('/api/favorites', recipe);
+      const response = await http.post(`${FAVORITES_BASE_URL}`, recipe);
       if (response.status === 200) {
         // Actualizar el estado solo si la respuesta es exitosa
         set((state) => ({
@@ -48,7 +50,7 @@ export const useUserProfileStore = create((set) => ({
   // Acción asíncrona para eliminar una receta de favoritos
   removeFavoriteRecipe: async (recipeId) => {
     try {
-      const response = await http.delete(`/api/favorites/${recipeId}`);
+      const response = await http.delete(`${FAVORITES_BASE_URL}/${recipeId}`);
       if (response.status === 200) {
         set((state) => ({
           favoriteRecipes: state.favoriteRecipes.filter(
@@ -65,7 +67,9 @@ export const useUserProfileStore = create((set) => ({
 
   fetchFavoriteRecipes: async (token, username) => {
     try {
-      const favorites = await http.get(`/api/favorites/?username=${username}`);
+      const favorites = await http.get(`${FAVORITES_BASE_URL}?username=${username}`, {
+        headers: 'Authorization: Bearer '+token
+      });
       set({ favoriteRecipes: favorites });
     } catch (error) {
       console.error('Error fetching favorite recipes:', error);
