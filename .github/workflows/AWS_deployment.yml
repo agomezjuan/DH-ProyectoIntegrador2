@@ -38,21 +38,20 @@ jobs:
       - name: Building app
         run: echo "Building app..."
 
-      - name: Change directory
-        run: |
-          cd frontend
-          echo "Switched to frontend directory"
-
       - name: Delete node_modules
+        working-directory: ./frontend
         run: rm -rf node_modules
 
       - name: Install npm dependencies
+        working-directory: ./frontend
         run: npm install
 
       - name: List npm scripts
+        working-directory: ./frontend
         run: npm run
 
       - name: Build the app
+        working-directory: ./frontend
         run: npm run build
 
       - name: Echo Finished building the app
