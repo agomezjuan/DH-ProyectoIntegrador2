@@ -1,0 +1,1 @@
+export {default UpdateUserData} from './UpdateUserData';
