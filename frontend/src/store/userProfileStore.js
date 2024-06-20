@@ -20,6 +20,7 @@ export const useUserProfileStore = create((set) => ({
     friday: { id: 'friday' },
     saturday: { id: 'saturday' }
   },
+  plannerToPost:{},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
     set((state) => ({
@@ -96,6 +97,10 @@ export const useUserProfileStore = create((set) => ({
       planner: {
         ...state.planner,
         [day]: { ...recipe, id: day, recipeId: recipe.id }
+      },
+      plannerToPost:{
+        ...state.planner,
+        [day]:{id:recipe.id}
       }
     }));
   }
