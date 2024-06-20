@@ -12,7 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH
+      - name: Add remote server to known_hosts
+        run: |
+          ssh-keyscan -H ec2-54-177-126-226.us-west-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: Run backend build-and-deploy script
         run: |
           cd .infra
           chmod +x dh-backend-dev.pem
@@ -38,7 +42,8 @@ jobs:
         run: echo "Building app..."
 
       - name: Change directory
-        run: cd frontend
+        working-directory: ./frontend
+        run: echo "Switched to frontend directory"
 
       - name: Delete node_modules
         run: rm -rf node_modules
