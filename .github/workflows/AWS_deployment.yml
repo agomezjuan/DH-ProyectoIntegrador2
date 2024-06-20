@@ -22,7 +22,7 @@ jobs:
         run: |
           cd .infra
           chmod 600 dh-backend-dev.pem
-          ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit' -y
+          ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit'
 
       - name: Echo Deployed
         run: echo "Finished deploying backend..."
