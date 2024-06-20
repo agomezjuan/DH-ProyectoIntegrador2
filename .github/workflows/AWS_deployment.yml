@@ -22,7 +22,7 @@ jobs:
         run: |
           cd .infra
           chmod 600 dh-backend-dev.pem
-          nohup ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit' -y &
+          ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit' -y
 
       - name: Echo Deployed
         run: echo "Finished deploying backend..."
@@ -39,8 +39,9 @@ jobs:
         run: echo "Building app..."
 
       - name: Change directory
-        working-directory: ./frontend
-        run: echo "Switched to frontend directory"
+        run: |
+          cd frontend
+          echo "Switched to frontend directory"
 
       - name: Delete node_modules
         run: rm -rf node_modules
@@ -49,7 +50,6 @@ jobs:
         run: npm install
 
       - name: List npm scripts
-        working-directory: ./frontend
         run: npm run
 
       - name: Build the app
