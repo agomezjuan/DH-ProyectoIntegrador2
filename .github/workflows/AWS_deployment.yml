@@ -14,13 +14,8 @@ jobs:
 
       - name: Set up SSH
         run: |
-          cd .infra
+          cd ../../.infra
           chmod +x dh-backend-dev.pem
-
-      - name: SSH and run backend build-and-deploy script
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
           ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit'
 
       - name: Echo Deployed
@@ -42,17 +37,11 @@ jobs:
       - name: Building app
         run: echo "Building app..."
 
-      - name: Set environment variable
-        run: echo "VITE_GATEWAY_URL=http://${{ secrets.DEPLOY_SERVER_IP }}:8090" > frontend/.env
-
       - name: Change directory
-        run: cd frontend
+        run: cd ../../frontend
 
       - name: Delete node_modules
         run: rm -rf node_modules
-
-      - name: Prune node_modules
-        run: npm prune
 
       - name: Install npm dependencies
         run: npm install
@@ -73,12 +62,12 @@ jobs:
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: AKIA356KWEBOLY2UTTWD
+          aws-secret-access-key: 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
           aws-region: us-west-1
 
       - name: Deploy to S3
-        run: aws s3 sync frontend/dist/ s3://${{ secrets.S3_BUCKET_NAME }}
+        run: aws s3 sync frontend/dist/ s3://dh-mealmap-frontend
 
       - name: Echo Finished deploying the app
         run: echo "Finished deploying the app."
