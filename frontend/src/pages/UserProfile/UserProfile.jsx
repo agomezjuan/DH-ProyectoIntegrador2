@@ -3,16 +3,19 @@ import { Layout } from '@/components/Layout';
 import { RecipeContainer } from '@/components/RecipeContainer';
 import {PlannerDnD} from '../Planner'
 import { useUserProfileStore } from '@/store/userProfileStore';
+import { useAuthStore } from "@/store/authStore";
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 
 function UserProfile(){
-    const { favoriteRecipes, fetchFavoriteRecipes, loading, } = useUserProfileStore();
+    const { favoriteRecipes, fetchFavoriteRecipes, loading} = useUserProfileStore();
+    const { profile, token } = useAuthStore();
+
+    const username = profile.sub
 
     useEffect(() => {
-      const token = 'user-auth-token'; // replace with actual token
-      const username = 'user-username'; // replace with actual username
       fetchFavoriteRecipes(token, username);
-    }, [fetchFavoriteRecipes]);
+    }, [fetchFavoriteRecipes, token, username]);
+    
     return(
         <Layout>
             <div className='container bg-base-200 py-6'>

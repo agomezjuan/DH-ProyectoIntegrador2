@@ -10,12 +10,17 @@ export default function Navbar() {
   const navigate = useNavigate();
 
 
+  const goToUserProfile = (userId) => {
+    navigate(`/user/${userId}`);
+  };
+
   const handleClick = () => {
     setLoading(true);
     setToastMessage(null);
     try {
       logout();
       setToastMessage({ type: 'success', message: 'Logged out successfully!' });
+      navigate("/");
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Logout failed. Please try again.' });
       console.error("Logout failed:", error);
@@ -66,7 +71,7 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><Link to={`user/${profile.username}`} >Perfil</Link></li>
+            <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
             <li>
               <a onClick={handleClick} >Cerrar Sesión</a>
             </li>
