@@ -12,6 +12,7 @@ import {
 import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
 import { mapPlannerData } from '../../utils/plannerMapper';
+import { useAuthStore } from "../../store/authStore.js";
 
 const PlannerDnD = () => {
   const daysOfWeek = [
@@ -25,6 +26,9 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
+  const { fetchDownloadReport} = useUserProfileStore();
+  const { token, profile } = useAuthStore();
+
 
   console.log('Planner', planner);
   console.log('Items', mapPlannerData(items));
@@ -35,8 +39,8 @@ const PlannerDnD = () => {
 
   console.log('RECIPES', items);
   const handleDownload = () => {
-    // Implementar funcionalidad para descargar el planner
-    alert('Descargar Planner no está implementado aún.');
+    fetchDownloadReport(token, profile.sub);
+
   };
 
   const handleDragEnd = (e) => {
