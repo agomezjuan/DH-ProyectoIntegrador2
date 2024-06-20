@@ -122,7 +122,7 @@ export const useUserProfileStore = create((set) => ({
     set({ error: null });
     try {
       const planner = await getPlanner();
-      set({
+      set({ 
         plannerEmpty
       });
     } catch (error) {
