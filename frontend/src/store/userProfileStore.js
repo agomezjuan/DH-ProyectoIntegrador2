@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
+import { getPlanner, downloadReport, deletePlannerByUser, savePlanner} from '../api/planner';
+
 
 export const useUserProfileStore = create((set) => ({
   userData: {
@@ -17,6 +19,8 @@ export const useUserProfileStore = create((set) => ({
     friday: { id: 'friday' },
     saturday: { id: 'saturday' }
   },
+
+  plannerEmpty: [],
 
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
@@ -85,6 +89,27 @@ export const useUserProfileStore = create((set) => ({
         [day]: { ...recipe, id: day, recipeId: recipe.id }
       }
     }));
+  },
+
+  fetchPlannerByUser: async () => {
+    set({error: null });
+    try {
+      const planner = await getPlanner();
+      set({ 
+        plannerEmpty
+      });
+    } catch (error) {
+      set({ error: error.message});
+    }
+  },
+  fetchDownloadReport: async (token, userid) => {
+    set({error: null });
+    try {
+      const data = await downloadReport(token, userid);0
+      set({ categoryByName: data, load: false });
+    } catch (error) {
+      set({ error: error.message});
+    }
   }
 }));
 
