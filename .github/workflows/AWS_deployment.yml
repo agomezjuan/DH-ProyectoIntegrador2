@@ -14,6 +14,8 @@ jobs:
 
       - name: Add remote server to known_hosts
         run: |
+          mkdir -p ~/.ssh
+          touch known_hosts
           ssh-keyscan -H ec2-54-177-126-226.us-west-1.compute.amazonaws.com >> ~/.ssh/known_hosts
 
       - name: Run backend build-and-deploy script
