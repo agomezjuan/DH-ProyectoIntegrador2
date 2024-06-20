@@ -17,8 +17,9 @@ export const SearchBar = () => {
   }, [searchTextParam, pathname]);
 
   const handleSearch = (e) => {
-    if (e.key === 'Enter' || e.type === 'click') {
-      navigate(`/search/${searchText}`);
+    const trimmedText = searchText.trim();
+    if ((e.key === 'Enter' || e.type === 'click') && trimmedText.length > 0) {
+      navigate(`/search/${trimmedText}`);
     }
   };
 
