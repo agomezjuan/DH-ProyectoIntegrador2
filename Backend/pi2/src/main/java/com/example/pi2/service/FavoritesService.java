@@ -20,6 +20,9 @@ public class FavoritesService {
     @Autowired
     private RecipeService recipeService;
 
+    @Autowired
+    private DtoMapper mapper;
+
     public List<FavoriteDto> getRecipesFavoriteByUser(String userid) {
         return favoriteRepository.findByUser(userid).stream().map(this::mapToDto).toList();
     }
@@ -50,12 +53,7 @@ public class FavoritesService {
     private FavoriteDto mapToDto(Favorite favorite) {
         FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setFavoriteId(favorite.getId());
-
-        RecipeDto recipeDto = new RecipeDto();
-        recipeDto.setId(favorite.getRecipe().getId());
-        recipeDto.setName(favorite.getRecipe().getName());
-
-        favoriteDto.setRecipe(recipeDto);
+        favoriteDto.setRecipe(mapper.toRecipeDto(favorite.getRecipe()));
         return favoriteDto;
     }
 }
