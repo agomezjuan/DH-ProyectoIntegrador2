@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useAuthStore } from "../../store/authStore.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function FavoriteIcon({isEnabled, recipeId}) {
@@ -22,7 +24,7 @@ export default function FavoriteIcon({isEnabled, recipeId}) {
           setEnabled(true);
         });
     } else {
-      alert("Inicia sesión para guardar favoritos!")
+      toast.warn("Inicia sesión para guardar favoritos!")
     }
   };
 
@@ -51,6 +53,7 @@ export default function FavoriteIcon({isEnabled, recipeId}) {
             onClick={setFavorite}
           />
       }
+      <ToastContainer />
     </div>
   );
 }
