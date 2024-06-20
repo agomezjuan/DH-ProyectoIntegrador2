@@ -49,9 +49,9 @@ const PlannerDnD = () => {
   };
 
   return (
-    <Layout>
+    // <Layout>
       <div className='container bg-base-200 p-6'>
-        <Header />
+        {/* <Header /> */}
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}>
@@ -105,7 +105,7 @@ const PlannerDnD = () => {
           </div>
         </DndContext>
       </div>
-    </Layout>
+    // </Layout>
   );
 };
 

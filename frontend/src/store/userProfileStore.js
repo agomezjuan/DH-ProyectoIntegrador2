@@ -63,6 +63,15 @@ export const useUserProfileStore = create((set) => ({
     }
   },
 
+  fetchFavoriteRecipes: async (token, username) => {
+    try {
+      const favorites = await http.get(`/api/favorites/?username=${username}`);
+      set({ favoriteRecipes: favorites });
+    } catch (error) {
+      console.error('Error fetching favorite recipes:', error);
+    }
+  },
+
   // Acción asíncrona para obtener el planner
   fetchPlanner: async () => {
     try {

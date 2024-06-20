@@ -66,7 +66,7 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><Link to='/profile' >Perfil</Link></li>
+            <li><Link to={`user/${profile.username}`} >Perfil</Link></li>
             <li>
               <a onClick={handleClick} >Cerrar Sesión</a>
             </li>

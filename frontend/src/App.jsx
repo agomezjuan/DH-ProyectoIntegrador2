@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ViewRecipe } from '@/pages/ViewRecipe';
 import { SearchPage } from './pages/SearchPage/SearchPage';
 import { PlannerDnD } from './pages/Planner';
+import { UserProfile } from './pages/UserProfile';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: '/planner',
     element: <PlannerDnD />
+  },
+  {
+    path: '/user/:id',
+    element: <UserProfile />
   },
   {
     path: '*',
