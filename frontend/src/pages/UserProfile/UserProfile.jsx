@@ -15,7 +15,7 @@ function UserProfile(){
     }, [fetchFavoriteRecipes]);
     return(
         <Layout>
-            <div className='container bg-base-200 p-6'>
+            <div className='container bg-base-200 py-6'>
             <div
           style={{
             backgroundColor: 'rgb(130, 170, 51)',
@@ -26,6 +26,7 @@ function UserProfile(){
           <SearchBar />
         </div>
             <PlannerDnD/>
+            <div className='container bg-base-200 px-24 mt-12'>
             {favoriteRecipes && (
             <RecipeContainer
               title={'Tus Favoritas'}
@@ -33,6 +34,7 @@ function UserProfile(){
               loading={loading}
             />
           )}
+          </div>
           </div>
         </Layout>
     )
