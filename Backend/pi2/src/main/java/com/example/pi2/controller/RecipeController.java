@@ -97,7 +97,7 @@ public class RecipeController {
         for (RecipeWithCategoriesDto recipe : recipes) {
             recipe.getRecipe().setFavorite(favorites
                     .stream()
-                    .anyMatch(favorite -> Objects.equals(favorite.getRecipeId(), recipe.getRecipe().getId())));
+                    .anyMatch(favorite -> Objects.equals(favorite.getRecipe().getId(), recipe.getRecipe().getId())));
         }
     }
 }

@@ -49,15 +49,15 @@ const PlannerDnD = () => {
   };
 
   return (
-    <Layout>
-      <div className='container bg-base-200 p-6'>
-        <Header />
+    // <Layout>
+      <div className='container bg-base-200 -mt-8'>
+        {/* <Header /> */}
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}>
-          <div className='w-[800px] mx-auto container mt-24 planner-container'>
+          <div className='w-[800px] mx-auto container planner-container'>
             <h1>AGENDA SEMANAL</h1>
-            <div className='planner p-4'>
+            <div className='planner p-4 mt-5'>
               <div className='flex w-full gap-4'>
                 <div className='flex flex-col gap-4'>
                   <div className='flex justify-center'>
@@ -105,7 +105,7 @@ const PlannerDnD = () => {
           </div>
         </DndContext>
       </div>
-    </Layout>
+    // </Layout>
   );
 };
 

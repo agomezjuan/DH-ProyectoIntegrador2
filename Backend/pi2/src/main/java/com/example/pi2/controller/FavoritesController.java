@@ -2,6 +2,7 @@ package com.example.pi2.controller;
 
 import com.example.pi2.domain.FavoriteDto;
 import com.example.pi2.domain.FavoriteRequestDto;
+import com.example.pi2.domain.RecipeWithCategoriesDto;
 import com.example.pi2.domain.UserDto;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.feign.UserClient;
@@ -21,11 +22,16 @@ public class FavoritesController {
     private FavoritesService favoritesService;
 
     @GetMapping
-    public List<FavoriteDto> getRecipesFavoritesByUsername(@RequestHeader("Authorization") String token,
-                                                           @RequestParam String username) throws ResourceNotFoundException {
+    public List<RecipeWithCategoriesDto> getRecipesFavoritesByUsername(@RequestHeader("Authorization") String token,
+                                                                       @RequestParam String username)
+            throws ResourceNotFoundException {
         UserDto user = userClient.findByUsername(token, username);
         if (user != null) {
-            return favoritesService.getRecipesFavoriteByUser(username);
+            return favoritesService.getRecipesFavoriteByUser(username)
+                    .stream()
+                    .map(FavoriteDto::getRecipe)
+                    .map(RecipeWithCategoriesDto::new)
+                    .toList();
         } else {
             throw new ResourceNotFoundException("User not found");
         }
