@@ -29,6 +29,7 @@ export const useUserProfileStore = create((set) => ({
   },
 
   plannerEmpty: [],
+  reportCsv: null,
 
   plannerToPost: {},
   // Acción para actualizar los datos del usuario
@@ -118,12 +119,12 @@ export const useUserProfileStore = create((set) => ({
     }));
   },
 
-  fetchPlannerByUser: async () => {
-    set({ error: null });
+  fetchPlannerByUser: async (token) => {
+    set({error: null });
     try {
-      const planner = await getPlanner();
-      set({ 
-        plannerEmpty
+      const planner = await getPlanner(token);
+      set({
+        plannerEmpty : planner
       });
     } catch (error) {
       set({ error: error.message });
@@ -132,9 +133,8 @@ export const useUserProfileStore = create((set) => ({
   fetchDownloadReport: async (token, userid) => {
     set({ error: null });
     try {
-      const data = await downloadReport(token, userid);
-      0;
-      set({ categoryByName: data, load: false });
+      const data = await downloadReport(token, userid);0
+      set({ reportCsv: data});
     } catch (error) {
       set({ error: error.message });
     }
