@@ -21,6 +21,7 @@ export const useUserProfileStore = create((set) => ({
   },
 
   plannerEmpty: [],
+  reportCsv: null,
 
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
@@ -91,12 +92,12 @@ export const useUserProfileStore = create((set) => ({
     }));
   },
 
-  fetchPlannerByUser: async () => {
+  fetchPlannerByUser: async (token) => {
     set({error: null });
     try {
-      const planner = await getPlanner();
+      const planner = await getPlanner(token);
       set({ 
-        plannerEmpty
+        plannerEmpty : planner
       });
     } catch (error) {
       set({ error: error.message});
@@ -106,7 +107,7 @@ export const useUserProfileStore = create((set) => ({
     set({error: null });
     try {
       const data = await downloadReport(token, userid);0
-      set({ categoryByName: data, load: false });
+      set({ reportCsv: data});
     } catch (error) {
       set({ error: error.message});
     }
