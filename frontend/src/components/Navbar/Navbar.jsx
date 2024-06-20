@@ -2,15 +2,21 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from "../../store/authStore";
+import { FormModal } from '../FormModal';
+import { RestorePassword } from '../RestorePassword';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
   const [toastMessage, setToastMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen)
+  };
 
-  const handleClick = () => {
+  const handleCerrarSesion = () => {
     setLoading(true);
     setToastMessage(null);
     try {
@@ -67,9 +73,8 @@ export default function Navbar() {
             :
             <>
             <li><Link to='/profile' >Perfil</Link></li>
-            <li>
-              <a onClick={handleClick} >Cerrar Sesión</a>
-            </li>
+            <li><a onClick={toggleModal} >Actualizar datos</a></li>
+            <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
             </>
             }
           </ul>
@@ -82,6 +87,14 @@ export default function Navbar() {
           </div>
         </div>
       )}
+       {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <FormModal isOpen={isModalOpen}>
+          <RestorePassword/>
+        </FormModal>
+        </div>
+      )
+      }
     </div>
   );
 }

@@ -31,7 +31,6 @@ function LoginForm() {
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen)
-    console.log(isModalOpen, 'Toggle modal')
   };
 
   const onSubmit = handleSubmit(async (data) => {
