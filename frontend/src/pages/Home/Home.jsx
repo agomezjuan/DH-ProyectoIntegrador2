@@ -3,21 +3,38 @@ import { Layout } from '@/components/Layout';
 import { Header } from '@/components/Header';
 import { RecipeContainer } from '@/components/RecipeContainer';
 import { Carousel } from '../../components/carousel/Carousel';
-import { useRecipesStore } from '@/store/recipesStore';
+import { useAuthStore } from '@/store/authStore';
 import { Pagination } from '@/components/Pagination';
-import {useAuthStore} from "../../store/authStore.js";
+import { useRecipesStore } from '@/store/recipesStore';
+import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Home = () => {
-  const { recipes, loading, fetchRecipes } = useRecipesStore();
+  const { recipes, loading, fetchRecipes, setRecipesByCategory } = useRecipesStore();
+  const { selectedCategory } = useCategoriesStore();
   const { profile } = useAuthStore();
 
+  const mapCategoryRecipe = (category) => {
+    const categoryRecipes = category?.recipes || [];
+    return categoryRecipes.map(element => ({
+      recipe: element
+    }));
+  }
+
   useEffect(() => {
-    if(profile){
-      fetchRecipes(0, profile.email)
-    } else {
-      fetchRecipes();
-    }
-  }, [fetchRecipes]);
+    const loadRecipes = async () => {
+      if (selectedCategory) {
+        setRecipesByCategory(mapCategoryRecipe(selectedCategory));
+      } else {
+        if(profile && profile.email) {
+          fetchRecipes(0, profile.email)
+        } else {
+          fetchRecipes();
+        }
+      }
+    };
+
+    loadRecipes();
+  }, [fetchRecipes, selectedCategory]);
 
   return (
     <Layout>
@@ -28,7 +45,7 @@ export const Home = () => {
           <Carousel />
           {recipes && (
             <RecipeContainer
-              title='Popular Recipes'
+              title={selectedCategory? `Recetas de ${selectedCategory?.category?.name}` : 'Recetas populares'}
               recipes={recipes}
               loading={loading}
             />

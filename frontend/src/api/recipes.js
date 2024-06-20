@@ -1,8 +1,10 @@
 import httpService from './httpService';
 
+const mapUserName = (username) => username? `&username=${username}`: '';
+
 export const getRecipes = async (page = 0, username) => {
   try {
-    const response = await httpService.get(`/api/v1/recipes/pagination?page=${page}&username=${username}`);
+    const response = await httpService.get(`/api/v1/recipes/pagination?page=${page}${mapUserName(username)}`);
     return response.data.content;
   } catch (error) {
     console.error('Error fetching recipes:', error);
@@ -19,4 +21,3 @@ export const getRecipeById = async (id) => {
     throw error;
   }
 };
-
