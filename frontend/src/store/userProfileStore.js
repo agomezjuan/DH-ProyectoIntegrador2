@@ -70,7 +70,7 @@ export const useUserProfileStore = create((set) => ({
       const favorites = await http.get(`${FAVORITES_BASE_URL}?username=${username}`, {
         headers: 'Authorization: Bearer '+token
       });
-      set({ favoriteRecipes: favorites });
+      set({ favoriteRecipes: favorites.data });
     } catch (error) {
       console.error('Error fetching favorite recipes:', error);
     }

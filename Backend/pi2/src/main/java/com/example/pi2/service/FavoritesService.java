@@ -53,7 +53,9 @@ public class FavoritesService {
     private FavoriteDto mapToDto(Favorite favorite) {
         FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setFavoriteId(favorite.getId());
-        favoriteDto.setRecipe(mapper.toRecipeDto(favorite.getRecipe()));
+        RecipeDto recipeDto = mapper.toRecipeDto(favorite.getRecipe());
+        recipeDto.setFavorite(true);
+        favoriteDto.setRecipe(recipeDto);
         return favoriteDto;
     }
 }
