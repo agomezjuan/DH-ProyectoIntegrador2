@@ -122,9 +122,10 @@ export const useUserProfileStore = create((set) => ({
   fetchPlannerByUser: async (token) => {
     set({error: null });
     try {
-      const planner = await getPlanner(token);
+      const plannerResponse = await getPlanner(token);
       set({
-        plannerEmpty : planner
+        //plannerEmpty : planner
+        planner: plannerResponse.data
       });
     } catch (error) {
       set({ error: error.message });
@@ -137,6 +138,15 @@ export const useUserProfileStore = create((set) => ({
       set({ reportCsv: data});
     } catch (error) {
       set({ error: error.message });
+    }
+  },
+  fetchDeletePlannerByUser: async (token) => {
+    set({error: null });
+    try {
+      const planner = await deletePlannerByUser(token);
+
+    } catch (error) {
+      set({ error: error.message});
     }
   }
 }));

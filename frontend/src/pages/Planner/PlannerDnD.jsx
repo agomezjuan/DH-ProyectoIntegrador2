@@ -26,7 +26,7 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport} = useUserProfileStore();
+  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, plannerEmpty} = useUserProfileStore();
   const { token, profile } = useAuthStore();
 
   const plannerToPost = useUserProfileStore((state) => state.plannerToPost);
@@ -48,6 +48,15 @@ const PlannerDnD = () => {
   const handlePost = () =>{
 
   }
+
+  const handleDelete = () => {
+    fetchDeletePlannerByUser(token);
+
+  };
+
+  useEffect(() => {
+    fetchPlannerByUser(token);
+  }, [fetchPlannerByUser]);
 
   const handleDragEnd = (e) => {
     const { active, over } = e;
@@ -95,7 +104,7 @@ const PlannerDnD = () => {
                 </div>
                 <SortableContext
                   items={items}
-                  strategy={verticalListSortingStrategy}>
+                  strategy={verticalListSortingStrategy}>                                                                                                     
                   {items?.map((recipe) => (
                     <PlannedRecipe key={recipe.id} item={recipe} />
                   ))}
@@ -105,14 +114,19 @@ const PlannerDnD = () => {
             <div className='planner-buttons-container mt-4'>
               <div className='planner-buttons'>
                 <button className='btn btn-primary' onClick={handleDownload}>
-                  Descargar Planner
+                  Descargar Plan
                 </button>
+              </div>
+              <div className='planner-buttons'>
+                <button className='btn btn-primary' onClick={handleDelete}>
+                  Limpiar Plan
+                </button>                                                                                                         
               </div>
             </div>
             <div className='planner-buttons-container mt-4'>
               <div className='planner-buttons'>
                 <button className='btn btn-primary' onClick={handlePost}>
-                  Guardar Planner
+                  Guardar Plan
                 </button>
               </div>
             </div>
