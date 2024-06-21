@@ -54,7 +54,7 @@ function RestorePassword() {
             className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Correo electrónico'
             type='email'
-            {...register('email')}
+            {...register('username')}
           />
           {errors.email && (
             <span className='text-xs text-primary font-bold'>
