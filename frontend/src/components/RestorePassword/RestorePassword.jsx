@@ -18,7 +18,7 @@ function RestorePassword() {
   } = useForm({
     resolver: yupResolver(changePasswordSchema),
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
       confirmPassword: ''
     }
@@ -26,14 +26,16 @@ function RestorePassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirmPassword, ...resetData } = data;
-    console.log('SUBMITED DATA', data);
     try {
       const response = await resetPassword(resetData);
       if (response) {
-        setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
         navigate('/login');
+       setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
+        
       } else {
         setToastMessage({ type: 'error', message: 'Correo no existe como usuario' });
+        reset();
+        navigate('/');
       }
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
