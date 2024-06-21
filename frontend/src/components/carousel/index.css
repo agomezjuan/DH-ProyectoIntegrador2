@@ -1,0 +1,14 @@
+.btn-reset {
+    background-color: #4CAF50; /* Color de fondo #557855*/
+    border: none; /* Borde */
+    color: white; /* Color del texto */
+    padding: 15px 32px; /* Espaciado entre el texto y los bordes */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* No hay subrayado */
+    font-size: 16px; /* Tamaño del texto */
+    cursor: pointer; /* Tipo de cursor */
+  }
+  
+  .btn-reset:hover {
+    background-color: #3e8e41; /* Color de fondo al pasar el mouse */
+  }

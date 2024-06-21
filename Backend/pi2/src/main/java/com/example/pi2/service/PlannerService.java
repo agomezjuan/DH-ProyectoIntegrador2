@@ -1,11 +1,13 @@
 package com.example.pi2.service;
 
 import com.example.pi2.domain.PlannerDTO;
+import com.example.pi2.domain.PlannerDtoToCsv;
 import com.example.pi2.model.Planner;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.repository.PlannerRepository;
 import com.example.pi2.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ public class PlannerService {
 	  @Autowired
 	  private RecipeRepository recipeRepository;
 
+	  @Autowired
+	  private DtoMapper mapper;
+
 	  public List<Planner> findAll() {
 
 			return plannerRepository.findAll();
@@ -33,11 +38,17 @@ public class PlannerService {
 	  public List<Planner> findByUserId(String idUser) {
 
 			return plannerRepository.findByUserId(idUser);
+
 	  }
 
 	  public Planner save(Planner planner) {
 
+			Planner plannerToUpdate = plannerRepository.findOneByUser(planner.getIdUser());
+			if (plannerToUpdate != null) {
+				  plannerRepository.deleteById(plannerToUpdate.getId());
+			}
 			return plannerRepository.save(planner);
+
 	  }
 
 	  public Planner saveForUser(String idUser, Planner planner) {
@@ -75,9 +86,60 @@ public class PlannerService {
 			return plannerDTOList;
 	  }
 
+	  public List<PlannerDtoToCsv> dtoToCsv2(String idUser) {
+
+			Planner planner = plannerRepository.findOneByUser(idUser);
+//			PlannerDtoToCsv plannerDTO = new PlannerDtoToCsv();
+			List<PlannerDtoToCsv> plannerDtoToCsvList = new ArrayList<>();
+
+			if (planner.getSunday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSunday());
+				  plannerDtoToCsv.setDayOfTheWeek("Domingo");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getMonday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getMonday());
+				  plannerDtoToCsv.setDayOfTheWeek("Lunes");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getTuesday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getTuesday());
+				  plannerDtoToCsv.setDayOfTheWeek("Martes");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getWednesday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getWednesday());
+				  plannerDtoToCsv.setDayOfTheWeek("Miércoles");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getThursday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getThursday());
+				  plannerDtoToCsv.setDayOfTheWeek("Jueves");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getFriday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getFriday());
+				  plannerDtoToCsv.setDayOfTheWeek("Viernes");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+			if (planner.getSaturday() != null) {
+				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSaturday());
+				  plannerDtoToCsv.setDayOfTheWeek("Sábado");
+				  plannerDtoToCsvList.add(plannerDtoToCsv);
+			}
+
+			return plannerDtoToCsvList;
+	  }
+
 	  public void deleteById(Long id) {
 
 			Planner planner = findById(id);
+			plannerRepository.delete(planner);
+	  }
+
+	  public void deleteByUserId(String userId){
+
+			Planner planner = plannerRepository.findOneByUser(userId);
 			plannerRepository.delete(planner);
 	  }
 }
