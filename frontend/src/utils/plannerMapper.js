@@ -15,4 +15,16 @@ function mapPlannerData(data) {
   }
 }
 
-export { mapPlannerData };
+function mapPlannerDataInverse(data){
+  let planner = {};
+  if(data){
+    data.forEach(day => {
+      if(day.recipeId){
+        planner = {...planner, [day.id] : {id:day.recipeId}}
+      }
+    });
+  }
+  return planner
+}
+
+export { mapPlannerData, mapPlannerDataInverse };

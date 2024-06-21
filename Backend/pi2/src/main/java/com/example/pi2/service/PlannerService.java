@@ -149,21 +149,24 @@ public class PlannerService {
 	  public void deleteByUserId(String userId){
 
 			Planner planner = plannerRepository.findOneByUser(userId);
-			plannerRepository.delete(planner);
+			if(planner != null){
+				plannerRepository.delete(planner);}
 	  }
 
 	  private PlannerWithRecipeDTO mapperPlan(Planner planner){
 
 		  PlannerWithRecipeDTO plannerDTO = new PlannerWithRecipeDTO();
-		  plannerDTO.setId(planner.getId());
-		  plannerDTO.setIdUser(planner.getIdUser());
-		  plannerDTO.setMonday(mapper.toFullRecipeDto(planner.getMonday()));
-		  plannerDTO.setTuesday(mapper.toFullRecipeDto(planner.getTuesday()));
-		  plannerDTO.setWednesday(mapper.toFullRecipeDto(planner.getWednesday()));
-		  plannerDTO.setThursday(mapper.toFullRecipeDto(planner.getThursday()));
-		  plannerDTO.setFriday(mapper.toFullRecipeDto(planner.getFriday()));
-		  plannerDTO.setSaturday(mapper.toFullRecipeDto(planner.getSaturday()));
-		  plannerDTO.setSunday(mapper.toFullRecipeDto(planner.getSunday()));
+		  if(planner != null){
+			  plannerDTO.setId(planner.getId());
+			  plannerDTO.setIdUser(planner.getIdUser());
+			  plannerDTO.setMonday(mapper.toFullRecipeDto(planner.getMonday()));
+			  plannerDTO.setTuesday(mapper.toFullRecipeDto(planner.getTuesday()));
+			  plannerDTO.setWednesday(mapper.toFullRecipeDto(planner.getWednesday()));
+			  plannerDTO.setThursday(mapper.toFullRecipeDto(planner.getThursday()));
+			  plannerDTO.setFriday(mapper.toFullRecipeDto(planner.getFriday()));
+			  plannerDTO.setSaturday(mapper.toFullRecipeDto(planner.getSaturday()));
+			  plannerDTO.setSunday(mapper.toFullRecipeDto(planner.getSunday()));
+		  }
 
 		  return plannerDTO;
 	  }
