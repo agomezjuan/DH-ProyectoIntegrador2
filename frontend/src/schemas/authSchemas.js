@@ -28,3 +28,22 @@ export const registerSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
     .required('Confirma tu contraseña')
   });
+
+  export const updasteUserSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(2, 'Nombre debe ser mayor a 2 caracteres')
+      .max(20, 'Nombre no debe ser mayor a 20 caracteres'),
+    lastName: Yup.string()
+      .min(2, 'Apellido debe ser mayor a 2 caracteres')
+      .max(20, 'Apellido no debe ser mayor a 20 caracteres'),
+  })
+
+
+  export const changePasswordSchema = Yup.object().shape({
+    username: Yup.string()
+      .email('Correo no válido')
+      .required('Correo es requerido'),
+    password: Yup.string()
+      .min(6, 'Contraseña debe ser mayor a 6 caracteres')
+      .required('Contraseña es requerida')
+  });

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { loginRequest, registerRequest } from '../api/auth';
+import { loginRequest, registerRequest, resetPasswordRequest, updateUserDataRequest } from '../api/auth';
 
 // Función para decodificar el JWT y obtener el perfil del usuario
 function parseJWT(token) {
@@ -42,6 +42,35 @@ export const useAuthStore = create(
       registerUser: async (data) => {
         const resRegister = await registerRequest(data);
         return resRegister;
+      },
+      resetPassword: async (data) => {
+        try {
+          const response = await resetPasswordRequest(data);
+          if (!response) {
+            throw new Error('Email no existe como usuario');
+          }
+          return response;
+        } catch (error) {
+          set({ errors: error.message });
+          throw error;
+        }
+      },
+      updateUserData: async (data, token) => {
+        try {
+          const response = await updateUserDataRequest(data, token);
+          if (response) {
+            set((state) => ({
+              profile: {
+                ...state.profile,
+                ...data
+              }
+            }));
+          }
+          return response;
+        } catch (error) {
+          set({ errors: error.message });
+          throw error;
+        }
       },
       logout: () => set(() => ({ token: null, profile: null, isAuth: false }))
     }),

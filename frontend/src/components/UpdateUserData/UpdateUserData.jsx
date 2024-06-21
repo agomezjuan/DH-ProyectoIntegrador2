@@ -1,8 +1,14 @@
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { updasteUserSchema } from '../../schemas/authSchemas';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuthStore } from '../../store/authStore';
 
-function UpdateUserData(){
+function UpdateUserData() {
   const navigate = useNavigate();
+  const [toastMessage, setToastMessage] = useState(null);
+  const { token, updateUserDataRequest } = useAuthStore();
 
   const {
     register,
@@ -10,10 +16,10 @@ function UpdateUserData(){
     formState: { errors },
     reset
   } = useForm({
-    // resolver: yupResolver(loginSchema),
+    resolver: yupResolver(updasteUserSchema),
     defaultValues: {
       name: '',
-      lastName: '',
+      lastName: ''
     }
   });
 
@@ -21,20 +27,33 @@ function UpdateUserData(){
     navigate('/change-password');
   };
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-  })
-    return(
-        <div className='flex justify-around bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await updateUserDataRequest(data, token);
+      setToastMessage({
+        type: 'success',
+        message: 'Datos actualizados correctamente'
+      });
+    } catch (error) {
+      setToastMessage({
+        type: 'error',
+        message: 'Error al actualizar los datos'
+      });
+      console.error('Update failed:', error);
+    } finally {
+      reset();
+    }
+  });
 
-        <form onSubmit={onSubmit}>
+  return (
+    <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
+      <form onSubmit={onSubmit}>
         <div className='text-center'>
           <h2 className='text-lg font-bold text-primary max-w-lg'>
-            Datos de Usuario
+            Regístrate
           </h2>
         </div>
-        <div className='flex justify-evenly gap-4'>
-        <div className='flex text-left'>
+        <div className='flex flex-col text-left'>
           <input
             className='w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Nombre'
@@ -48,9 +67,9 @@ function UpdateUserData(){
           )}
         </div>
 
-        <div className='flex flex-col text-left'>
+        <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Apellido'
             type='text'
             {...register('lastName')}
@@ -61,21 +80,45 @@ function UpdateUserData(){
             </span>
           )}
         </div>
+
+        <div className='mt-1 flex flex-col text-left'>
+          <input
+            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            placeholder='Correo electrónico'
+            type='email'
+            {...register('email')}
+          />
+          {errors.email && (
+            <span className='text-xs text-primary font-bold'>
+              {errors.email.message}
+            </span>
+          )}
+        </div>
+
         <button
-            type='submit'
-            className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
-            Actualiza tus datos
-          </button>
-          </div>
-        </form>
+          type='submit'
+          className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
+          Actualiza tus datos
+        </button>
+
         <div className='mt-2'>
-          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
+          <button
+            className='btn btn-ghost text-primary'
+            onClick={goToChangePassword}>
             Actualizar Contraseña
           </button>
         </div>
+      </form>
+      {toastMessage && (
+        <div className='toast toast-center toast-middle'>
+          <div
+            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+            <span>{toastMessage.message}</span>
+          </div>
         </div>
-        
-    )
+      )}
+    </div>
+  );
 }
 
 export default UpdateUserData;

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {  useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { changePasswordSchema } from '../../schemas/authSchemas';
+import { useAuthStore } from '../../store/authStore';
 
 function RestorePassword() {
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState(null);
+  const { resetPassword } = useAuthStore(); 
 
   const {
     register,
@@ -12,7 +16,7 @@ function RestorePassword() {
     formState: { errors },
     reset
   } = useForm({
-    // resolver: yupResolver(registerSchema),
+    resolver: yupResolver(changePasswordSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -21,18 +25,18 @@ function RestorePassword() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    //Cartel que diga que ha cambiado la contraseña exitosamente
-    //re dirigir al login
-    // const { confirmPassword, ...registerData } = data;
+    const { confirmPassword, ...resetData } = data;
     try {
-      //   const resRegister = await registerUser(data);
-      //   if (resRegister.status === 201) {
-        // setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
-        // navigate('/login');
-      //   }
+      const response = await resetPassword(resetData);
+      if (response) {
+        setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
+        navigate('/login');
+      } else {
+        setToastMessage({ type: 'error', message: 'Correo no existe como usuario' });
+      }
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
-      console.error('Registration failed:', error);
+      console.error('Password reset failed:', error);
     } finally {
       reset();
     }
