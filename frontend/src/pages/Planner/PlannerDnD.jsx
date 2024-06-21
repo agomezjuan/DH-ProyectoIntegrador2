@@ -61,8 +61,8 @@ const PlannerDnD = () => {
   const handleDragEnd = (e) => {
     const { active, over } = e;
     setItems((items) => {
-      const oldIndex = items.findIndex((item) => item.id === active.id);
-      const newIndex = items.findIndex((item) => item.id === over.id);
+      const oldIndex = items.findIndex((item) => item.recipe.id === active.id);
+      const newIndex = items.findIndex((item) => item.recipe.id === over.id);
       return arrayMove(items, oldIndex, newIndex);
     });
   };
