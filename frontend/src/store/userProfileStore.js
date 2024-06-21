@@ -28,9 +28,6 @@ export const useUserProfileStore = create((set) => ({
     saturday: { id: 'saturday' }
   },
 
-  plannerEmpty: [],
-  reportCsv: null,
-
   plannerToPost: {},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
@@ -122,9 +119,9 @@ export const useUserProfileStore = create((set) => ({
   fetchPlannerByUser: async (token) => {
     set({error: null });
     try {
-      const planner = await getPlanner(token);
+      const plannerResponse = await getPlanner(token);
       set({
-        plannerEmpty : planner
+        planner: plannerResponse
       });
     } catch (error) {
       set({ error: error.message });
@@ -134,9 +131,28 @@ export const useUserProfileStore = create((set) => ({
     set({ error: null });
     try {
       const data = await downloadReport(token, userid);0
-      set({ reportCsv: data});
+
+      const urlBlob = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement('a');
+      link.href = urlBlob;
+      link.setAttribute('download', 'plan.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
     } catch (error) {
       set({ error: error.message });
+    }
+  },
+  fetchDeletePlannerByUser: async (token) => {
+    set({error: null });
+    try {
+      const planner = await deletePlannerByUser(token);
+      if (planner.status === 200) {
+        set({ planner: {} });
+      }
+
+    } catch (error) {
+      set({ error: error.message});
     }
   }
 }));
