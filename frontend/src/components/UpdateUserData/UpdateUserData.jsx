@@ -8,7 +8,9 @@ import { useAuthStore } from '../../store/authStore';
 function UpdateUserData() {
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState(null);
-  const { token, updateUserData } = useAuthStore();
+  const { updateUserData, profile } = useAuthStore();
+
+  console.log('PROFILE: ', profile)
 
   const {
     register,
@@ -18,8 +20,8 @@ function UpdateUserData() {
   } = useForm({
     resolver: yupResolver(updasteUserSchema),
     defaultValues: {
-      name: '',
-      lastName: ''
+      firstName: profile?.given_name,
+      lastName: profile?.family_name
     }
   });
 
@@ -27,9 +29,9 @@ function UpdateUserData() {
     navigate('/change-password');
   };
 
-  const onSubmit = handleSubmit(async (data, token) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
-      await updateUserData(data, token);
+      await updateUserData(data);
       setToastMessage({
         type: 'success',
         message: 'Datos actualizados correctamente'
@@ -50,7 +52,7 @@ function UpdateUserData() {
       <form onSubmit={onSubmit}>
         <div className='text-center'>
           <h2 className='text-lg font-bold text-primary max-w-lg'>
-            Regístrate
+            Actualizar información
           </h2>
         </div>
         <div className='flex flex-col text-left'>
@@ -80,14 +82,15 @@ function UpdateUserData() {
             </span>
           )}
         </div>
-
+          <div className='text-center'>
         <button
           type='submit'
           className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
           Actualiza tus datos
         </button>
+        </div>
 
-        <div className='mt-2'>
+        <div className='mt-2 text-center'>
           <button
             className='btn btn-ghost text-primary'
             onClick={goToChangePassword}>
