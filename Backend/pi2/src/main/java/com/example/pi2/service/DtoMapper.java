@@ -1,9 +1,6 @@
 package com.example.pi2.service;
 
-import com.example.pi2.domain.CategoryDto;
-import com.example.pi2.domain.CategoryWithRecipeDto;
-import com.example.pi2.domain.RecipeDto;
-import com.example.pi2.domain.RecipeWithCategoriesDto;
+import com.example.pi2.domain.*;
 import com.example.pi2.model.Category;
 import com.example.pi2.model.CategoryXRecipe;
 import com.example.pi2.model.Recipe;
@@ -59,6 +56,15 @@ public class DtoMapper {
         dto.setId(category.getId());
         dto.setName(category.getName());
         dto.setUrlImg(category.getUrlImg());
+        return dto;
+    }
+
+    public PlannerDtoToCsv toPlannerDtoToCsv(Recipe recipe){
+        PlannerDtoToCsv dto = new PlannerDtoToCsv();
+        dto.setName(recipe.getName());
+        dto.setDescription(recipe.getDescription());
+        dto.setPreparationTime(recipe.getPreparationTime());
+        dto.setPreparationSteps(recipe.getPreparationSteps());
         return dto;
     }
 }

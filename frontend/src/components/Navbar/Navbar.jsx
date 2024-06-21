@@ -12,8 +12,9 @@ export default function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen)
+
+  const goToUserProfile = (userId) => {
+    navigate(`/user/${userId}`);
   };
 
   const handleCerrarSesion = () => {
@@ -22,6 +23,7 @@ export default function Navbar() {
     try {
       logout();
       setToastMessage({ type: 'success', message: 'Logged out successfully!' });
+      navigate("/");
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Logout failed. Please try again.' });
       console.error("Logout failed:", error);
@@ -72,9 +74,10 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><Link to='/profile' >Perfil</Link></li>
-            <li><a onClick={toggleModal} >Actualizar datos</a></li>
-            <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
+            <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
+            <li>
+              <a onClick={handleClick} >Cerrar Sesión</a>
+            </li>
             </>
             }
           </ul>

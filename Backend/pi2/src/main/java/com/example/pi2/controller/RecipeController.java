@@ -1,5 +1,6 @@
 package com.example.pi2.controller;
 
+import com.example.pi2.domain.FavoriteDto;
 import com.example.pi2.domain.RecipeWithCategoriesDto;
 import com.example.pi2.exceptions.ResourceAlreadyExistExeption;
 import com.example.pi2.exceptions.ResourceNotFoundException;
@@ -92,7 +93,7 @@ public class RecipeController {
             return;
         }
 
-        List<Favorite> favorites = favoritesService.getRecipesFavoriteByUser(username);
+        List<FavoriteDto> favorites = favoritesService.getRecipesFavoriteByUser(username);
         for (RecipeWithCategoriesDto recipe : recipes) {
             recipe.getRecipe().setFavorite(favorites
                     .stream()
