@@ -26,6 +26,10 @@ function LoginForm() {
     }
   });
 
+  const goToChangePassword = () => {
+    navigate('/change-password');
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
     setToastMessage(null);
@@ -105,6 +109,11 @@ function LoginForm() {
         <div className='mt-2'>
           <button className='btn btn-ghost text-primary'>
             <Link to='/register'>Registrarse</Link>
+          </button>
+        </div>
+        <div className='mt-2'>
+          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
+            ¿Olvidaste tu contraseña?
           </button>
         </div>
       </div>
