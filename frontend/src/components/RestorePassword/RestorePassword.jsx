@@ -25,6 +25,7 @@ function RestorePassword() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    data.email = data.username;
     const { confirmPassword, ...resetData } = data;
     try {
       const response = await resetPassword(resetData);
