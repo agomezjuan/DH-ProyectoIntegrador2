@@ -4,14 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { loginSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FormModal } from '../FormModal';
-import { RestorePassword } from '../RestorePassword';
 
 function LoginForm() {
   const { login, profile } = useAuthStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
   const {
@@ -28,11 +25,6 @@ function LoginForm() {
       password: ''
     }
   });
-
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen)
-    console.log(isModalOpen, 'Toggle modal')
-  };
 
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
@@ -128,14 +120,6 @@ function LoginForm() {
           </div>
         </div>
       )}
-       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-        <FormModal isOpen={isModalOpen}>
-          <RestorePassword/>
-        </FormModal>
-        </div>
-      )
-      }
     </div>
   );
 }
