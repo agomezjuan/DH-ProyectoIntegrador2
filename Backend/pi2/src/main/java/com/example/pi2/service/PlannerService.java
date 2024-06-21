@@ -42,10 +42,11 @@ public class PlannerService {
 
 	  }
 
-	public PlannerWithRecipeDTO findPlanByUserId(String idUser) {
-		  return mapperPlan(plannerRepository.findOneByUser(idUser)) ;
+	  public PlannerWithRecipeDTO findPlanByUserId(String idUser) {
 
-	}
+			return mapperPlan(plannerRepository.findOneByUser(idUser));
+
+	  }
 
 	  public Planner save(Planner planner) {
 
@@ -94,48 +95,48 @@ public class PlannerService {
 
 	  public List<PlannerDtoToCsv> dtoToCsv2(String idUser) {
 
-		  Planner planner = plannerRepository.findOneByUser(idUser);
+			Planner planner = plannerRepository.findOneByUser(idUser);
 //			PlannerDtoToCsv plannerDTO = new PlannerDtoToCsv();
-		  List<PlannerDtoToCsv> plannerDtoToCsvList = new ArrayList<>();
+			List<PlannerDtoToCsv> plannerDtoToCsvList = new ArrayList<>();
 
-		  if (planner != null){
+			if (planner != null) {
 
-			  if (planner.getSunday() != null) {
-				  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSunday());
-				  plannerDtoToCsv.setDayOfTheWeek("Domingo");
-				  plannerDtoToCsvList.add(plannerDtoToCsv);
-			  }
-			  if (planner.getMonday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getMonday());
-			  plannerDtoToCsv.setDayOfTheWeek("Lunes");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-			  if (planner.getTuesday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getTuesday());
-			  plannerDtoToCsv.setDayOfTheWeek("Martes");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-			  if (planner.getWednesday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getWednesday());
-			  plannerDtoToCsv.setDayOfTheWeek("Miércoles");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-			  if (planner.getThursday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getThursday());
-			  plannerDtoToCsv.setDayOfTheWeek("Jueves");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-			  if (planner.getFriday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getFriday());
-			  plannerDtoToCsv.setDayOfTheWeek("Viernes");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-			  if (planner.getSaturday() != null) {
-			  PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSaturday());
-			  plannerDtoToCsv.setDayOfTheWeek("Sábado");
-			  plannerDtoToCsvList.add(plannerDtoToCsv);
-		  }
-	  }
+				  if (planner.getSunday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSunday());
+						plannerDtoToCsv.setDayOfTheWeek("Domingo");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getMonday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getMonday());
+						plannerDtoToCsv.setDayOfTheWeek("Lunes");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getTuesday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getTuesday());
+						plannerDtoToCsv.setDayOfTheWeek("Martes");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getWednesday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getWednesday());
+						plannerDtoToCsv.setDayOfTheWeek("Miércoles");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getThursday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getThursday());
+						plannerDtoToCsv.setDayOfTheWeek("Jueves");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getFriday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getFriday());
+						plannerDtoToCsv.setDayOfTheWeek("Viernes");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+				  if (planner.getSaturday() != null) {
+						PlannerDtoToCsv plannerDtoToCsv = mapper.toPlannerDtoToCsv(planner.getSaturday());
+						plannerDtoToCsv.setDayOfTheWeek("Sábado");
+						plannerDtoToCsvList.add(plannerDtoToCsv);
+				  }
+			}
 
 			return plannerDtoToCsvList;
 	  }
@@ -146,28 +147,36 @@ public class PlannerService {
 			plannerRepository.delete(planner);
 	  }
 
-	  public void deleteByUserId(String userId){
+	  public void deleteByUserId(String userId) {
 
 			Planner planner = plannerRepository.findOneByUser(userId);
-			if(planner != null){
-				plannerRepository.delete(planner);}
+			if (planner != null) {
+				  plannerRepository.delete(planner);
+			}
 	  }
 
-	  private PlannerWithRecipeDTO mapperPlan(Planner planner){
+	  private PlannerWithRecipeDTO mapperPlan(Planner planner) {
 
-		  PlannerWithRecipeDTO plannerDTO = new PlannerWithRecipeDTO();
-		  if(planner != null){
-			  plannerDTO.setId(planner.getId());
-			  plannerDTO.setIdUser(planner.getIdUser());
-			  plannerDTO.setMonday(mapper.toFullRecipeDto(planner.getMonday()));
-			  plannerDTO.setTuesday(mapper.toFullRecipeDto(planner.getTuesday()));
-			  plannerDTO.setWednesday(mapper.toFullRecipeDto(planner.getWednesday()));
-			  plannerDTO.setThursday(mapper.toFullRecipeDto(planner.getThursday()));
-			  plannerDTO.setFriday(mapper.toFullRecipeDto(planner.getFriday()));
-			  plannerDTO.setSaturday(mapper.toFullRecipeDto(planner.getSaturday()));
-			  plannerDTO.setSunday(mapper.toFullRecipeDto(planner.getSunday()));
-		  }
+			PlannerWithRecipeDTO plannerDTO = new PlannerWithRecipeDTO();
+			if (planner != null) {
+				  plannerDTO.setId(planner.getId());
+				  plannerDTO.setIdUser(planner.getIdUser());
+				  if (planner.getMonday() != null)
+						plannerDTO.setMonday(mapper.toFullRecipeDto(planner.getMonday()));
+				  if (planner.getTuesday() != null)
+						plannerDTO.setTuesday(mapper.toFullRecipeDto(planner.getTuesday()));
+				  if (planner.getWednesday() != null)
+						plannerDTO.setWednesday(mapper.toFullRecipeDto(planner.getWednesday()));
+				  if (planner.getThursday() != null)
+						plannerDTO.setThursday(mapper.toFullRecipeDto(planner.getThursday()));
+				  if (planner.getFriday() != null)
+						plannerDTO.setFriday(mapper.toFullRecipeDto(planner.getFriday()));
+				  if (planner.getSaturday() != null)
+						plannerDTO.setSaturday(mapper.toFullRecipeDto(planner.getSaturday()));
+				  if (planner.getSunday() != null)
+						plannerDTO.setSunday(mapper.toFullRecipeDto(planner.getSunday()));
+			}
 
-		  return plannerDTO;
+			return plannerDTO;
 	  }
 }

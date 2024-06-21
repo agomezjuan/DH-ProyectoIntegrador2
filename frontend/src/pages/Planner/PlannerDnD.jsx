@@ -104,9 +104,9 @@ const PlannerDnD = () => {
                 </div>
                 <SortableContext
                   items={items}
-                  strategy={verticalListSortingStrategy}>                                                                                                     
-                  {items?.map((recipes) => (
-                    <PlannedRecipe key={recipes.recipe?.id} item={recipes?.recipe} />
+                  strategy={verticalListSortingStrategy}>
+                  {items?.map((recipes, index) => ( recipes.recipe?.id ?
+                    <PlannedRecipe key={recipes.recipe?.id} item={recipes?.recipe }  /> : <PlannedRecipe key={index*13} item={{id: index} }/>
                   ))}
                 </SortableContext>
               </div>
@@ -120,7 +120,7 @@ const PlannerDnD = () => {
               <div className='planner-buttons'>
                 <button className='btn btn-primary' onClick={handleDelete}>
                   Limpiar Plan
-                </button>                                                                                                         
+                </button>
               </div>
             </div>
             <div className='planner-buttons-container mt-4'>
