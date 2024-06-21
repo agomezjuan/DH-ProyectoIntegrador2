@@ -47,7 +47,7 @@ export default function Navbar() {
           navigate("/");
         }
         setToastMessage(null);
-      }, 5000);
+      }, 7000);
     }
     return () => clearTimeout(timer);
   }, [toastMessage, navigate]);
@@ -90,7 +90,7 @@ export default function Navbar() {
         </details>
       </div>
       {toastMessage && (
-        <div className='toast toast-center toast-middle'>
+        <div className='toast toast-center toast-middle z-20'>
           <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
             <span>{toastMessage.message}</span>
           </div>

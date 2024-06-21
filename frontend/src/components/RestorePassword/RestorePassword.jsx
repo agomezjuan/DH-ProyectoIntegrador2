@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { changePasswordSchema } from '../../schemas/authSchemas';
 import { useAuthStore } from '../../store/authStore';
@@ -26,6 +26,7 @@ function RestorePassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirmPassword, ...resetData } = data;
+    console.log('SUBMITED DATA', data);
     try {
       const response = await resetPassword(resetData);
       if (response) {

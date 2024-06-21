@@ -46,10 +46,12 @@ export const useAuthStore = create(
       resetPassword: async (data) => {
         try {
           const response = await resetPasswordRequest(data);
-          if (!response) {
-            throw new Error('Email no existe como usuario');
-          }
+          // if (!response) {
+          //   throw new Error('Email no existe como usuario');
+          // }
+          console.log('Reset Password response: ', response)
           return response;
+          
         } catch (error) {
           set({ errors: error.message });
           throw error;

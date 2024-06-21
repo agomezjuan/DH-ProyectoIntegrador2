@@ -30,7 +30,7 @@ function RegisterForm() {
   const onSubmit = handleSubmit(async (data) => {
     const { confirmPassword, ...registerData } = data;
     try {
-      const resRegister = await registerUser(data);
+      const resRegister = await registerUser(registerData);
       if (resRegister.status === 201) {
         setToastMessage({ type: 'success', message: 'Te has registrado con éxito!' });
         navigate('/login');

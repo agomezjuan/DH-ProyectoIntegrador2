@@ -8,7 +8,7 @@ import { useAuthStore } from '../../store/authStore';
 function UpdateUserData() {
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState(null);
-  const { token, updateUserDataRequest } = useAuthStore();
+  const { token, updateUserData } = useAuthStore();
 
   const {
     register,
@@ -27,9 +27,9 @@ function UpdateUserData() {
     navigate('/change-password');
   };
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data, token) => {
     try {
-      await updateUserDataRequest(data, token);
+      await updateUserData(data, token);
       setToastMessage({
         type: 'success',
         message: 'Datos actualizados correctamente'
@@ -77,20 +77,6 @@ function UpdateUserData() {
           {errors.lastName && (
             <span className='text-xs text-primary font-bold'>
               {errors.lastName.message}
-            </span>
-          )}
-        </div>
-
-        <div className='mt-1 flex flex-col text-left'>
-          <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
-            placeholder='Correo electrónico'
-            type='email'
-            {...register('email')}
-          />
-          {errors.email && (
-            <span className='text-xs text-primary font-bold'>
-              {errors.email.message}
             </span>
           )}
         </div>
