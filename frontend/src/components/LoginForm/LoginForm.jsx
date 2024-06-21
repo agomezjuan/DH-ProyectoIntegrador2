@@ -26,6 +26,10 @@ function LoginForm() {
     }
   });
 
+  const goToChangePassword = () => {
+    navigate('/change-password');
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
     setToastMessage(null);
@@ -108,7 +112,7 @@ function LoginForm() {
           </button>
         </div>
         <div className='mt-2'>
-          <button className='btn btn-ghost text-primary'onClick={toggleModal}>
+          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
             ¿Olvidaste tu contraseña?
           </button>
         </div>
