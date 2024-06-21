@@ -142,6 +142,9 @@ export const useUserProfileStore = create((set) => ({
     set({error: null });
     try {
       const planner = await deletePlannerByUser(token);
+      if (planner.status === 200) {
+        set({ planner: {} });
+      }
 
     } catch (error) {
       set({ error: error.message});
