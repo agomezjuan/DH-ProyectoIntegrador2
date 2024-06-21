@@ -1,39 +1,44 @@
 import { useForm } from 'react-hook-form';
 
 function RestorePassword() {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset
-      } = useForm({
-        // resolver: yupResolver(registerSchema),
-        defaultValues: {
-          email: '',
-          password: '',
-          confirmPassword: ''
-        }
-      });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    // resolver: yupResolver(registerSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  });
 
-      const onSubmit = handleSubmit(async (data) => {
-        // const { confirmPassword, ...registerData } = data;
-        try {
-        //   const resRegister = await registerUser(data);
-        //   if (resRegister.status === 201) {
-        //     console.log('Registro exitoso:', resRegister.statusText);
-            // navigate('/login');
-        //   }
-        } catch (error) {
-          console.error('Registration failed:', error);
-        } finally {
-          reset();
-        }
-      });
+  const onSubmit = handleSubmit(async (data) => {
+    //Cartel que diga que ha cambiado la contraseña exitosamente
+    //re dirigir al login
+    // const { confirmPassword, ...registerData } = data;
+    try {
+      //   const resRegister = await registerUser(data);
+      //   if (resRegister.status === 201) {
+      //     console.log('Registro exitoso:', resRegister.statusText);
+      // navigate('/login');
+      //   }
+    } catch (error) {
+      console.error('Registration failed:', error);
+    } finally {
+      reset();
+    }
+  });
 
-    return(
-        <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
+  return (
+    <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
       <form onSubmit={onSubmit}>
-      <div className='mt-1 flex flex-col text-left'>
+        <h2 className='text-lg font-bold text-primary max-w-lg'>
+          Cambiar contraseña
+        </h2>
+        <div className='mt-1 flex flex-col text-left'>
           <input
             className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Correo electrónico'
@@ -81,8 +86,8 @@ function RestorePassword() {
           </button>
         </div>
       </form>
-      </div>
-    )
+    </div>
+  );
 }
 
 export default RestorePassword;

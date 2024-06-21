@@ -10,7 +10,7 @@ function UserProfile(){
     const { favoriteRecipes, fetchFavoriteRecipes, loading} = useUserProfileStore();
     const { profile, token } = useAuthStore();
 
-    const username = profile.email
+    const username = profile?.email
 
     useEffect(() => {
       fetchFavoriteRecipes(token, username);
