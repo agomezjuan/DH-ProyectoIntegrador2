@@ -125,7 +125,7 @@ export const useUserProfileStore = create((set) => ({
       const plannerResponse = await getPlanner(token);
       set({
         //plannerEmpty : planner
-        planner: plannerResponse.data
+        planner: plannerResponse
       });
     } catch (error) {
       set({ error: error.message });
