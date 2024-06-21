@@ -76,13 +76,10 @@ export const useUserProfileStore = create((set) => ({
 
   fetchFavoriteRecipes: async (token, username) => {
     try {
-      const favorites = await http.get(
-        `${FAVORITES_BASE_URL}?username=${username}`,
-        {
-          headers: 'Authorization: Bearer ' + token
-        }
-      );
-      set({ favoriteRecipes: favorites });
+      const favorites = await http.get(`${FAVORITES_BASE_URL}?username=${username}`, {
+        headers: 'Authorization: Bearer '+token
+      });
+      set({ favoriteRecipes: favorites.data });
     } catch (error) {
       console.error('Error fetching favorite recipes:', error);
     }

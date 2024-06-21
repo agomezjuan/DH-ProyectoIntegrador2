@@ -1,5 +1,6 @@
 package com.example.pi2.service;
 
+import com.example.pi2.domain.RecipeDto;
 import com.example.pi2.exceptions.ResourceNotFoundException;
 import com.example.pi2.domain.FavoriteDto;
 import com.example.pi2.model.Favorite;
@@ -18,6 +19,9 @@ public class FavoritesService {
 
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private DtoMapper mapper;
 
     public List<FavoriteDto> getRecipesFavoriteByUser(String userid) {
         return favoriteRepository.findByUser(userid).stream().map(this::mapToDto).toList();
@@ -49,8 +53,9 @@ public class FavoritesService {
     private FavoriteDto mapToDto(Favorite favorite) {
         FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setFavoriteId(favorite.getId());
-        favoriteDto.getRecipe().setId(favorite.getRecipe().getId());
-        favoriteDto.getRecipe().setName(favorite.getRecipe().getName());
+        RecipeDto recipeDto = mapper.toRecipeDto(favorite.getRecipe());
+        recipeDto.setFavorite(true);
+        favoriteDto.setRecipe(recipeDto);
         return favoriteDto;
     }
 }

@@ -10,7 +10,7 @@ function UserProfile(){
     const { favoriteRecipes, fetchFavoriteRecipes, loading} = useUserProfileStore();
     const { profile, token } = useAuthStore();
 
-    const username = profile.email
+    const username = profile?.email
 
     useEffect(() => {
       fetchFavoriteRecipes(token, username);
@@ -32,7 +32,7 @@ function UserProfile(){
             <div className='container bg-base-200 px-24 mt-12'>
             {favoriteRecipes && (
             <RecipeContainer
-              title={'Recetas favoritas'}
+              title={'Tus recetas favoritas'}
               recipes={favoriteRecipes}
               loading={loading}
             />
