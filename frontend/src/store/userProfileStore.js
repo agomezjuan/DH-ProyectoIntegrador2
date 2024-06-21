@@ -28,8 +28,6 @@ export const useUserProfileStore = create((set) => ({
     saturday: { id: 'saturday' }
   },
 
-  reportCsv: null,
-
   plannerToPost: {},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
@@ -133,7 +131,14 @@ export const useUserProfileStore = create((set) => ({
     set({ error: null });
     try {
       const data = await downloadReport(token, userid);0
-      set({ reportCsv: data});
+
+      const urlBlob = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement('a');
+      link.href = urlBlob;
+      link.setAttribute('download', 'plan.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
     } catch (error) {
       set({ error: error.message });
     }
