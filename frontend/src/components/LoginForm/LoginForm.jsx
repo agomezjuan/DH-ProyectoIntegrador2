@@ -26,18 +26,23 @@ function LoginForm() {
     }
   });
 
+  const goToChangePassword = () => {
+    navigate('/change-password');
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
     setToastMessage(null);
     try {
       await login(data);
       setToastMessage({ type: 'success', message: 'Bienvenida!' });
+      reset();
+      navigate("/");
     } catch (error) {
       setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
       console.error("Login failed:", error);
     } finally {
       setLoading(false);
-      reset();
     }
   });
 
@@ -49,7 +54,7 @@ function LoginForm() {
           navigate("/");
         }
         setToastMessage(null);
-      }, 5000); 
+      }, 5000);
     }
 
     return () => clearTimeout(timer);
@@ -104,6 +109,11 @@ function LoginForm() {
         <div className='mt-2'>
           <button className='btn btn-ghost text-primary'>
             <Link to='/register'>Registrarse</Link>
+          </button>
+        </div>
+        <div className='mt-2'>
+          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
+            ¿Olvidaste tu contraseña?
           </button>
         </div>
       </div>

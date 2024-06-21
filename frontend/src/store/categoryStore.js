@@ -3,6 +3,8 @@ import { getCategories, getCategoryByName } from '../api/category';
 
 export const useCategoriesStore = create((set) => ({
   categories: [],
+  selectedCategory: null,
+  categoryByName: null,
   error: null,
   load: false,
 
@@ -21,10 +23,13 @@ export const useCategoriesStore = create((set) => ({
   fetchCategoryByName: async (name) => {
     set({ load: true, error: null });
     try {
-      const categoryByName = await getCategoryByName(name);
-      set({ categoryByName, load: false });
+      const data = await getCategoryByName(name);0
+      set({ categoryByName: data, load: false });
     } catch (error) {
       set({ error: error.message, load: false });
     }
+  },
+  setSelectedCategory: (category) => {
+    set({ selectedCategory: category });
   },
 }));

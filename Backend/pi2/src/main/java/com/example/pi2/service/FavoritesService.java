@@ -1,6 +1,8 @@
 package com.example.pi2.service;
 
+import com.example.pi2.domain.RecipeDto;
 import com.example.pi2.exceptions.ResourceNotFoundException;
+import com.example.pi2.domain.FavoriteDto;
 import com.example.pi2.model.Favorite;
 import com.example.pi2.model.Recipe;
 import com.example.pi2.repository.FavoriteRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FavoritesService {
@@ -17,20 +20,42 @@ public class FavoritesService {
     @Autowired
     private RecipeService recipeService;
 
-    public List<Favorite> getRecipesFavoriteByUser(String userid) {
-        return favoriteRepository.findByUser(userid);
+    @Autowired
+    private DtoMapper mapper;
+
+    public List<FavoriteDto> getRecipesFavoriteByUser(String userid) {
+        return favoriteRepository.findByUser(userid).stream().map(this::mapToDto).toList();
     }
 
-    public Favorite saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
+    public FavoriteDto saveRecipeFavorite(String userid, Integer recipeid) throws ResourceNotFoundException {
         Recipe recipe = recipeService.getRecipeById(recipeid);
         Favorite favorite = new Favorite();
         favorite.setUser(userid);
         favorite.setRecipe(recipe);
-        return favoriteRepository.save(favorite);
+        favorite = favoriteRepository.save(favorite);
+        return this.mapToDto(favorite);
     }
 
 
     public void deleteRecipeFavorite(Long favoriteId) {
         favoriteRepository.deleteById(favoriteId);
+    }
+
+    public void deleteRecipeFavoriteByUser(String username, Long recipeId) {
+        List<Favorite> favorites = favoriteRepository.findByUser(username);
+        Optional<Favorite> favoriteOptional = favorites.stream()
+                .filter(favorite -> favorite.getRecipe().getId() == recipeId.intValue())
+                .findFirst();
+        favoriteOptional.ifPresent(favorite -> favoriteRepository.deleteById(favorite.getId()));
+    }
+
+
+    private FavoriteDto mapToDto(Favorite favorite) {
+        FavoriteDto favoriteDto = new FavoriteDto();
+        favoriteDto.setFavoriteId(favorite.getId());
+        RecipeDto recipeDto = mapper.toRecipeDto(favorite.getRecipe());
+        recipeDto.setFavorite(true);
+        favoriteDto.setRecipe(recipeDto);
+        return favoriteDto;
     }
 }

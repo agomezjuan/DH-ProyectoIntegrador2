@@ -1,16 +1,15 @@
 # Configuraciones del servidor
 server:
-  port: 8090
+  port: ${PORT:8090}
 # Configuraciones de eureka
 eureka:
   instance:
-    hostname: localhost
-    prefer-ip-address: true
+    prefer-ip-address: false
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${EUREKA_ID:localhost}:8761/eureka
 # Configuraciones de spring cloud
 spring:
   application:
@@ -22,7 +21,7 @@ spring:
         - id: mealmap-core
           uri: lb://pi2
           predicates:
-            - Path=/api/v1/categories/**, /api/v1/ingredient/**, /api/v1/recipes/**, /api/v1/favorites/**, /api/v1/planner/**
+            - Path=/api/v1/categories/**, /api/v1/ingredient/**, /api/v1/recipes/**, /api/v1/favorites, /api/v1/favorites/user/**, /api/v1/planner/**
           filters:
             - StripPrefix=2
         - id: ms-users
@@ -31,16 +30,13 @@ spring:
             - Path=/api/v1/users/**
           filters:
             - StripPrefix=2
-
-
-
   # Configuraciones de seguridad
   security:
     oauth2:
       client:
         provider:
           gateway-service:
-            issuer-uri: http://localhost:8089/realms/proyecto-integrador
+            issuer-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador
         registration:
           gateway-service:
             client-id: ms-gateway
@@ -48,7 +44,13 @@ spring:
             scope:
               - openid
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8090/login/oauth2/code/keycloak
+            redirect-uri: http://${KEYCLOAK_HOST:localhost}:8090/login/oauth2/code/keycloak
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8089/realms/proyecto-integrador
+          issuer-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useAuthStore } from "../store/auth";
-
+import { useEffect } from 'react';
+import { useAuthStore } from '../store/auth';
+import PropTypes from 'prop-types';
 
 export function Errors({ errors }) {
   const cleanErrors = useAuthStore((state) => state.cleanErrors);
@@ -16,11 +16,15 @@ export function Errors({ errors }) {
 
   return (
     <>
-      {errors.map((error) => (
-        <div className="bg-red-500 text-white p-2 rounded-md mb-2">
+      {errors.map((error, i) => (
+        <div className='bg-red-500 text-white p-2 rounded-md mb-2' key={i}>
           {error.message}
         </div>
       ))}
     </>
   );
 }
+
+Errors.propTypes = {
+  errors: PropTypes.array.isRequired
+};

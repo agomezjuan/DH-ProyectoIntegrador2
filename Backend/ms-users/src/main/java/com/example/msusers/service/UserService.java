@@ -3,30 +3,30 @@ package com.example.msusers.service;
 import com.example.msusers.configuration.ClientConfig;
 import com.example.msusers.dto.UserDTO;
 import com.example.msusers.exceptions.ResourceNotFoundException;
-import com.example.msusers.repository.UserRepository;
 import jakarta.ws.rs.core.Response;
-import org.keycloak.admin.client.Keycloak;
+import org.apache.commons.lang.StringUtils;
+import org.keycloak.OAuth2Constants;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService {
 
-    private final Keycloak keycloak;
+    private final RealmResource keycloakRealm;
     private final ClientConfig clientConfig;
-    private UserRepository userRepository;
-    @Value("${keycloakProperties.realm}")
-    private String realm;
 
-
-    public UserService(UserRepository userRepository, Keycloak keycloak, ClientConfig clientConfig) {
-        this.userRepository = userRepository;
-        this.keycloak = keycloak;
+    @Autowired
+    public UserService(RealmResource keycloakRealm, ClientConfig clientConfig) {
+        this.keycloakRealm = keycloakRealm;
         this.clientConfig = clientConfig;
     }
 
@@ -48,9 +48,7 @@ public class UserService {
 
         userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation));
 
-        Keycloak keycloakBuilder = clientConfig.buildClientWithToken();
-
-        Response response = keycloakBuilder.realm(realm).users().create(userRepresentation);
+        Response response = keycloakRealm.users().create(userRepresentation);
 
         response.close();
         return response.getStatus();
@@ -58,7 +56,7 @@ public class UserService {
     }
 
     public UserDTO findByUsername(String username) throws ResourceNotFoundException {
-        UserRepresentation userById = keycloak.realm(realm)
+        UserRepresentation userById = keycloakRealm
                 .users()
                 .searchByUsername(username, true)
                 .stream()
@@ -81,4 +79,58 @@ public class UserService {
     public AccessTokenResponse loginUser(UserDTO userDTO) {
         return clientConfig.getUserAccessToken(userDTO.getUsername(), userDTO.getPassword());
     }
+
+    public UserDTO modifyUser(UserDTO user) {
+
+        UserRepresentation userRepresentation = new UserRepresentation();
+
+        if(isNotBlankOrNull(user.getFirstName())){
+            userRepresentation.setFirstName(user.getFirstName());
+        }
+        if(isNotBlankOrNull(user.getLastName())){
+            userRepresentation.setLastName(user.getLastName());}
+
+        if(isNotBlankOrNull(user.getPassword())){
+            CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+            credentialRepresentation.setTemporary(false);
+            credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+            credentialRepresentation.setValue(user.getPassword());
+
+            userRepresentation.setCredentials(Collections.singletonList(credentialRepresentation));
+        }
+
+        keycloakRealm.users().get(user.getId()).update(userRepresentation);
+
+        UserDTO userAfterUpdate = mapToDto(keycloakRealm.users().get(user.getId()).toRepresentation());
+
+        return userAfterUpdate;
+
+    }
+
+    public HttpStatus resetPassword(UserDTO user){
+
+        HttpStatus status = null;
+
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
+        credentialRepresentation.setValue(user.getPassword());
+
+        List<UserRepresentation> userRepresentations = keycloakRealm.users().searchByEmail(user.getEmail(), true);
+        if(!userRepresentations.isEmpty() && userRepresentations.size() == 1){
+            for (UserRepresentation u: userRepresentations
+            ) {
+                keycloakRealm.users().get(u.getId()).resetPassword(credentialRepresentation);
+                status = HttpStatus.OK;
+            }
+        }else {
+            status = HttpStatus.CONFLICT;
+        }
+        return status;
+    }
+
+    private Boolean isNotBlankOrNull(String attr){
+        return StringUtils.isNotBlank(attr);
+    }
+
 }

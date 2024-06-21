@@ -1,0 +1,69 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Add remote server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          touch known_hosts
+          ssh-keyscan -H ec2-54-177-126-226.us-west-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: Run backend build-and-deploy script
+        run: |
+          cd .infra
+          chmod 600 dh-backend-dev.pem
+          ssh -i "dh-backend-dev.pem" ec2-user@ec2-54-177-126-226.us-west-1.compute.amazonaws.com 'sh dh-recipes/DH-ProyectoIntegrador2/.infra/build-and-run.sh && exit'
+
+      - name: Echo Deployed
+        run: echo "Finished deploying backend..."
+
+  build-and-deploy-frontend:
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max_old_space_size=4096
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: AKIA356KWEBOLY2UTTWD
+          aws-secret-access-key: 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
+          aws-region: us-west-1
+
+      - name: Building app
+        run: echo "Building app..."
+
+      - name: Delete node_modules
+        working-directory: ./frontend
+        run: rm -rf node_modules
+
+      - name: Install npm dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: List npm scripts
+        working-directory: ./frontend
+        run: npm run
+
+      - name: Build the app
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Deploy to S3
+        working-directory: ./frontend
+        run: aws s3 sync dist/ s3://dh-mealmap-frontend
+
+      - name: Echo Finished deploying the app
+        run: echo "Finished deploying the app."

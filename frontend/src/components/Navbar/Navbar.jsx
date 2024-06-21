@@ -2,22 +2,37 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from "../../store/authStore";
+import { FormModal } from '../FormModal';
+import { UpdateUserData } from '../UpdateUserData';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
   const [toastMessage, setToastMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  function handleUpdate() {
+    setModalOpen(!isModalOpen)
+  }
 
-  const handleClick = () => {
+  function handleClose() {
+    setModalOpen(false);
+  }
+
+  const goToUserProfile = (userId) => {
+    navigate(`/user/${userId}`);
+  };
+
+  const handleCerrarSesion = () => {
     setLoading(true);
     setToastMessage(null);
     try {
       logout();
-      setToastMessage({ type: 'success', message: 'Logged out successfully!' });
+      setToastMessage({ type: 'success', message: 'Has cerrado sesión!' });
+      navigate("/");
     } catch (error) {
-      setToastMessage({ type: 'error', message: 'Logout failed. Please try again.' });
+      setToastMessage({ type: 'error', message: 'Algo falló. Intenta de nuevo.' });
       console.error("Logout failed:", error);
     } finally {
       setLoading(false);
@@ -32,7 +47,7 @@ export default function Navbar() {
           navigate("/");
         }
         setToastMessage(null);
-      }, 5000);
+      }, 7000);
     }
     return () => clearTimeout(timer);
   }, [toastMessage, navigate]);
@@ -66,22 +81,29 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><Link to='/profile' >Perfil</Link></li>
-            <li>
-              <a onClick={handleClick} >Cerrar Sesión</a>
-            </li>
+            <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
+            <li><a onClick={handleUpdate} >Actualizar datos</a></li>
+            <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
             </>
             }
           </ul>
         </details>
       </div>
       {toastMessage && (
-        <div className='toast toast-center toast-middle'>
+        <div className='toast toast-center toast-middle z-20'>
           <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
             <span>{toastMessage.message}</span>
           </div>
         </div>
       )}
+       {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <FormModal isOpen={isModalOpen} onClose={handleClose}>
+          <UpdateUserData/>
+        </FormModal>
+        </div>
+      )
+      }
     </div>
   );
 }

@@ -1,28 +1,38 @@
 eureka:
-    client:
-        service-url:
-            defaultZone: http://localhost:8761/eureka
-    instance:
-        hostname: localhost
-        instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_ID:localhost}:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: false
+
 spring:
-    application:
-        name: pi2
-        security:
-            oauth2:
-                resourceserver:
-                    jwt:
-                        issuer-uri: http://localhost:8089/realms/proyecto-integrador
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/MealMap?createDatabaseIfNotExist=true
-        password: root
-        username: root
-    jpa:
-        database-platform: org.hibernate.dialect.MySQLDialect
-        hibernate:
-            ddl-auto: create
-        show-sql: true
-        properties:
-            hibernate:
-                format_sql: true
+  application:
+    name: pi2
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:8089/realms/proyecto-integrador/protocol/openid-connect/certs
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_ID:localhost}:3306/MealMap?createDatabaseIfNotExist=true
+    username: root
+    password: ${MYSQL_PASSWORD:root}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

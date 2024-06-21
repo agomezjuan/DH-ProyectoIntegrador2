@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useCategoriesStore } from '@/store/categoryStore';
+import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const { categories, load, fetchCategories } = useCategoriesStore();
+  const { categories, selectedCategory, load, fetchCategories, setSelectedCategory } = useCategoriesStore();
 
   useEffect(() => {
     fetchCategories();
@@ -25,9 +24,24 @@ export const Carousel = () => {
 
   const displayImages = [];
   for (let i = 0; i < 4; i++) {
-    !load &&
-      categories.length > 0 &&
-      displayImages.push(categories[(currentIndex + i) % categories.length]);
+    displayImages.push(categories[(currentIndex + i) % categories.length]);
+  }
+
+  const handleCategoryClick = async (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleResetCategory = () => {
+    setSelectedCategory(null);
+  };
+
+  if (load) {
+    return (
+      <div className='flex flex-col justify-center items-center h-36'>
+        <span className='loading loading-ring loading-md'></span>
+        <span className='text-primary mt-4'>Cargando...</span>
+      </div>
+    );
   }
 
   return (
@@ -49,6 +63,7 @@ export const Carousel = () => {
                 src={allCategories?.category?.urlImg}
                 alt={`Imagen ${index}`}
                 className='w-full h-full object-cover'
+                onClick={() => handleCategoryClick(allCategories)}
               />
             </div>
             <div className='text-xl font-semibold text-primary text-center'>
@@ -64,6 +79,16 @@ export const Carousel = () => {
         onClick={handleNext}>
         <FaChevronRight size={60} />
       </button>
+
+      {selectedCategory && (
+        <div className='recipes__contenedor'>
+          <button
+            className='btn-reset'
+            onClick={handleResetCategory}>
+            Limpiar categoría seleccionada
+          </button>
+        </div>
+      )}
     </div>
   );
 };

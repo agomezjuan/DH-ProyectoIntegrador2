@@ -8,14 +8,14 @@ export const useRecipesStore = create((set) => ({
   error: null,
   loading: false,
 
-  fetchRecipes: async (page = 0) => {
+  fetchRecipes: async (page = 0, username) => {
     set({ loading: true, error: null });
     try {
-      const recipes = await getRecipes(page);
-      set({ 
+      const recipes = await getRecipes(page, username);
+      set({
         recipes,
         currentPage: page,
-        loading: false 
+        loading: false
       });
     } catch (error) {
       set({ error: error.message, loading: false });
@@ -29,5 +29,10 @@ export const useRecipesStore = create((set) => ({
     } catch (error) {
       set({ error: error.message, loading: false });
     }
+  },
+  setRecipesByCategory: (newRecipes) => {
+    set({ loading: true });
+    set({ recipes: newRecipes});
+    set({ loading: false });
   },
 }));
