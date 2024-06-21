@@ -1,6 +1,11 @@
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import {  useNavigate } from 'react-router-dom';
 
 function RestorePassword() {
+  const navigate = useNavigate();
+  const [toastMessage, setToastMessage] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -22,10 +27,11 @@ function RestorePassword() {
     try {
       //   const resRegister = await registerUser(data);
       //   if (resRegister.status === 201) {
-      //     console.log('Registro exitoso:', resRegister.statusText);
-      // navigate('/login');
+        // setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
+        // navigate('/login');
       //   }
     } catch (error) {
+      setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
       console.error('Registration failed:', error);
     } finally {
       reset();
@@ -86,6 +92,13 @@ function RestorePassword() {
           </button>
         </div>
       </form>
+      {toastMessage && (
+        <div className='toast toast-center toast-middle'>
+          <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+            <span>{toastMessage.message}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

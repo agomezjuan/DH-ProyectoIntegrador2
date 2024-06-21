@@ -12,6 +12,13 @@ export default function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  function handleUpdate() {
+    setModalOpen(!isModalOpen)
+  }
+
+  function handleClose() {
+    setModalOpen(false);
+  }
 
   const goToUserProfile = (userId) => {
     navigate(`/user/${userId}`);
@@ -22,10 +29,10 @@ export default function Navbar() {
     setToastMessage(null);
     try {
       logout();
-      setToastMessage({ type: 'success', message: 'Logged out successfully!' });
+      setToastMessage({ type: 'success', message: 'Has cerrado sesión!' });
       navigate("/");
     } catch (error) {
-      setToastMessage({ type: 'error', message: 'Logout failed. Please try again.' });
+      setToastMessage({ type: 'error', message: 'Algo falló. Intenta de nuevo.' });
       console.error("Logout failed:", error);
     } finally {
       setLoading(false);
@@ -75,9 +82,8 @@ export default function Navbar() {
             :
             <>
             <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
-            <li>
-              <a onClick={handleClick} >Cerrar Sesión</a>
-            </li>
+            <li><a onClick={handleUpdate} >Actualizar datos</a></li>
+            <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
             </>
             }
           </ul>
@@ -92,7 +98,7 @@ export default function Navbar() {
       )}
        {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-        <FormModal isOpen={isModalOpen}>
+        <FormModal isOpen={isModalOpen} onClose={handleClose}>
           <UpdateUserData/>
         </FormModal>
         </div>

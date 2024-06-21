@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
-
+import { useNavigate } from 'react-router-dom';
 
 function UpdateUserData(){
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -14,6 +16,10 @@ function UpdateUserData(){
       lastName: '',
     }
   });
+
+  const goToChangePassword = () => {
+    navigate('/change-password');
+  };
 
   const onSubmit = handleSubmit((data) => {
     console.log(data)
@@ -62,6 +68,11 @@ function UpdateUserData(){
           </button>
           </div>
         </form>
+        <div className='mt-2'>
+          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
+            Actualizar Contraseña
+          </button>
+        </div>
         </div>
         
     )
