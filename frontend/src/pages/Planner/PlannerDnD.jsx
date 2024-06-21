@@ -26,7 +26,7 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, plannerEmpty} = useUserProfileStore();
+  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser} = useUserProfileStore();
   const { token, profile } = useAuthStore();
 
   const plannerToPost = useUserProfileStore((state) => state.plannerToPost);
@@ -105,8 +105,8 @@ const PlannerDnD = () => {
                 <SortableContext
                   items={items}
                   strategy={verticalListSortingStrategy}>                                                                                                     
-                  {items?.map((recipe) => (
-                    <PlannedRecipe key={recipe.id} item={recipe} />
+                  {items?.map((recipes) => (
+                    <PlannedRecipe key={recipes.recipe?.id} item={recipes?.recipe} />
                   ))}
                 </SortableContext>
               </div>

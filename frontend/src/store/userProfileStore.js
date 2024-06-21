@@ -28,7 +28,6 @@ export const useUserProfileStore = create((set) => ({
     saturday: { id: 'saturday' }
   },
 
-  plannerEmpty: [],
   reportCsv: null,
 
   plannerToPost: {},
@@ -124,7 +123,6 @@ export const useUserProfileStore = create((set) => ({
     try {
       const plannerResponse = await getPlanner(token);
       set({
-        //plannerEmpty : planner
         planner: plannerResponse
       });
     } catch (error) {
