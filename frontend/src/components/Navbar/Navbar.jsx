@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from "../../store/authStore";
 import { FormModal } from '../FormModal';
-import { RestorePassword } from '../RestorePassword';
+import { UpdateUserData } from '../UpdateUserData';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
@@ -90,7 +90,7 @@ export default function Navbar() {
        {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
         <FormModal isOpen={isModalOpen}>
-          <RestorePassword/>
+          <UpdateUserData/>
         </FormModal>
         </div>
       )
