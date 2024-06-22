@@ -165,15 +165,7 @@ export const useUserProfileStore = create((set) => ({
     try {
       // Asumiendo que tienes una API que acepta POST a /api/favorites
       const response = await savePlanner(token, planner);
-      if (response.status === 200) {
-        // Actualizar el estado solo si la respuesta es exitosa
-        console.log("entre bien");
-        // set((state) => ({
-        //   planner: [...state.planner, response.data]
-        // }));
-      } else {
-        throw new Error('Failed to add recipe');
-      }
+
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
