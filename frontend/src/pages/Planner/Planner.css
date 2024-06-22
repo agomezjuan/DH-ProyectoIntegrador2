@@ -61,6 +61,15 @@ input[type='text'] {
   color: white;
   font-weight: bold;
 }
+.planner-buttons button {
+  width: 150px;
+  height: 50px; /* Ajusta este valor según sea necesario */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Tamaño de fuente consistente */
+}
+
 /* Estilos para las celdas de los días de la semana */
 .green {
   background-color: #82aa33;
