@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const PlannerButtons = ({ handleDownload, handleDelete, handlePost }) => (
   <div className='planner-buttons-container mt-4'>
     <div className='planner-buttons'>
@@ -17,5 +18,10 @@ const PlannerButtons = ({ handleDownload, handleDelete, handlePost }) => (
     </div>
   </div>
 );
+PlannerButtons.propTypes = {
+  handleDownload: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handlePost: PropTypes.func.isRequired,
+};
 
 export default PlannerButtons;
