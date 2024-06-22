@@ -1,4 +1,4 @@
-..planner-buttons-container {
+.planner-buttons-container {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centrar los botones horizontalmente */
@@ -54,6 +54,7 @@ input[type='text'] {
 }
 
 .planner-buttons {
+  width: 20%;
   display: flex;
   flex-direction: column;
   gap: 10px;
