@@ -1,9 +1,8 @@
 .planner-buttons-container {
   display: flex;
-  justify-content: center;
-  align-items: center; /* Centra verticalmente */
-  bottom: 20px; /* Ajusta la distancia desde la parte inferior */
-  width: 100%;
+  flex-direction: column;
+  align-items: center; /* Centrar los botones horizontalmente */
+  gap: 1rem; /* Espacio entre los botones */
 }
 
 .planner-container {
@@ -55,12 +54,22 @@ input[type='text'] {
 }
 
 .planner-buttons {
+  width: 20%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   color: white;
   font-weight: bold;
 }
+.planner-buttons button {
+  width: 150px;
+  height: 50px; /* Ajusta este valor según sea necesario */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Tamaño de fuente consistente */
+}
+
 /* Estilos para las celdas de los días de la semana */
 .green {
   background-color: #82aa33;

@@ -1,8 +1,4 @@
 import { useEffect, useState } from 'react';
-// import knifeplateImage from './knifeplate.png';
-import { Layout } from '@/components/Layout';
-import { Header } from '@/components/Header';
-import './Planner.css';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -13,6 +9,10 @@ import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
 import { mapPlannerData, mapPlannerToPost } from '../../utils/plannerMapper';
 import { useAuthStore } from '../../store/authStore.js';
+import PlannerHeader from './PlannerHeader';
+import PlannerDay from './PlannerDay';
+import PlannerButtons from './PlannerButtons';
+import './Planner.css';
 
 const PlannerDnD = () => {
   const daysOfWeek = [
@@ -24,19 +24,16 @@ const PlannerDnD = () => {
     { name: 'Viernes', colorClass: 'green' },
     { name: 'Sábado', colorClass: 'light-green' }
   ];
-  const [items, setItems] = useState([]);
-  const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, fetchSavePlanner } =
-    useUserProfileStore();
-  const { token, profile } = useAuthStore();
 
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const planner = useUserProfileStore((state) => state.planner);
+  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, fetchSavePlanner } = useUserProfileStore();
+  const { token, profile } = useAuthStore();
   const [plannerToPost, setPlannerToPost] = useState(
     useUserProfileStore((state) => state.plannerToPost)
   );
-
-  console.log('Planner', planner);
-  console.log('Items', mapPlannerData(items));
-  console.log('Planner To Post', plannerToPost);
 
   useEffect(() => {
     setItems(mapPlannerData(planner));
@@ -46,36 +43,70 @@ const PlannerDnD = () => {
     setPlannerToPost(mapPlannerToPost(items));
   }, [items]);
 
-  console.log('RECIPES', items);
-
-  const handleDownload = () => {
-    fetchDownloadReport(token, profile.sub);
-  };
-  const handlePost = () => {
-    fetchSavePlanner(token, plannerToPost)
-  };
-
-  const handleDelete = () => {
-    fetchDeletePlannerByUser(token);
-  };
-
   useEffect(() => {
-    fetchPlannerByUser(token);
+    const loadPlanner = async () => {
+      try {
+        setLoading(true);
+        await fetchPlannerByUser(token);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPlanner();
   }, [fetchPlannerByUser]);
+
+  const handleDownload = async () => {
+    try {
+      setLoading(true);
+      await fetchDownloadReport(token, profile.sub);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePost = async () => {
+    try {
+      setLoading(true);
+      await fetchSavePlanner(token, plannerToPost);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      await fetchDeletePlannerByUser(token);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDragEnd = (e) => {
     const { active, over } = e;
-    setItems((items) => {
-      const oldIndex = items.findIndex((item) => item.recipe.id === active.id);
-      const newIndex = items.findIndex((item) => item.recipe.id === over.id);
-      return arrayMove(items, oldIndex, newIndex);
-    });
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.findIndex((item) => item.recipe.id === active.id);
+        const newIndex = items.findIndex((item) => item.recipe.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
   };
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    // <Layout>
     <div className='container bg-base-200 -mt-8'>
-      {/* <Header /> */}
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <div className='w-[800px] mx-auto container planner-container'>
           <h1>AGENDA SEMANAL</h1>
@@ -88,25 +119,11 @@ const PlannerDnD = () => {
                   </span>
                 </div>
                 {daysOfWeek.map((day, index) => (
-                  <div
-                    className={`${day.colorClass} text-center text-3xl w-56 h-40 flex items-center justify-center border border-primary rounded-lg`}
-                    key={index}>
-                    {day.name}
-                  </div>
+                  <PlannerDay day={day} key={index} />
                 ))}
               </div>
               <div className='flex flex-col w-full gap-4'>
-                <div className='font-bold text-primary flex items-center justify-center gap-2 m-2'>
-                  {/* <img
-                      src={knifeplateImage}
-                      alt='Knife Plate'
-                      className='knifeplate-icon'
-                      style={{ width: '24px', height: '24px' }}
-                    /> */}
-                  <span className='text-primary text-xl font-bold'>
-                    Recetas
-                  </span>
-                </div>
+                <PlannerHeader />
                 <SortableContext
                   items={items}
                   strategy={verticalListSortingStrategy}>
@@ -123,30 +140,15 @@ const PlannerDnD = () => {
                 </SortableContext>
               </div>
             </div>
-            <div className='planner-buttons-container mt-4'>
-              <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDownload}>
-                  Descargar Plan
-                </button>
-              </div>
-              <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDelete}>
-                  Limpiar Plan
-                </button>
-              </div>
-            </div>
-            <div className='planner-buttons-container mt-4'>
-              <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handlePost}>
-                  Guardar Plan
-                </button>
-              </div>
-            </div>
+            <PlannerButtons
+              handleDownload={handleDownload}
+              handleDelete={handleDelete}
+              handlePost={handlePost}
+            />
           </div>
         </div>
       </DndContext>
     </div>
-    // </Layout>
   );
 };
 
