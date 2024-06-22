@@ -21,7 +21,7 @@ function PlannedRecipe({ item }) {
       style={style}
       className='bg-gray-200 rounded-md h-40 w-full grid grid-cols-3'>
       <div className='rounded-bl-md rounded-tl-md overflow-hidden'>
-        <Link to={`/recipe/${item?.recipeId}`}>
+        <Link to={`/recipe/${item?.id}`}>
           <img
             src={item?.urlImg}
             alt={item?.name}
@@ -30,7 +30,7 @@ function PlannedRecipe({ item }) {
         </Link>
       </div>
       <div className='flex flex-col p-2 col-start-2 col-end-4'>
-        <Link to={`/recipe/${item?.recipeId}`}>
+        <Link to={`/recipe/${item?.id}`}>
           <h3 className='text-lg font-semibold hover:text-primary'>
             {item?.name}
           </h3>

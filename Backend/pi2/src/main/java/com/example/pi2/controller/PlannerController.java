@@ -2,6 +2,7 @@ package com.example.pi2.controller;
 
 import com.example.pi2.domain.PlannerDTO;
 import com.example.pi2.domain.PlannerDtoToCsv;
+import com.example.pi2.domain.PlannerWithRecipeDTO;
 import com.example.pi2.model.Planner;
 import com.example.pi2.service.PlannerService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,6 +42,12 @@ public class PlannerController {
 
 			return plannerService.findByUserId(idUser);
 	  }
+
+	@GetMapping("/userid")
+	public PlannerWithRecipeDTO getPlanByUserId(@AuthenticationPrincipal Jwt jwt) {
+		  String idUser = jwt.getSubject();
+		  return plannerService.findPlanByUserId(idUser);
+	}
 
 	  @PostMapping
 	  public Planner save(@RequestBody Planner planner, @AuthenticationPrincipal Jwt jwt) {
