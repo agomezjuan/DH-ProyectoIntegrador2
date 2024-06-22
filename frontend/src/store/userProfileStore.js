@@ -1,8 +1,15 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
-import {saveFavorite } from '@/api/favorites';
+import {
+  getPlanner,
+  downloadReport,
+  deletePlannerByUser,
+  savePlanner
+} from '../api/planner';
 
-const FAVORITES_BASE_URL = 'api/v1/favorites'
+import { saveFavorite } from '@/api/favorites';
+
+const FAVORITES_BASE_URL = 'api/v1/favorites';
 
 export const useUserProfileStore = create((set) => ({
   userData: {
@@ -20,6 +27,8 @@ export const useUserProfileStore = create((set) => ({
     friday: { id: 'friday' },
     saturday: { id: 'saturday' }
   },
+
+  plannerToPost: {},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
     set((state) => ({
@@ -96,8 +105,52 @@ export const useUserProfileStore = create((set) => ({
       planner: {
         ...state.planner,
         [day]: { ...recipe, id: day, recipeId: recipe.id }
+      },
+      plannerToPost: {
+        ...state.planner,
+        [day]: { id: recipe.id }
       }
     }));
+  },
+
+  fetchPlannerByUser: async (token) => {
+    set({error: null });
+    try {
+      const plannerResponse = await getPlanner(token);
+      set({
+        planner: plannerResponse
+      });
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
+  fetchDownloadReport: async (token, userid) => {
+    set({ error: null });
+    try {
+      const data = await downloadReport(token, userid);0
+
+      const urlBlob = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement('a');
+      link.href = urlBlob;
+      link.setAttribute('download', 'plan.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
+  fetchDeletePlannerByUser: async (token) => {
+    set({error: null });
+    try {
+      const planner = await deletePlannerByUser(token);
+      if (planner.status === 200) {
+        set({ planner: {} });
+      }
+
+    } catch (error) {
+      set({ error: error.message});
+    }
   }
 }));
 
