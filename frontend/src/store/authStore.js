@@ -61,6 +61,7 @@ export const useAuthStore = create(
         try {
           const response = await updateUserDataRequest(data, token);
           if (response) {
+            data.name = (data.firstName + " " + data.lastName);
             set((state) => ({
               profile: {
                 ...state.profile,
