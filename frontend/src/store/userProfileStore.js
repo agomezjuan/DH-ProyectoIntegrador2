@@ -76,9 +76,12 @@ export const useUserProfileStore = create((set) => ({
 
   fetchFavoriteRecipes: async (token, username) => {
     try {
-      const favorites = await http.get(`${FAVORITES_BASE_URL}?username=${username}`, {
-        headers: 'Authorization: Bearer '+token
-      });
+      const favorites = await http.get(
+        `${FAVORITES_BASE_URL}?username=${username}`,
+        {
+          headers: 'Authorization: Bearer ' + token
+        }
+      );
       set({ favoriteRecipes: favorites.data });
     } catch (error) {
       console.error('Error fetching favorite recipes:', error);
@@ -114,7 +117,7 @@ export const useUserProfileStore = create((set) => ({
   },
 
   fetchPlannerByUser: async (token) => {
-    set({error: null });
+    set({ error: null });
     try {
       const plannerResponse = await getPlanner(token);
       set({
@@ -127,7 +130,8 @@ export const useUserProfileStore = create((set) => ({
   fetchDownloadReport: async (token, userid) => {
     set({ error: null });
     try {
-      const data = await downloadReport(token, userid);0
+      const data = await downloadReport(token, userid);
+      0;
 
       const urlBlob = window.URL.createObjectURL(new Blob([data]));
       const link = document.createElement('a');
@@ -141,15 +145,32 @@ export const useUserProfileStore = create((set) => ({
     }
   },
   fetchDeletePlannerByUser: async (token) => {
-    set({error: null });
+    set({ error: null });
     try {
       const planner = await deletePlannerByUser(token);
       if (planner.status === 200) {
         set({ planner: {} });
       }
-
     } catch (error) {
-      set({ error: error.message});
+      set({ error: error.message });
+    }
+  },
+
+  fetchSavePlanner: async (token, planner) => {
+    try {
+      // Asumiendo que tienes una API que acepta POST a /api/favorites
+      const response = await savePlanner(token, planner);
+      if (response.status === 200) {
+        // Actualizar el estado solo si la respuesta es exitosa
+        console.log("entre bien");
+        // set((state) => ({
+        //   planner: [...state.planner, response.data]
+        // }));
+      } else {
+        throw new Error('Failed to add recipe');
+      }
+    } catch (error) {
+      console.error('Error adding recipe:', error);
     }
   }
 }));
