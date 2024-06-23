@@ -12,6 +12,8 @@ export default function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  const userId = profile?.sub
+
   function handleUpdate() {
     setModalOpen(!isModalOpen)
   }
@@ -81,7 +83,7 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
+            <li><a onClick={() => goToUserProfile(`${userId}`)}>Perfil</a></li>
             <li><a onClick={handleUpdate} >Actualizar datos</a></li>
             <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
             </>
