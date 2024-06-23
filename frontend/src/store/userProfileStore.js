@@ -169,7 +169,9 @@ export const useUserProfileStore = create((set) => ({
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
-  }
+  },
+
+  cleanPlanner: () => set(() => ({ planner: {}}))
 }));
 
 export default useUserProfileStore;
