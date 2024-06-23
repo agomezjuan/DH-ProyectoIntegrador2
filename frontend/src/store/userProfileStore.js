@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
-import {
+import planner, {
   getPlanner,
   downloadReport,
   deletePlannerByUser,
@@ -29,6 +29,7 @@ export const useUserProfileStore = create((set) => ({
   },
 
   plannerToPost: {},
+  plannerUpdateDay: {},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
     set((state) => ({
@@ -105,9 +106,9 @@ export const useUserProfileStore = create((set) => ({
   // Accion para actualizar el planner
   addRecipeToPlanner: (day, recipe) => {
     set((state) => ({
-      planner: {
+      plannerUpdateDay: {
         ...state.planner,
-        [day]: { ...recipe, id: day, recipeId: recipe.id }
+        [day]: {"recipe" : recipe}
       },
       plannerToPost: {
         ...state.planner,
@@ -120,9 +121,13 @@ export const useUserProfileStore = create((set) => ({
     set({ error: null });
     try {
       const plannerResponse = await getPlanner(token);
-      set({
-        planner: plannerResponse
-      });
+      set((state) => ({
+        planner: {
+          ...state.planner,
+          ...plannerResponse,
+          ...state.plannerUpdateDay
+        }
+      }));
     } catch (error) {
       set({ error: error.message });
     }
@@ -160,19 +165,13 @@ export const useUserProfileStore = create((set) => ({
     try {
       // Asumiendo que tienes una API que acepta POST a /api/favorites
       const response = await savePlanner(token, planner);
-      if (response.status === 200) {
-        // Actualizar el estado solo si la respuesta es exitosa
-        console.log("entre bien");
-        // set((state) => ({
-        //   planner: [...state.planner, response.data]
-        // }));
-      } else {
-        throw new Error('Failed to add recipe');
-      }
+
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
-  }
+  },
+
+  cleanPlanner: () => set(() => ({ planner: {}}))
 }));
 
 export default useUserProfileStore;
