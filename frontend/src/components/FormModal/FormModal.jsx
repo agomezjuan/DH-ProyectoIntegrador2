@@ -14,7 +14,7 @@ function FormModal({ isOpen, children, onClose }) {
                 onClick={onClose}
                 className="btn btn-ghost btn-sm btn-outline mr-2"
               >
-                Close
+                Cerrar
               </button>
             </div>
           </div>
