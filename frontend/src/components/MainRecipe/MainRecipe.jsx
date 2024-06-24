@@ -30,10 +30,8 @@ const MainRecipe = ({ title, time, img }) => {
   };
 
   return (
-    <div className='flex justify-between mx-20 mt-12 relative'>
-      <div
-        style={{ width: '45%', maxWidth: '900px' }}
-        className='sticky top-0 z-10'>
+    <div className='flex flex-col lg:flex-row gap-4 justify-center  mt-12 relative p-6'>
+      <div className='mb-10 flex-1'>
         <div className='grid gap-4'>
           <div className='overflow-hidden rounded-lg shadow-md bg-white h-[300px]'>
             <img
@@ -44,10 +42,10 @@ const MainRecipe = ({ title, time, img }) => {
           </div>
         </div>
       </div>
-      <div style={{ width: '45%', maxWidth: '900px' }}>
-        <h2 style={{ fontWeight: 'bold', fontSize: '30px' }}>{title}</h2>
-        <div className='grid gap-4'>
-          <div className='flex gap-10 mt-10'>
+      <div className='flex flex-col flex-1 items-center'>
+        <h2 className='font-bold text-3xl text-center md:text-left'>{title}</h2>
+        <div className='flex gap-4 w-full justify-center '>
+          <div className='flex flex-wrap gap-4 mt-10 justify-center '>
             <button className='btn btn-ghost'>
               <div className='flex flex-col justify-center items-center gap-2'>
                 <FaClock color='#557824' />

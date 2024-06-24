@@ -10,7 +10,7 @@ const Header = () => {
         <div className='mt-8 bg-gray-200 p-6 rounded-md shadow-md text-center absolute bottom-[-70px] h-40'>
           <p className='text-primary font-semibold mb-2'>Meal Map</p>
           <h1 className='text-3xl font-bold text-gray-900 max-w-lg'>
-          Recetas rápidas para almuerzos perfectos
+            Recetas rápidas para almuerzos perfectos
           </h1>
         </div>
       </div>

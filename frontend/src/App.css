@@ -5,8 +5,6 @@
   text-align: center;
 }
 
-
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -29,7 +27,7 @@
 .read-the-docs {
   color: #888;
 }
-.btn{
+.btn {
   background-color: #61dafbaa;
   border: none;
   border-radius: 5px;
@@ -37,4 +35,3 @@
   padding: 7px 16px;
   text-align: center;
 }
-
