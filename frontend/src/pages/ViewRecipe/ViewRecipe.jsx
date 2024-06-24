@@ -22,14 +22,8 @@ export const ViewRecipe = () => {
 
   return (
     <Layout>
-      <div className='container bg-base-200 p-6'>
-        <div
-          style={{
-            backgroundColor: 'rgb(130, 170, 51)',
-            height: '200px',
-            margin: '0 80px'
-          }}
-          className='flex items-center justify-center p-8 text-center'>
+      <div className='container lg:px-20 bg-base-200 lg:py-6'>
+        <div className='h-[200px] bg-secondary flex items-center justify-center p-8 text-center'>
           <SearchBar />
         </div>
         <PlannerProvider>
@@ -39,12 +33,12 @@ export const ViewRecipe = () => {
             img={detail.recipe?.urlImg}
           />
         </PlannerProvider>
-        <div className='container mx-20'>
+        <div className='container'>
           <main className='p-4'>
             {loading && <p>Cargando...</p>}
             {error && <p>Error: {error}</p>}
             {!loading && !error && (
-              <div>
+              <div className='p-6'>
                 <div className='my-5'>
                   <h2 className='font-bold text-xl'>Ingredientes</h2>
                   <ul className='list-disc p-5'>
