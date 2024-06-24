@@ -6,7 +6,6 @@ import {
   FaInstagram,
   FaYoutube
 } from 'react-icons/fa6';
-import './footer.css';
 
 const Footer = () => {
   return (

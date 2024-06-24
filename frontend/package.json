@@ -24,11 +24,7 @@
     "react-hook-form": "^7.51.5",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
-<<<<<<< HEAD
-    "y": "^0.3.2",
-=======
     "react-toastify": "^10.0.5",
->>>>>>> 3e05c77976e93c399ce887e2975454637ee4147a
     "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
