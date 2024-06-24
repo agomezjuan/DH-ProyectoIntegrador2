@@ -10,7 +10,7 @@ import {
 const Footer = () => {
   return (
     <footer className='footer container flex flex-col items-center lg:flex-row p-10 bg-primary'>
-      <div className='w-full lg:w-1/3 flex items-center justify-center p-4'>
+      <div className='w-full lg:w-1/3 flex items-center justify-center p-4 '>
         <nav className='flex justify-center items-center'>
           <Link
             to='/register'
