@@ -8,7 +8,7 @@ export const useRecipesStore = create((set) => ({
   error: null,
   loading: false,
 
-  fetchRecipes: async (page = 0, username) => {
+  fetchRecipes: async (page, username) => {
     set({ loading: true, error: null });
     try {
       const recipes = await getRecipes(page, username);

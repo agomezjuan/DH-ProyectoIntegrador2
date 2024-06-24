@@ -5,8 +5,9 @@ import { CustomAlert } from '../CustomAlert';
 import { PlannerModal } from '../PlannerModal/PlannerModal';
 import { useAuthStore } from "../../store/authStore";
 import { useNavigate } from 'react-router-dom';
+import {FavoriteIcon} from '../FavoriteIcon';
 
-const MainRecipe = ({ title, time, img }) => {
+const MainRecipe = ({ title, time, img, id, favorite }) => {
   const { isAuth } = useAuthStore();
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -60,9 +61,9 @@ const MainRecipe = ({ title, time, img }) => {
                 <p>Planeador</p>
               </div>
             </button>
-            <button className='btn btn-ghost'>
+            <button className='btn btn-primary'>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FaHeart />
+                <FavoriteIcon isEnabled={favorite} recipeId={id}/>
                 <p>Favoritos</p>
               </div>
             </button>

@@ -34,6 +34,8 @@ export const ViewRecipe = () => {
         </div>
         <PlannerProvider>
           <MainRecipe
+            favorite={detail.recipe?.favorite}
+            id={detail.recipe?.id}
             title={detail.recipe?.name}
             time={detail.recipe?.preparationTime}
             img={detail.recipe?.urlImg}
