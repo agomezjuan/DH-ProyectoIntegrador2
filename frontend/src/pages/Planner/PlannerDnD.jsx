@@ -11,8 +11,8 @@ import {
 } from '@dnd-kit/sortable';
 import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
-import { mapPlannerData } from '../../utils/plannerMapper';
-import { useAuthStore } from "../../store/authStore.js";
+import { mapPlannerData, mapPlannerToPost } from '../../utils/plannerMapper';
+import { useAuthStore } from '../../store/authStore.js';
 
 const PlannerDnD = () => {
   const daysOfWeek = [
@@ -26,10 +26,13 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser} = useUserProfileStore();
+  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, fetchSavePlanner } =
+    useUserProfileStore();
   const { token, profile } = useAuthStore();
 
-  const plannerToPost = useUserProfileStore((state) => state.plannerToPost);
+  const [plannerToPost, setPlannerToPost] = useState(
+    useUserProfileStore((state) => state.plannerToPost)
+  );
 
   console.log('Planner', planner);
   console.log('Items', mapPlannerData(items));
@@ -39,19 +42,21 @@ const PlannerDnD = () => {
     setItems(mapPlannerData(planner));
   }, [planner]);
 
+  useEffect(() => {
+    setPlannerToPost(mapPlannerToPost(items));
+  }, [items]);
+
   console.log('RECIPES', items);
 
   const handleDownload = () => {
     fetchDownloadReport(token, profile.sub);
-
   };
-  const handlePost = () =>{
-
-  }
+  const handlePost = () => {
+    fetchSavePlanner(token, plannerToPost)
+  };
 
   const handleDelete = () => {
     fetchDeletePlannerByUser(token);
-
   };
 
   useEffect(() => {
@@ -61,8 +66,8 @@ const PlannerDnD = () => {
   const handleDragEnd = (e) => {
     const { active, over } = e;
     setItems((items) => {
-      const oldIndex = items.findIndex((item) => item.recipe.id === active.id);
-      const newIndex = items.findIndex((item) => item.recipe.id === over.id);
+      const oldIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === active.id);
+      const newIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === over.id);
       return arrayMove(items, oldIndex, newIndex);
     });
   };
@@ -105,9 +110,16 @@ const PlannerDnD = () => {
                 <SortableContext
                   items={items}
                   strategy={verticalListSortingStrategy}>
-                  {items?.map((recipes, index) => ( recipes.recipe?.id ?
-                    <PlannedRecipe key={recipes.recipe?.id} item={recipes?.recipe }  /> : <PlannedRecipe key={index*13} item={{id: index} }/>
-                  ))}
+                  {items?.map((recipes, index) =>
+                    recipes.recipe?.id ? (
+                      <PlannedRecipe
+                        key={recipes.recipe?.id}
+                        item={recipes?.recipe}
+                      />
+                    ) : (
+                      <PlannedRecipe key={index * 13} item={{ id: index }} />
+                    )
+                  )}
                 </SortableContext>
               </div>
             </div>

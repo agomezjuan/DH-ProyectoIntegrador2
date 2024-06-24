@@ -14,5 +14,24 @@ function mapPlannerData(data) {
     return [];
   }
 }
+const weekDays = [
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday'
+];
 
-export { mapPlannerData };
+function mapPlannerToPost(data){
+  let plannerToPost = {}
+  data.forEach((day,index) => {
+    if(day.recipe){
+      plannerToPost = {...plannerToPost, [weekDays[index]]:{id: day.recipe.id}}
+    }
+  });
+  return plannerToPost
+}
+
+export { mapPlannerData, mapPlannerToPost };

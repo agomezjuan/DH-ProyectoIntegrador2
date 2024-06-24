@@ -42,7 +42,6 @@ function UpdateUserData() {
         message: 'Error al actualizar los datos'
       });
       console.error('Update failed:', error);
-    } finally {
       reset();
     }
   });

@@ -4,6 +4,7 @@ import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from "../../store/authStore";
 import { FormModal } from '../FormModal';
 import { UpdateUserData } from '../UpdateUserData';
+import {useUserProfileStore} from '../../store/userProfileStore';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
@@ -11,6 +12,9 @@ export default function Navbar() {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const {cleanPlanner} = useUserProfileStore();
+
+  const userId = profile?.sub
 
   function handleUpdate() {
     setModalOpen(!isModalOpen)
@@ -29,6 +33,7 @@ export default function Navbar() {
     setToastMessage(null);
     try {
       logout();
+      cleanPlanner();
       setToastMessage({ type: 'success', message: 'Has cerrado sesión!' });
       navigate("/");
     } catch (error) {
@@ -81,7 +86,7 @@ export default function Navbar() {
             </>
             :
             <>
-            <li><a onClick={() => goToUserProfile(`${profile.sub}`)}>Perfil</a></li>
+            <li><a onClick={() => goToUserProfile(`${userId}`)}>Perfil</a></li>
             <li><a onClick={handleUpdate} >Actualizar datos</a></li>
             <li><a onClick={handleCerrarSesion} >Cerrar Sesión</a></li>
             </>

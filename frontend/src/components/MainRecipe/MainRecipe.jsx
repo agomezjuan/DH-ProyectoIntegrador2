@@ -1,8 +1,34 @@
-import { FaCalendarAlt, FaClock, FaHeart } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { CustomAlert } from '../CustomAlert';
 import { PlannerModal } from '../PlannerModal/PlannerModal';
+import { useAuthStore } from '../../store/authStore';
+import { useNavigate, useParams } from 'react-router-dom';
+import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 
 const MainRecipe = ({ title, time, img }) => {
+  const { isAuth } = useAuthStore();
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleButtonClick = () => {
+    if (!isAuth) {
+      setShowAlert(true);
+    } else {
+      document.getElementById('planner_modal').showModal();
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  const handleLogin = () => {
+    navigate(`/login`);
+  };
+
   return (
     <div className='flex justify-between mx-20 mt-12 relative'>
       <div
@@ -24,23 +50,19 @@ const MainRecipe = ({ title, time, img }) => {
           <div className='flex gap-10 mt-10'>
             <button className='btn btn-ghost'>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FaClock />
+                <FaClock color='#557824' />
                 <p>{time}</p>
               </div>
             </button>
-            <button
-              className='btn btn-ghost'
-              onClick={() =>
-                document.getElementById('planner_modal').showModal()
-              }>
+            <button className='btn btn-ghost' onClick={handleButtonClick}>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FaCalendarAlt />
+                <FaCalendarAlt color='#557824' />
                 <p>Planeador</p>
               </div>
             </button>
             <button className='btn btn-ghost'>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FaHeart />
+                <FavoriteIcon isEnabled={false} recipeId={id} />
                 <p>Favoritos</p>
               </div>
             </button>
@@ -48,6 +70,16 @@ const MainRecipe = ({ title, time, img }) => {
         </div>
       </div>
       <PlannerModal />
+      {showAlert && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20'>
+          <CustomAlert
+            onClose={handleCloseAlert}
+            handleAction={handleLogin}
+            message='Para crear tu plan semanal inicia sesión.'
+            option='Iniciar Sesión'
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -43,9 +43,9 @@ export const deletePlannerByUser = async (token) => {
 
 export const savePlanner = async (token, planner) => {
   try {
-    const response = await httpService.post(`${BASE_URL}`, {
+    const response = await httpService.post(`${BASE_URL}`,
       planner
-    }, {
+    , {
       headers: "Authorization: Bearer "+token
     });
     return response.data;

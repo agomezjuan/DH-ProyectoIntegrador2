@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
-import {
+import planner, {
   getPlanner,
   downloadReport,
   deletePlannerByUser,
@@ -29,6 +29,7 @@ export const useUserProfileStore = create((set) => ({
   },
 
   plannerToPost: {},
+  plannerUpdateDay: {},
   // Acción para actualizar los datos del usuario
   updateUserData: (newData) =>
     set((state) => ({
@@ -76,9 +77,12 @@ export const useUserProfileStore = create((set) => ({
 
   fetchFavoriteRecipes: async (token, username) => {
     try {
-      const favorites = await http.get(`${FAVORITES_BASE_URL}?username=${username}`, {
-        headers: 'Authorization: Bearer '+token
-      });
+      const favorites = await http.get(
+        `${FAVORITES_BASE_URL}?username=${username}`,
+        {
+          headers: 'Authorization: Bearer ' + token
+        }
+      );
       set({ favoriteRecipes: favorites.data });
     } catch (error) {
       console.error('Error fetching favorite recipes:', error);
@@ -102,9 +106,9 @@ export const useUserProfileStore = create((set) => ({
   // Accion para actualizar el planner
   addRecipeToPlanner: (day, recipe) => {
     set((state) => ({
-      planner: {
+      plannerUpdateDay: {
         ...state.planner,
-        [day]: { ...recipe, id: day, recipeId: recipe.id }
+        [day]: {"recipe" : recipe}
       },
       plannerToPost: {
         ...state.planner,
@@ -114,12 +118,16 @@ export const useUserProfileStore = create((set) => ({
   },
 
   fetchPlannerByUser: async (token) => {
-    set({error: null });
+    set({ error: null });
     try {
       const plannerResponse = await getPlanner(token);
-      set({
-        planner: plannerResponse
-      });
+      set((state) => ({
+        planner: {
+          ...state.planner,
+          ...plannerResponse,
+          ...state.plannerUpdateDay
+        }
+      }));
     } catch (error) {
       set({ error: error.message });
     }
@@ -127,7 +135,8 @@ export const useUserProfileStore = create((set) => ({
   fetchDownloadReport: async (token, userid) => {
     set({ error: null });
     try {
-      const data = await downloadReport(token, userid);0
+      const data = await downloadReport(token, userid);
+      0;
 
       const urlBlob = window.URL.createObjectURL(new Blob([data]));
       const link = document.createElement('a');
@@ -141,17 +150,28 @@ export const useUserProfileStore = create((set) => ({
     }
   },
   fetchDeletePlannerByUser: async (token) => {
-    set({error: null });
+    set({ error: null });
     try {
       const planner = await deletePlannerByUser(token);
       if (planner.status === 200) {
         set({ planner: {} });
       }
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
+
+  fetchSavePlanner: async (token, planner) => {
+    try {
+      // Asumiendo que tienes una API que acepta POST a /api/favorites
+      const response = await savePlanner(token, planner);
 
     } catch (error) {
-      set({ error: error.message});
+      console.error('Error adding recipe:', error);
     }
-  }
+  },
+
+  cleanPlanner: () => set(() => ({ planner: {}}))
 }));
 
 export default useUserProfileStore;

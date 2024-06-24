@@ -315,3 +315,5 @@ $RECYCLE.BIN/
 !build-and-run.sh
 
 *.out
+# Local Netlify folder
+.netlify
