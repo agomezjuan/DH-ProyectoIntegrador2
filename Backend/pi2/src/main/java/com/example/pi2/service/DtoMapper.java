@@ -61,10 +61,10 @@ public class DtoMapper {
 
     public PlannerDtoToCsv toPlannerDtoToCsv(Recipe recipe){
         PlannerDtoToCsv dto = new PlannerDtoToCsv();
-        dto.setName(recipe.getName());
-        dto.setDescription(recipe.getDescription());
-        dto.setPreparationTime(recipe.getPreparationTime());
-        dto.setPreparationSteps(recipe.getPreparationSteps());
+        dto.setNombre(recipe.getName());
+        dto.setDescripcion(recipe.getDescription());
+        dto.setTiempoPreparacion(recipe.getPreparationTime());
+        dto.setInstrucciones(recipe.getPreparationSteps());
         return dto;
     }
 }

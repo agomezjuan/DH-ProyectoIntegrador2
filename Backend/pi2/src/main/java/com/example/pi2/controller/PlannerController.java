@@ -93,7 +93,7 @@ public class PlannerController {
 					csvFileName);
 			response.setHeader(headerKey, headerValue);
 			ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-			String[] header = {"dayOfTheWeek", "name", "description", "preparationTime", "preparationSteps"};
+			String[] header = {"Dia", "Nombre", "Descripcion", "TiempoPreparacion", "Instrucciones"};
 			csvBeanWriter.writeHeader(header);
 			List<PlannerDtoToCsv> plannerDTOList = plannerService.dtoToCsv2(idUser);
 			for (PlannerDtoToCsv plannerDTO1 :

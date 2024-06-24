@@ -13,9 +13,9 @@ import java.util.LinkedList;
 @NoArgsConstructor
 public class PlannerDtoToCsv {
 
-	  private String dayOfTheWeek;
-	  private String name;
-	  private String description;
-	  private String preparationTime;
-	  private LinkedList<String> preparationSteps;
+	  private String Dia;
+	  private String Nombre;
+	  private String Descripcion;
+	  private String TiempoPreparacion;
+	  private LinkedList<String> Instrucciones;
 }
