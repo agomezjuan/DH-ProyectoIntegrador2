@@ -39,7 +39,7 @@ const Footer = () => {
           </Link>
           <div className='flex items-start gap-3 justify-between'>
             <a
-              href='https://www.facebook.com'
+              href='https://www.facebook.com/profile.php?id=61561368355295&mibextid=ZbWKwL'
               aria-label='Facebook'
                target='_blank'
               rel='noopener noreferrer'
@@ -54,7 +54,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='https://www.x.com/home'
+              href='https://x.com/MealMap_'
               aria-label='X'
                target='_blank'
               rel='noopener noreferrer'
@@ -71,7 +71,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='https://www.instagram.com/'
+              href='https://www.instagram.com/mealmap__?igsh=MXVmY3pxOWJkaG5uMQ%3D%3D'
               aria-label='Instagram'
                target='_blank'
               rel='noopener noreferrer'
@@ -93,7 +93,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href='https://www.youtube.com/'
+              href='https://www.youtube.com/@MealMap_Planner'
               aria-label='YouTube'
                target='_blank'
               rel='noopener noreferrer'
