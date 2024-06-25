@@ -10,6 +10,7 @@ import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 const MainRecipe = ({ title, time, img }) => {
   const { isAuth } = useAuthStore();
   const [showAlert, setShowAlert] = useState(false);
+  const [showAlertFav, setShowAlertFav] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -27,6 +28,16 @@ const MainRecipe = ({ title, time, img }) => {
 
   const handleLogin = () => {
     navigate(`/login`);
+  };
+
+  const handleFavoritesButtonClick = () => {
+    if (!isAuth) {
+      setShowAlertFav(true);
+    }
+  };
+
+  const handleCloseAlertFav = () => {
+    setShowAlertFav(false);
   };
 
   return (
@@ -58,7 +69,7 @@ const MainRecipe = ({ title, time, img }) => {
                 <p>Planeador</p>
               </div>
             </button>
-            <button className='btn btn-ghost'>
+            <button className='btn btn-ghost' onClick={handleFavoritesButtonClick}>
               <div className='flex flex-col justify-center items-center gap-2'>
                 <FavoriteIcon isEnabled={false} recipeId={id} />
                 <p>Favoritos</p>
@@ -74,6 +85,16 @@ const MainRecipe = ({ title, time, img }) => {
             onClose={handleCloseAlert}
             handleAction={handleLogin}
             message='Para crear tu plan semanal inicia sesión.'
+            option='Iniciar Sesión'
+          />
+        </div>
+      )}
+      {showAlertFav && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20'>
+          <CustomAlert
+            onClose={handleCloseAlertFav}
+            handleAction={handleLogin}
+            message='Para agregar a favoritos inicia sesión.'
             option='Iniciar Sesión'
           />
         </div>

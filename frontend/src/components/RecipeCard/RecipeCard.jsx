@@ -1,12 +1,33 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FavoriteIcon } from "../FavoriteIcon/index.js";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import { useAuthStore } from '../../store/authStore';
+import { CustomAlert } from '../CustomAlert';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecipeCard({ recipe }) {
   useEffect(() => {
 
   }, [recipe]);
+
+  const { isAuth } = useAuthStore();
+  const [showAlertFav, setShowAlertFav] = useState(false);
+  const navigate = useNavigate();
+
+  const handleFavoritesButtonClick = () => {
+    if (!isAuth) {
+      setShowAlertFav(true);
+    }
+  };
+
+  const handleCloseAlertFav = () => {
+    setShowAlertFav(false);
+  };
+
+  const handleLogin = () => {
+    navigate(`/login`);
+  };
 
   return (
     <div className='border rounded-lg overflow-hidden shadow-md bg-white relative pb-8'>
@@ -31,9 +52,20 @@ export default function RecipeCard({ recipe }) {
         <div className='absolute bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-secondary'>
           <div className='flex items-center '></div>
           <span className='text-gray-600'>{recipe.preparationTime}</span>
-          <FavoriteIcon isEnabled={recipe.favorite} recipeId={recipe.id}/>
+          <span onClick={handleFavoritesButtonClick}>
+          <FavoriteIcon isEnabled={recipe.favorite} recipeId={recipe.id}/></span>
         </div>
       </div>
+      {showAlertFav && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20'>
+          <CustomAlert
+            onClose={handleCloseAlertFav}
+            handleAction={handleLogin}
+            message='Para agregar a favoritos inicia sesión.'
+            option='Iniciar Sesión'
+          />
+        </div>
+      )}
     </div>
   );
 }

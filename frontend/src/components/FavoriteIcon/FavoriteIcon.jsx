@@ -20,9 +20,9 @@ export default function FavoriteIcon({ isEnabled, recipeId }) {
         console.log(response);
         setEnabled(true);
       });
-    } else {
+    } /*else {
       toast.warn('Inicia sesión para guardar favoritos!');
-    }
+    }*/
   };
 
   const unsetFavorite = () => {
