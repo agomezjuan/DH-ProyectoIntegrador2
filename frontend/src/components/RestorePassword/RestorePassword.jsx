@@ -4,11 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { changePasswordSchema } from '../../schemas/authSchemas';
 import { useAuthStore } from '../../store/authStore';
+import { useUserProfileStore } from '../../store/userProfileStore';
+
 
 function RestorePassword() {
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState(null);
-  const { resetPassword } = useAuthStore(); 
+  const { resetPassword, logout } = useAuthStore(); 
+  const { cleanPlanner } = useUserProfileStore();
+
 
   const {
     register,
@@ -30,9 +34,10 @@ function RestorePassword() {
     try {
       const response = await resetPassword(resetData);
       if (response) {
-        navigate('/login');
-       setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
-        
+        logout();
+        cleanPlanner();
+        setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
+        navigate('/login');        
       } else {
         setToastMessage({ type: 'error', message: 'Correo no existe como usuario' });
         reset();
