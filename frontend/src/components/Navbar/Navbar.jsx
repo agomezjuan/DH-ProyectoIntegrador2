@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from '../../store/authStore';
 import { FormModal } from '../FormModal';
 import { UpdateUserData } from '../UpdateUserData';
 import { useUserProfileStore } from '../../store/userProfileStore';
+import { PlannerModal } from '../PlannerModal/PlannerModal';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
@@ -122,6 +123,7 @@ export default function Navbar() {
           </FormModal>
         </div>
       )}
+      <PlannerModal />
     </div>
   );
 }
