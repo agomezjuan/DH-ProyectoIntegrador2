@@ -72,7 +72,7 @@ export const Carousel = () => {
               <img
                 src={allCategories?.category?.urlImg}
                 alt={`Imagen ${index}`}
-                className={`w-full h-full object-cover transition-opacity duration-300 ease-in-out hover:scale-105 transform hover:shadow-lg hover:bg-gray-100 ${selectedCategory?.category !== allCategories?.category && unselectedCategories}`}
+                className={`w-full h-full object-cover transition duration-300 ease-in-out hover:scale-105 transform hover:shadow-lg hover:bg-gray-100 ${selectedCategory?.category !== allCategories?.category && unselectedCategories}`}
                 onClick={() => handleCategoryClick(allCategories)}
               />
             </div>
