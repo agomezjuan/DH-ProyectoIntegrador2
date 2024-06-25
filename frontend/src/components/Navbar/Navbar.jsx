@@ -52,10 +52,11 @@ export default function Navbar() {
     if (toastMessage) {
       timer = setTimeout(() => {
         if (toastMessage.type === 'success') {
+          window.location.reload();
           navigate('/');
         }
         setToastMessage(null);
-      }, 7000);
+      }, 3000);
     }
     return () => clearTimeout(timer);
   }, [toastMessage, navigate]);
