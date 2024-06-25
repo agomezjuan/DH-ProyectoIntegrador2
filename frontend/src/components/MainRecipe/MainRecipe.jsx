@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { CustomAlert } from '../CustomAlert';
@@ -10,6 +10,7 @@ import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 const MainRecipe = ({ title, time, img }) => {
   const { isAuth } = useAuthStore();
   const [showAlert, setShowAlert] = useState(false);
+  const ref = useRef(null);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -27,6 +28,13 @@ const MainRecipe = ({ title, time, img }) => {
 
   const handleLogin = () => {
     navigate(`/login`);
+  };
+
+  const handleFavorite = () => {
+    if (ref.current) {
+      ref.current.click();
+      console.log('click');
+    }
   };
 
   return (
@@ -58,9 +66,9 @@ const MainRecipe = ({ title, time, img }) => {
                 <p>Planeador</p>
               </div>
             </button>
-            <button className='btn btn-ghost'>
+            <button className='btn btn-ghost' onClick={handleFavorite}>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FavoriteIcon isEnabled={false} recipeId={id} />
+                <FavoriteIcon isEnabled={false} recipeId={id} ref={ref} />
                 <p>Favoritos</p>
               </div>
             </button>

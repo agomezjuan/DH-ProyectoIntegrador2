@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Layout } from '@/components/Layout';
 import MainRecipe from '../../components/MainRecipe/MainRecipe';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
@@ -11,6 +11,7 @@ export const ViewRecipe = () => {
   const { id } = useParams();
   const { detail, loading, error, fetchRecipeById } = useRecipesStore();
   const planner = useUserProfileStore((state) => state.planner);
+  const ref = useRef();
 
   console.log('RECIPES', planner);
 
@@ -18,11 +19,13 @@ export const ViewRecipe = () => {
     if (id) {
       fetchRecipeById(id);
     }
+
+    ref.current.scrollIntoView({ behavior: 'smooth' });
   }, [id, fetchRecipeById]);
 
   return (
     <Layout>
-      <div className='container lg:px-20 bg-base-200 lg:py-6'>
+      <div className='container lg:px-20 bg-base-200 lg:py-6' ref={ref}>
         <div className='h-[200px] bg-secondary flex items-center justify-center p-8 text-center'>
           <SearchBar />
         </div>
