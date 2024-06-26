@@ -54,10 +54,10 @@ const PlanPDF = ({ planner }) => {
         .map((day) => (
           <Page size='A4' key={day} style={styles.page}>
             <View style={styles.section}>
-              <Text style={styles.title}>{days[day].toUpperCase()}</Text>
-              <Text style={styles.header}>{planner[day].recipe?.name}</Text>
+              <Text style={styles.title}>{days[day]?.toUpperCase()}</Text>
+              <Text style={styles.header}>{planner[day]?.recipe?.name}</Text>
               <Text style={styles.content}>
-                Tiempo de preparación: {planner[day].recipe?.preparationTime}
+                Tiempo de preparación: {planner[day]?.recipe?.preparationTime}
               </Text>
 
               <Text
@@ -67,7 +67,7 @@ const PlanPDF = ({ planner }) => {
                 ]}>
                 Ingredientes:
               </Text>
-              {planner[day].recipe?.ingredients.map((ingredient, index) => (
+              {planner[day]?.recipe?.ingredients.map((ingredient, index) => (
                 <Text key={index} style={styles.content}>
                   - {ingredient}
                 </Text>
@@ -79,7 +79,7 @@ const PlanPDF = ({ planner }) => {
                 ]}>
                 Pasos de preparación:
               </Text>
-              {planner[day].recipe?.preparationSteps.map((step, index) => (
+              {planner[day]?.recipe?.preparationSteps.map((step, index) => (
                 <Text key={index} style={styles.content}>
                   {index + 1}. {step}
                 </Text>
