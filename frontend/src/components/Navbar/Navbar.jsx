@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from '../../store/authStore';
@@ -6,12 +6,10 @@ import { FormModal } from '../FormModal';
 import { UpdateUserData } from '../UpdateUserData';
 import { useUserProfileStore } from '../../store/userProfileStore';
 import { PlannerModal } from '../PlannerModal/PlannerModal';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
-  const [toastMessage, setToastMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const { cleanPlanner } = useUserProfileStore();
@@ -31,37 +29,16 @@ export default function Navbar() {
   };
 
   const handleCerrarSesion = () => {
-    setLoading(true);
-    setToastMessage(null);
     try {
       logout();
       cleanPlanner();
-      setToastMessage({ type: 'success', message: 'Has cerrado sesión!' });
+      toast.success('Has cerrado sesión!');
       navigate('/');
     } catch (error) {
-      setToastMessage({
-        type: 'error',
-        message: 'Algo falló. Intenta de nuevo.'
-      });
+      toast.error('Algo falló. Intenta de nuevo.');
       console.error('Logout failed:', error);
-    } finally {
-      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    let timer;
-    if (toastMessage) {
-      timer = setTimeout(() => {
-        if (toastMessage.type === 'success') {
-          window.location.reload();
-          navigate('/');
-        }
-        setToastMessage(null);
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [toastMessage, navigate]);
 
   return (
     <div className='navbar container bg-base-100'>
@@ -109,14 +86,7 @@ export default function Navbar() {
           </ul>
         </details>
       </div>
-      {toastMessage && (
-        <div className='toast toast-center toast-middle z-20'>
-          <div
-            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-            <span>{toastMessage.message}</span>
-          </div>
-        </div>
-      )}
+
       {isModalOpen && (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60'>
           <FormModal isOpen={isModalOpen} onClose={handleClose}>

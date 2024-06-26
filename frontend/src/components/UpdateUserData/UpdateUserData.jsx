@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { updasteUserSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthStore } from '../../store/authStore';
+import { toast } from 'react-toastify';
 
 function UpdateUserData() {
   const navigate = useNavigate();
-  const [toastMessage, setToastMessage] = useState(null);
   const { updateUserData, profile } = useAuthStore();
 
-  console.log('PROFILE: ', profile)
+  console.log('PROFILE: ', profile);
 
   const {
     register,
@@ -32,15 +31,10 @@ function UpdateUserData() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await updateUserData(data);
-      setToastMessage({
-        type: 'success',
-        message: 'Datos actualizados correctamente'
-      });
+      toast.success('Datos actualizados correctamente');
     } catch (error) {
-      setToastMessage({
-        type: 'error',
-        message: 'Error al actualizar los datos'
-      });
+      toast.error('Error al actualizar los datos');
+
       console.error('Update failed:', error);
       reset();
     }
@@ -81,12 +75,12 @@ function UpdateUserData() {
             </span>
           )}
         </div>
-          <div className='text-center'>
-        <button
-          type='submit'
-          className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
-          Actualiza tus datos
-        </button>
+        <div className='text-center'>
+          <button
+            type='submit'
+            className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
+            Actualiza tus datos
+          </button>
         </div>
 
         <div className='mt-2 text-center'>
@@ -97,14 +91,6 @@ function UpdateUserData() {
           </button>
         </div>
       </form>
-      {toastMessage && (
-        <div className='toast toast-center toast-middle'>
-          <div
-            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-            <span>{toastMessage.message}</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

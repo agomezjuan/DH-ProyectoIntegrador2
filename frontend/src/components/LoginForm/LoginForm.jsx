@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { loginSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 
 function LoginForm() {
   const { login } = useAuthStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
 
   const {
     register,
@@ -32,36 +32,22 @@ function LoginForm() {
 
   const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
-    setToastMessage(null);
+
     try {
-      await login(data);
-      setToastMessage({ type: 'success', message: 'Bienvenida!' });
+      await login(data).then(() => {
+        navigate('/');
+        toast.success('Bienvenida!');
+      });
       reset();
       navigate('/');
     } catch (error) {
-      setToastMessage({
-        type: 'error',
-        message: 'Algo falló :(. Revisa tus datos'
-      });
+      toast.error('Algo falló :(. Revisa tus datos');
+
       console.error('Login failed:', error);
     } finally {
       setLoading(false);
     }
   });
-
-  useEffect(() => {
-    let timer;
-    if (toastMessage) {
-      timer = setTimeout(() => {
-        if (toastMessage.type === 'success') {
-          navigate('/');
-        }
-        setToastMessage(null);
-      }, 5000);
-    }
-
-    return () => clearTimeout(timer);
-  }, [toastMessage, navigate]);
 
   return (
     <div className='flex flex-column text-center bg-zinc-200 bg-opacity-80 md:py-16 rounded-md w-full'>
@@ -122,14 +108,6 @@ function LoginForm() {
           </button>
         </div>
       </div>
-      {toastMessage && (
-        <div className='toast toast-center toast-middle'>
-          <div
-            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-            <span>{toastMessage.message}</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { registerSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 
 function RegisterForm() {
   const { registerUser } = useAuthStore();
   const navigate = useNavigate();
-  const [toastMessage, setToastMessage] = useState(null);
 
   const {
     register,
@@ -31,17 +30,12 @@ function RegisterForm() {
     try {
       const resRegister = await registerUser(registerData);
       if (resRegister.status === 201) {
-        setToastMessage({
-          type: 'success',
-          message: 'Te has registrado con éxito!'
-        });
+        toast.success('Te has registrado con éxito!');
         navigate('/login');
       }
     } catch (error) {
-      setToastMessage({
-        type: 'error',
-        message: 'Algo falló :(. Revisa tus datos'
-      });
+      toast.error('Algo falló :(. Revisa tus datos');
+
       console.error('Registration failed:', error);
     } finally {
       reset();
@@ -132,14 +126,6 @@ function RegisterForm() {
           </button>
         </div>
       </form>
-      {toastMessage && (
-        <div className='toast toast-center toast-middle'>
-          <div
-            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-            <span>{toastMessage.message}</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

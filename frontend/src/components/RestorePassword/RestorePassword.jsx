@@ -5,14 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { changePasswordSchema } from '../../schemas/authSchemas';
 import { useAuthStore } from '../../store/authStore';
 import { useUserProfileStore } from '../../store/userProfileStore';
-
+import { toast } from 'react-toastify';
 
 function RestorePassword() {
   const navigate = useNavigate();
-  const [toastMessage, setToastMessage] = useState(null);
-  const { resetPassword, logout } = useAuthStore(); 
+  const { resetPassword, logout } = useAuthStore();
   const { cleanPlanner } = useUserProfileStore();
-
 
   const {
     register,
@@ -36,15 +34,15 @@ function RestorePassword() {
       if (response) {
         logout();
         cleanPlanner();
-        setToastMessage({ type: 'success', message: 'Has actualizado tu contraseña' });
-        navigate('/login');        
+        toast.success('Has actualizado tu contraseña');
+        navigate('/login');
       } else {
-        setToastMessage({ type: 'error', message: 'Correo no existe como usuario' });
+        toast.error('Correo no existe como usuario');
         reset();
         navigate('/');
       }
     } catch (error) {
-      setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
+      toast.error('Algo falló :(. Revisa tus datos');
       console.error('Password reset failed:', error);
     } finally {
       reset();
@@ -105,13 +103,6 @@ function RestorePassword() {
           </button>
         </div>
       </form>
-      {toastMessage && (
-        <div className='toast toast-center toast-middle'>
-          <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-            <span>{toastMessage.message}</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
