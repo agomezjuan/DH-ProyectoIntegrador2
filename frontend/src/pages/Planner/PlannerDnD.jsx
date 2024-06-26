@@ -124,9 +124,9 @@ const PlannerDnD = () => {
                   items={items}
                   strategy={verticalListSortingStrategy}>
                   {items?.map((recipes, index) =>
-                    recipes.recipe?.id ? (
+                    recipes?.recipe?.id ? (
                       <PlannedRecipe
-                        key={recipes.recipe?.id}
+                        key={recipes?.recipe?.id}
                         item={recipes?.recipe}
                       />
                     ) : (
