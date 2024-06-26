@@ -45,7 +45,10 @@ export const ViewRecipe = () => {
             {error && <p>Error: {error}</p>}
             {!loading && !error && (
               <div className='p-6'>
-                <div className='my-5'>
+                <div className='mb-5'>
+                  <p className='text-center md:text-left text-lg text-gray-600 mb-4'>
+                    {decodeHTML(detail.recipe?.description)}
+                  </p>
                   <h2 className='font-bold text-xl'>Ingredientes</h2>
                   <ul className='list-disc p-5'>
                     {detail.recipe?.ingredients &&

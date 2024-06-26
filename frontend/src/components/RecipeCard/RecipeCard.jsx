@@ -51,7 +51,9 @@ export default function RecipeCard({ recipe }) {
             </h3>
           </Link>
           <div className='mb-5'>
-            <p className='text-gray-600 p-4'>{recipe.description}</p>
+            <p className='text-gray-600 p-4'>
+              {decodeHTML(recipe.description)}
+            </p>
           </div>
         </div>
         <div className='absolute bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-secondary'>
