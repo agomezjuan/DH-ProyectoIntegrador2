@@ -8,12 +8,13 @@ import { PlannerProvider } from '../../context/PlannerContext';
 import useUserProfileStore from '../../store/userProfileStore';
 
 export const ViewRecipe = () => {
+  const ref = useRef();
   const { id } = useParams();
   const { detail, loading, error, fetchRecipeById } = useRecipesStore();
-  const planner = useUserProfileStore((state) => state.planner);
-  const ref = useRef();
 
-  console.log('RECIPES', planner);
+  const { favoriteRecipes } = useUserProfileStore();
+
+  const favorite = favoriteRecipes.some((recipe) => recipe.recipe.id == id);
 
   useEffect(() => {
     if (id) {
@@ -21,7 +22,7 @@ export const ViewRecipe = () => {
     }
 
     ref.current.scrollIntoView({ behavior: 'smooth' });
-  }, [id, fetchRecipeById]);
+  }, [id, fetchRecipeById, favoriteRecipes]);
 
   return (
     <Layout>
@@ -34,6 +35,7 @@ export const ViewRecipe = () => {
             title={detail.recipe?.name}
             time={detail.recipe?.preparationTime}
             img={detail.recipe?.urlImg}
+            favorite={favorite}
           />
         </PlannerProvider>
         <div className='container'>

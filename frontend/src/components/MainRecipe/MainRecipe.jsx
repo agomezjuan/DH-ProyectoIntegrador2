@@ -7,7 +7,7 @@ import { useAuthStore } from '../../store/authStore';
 import { useNavigate, useParams } from 'react-router-dom';
 import FavoriteIcon from '../FavoriteIcon/FavoriteIcon';
 
-const MainRecipe = ({ title, time, img }) => {
+const MainRecipe = ({ title, time, img, favorite }) => {
   const { isAuth } = useAuthStore();
   const [showAlert, setShowAlert] = useState(false);
   const ref = useRef(null);
@@ -33,7 +33,6 @@ const MainRecipe = ({ title, time, img }) => {
   const handleFavorite = () => {
     if (ref.current) {
       ref.current.click();
-      console.log('click');
     }
   };
 
@@ -68,7 +67,7 @@ const MainRecipe = ({ title, time, img }) => {
             </button>
             <button className='btn btn-ghost' onClick={handleFavorite}>
               <div className='flex flex-col justify-center items-center gap-2'>
-                <FavoriteIcon isEnabled={false} recipeId={id} ref={ref} />
+                <FavoriteIcon isEnabled={favorite} recipeId={id} ref={ref} />
                 <p>Favoritos</p>
               </div>
             </button>
@@ -93,7 +92,8 @@ const MainRecipe = ({ title, time, img }) => {
 MainRecipe.propTypes = {
   title: PropTypes.string,
   time: PropTypes.string,
-  img: PropTypes.string
+  img: PropTypes.string,
+  favorite: PropTypes.bool
 };
 
 export default MainRecipe;
