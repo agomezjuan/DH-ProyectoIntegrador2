@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { registerSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,7 +9,6 @@ function RegisterForm() {
   const { registerUser } = useAuthStore();
   const navigate = useNavigate();
   const [toastMessage, setToastMessage] = useState(null);
-
 
   const {
     register,
@@ -32,11 +31,17 @@ function RegisterForm() {
     try {
       const resRegister = await registerUser(registerData);
       if (resRegister.status === 201) {
-        setToastMessage({ type: 'success', message: 'Te has registrado con éxito!' });
+        setToastMessage({
+          type: 'success',
+          message: 'Te has registrado con éxito!'
+        });
         navigate('/login');
       }
     } catch (error) {
-      setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
+      setToastMessage({
+        type: 'error',
+        message: 'Algo falló :(. Revisa tus datos'
+      });
       console.error('Registration failed:', error);
     } finally {
       reset();
@@ -45,7 +50,7 @@ function RegisterForm() {
 
   return (
     <div className='flex flex-column justify-center bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='p-6 w-full max-w-96'>
         <div className='text-center'>
           <h2 className='text-lg font-bold text-primary max-w-lg'>
             Regístrate
@@ -67,7 +72,7 @@ function RegisterForm() {
 
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Apellido'
             type='text'
             {...register('lastName')}
@@ -81,7 +86,7 @@ function RegisterForm() {
 
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Correo electrónico'
             type='email'
             {...register('email')}
@@ -95,7 +100,7 @@ function RegisterForm() {
 
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Contraseña'
             type='password'
             {...register('password')}
@@ -108,7 +113,7 @@ function RegisterForm() {
         </div>
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
             placeholder='Confirmar Contraseña'
             type='password'
             {...register('confirmPassword')}
@@ -129,7 +134,8 @@ function RegisterForm() {
       </form>
       {toastMessage && (
         <div className='toast toast-center toast-middle'>
-          <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+          <div
+            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
             <span>{toastMessage.message}</span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import knifeplateImage from './knifeplate.png';
-import { Layout } from '@/components/Layout';
-import { Header } from '@/components/Header';
+import { FaDownload, FaTrashCan } from 'react-icons/fa6';
+import { FaSave } from 'react-icons/fa';
 import './Planner.css';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -26,8 +26,12 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, fetchSavePlanner } =
-    useUserProfileStore();
+  const {
+    fetchDownloadReport,
+    fetchPlannerByUser,
+    fetchDeletePlannerByUser,
+    fetchSavePlanner
+  } = useUserProfileStore();
   const { token, profile } = useAuthStore();
 
   const [plannerToPost, setPlannerToPost] = useState(
@@ -52,7 +56,7 @@ const PlannerDnD = () => {
     fetchDownloadReport(token, profile.sub);
   };
   const handlePost = () => {
-    fetchSavePlanner(token, plannerToPost)
+    fetchSavePlanner(token, plannerToPost);
   };
 
   const handleDelete = () => {
@@ -66,16 +70,20 @@ const PlannerDnD = () => {
   const handleDragEnd = (e) => {
     const { active, over } = e;
     setItems((items) => {
-      const oldIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === active.id);
-      const newIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === over.id);
+      const oldIndex = items.findIndex(
+        (item, index) =>
+          (item?.recipe?.id ? item?.recipe?.id : index) === active.id
+      );
+      const newIndex = items.findIndex(
+        (item, index) =>
+          (item?.recipe?.id ? item?.recipe?.id : index) === over.id
+      );
       return arrayMove(items, oldIndex, newIndex);
     });
   };
 
   return (
-    // <Layout>
     <div className='container bg-base-200 -mt-8'>
-      {/* <Header /> */}
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <div className='w-[800px] mx-auto container planner-container'>
           <h1>AGENDA SEMANAL</h1>
@@ -123,22 +131,25 @@ const PlannerDnD = () => {
                 </SortableContext>
               </div>
             </div>
-            <div className='planner-buttons-container mt-4'>
+            <div className='flex justify-between mt-10 mx-10'>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDownload}>
-                  Descargar Plan
+                <button className='btn btn-accent' onClick={handlePost}>
+                  <FaSave />
+                  Guardar
                 </button>
               </div>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDelete}>
-                  Limpiar Plan
+                <button className='btn btn-info' onClick={handleDownload}>
+                  <FaDownload />
+                  Descargar
                 </button>
               </div>
-            </div>
-            <div className='planner-buttons-container mt-4'>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handlePost}>
-                  Guardar Plan
+                <button
+                  className='btn bg-[#f17f82] hover:bg-[#e54a4f] '
+                  onClick={handleDelete}>
+                  <FaTrashCan />
+                  Limpiar
                 </button>
               </div>
             </div>
@@ -146,7 +157,6 @@ const PlannerDnD = () => {
         </div>
       </DndContext>
     </div>
-    // </Layout>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
@@ -6,7 +6,7 @@ import { loginSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 function LoginForm() {
-  const { login, profile } = useAuthStore();
+  const { login } = useAuthStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
@@ -37,10 +37,13 @@ function LoginForm() {
       await login(data);
       setToastMessage({ type: 'success', message: 'Bienvenida!' });
       reset();
-      navigate("/");
+      navigate('/');
     } catch (error) {
-      setToastMessage({ type: 'error', message: 'Algo falló :(. Revisa tus datos' });
-      console.error("Login failed:", error);
+      setToastMessage({
+        type: 'error',
+        message: 'Algo falló :(. Revisa tus datos'
+      });
+      console.error('Login failed:', error);
     } finally {
       setLoading(false);
     }
@@ -51,7 +54,7 @@ function LoginForm() {
     if (toastMessage) {
       timer = setTimeout(() => {
         if (toastMessage.type === 'success') {
-          navigate("/");
+          navigate('/');
         }
         setToastMessage(null);
       }, 5000);
@@ -61,15 +64,15 @@ function LoginForm() {
   }, [toastMessage, navigate]);
 
   return (
-    <div className='flex flex-column text-center bg-zinc-200 bg-opacity-80 py-16 rounded-md'>
-      <div className='text-center mx-auto'>
-        <form onSubmit={onSubmit}>
+    <div className='flex flex-column text-center bg-zinc-200 bg-opacity-80 md:py-16 rounded-md w-full'>
+      <div className='flex flex-col items-center w-full'>
+        <form onSubmit={onSubmit} className='p-6 w-full max-w-96'>
           <h2 className='text-lg font-bold text-primary max-w-lg'>
             Iniciar Sesión
           </h2>
           <div className='flex flex-col text-left'>
             <input
-              className='w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+              className='w-full mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
               placeholder='Correo electrónico'
               type='text'
               {...register('username')}
@@ -81,9 +84,9 @@ function LoginForm() {
             )}
           </div>
 
-          <div className='mt-1 flex flex-col text-left'>
+          <div className='mt-1 flex flex-col text-left '>
             <input
-              className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+              className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
               placeholder='Contraseña'
               type='password'
               {...register('password')}
@@ -112,14 +115,17 @@ function LoginForm() {
           </button>
         </div>
         <div className='mt-2'>
-          <button className='btn btn-ghost text-primary'onClick={goToChangePassword}>
+          <button
+            className='btn btn-ghost text-primary'
+            onClick={goToChangePassword}>
             ¿Olvidaste tu contraseña?
           </button>
         </div>
       </div>
       {toastMessage && (
         <div className='toast toast-center toast-middle'>
-          <div className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+          <div
+            className={`alert ${toastMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
             <span>{toastMessage.message}</span>
           </div>
         </div>

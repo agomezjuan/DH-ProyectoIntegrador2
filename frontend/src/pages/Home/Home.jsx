@@ -9,24 +9,25 @@ import { useRecipesStore } from '@/store/recipesStore';
 import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Home = () => {
-  const { recipes, loading, fetchRecipes, setRecipesByCategory } = useRecipesStore();
+  const { recipes, loading, fetchRecipes, setRecipesByCategory } =
+    useRecipesStore();
   const { selectedCategory } = useCategoriesStore();
   const { profile } = useAuthStore();
 
   const mapCategoryRecipe = (category) => {
     const categoryRecipes = category?.recipes || [];
-    return categoryRecipes.map(element => ({
+    return categoryRecipes.map((element) => ({
       recipe: element
     }));
-  }
+  };
 
   useEffect(() => {
     const loadRecipes = async () => {
       if (selectedCategory) {
         setRecipesByCategory(mapCategoryRecipe(selectedCategory));
       } else {
-        if(profile && profile.email) {
-          fetchRecipes(0, profile.email)
+        if (profile && profile.email) {
+          fetchRecipes(0, profile.email);
         } else {
           fetchRecipes();
         }
@@ -45,13 +46,17 @@ export const Home = () => {
           <Carousel />
           {recipes && (
             <RecipeContainer
-              title={selectedCategory? `Recetas de ${selectedCategory?.category?.name}` : 'Recetas populares'}
+              title={
+                selectedCategory
+                  ? `Recetas de ${selectedCategory?.category?.name}`
+                  : 'Recetas populares'
+              }
               recipes={recipes}
               loading={loading}
             />
           )}
         </div>
-        <Pagination />
+        {!selectedCategory && <Pagination />}
       </div>
     </Layout>
   );

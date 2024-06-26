@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Layout } from '@/components/Layout';
 import MainRecipe from '../../components/MainRecipe/MainRecipe';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
@@ -8,21 +8,25 @@ import { PlannerProvider } from '../../context/PlannerContext';
 import useUserProfileStore from '../../store/userProfileStore';
 
 export const ViewRecipe = () => {
+  const ref = useRef();
   const { id } = useParams();
   const { detail, loading, error, fetchRecipeById } = useRecipesStore();
-  const planner = useUserProfileStore((state) => state.planner);
 
-  console.log('RECIPES', planner);
+  const { favoriteRecipes } = useUserProfileStore();
+
+  const favorite = favoriteRecipes.some((recipe) => recipe.recipe.id == id);
 
   useEffect(() => {
     if (id) {
       fetchRecipeById(id);
     }
-  }, [id, fetchRecipeById]);
+
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  }, [id, fetchRecipeById, favoriteRecipes]);
 
   return (
     <Layout>
-      <div className='container lg:px-20 bg-base-200 lg:py-6'>
+      <div className='container lg:px-20 bg-base-200 lg:py-6' ref={ref}>
         <div className='h-[200px] bg-secondary flex items-center justify-center p-8 text-center'>
           <SearchBar />
         </div>
@@ -31,6 +35,7 @@ export const ViewRecipe = () => {
             title={detail.recipe?.name}
             time={detail.recipe?.preparationTime}
             img={detail.recipe?.urlImg}
+            favorite={favorite}
           />
         </PlannerProvider>
         <div className='container'>
