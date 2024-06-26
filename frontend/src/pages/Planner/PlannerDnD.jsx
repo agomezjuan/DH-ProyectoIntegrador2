@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 // import knifeplateImage from './knifeplate.png';
-import { FaDownload, FaTrashCan } from 'react-icons/fa6';
+import { FaFileCsv, FaFilePdf, FaTrashCan } from 'react-icons/fa6';
 import { FaSave } from 'react-icons/fa';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import './Planner.css';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -13,6 +14,10 @@ import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
 import { mapPlannerData, mapPlannerToPost } from '../../utils/plannerMapper';
 import { useAuthStore } from '../../store/authStore.js';
+import { CleanConfirm } from './modals/CleanConfirm.jsx';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PlanPDF from './PlanPDF/PlanPDF.jsx';
 
 const PlannerDnD = () => {
   const daysOfWeek = [
@@ -26,12 +31,8 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const {
-    fetchDownloadReport,
-    fetchPlannerByUser,
-    fetchDeletePlannerByUser,
-    fetchSavePlanner
-  } = useUserProfileStore();
+  const { fetchDownloadReport, fetchPlannerByUser, fetchSavePlanner } =
+    useUserProfileStore();
   const { token, profile } = useAuthStore();
 
   const [plannerToPost, setPlannerToPost] = useState(
@@ -56,11 +57,15 @@ const PlannerDnD = () => {
     fetchDownloadReport(token, profile.sub);
   };
   const handlePost = () => {
-    fetchSavePlanner(token, plannerToPost);
-  };
-
-  const handleDelete = () => {
-    fetchDeletePlannerByUser(token);
+    fetchSavePlanner(token, plannerToPost).then((response) => {
+      console.log(response);
+      if (response.idUser !== profile.sub) {
+        toast.error('Error al guardar el plan');
+        return;
+      }
+      fetchPlannerByUser(token);
+      toast.success('El plan se ha guardado correctamente!');
+    });
   };
 
   useEffect(() => {
@@ -140,14 +145,32 @@ const PlannerDnD = () => {
               </div>
               <div className='planner-buttons'>
                 <button className='btn btn-info' onClick={handleDownload}>
-                  <FaDownload />
-                  Descargar
+                  <FaFileCsv />
+                  CSV
                 </button>
+              </div>
+              <div className='planner-buttons'>
+                <PDFDownloadLink
+                  document={<PlanPDF planner={planner} />}
+                  fileName='plan.pdf'>
+                  {({ loading }) =>
+                    loading ? (
+                      <button className='btn btn-info'>Cargando...</button>
+                    ) : (
+                      <button className='btn btn-info'>
+                        <FaFilePdf />
+                        PDF
+                      </button>
+                    )
+                  }
+                </PDFDownloadLink>
               </div>
               <div className='planner-buttons'>
                 <button
                   className='btn bg-[#f17f82] hover:bg-[#e54a4f] '
-                  onClick={handleDelete}>
+                  onClick={() =>
+                    document.getElementById('clean-confirm').showModal()
+                  }>
                   <FaTrashCan />
                   Limpiar
                 </button>
@@ -155,6 +178,7 @@ const PlannerDnD = () => {
             </div>
           </div>
         </div>
+        <CleanConfirm token={token} />
       </DndContext>
     </div>
   );

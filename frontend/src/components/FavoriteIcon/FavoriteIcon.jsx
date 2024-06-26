@@ -45,7 +45,6 @@ const FavoriteIcon = forwardRef((props, ref) => {
         icon={enabled ? solidHeart : faHeart}
         className={`${enabled ? 'text-red-700' : 'text-primary'} hover:text-red-500 hover:scale-105`}
       />
-      <ToastContainer />
     </div>
   );
 });

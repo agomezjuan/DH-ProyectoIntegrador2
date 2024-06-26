@@ -6,6 +6,7 @@ import { FormModal } from '../FormModal';
 import { UpdateUserData } from '../UpdateUserData';
 import { useUserProfileStore } from '../../store/userProfileStore';
 import { PlannerModal } from '../PlannerModal/PlannerModal';
+import { ToastContainer } from 'react-toastify';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
@@ -124,6 +125,7 @@ export default function Navbar() {
         </div>
       )}
       <PlannerModal />
+      <ToastContainer />
     </div>
   );
 }
