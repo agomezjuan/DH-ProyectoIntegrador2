@@ -6,6 +6,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { useAuthStore } from '../../store/authStore.js';
 import CustomAlert from '../CustomAlert/CustomAlert.jsx';
 import { useRecipesStore } from '../../store/recipesStore.js';
+import decodeHTML from '../../utils/decodeHTML.js';
 
 export default function RecipeCard({ recipe }) {
   const { isAuth } = useAuthStore();
@@ -46,7 +47,7 @@ export default function RecipeCard({ recipe }) {
         <div className='flex flex-grow h-full flex-col'>
           <Link to={`/recipe/${recipe.id}`}>
             <h3 className='text-lg font-semibold p-4 hover:text-primary'>
-              {recipe.name}
+              {decodeHTML(recipe.name)}
             </h3>
           </Link>
           <div className='mb-5'>

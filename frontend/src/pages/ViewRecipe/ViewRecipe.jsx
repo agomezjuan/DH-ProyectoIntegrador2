@@ -6,6 +6,7 @@ import { useRecipesStore } from '@/store/recipesStore';
 import { useParams } from 'react-router-dom';
 import { PlannerProvider } from '../../context/PlannerContext';
 import useUserProfileStore from '../../store/userProfileStore';
+import decodeHTML from '../../utils/decodeHTML';
 
 export const ViewRecipe = () => {
   const ref = useRef();
@@ -32,7 +33,7 @@ export const ViewRecipe = () => {
         </div>
         <PlannerProvider>
           <MainRecipe
-            title={detail.recipe?.name}
+            title={decodeHTML(detail.recipe?.name)}
             time={detail.recipe?.preparationTime}
             img={detail.recipe?.urlImg}
             favorite={favorite}
