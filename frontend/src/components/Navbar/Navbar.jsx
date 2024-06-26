@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { useAuthStore } from '../../store/authStore';
 import { FormModal } from '../FormModal';
 import { UpdateUserData } from '../UpdateUserData';
 import { useUserProfileStore } from '../../store/userProfileStore';
+import { PlannerModal } from '../PlannerModal/PlannerModal';
+import { ToastContainer } from 'react-toastify';
 
 export default function Navbar() {
   const { isAuth, logout, profile } = useAuthStore();
@@ -52,10 +54,11 @@ export default function Navbar() {
     if (toastMessage) {
       timer = setTimeout(() => {
         if (toastMessage.type === 'success') {
+          window.location.reload();
           navigate('/');
         }
         setToastMessage(null);
-      }, 7000);
+      }, 3000);
     }
     return () => clearTimeout(timer);
   }, [toastMessage, navigate]);
@@ -121,6 +124,8 @@ export default function Navbar() {
           </FormModal>
         </div>
       )}
+      <PlannerModal />
+      <ToastContainer />
     </div>
   );
 }

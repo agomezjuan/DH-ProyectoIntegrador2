@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 // import knifeplateImage from './knifeplate.png';
-import { Layout } from '@/components/Layout';
-import { Header } from '@/components/Header';
+import { FaFileCsv, FaFilePdf, FaTrashCan } from 'react-icons/fa6';
+import { FaSave } from 'react-icons/fa';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import './Planner.css';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
@@ -13,6 +14,10 @@ import PlannedRecipe from './PlannedRecipe';
 import useUserProfileStore from '../../store/userProfileStore';
 import { mapPlannerData, mapPlannerToPost } from '../../utils/plannerMapper';
 import { useAuthStore } from '../../store/authStore.js';
+import { CleanConfirm } from './modals/CleanConfirm.jsx';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PlanPDF from './PlanPDF/PlanPDF.jsx';
 
 const PlannerDnD = () => {
   const daysOfWeek = [
@@ -26,7 +31,7 @@ const PlannerDnD = () => {
   ];
   const [items, setItems] = useState([]);
   const planner = useUserProfileStore((state) => state.planner);
-  const { fetchDownloadReport, fetchPlannerByUser, fetchDeletePlannerByUser, fetchSavePlanner } =
+  const { fetchDownloadReport, fetchPlannerByUser, fetchSavePlanner } =
     useUserProfileStore();
   const { token, profile } = useAuthStore();
 
@@ -52,11 +57,15 @@ const PlannerDnD = () => {
     fetchDownloadReport(token, profile.sub);
   };
   const handlePost = () => {
-    fetchSavePlanner(token, plannerToPost)
-  };
-
-  const handleDelete = () => {
-    fetchDeletePlannerByUser(token);
+    fetchSavePlanner(token, plannerToPost).then((response) => {
+      console.log(response);
+      if (response.idUser !== profile.sub) {
+        toast.error('Error al guardar el plan');
+        return;
+      }
+      fetchPlannerByUser(token);
+      toast.success('El plan se ha guardado correctamente!');
+    });
   };
 
   useEffect(() => {
@@ -66,16 +75,20 @@ const PlannerDnD = () => {
   const handleDragEnd = (e) => {
     const { active, over } = e;
     setItems((items) => {
-      const oldIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === active.id);
-      const newIndex = items.findIndex((item, index) => (item?.recipe?.id ? item?.recipe?.id : index) === over.id);
+      const oldIndex = items.findIndex(
+        (item, index) =>
+          (item?.recipe?.id ? item?.recipe?.id : index) === active.id
+      );
+      const newIndex = items.findIndex(
+        (item, index) =>
+          (item?.recipe?.id ? item?.recipe?.id : index) === over.id
+      );
       return arrayMove(items, oldIndex, newIndex);
     });
   };
 
   return (
-    // <Layout>
     <div className='container bg-base-200 -mt-8'>
-      {/* <Header /> */}
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <div className='w-[800px] mx-auto container planner-container'>
           <h1>AGENDA SEMANAL</h1>
@@ -111,9 +124,9 @@ const PlannerDnD = () => {
                   items={items}
                   strategy={verticalListSortingStrategy}>
                   {items?.map((recipes, index) =>
-                    recipes.recipe?.id ? (
+                    recipes?.recipe?.id ? (
                       <PlannedRecipe
-                        key={recipes.recipe?.id}
+                        key={recipes?.recipe?.id}
                         item={recipes?.recipe}
                       />
                     ) : (
@@ -123,30 +136,51 @@ const PlannerDnD = () => {
                 </SortableContext>
               </div>
             </div>
-            <div className='planner-buttons-container mt-4'>
+            <div className='flex justify-between mt-10 mx-10'>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDownload}>
-                  Descargar Plan
+                <button className='btn btn-accent' onClick={handlePost}>
+                  <FaSave />
+                  Guardar
                 </button>
               </div>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handleDelete}>
-                  Limpiar Plan
+                <button className='btn btn-info' onClick={handleDownload}>
+                  <FaFileCsv />
+                  CSV
                 </button>
               </div>
-            </div>
-            <div className='planner-buttons-container mt-4'>
               <div className='planner-buttons'>
-                <button className='btn btn-primary' onClick={handlePost}>
-                  Guardar Plan
+                <PDFDownloadLink
+                  document={<PlanPDF planner={planner} />}
+                  fileName='plan.pdf'>
+                  {({ loading }) =>
+                    loading ? (
+                      <button className='btn btn-info'>Cargando...</button>
+                    ) : (
+                      <button className='btn btn-info'>
+                        <FaFilePdf />
+                        PDF
+                      </button>
+                    )
+                  }
+                </PDFDownloadLink>
+              </div>
+              <div className='planner-buttons'>
+                <button
+                  className='btn bg-[#f17f82] hover:bg-[#e54a4f] '
+                  onClick={() =>
+                    document.getElementById('clean-confirm').showModal()
+                  }>
+                  <FaTrashCan />
+                  Limpiar
                 </button>
               </div>
             </div>
           </div>
         </div>
+        <CleanConfirm token={token} />
       </DndContext>
     </div>
-    // </Layout>
   );
 };
 

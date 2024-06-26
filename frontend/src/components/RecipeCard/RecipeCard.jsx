@@ -1,28 +1,32 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { FavoriteIcon } from "../FavoriteIcon/index.js";
-import {useEffect, useState} from "react";
-import { useAuthStore } from '../../store/authStore';
-import { CustomAlert } from '../CustomAlert';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FavoriteIcon } from '../FavoriteIcon/index.js';
+import { useEffect, useState } from 'react';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { useAuthStore } from '../../store/authStore.js';
+import CustomAlert from '../CustomAlert/CustomAlert.jsx';
+import { useRecipesStore } from '../../store/recipesStore.js';
 
 export default function RecipeCard({ recipe }) {
-  useEffect(() => {
-
-  }, [recipe]);
-
   const { isAuth } = useAuthStore();
-  const [showAlertFav, setShowAlertFav] = useState(false);
+  const { fetchRecipeById } = useRecipesStore();
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
-  const handleFavoritesButtonClick = () => {
+  useEffect(() => {}, [recipe]);
+
+  const handleButtonClick = async () => {
     if (!isAuth) {
-      setShowAlertFav(true);
+      setShowAlert(true);
+    } else {
+      fetchRecipeById(recipe.id).then(() => {
+        document.getElementById('planner_modal').showModal();
+      });
     }
   };
 
-  const handleCloseAlertFav = () => {
-    setShowAlertFav(false);
+  const handleCloseAlert = () => {
+    setShowAlert(false);
   };
 
   const handleLogin = () => {
@@ -50,18 +54,21 @@ export default function RecipeCard({ recipe }) {
           </div>
         </div>
         <div className='absolute bottom-0 left-0 right-0 flex items-center justify-between p-4 bg-secondary'>
-          <div className='flex items-center '></div>
+          <div
+            className='flex items-center hover:cursor-pointer text-primary hover:text-[#2d450c]'
+            onClick={handleButtonClick}>
+            <FaCalendarAlt />
+          </div>
           <span className='text-gray-600'>{recipe.preparationTime}</span>
-          <span onClick={handleFavoritesButtonClick}>
-          <FavoriteIcon isEnabled={recipe.favorite} recipeId={recipe.id}/></span>
+          <FavoriteIcon isEnabled={recipe.favorite} recipeId={recipe.id} />
         </div>
       </div>
-      {showAlertFav && (
+      {showAlert && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20'>
           <CustomAlert
-            onClose={handleCloseAlertFav}
+            onClose={handleCloseAlert}
             handleAction={handleLogin}
-            message='Para agregar a favoritos inicia sesión.'
+            message='Para crear tu plan semanal inicia sesión.'
             option='Iniciar Sesión'
           />
         </div>

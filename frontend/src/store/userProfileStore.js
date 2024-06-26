@@ -47,7 +47,14 @@ export const useUserProfileStore = create((set) => ({
       if (response.status === 200) {
         // Actualizar el estado solo si la respuesta es exitosa
         set((state) => ({
-          favoriteRecipes: [...state.favoriteRecipes, response.data]
+          favoriteRecipes: Array.from(
+            new Map(
+              [...state.favoriteRecipes, response.data].map((obj) => [
+                obj.recipe.id,
+                obj
+              ])
+            ).values()
+          )
         }));
       } else {
         throw new Error('Failed to add recipe');
@@ -108,7 +115,7 @@ export const useUserProfileStore = create((set) => ({
     set((state) => ({
       plannerUpdateDay: {
         ...state.planner,
-        [day]: {"recipe" : recipe}
+        [day]: { recipe: recipe }
       },
       plannerToPost: {
         ...state.planner,
@@ -154,7 +161,17 @@ export const useUserProfileStore = create((set) => ({
     try {
       const planner = await deletePlannerByUser(token);
       if (planner.status === 200) {
-        set({ planner: {} });
+        set({
+          planner: {
+            sunday: { id: 'sunday' },
+            monday: { id: 'monday' },
+            tuesday: { id: 'tuesday' },
+            wednesday: { id: 'wednesday' },
+            thursday: { id: 'thursday' },
+            friday: { id: 'friday' },
+            saturday: { id: 'saturday' }
+          }
+        });
       }
     } catch (error) {
       set({ error: error.message });
@@ -165,13 +182,13 @@ export const useUserProfileStore = create((set) => ({
     try {
       // Asumiendo que tienes una API que acepta POST a /api/favorites
       const response = await savePlanner(token, planner);
-
+      return response;
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
   },
 
-  cleanPlanner: () => set(() => ({ planner: {}}))
+  cleanPlanner: () => set(() => ({ planner: {} }))
 }));
 
 export default useUserProfileStore;

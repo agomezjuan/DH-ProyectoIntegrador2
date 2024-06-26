@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
-import './index.css';
+// import './index.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useCategoriesStore } from '../../store/categoryStore';
 
 export const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { categories, selectedCategory, load, fetchCategories, setSelectedCategory } = useCategoriesStore();
+  const {
+    categories,
+    selectedCategory,
+    load,
+    fetchCategories,
+    setSelectedCategory
+  } = useCategoriesStore();
 
   useEffect(() => {
     fetchCategories();
@@ -35,6 +41,9 @@ export const Carousel = () => {
     setSelectedCategory(null);
   };
 
+  const unselectedCategories = selectedCategory
+    ? 'opacity-50 hover:opacity-100 '
+    : '';
   if (load) {
     return (
       <div className='flex flex-col justify-center items-center h-36'>
@@ -57,12 +66,13 @@ export const Carousel = () => {
         {displayImages.map((allCategories, index) => (
           <div
             key={index}
-            className='carousel-item flex flex-col items-center p-2 text-center'>
-            <div className='w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg'>
+            className='carousel-item flex flex-col items-center p-2 text-center cursor-pointer'>
+            <div
+              className={`w-60 h-60 overflow-hidden rounded-full mx-auto shadow-lg ${selectedCategory?.category !== allCategories?.category && 'scale-75'}`}>
               <img
                 src={allCategories?.category?.urlImg}
                 alt={`Imagen ${index}`}
-                className='w-full h-full object-cover'
+                className={`w-full h-full object-cover transition duration-300 ease-in-out hover:scale-105 transform hover:shadow-lg hover:bg-gray-100 ${selectedCategory?.category !== allCategories?.category && unselectedCategories}`}
                 onClick={() => handleCategoryClick(allCategories)}
               />
             </div>
@@ -81,11 +91,9 @@ export const Carousel = () => {
       </button>
 
       {selectedCategory && (
-        <div className='recipes__contenedor'>
-          <button
-            className='btn-reset'
-            onClick={handleResetCategory}>
-            Limpiar categoría seleccionada
+        <div className='w-full flex justify-center'>
+          <button className='btn btn-ghost mt-2' onClick={handleResetCategory}>
+            Limpiar categorías
           </button>
         </div>
       )}
