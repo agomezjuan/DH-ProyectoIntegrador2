@@ -51,6 +51,7 @@ const PlanPDF = ({ planner }) => {
     <Document>
       {Object.keys(planner)
         .filter((day) => Object.keys(days).includes(day))
+        .filter((day) => planner[day]?.recipe !== undefined)
         .map((day) => (
           <Page size='A4' key={day} style={styles.page}>
             <View style={styles.section}>

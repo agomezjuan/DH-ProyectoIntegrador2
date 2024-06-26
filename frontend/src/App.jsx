@@ -4,7 +4,6 @@ import { LoginPage } from '@/pages/LoginPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ViewRecipe } from '@/pages/ViewRecipe';
 import { SearchPage } from './pages/SearchPage/SearchPage';
-import { PlannerDnD } from './pages/Planner';
 import { UserProfile } from './pages/UserProfile';
 import { PasswordReset } from './pages/PasswordReset';
 const router = createBrowserRouter([
@@ -29,10 +28,6 @@ const router = createBrowserRouter([
     element: <ViewRecipe />
   },
   {
-    path: '/planner',
-    element: <PlannerDnD />
-  },
-  {
     path: '/user/:id',
     element: <UserProfile />
   },
@@ -42,7 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <div>Página no encontrada</div>
+    element: (
+      <div className='flex items-center justify-center h-full mt-40 text-2xl'>
+        Página no encontrada
+      </div>
+    )
   }
 ]);
 

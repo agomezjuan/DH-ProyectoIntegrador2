@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,6 +11,7 @@ function RestorePassword() {
   const navigate = useNavigate();
   const { resetPassword, logout } = useAuthStore();
   const { cleanPlanner } = useUserProfileStore();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -30,6 +31,7 @@ function RestorePassword() {
     data.email = data.username;
     const { confirmPassword, ...resetData } = data;
     try {
+      setLoading(true);
       const response = await resetPassword(resetData);
       if (response) {
         logout();
@@ -45,6 +47,7 @@ function RestorePassword() {
       toast.error('Algo falló :(. Revisa tus datos');
       console.error('Password reset failed:', error);
     } finally {
+      setLoading(false);
       reset();
     }
   });
@@ -57,7 +60,7 @@ function RestorePassword() {
         </h2>
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='input input-bordered input-primary w-full mt-7'
             placeholder='Correo electrónico'
             type='email'
             {...register('username')}
@@ -71,7 +74,7 @@ function RestorePassword() {
 
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='input input-bordered input-primary w-full mt-2'
             placeholder='Contraseña'
             type='password'
             {...register('password')}
@@ -84,7 +87,7 @@ function RestorePassword() {
         </div>
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='input input-bordered input-primary w-full mt-2'
             placeholder='Confirmar Contraseña'
             type='password'
             {...register('confirmPassword')}
@@ -98,8 +101,12 @@ function RestorePassword() {
         <div className='flex justify-center'>
           <button
             type='submit'
-            className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
-            Cambiar Contraseña
+            className={`btn btn-primary p-2 mt-8 ${loading ? 'loading' : ''}`}>
+            {loading ? (
+              <span className='loading loading-ring loading-xs'></span>
+            ) : (
+              'Cambiar Contraseña'
+            )}
           </button>
         </div>
       </form>

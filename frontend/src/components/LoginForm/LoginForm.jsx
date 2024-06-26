@@ -35,11 +35,12 @@ function LoginForm() {
 
     try {
       await login(data).then(() => {
-        navigate('/');
         toast.success('Bienvenida!');
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
       });
       reset();
-      navigate('/');
     } catch (error) {
       toast.error('Algo falló :(. Revisa tus datos');
 
@@ -58,13 +59,13 @@ function LoginForm() {
           </h2>
           <div className='flex flex-col text-left'>
             <input
-              className='w-full mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+              className='input input-bordered input-primary w-full mt-7'
               placeholder='Correo electrónico'
               type='text'
               {...register('username')}
             />
             {errors.username && (
-              <span className='text-xs text-primary font-bold'>
+              <span className='text-xs text-primary font-bold mt-1'>
                 {errors.username.message}
               </span>
             )}
@@ -72,13 +73,13 @@ function LoginForm() {
 
           <div className='mt-1 flex flex-col text-left '>
             <input
-              className='w-full mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+              className='input input-bordered input-primary w-full mt-2'
               placeholder='Contraseña'
               type='password'
               {...register('password')}
             />
             {errors.password && (
-              <span className='text-xs text-primary font-bold'>
+              <span className='text-xs text-primary font-bold mt-1'>
                 {errors.password.message}
               </span>
             )}
@@ -86,7 +87,7 @@ function LoginForm() {
 
           <button
             type='submit'
-            className={`bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900 ${loading ? 'loading' : ''}`}
+            className={`btn btn-primary p-2 mt-8 ${loading ? 'loading' : ''}`}
             disabled={loading}>
             {loading ? (
               <span className='loading loading-ring loading-xs'></span>

@@ -4,10 +4,12 @@ import { updasteUserSchema } from '../../schemas/authSchemas';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthStore } from '../../store/authStore';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 function UpdateUserData() {
   const navigate = useNavigate();
   const { updateUserData, profile } = useAuthStore();
+  const [loading, setLoading] = useState(false);
 
   console.log('PROFILE: ', profile);
 
@@ -30,6 +32,7 @@ function UpdateUserData() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      setLoading(true);
       await updateUserData(data);
       toast.success('Datos actualizados correctamente');
     } catch (error) {
@@ -37,6 +40,8 @@ function UpdateUserData() {
 
       console.error('Update failed:', error);
       reset();
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -50,13 +55,13 @@ function UpdateUserData() {
         </div>
         <div className='flex flex-col text-left'>
           <input
-            className='w-80 mt-7 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='input input-bordered input-primary w-full mt-7'
             placeholder='Nombre'
             type='text'
             {...register('firstName')}
           />
           {errors.firstName && (
-            <span className='text-xs text-primary font-bold'>
+            <span className='text-xs text-primary font-bold mt-1'>
               {errors.firstName.message}
             </span>
           )}
@@ -64,13 +69,13 @@ function UpdateUserData() {
 
         <div className='mt-1 flex flex-col text-left'>
           <input
-            className='w-80 mt-2 p-1 italic rounded-sm border border-solid border-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
+            className='input input-bordered input-primary w-full mt-7'
             placeholder='Apellido'
             type='text'
             {...register('lastName')}
           />
           {errors.lastName && (
-            <span className='text-xs text-primary font-bold'>
+            <span className='text-xs text-primary font-bold mt-1'>
               {errors.lastName.message}
             </span>
           )}
@@ -78,8 +83,13 @@ function UpdateUserData() {
         <div className='text-center'>
           <button
             type='submit'
-            className='bg-primary px-3 font-semibold text-white p-2 mt-8 rounded-sm border border-solid border-primary hover:bg-green-900'>
-            Actualiza tus datos
+            className={`btn btn-primary p-2 mt-8 ${loading ? 'loading' : ''}`}
+            disabled={loading}>
+            {loading ? (
+              <span className='loading loading-ring loading-xs'></span>
+            ) : (
+              'Actualiza tus datos'
+            )}
           </button>
         </div>
 
