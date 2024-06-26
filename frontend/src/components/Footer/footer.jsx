@@ -73,29 +73,25 @@ const Footer = () => {
       <div className='w-full h-full lg:w-1/3 flex items-center justify-center p-4'>
         <ul className=' text-neutral-100'>
           <li>
-            <a
-              className='link link-hover text-neutral-100 hover:text-primary-content'
-              target='_blank'
-              rel='noopener noreferrer'
-              href='https://somosgusman.com/meal-prep-y-batch-cooking/'>
+            <Link
+              to='/'
+              className='link link-hover text-neutral-100 hover:text-primary-content'>
               Blog
-            </a>
+            </Link>
           </li>
           <li>
             <Link
-              to='/recipes'
+              to='/'
               className='link link-hover text-neutral-100 hover:text-primary-content'>
               Recetas
             </Link>
           </li>
           <li>
-            <a
-              className='link link-hover text-neutral-100 hover:text-primary-content'
-              target='_blank'
-              rel='noopener noreferrer'
-              href='https://www.youtube.com/watch?v=3EO2tWJi2Y8'>
+            <Link
+              to='/'
+              className='link link-hover text-neutral-100 hover:text-primary-content'>
               Tips
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
