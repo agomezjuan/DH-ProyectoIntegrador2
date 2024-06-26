@@ -1,13 +1,11 @@
 import { create } from 'zustand';
 import http from '@/api/httpService';
-import planner, {
+import {
   getPlanner,
   downloadReport,
   deletePlannerByUser,
   savePlanner
 } from '../api/planner';
-
-import { saveFavorite } from '@/api/favorites';
 
 const FAVORITES_BASE_URL = 'api/v1/favorites';
 
@@ -113,6 +111,10 @@ export const useUserProfileStore = create((set) => ({
   // Accion para actualizar el planner
   addRecipeToPlanner: (day, recipe) => {
     set((state) => ({
+      planner: {
+        ...state.planner,
+        [day]: { recipe: recipe }
+      },
       plannerUpdateDay: {
         ...state.planner,
         [day]: { recipe: recipe }
@@ -188,7 +190,18 @@ export const useUserProfileStore = create((set) => ({
     }
   },
 
-  cleanPlanner: () => set(() => ({ planner: {} }))
+  cleanPlanner: () =>
+    set(() => ({
+      planner: {
+        sunday: { id: 'sunday' },
+        monday: { id: 'monday' },
+        tuesday: { id: 'tuesday' },
+        wednesday: { id: 'wednesday' },
+        thursday: { id: 'thursday' },
+        friday: { id: 'friday' },
+        saturday: { id: 'saturday' }
+      }
+    }))
 }));
 
 export default useUserProfileStore;
